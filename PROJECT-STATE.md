@@ -96,7 +96,7 @@ Approved principles:
 - unknown optional services remain `Not sure` unless the user explicitly changes them;
 - secondary package items use progressive disclosure;
 - separate-charge amount fields appear only when relevant;
-- money fields treat the `$` prefix and numeric input as one visual control;
+- money fields treat the `$` prefix and numeric input as one visual control for both focus and error states;
 - internal calculator IDs are stored only as non-visible metadata;
 - itemized single-tooth charge names use a dropdown of common quote labels plus `Other charge`;
 - result cards use plain labels such as `Total from your quote`, `Cost per tooth from this quote`, or `Cost per arch from this quote`;
@@ -113,20 +113,27 @@ CALC-001:
 
 CALC-003 and CALC-003-A04:
 - Guided interaction implemented from the approved CALC-001 principles without changing their arch formulas.
-- Three stages: `Your quote` → `What's included` → `Insurance & result`.
+- User reviewed the first live guided renders and identified the same prefixed-money focus problem plus broader layout/clarity issues.
+- Arch money fields now use the same whole-control focus/error treatment as CALC-001.
+- H1s shortened to `Full-mouth dental implants cost` and `All-on-4 dental implant cost`.
+- CALC-003 now appears after the direct cost answer plus the one-arch/two-arch explanation rather than after five explanatory sections.
+- CALC-003-A04 now appears after the direct answer, All-on-4 definition and arch-unit caveat rather than after the package/price-driver sections.
+- Both calculator H2s now use `id="calculator-heading"`, fixing the focus/scroll target used by Back/Continue navigation.
+- Three stages remain `Your quote` → `What's included` → `Insurance & result`.
 - Step 1 requires quoted total, one/two-arch selection and explicit confirmation that the arch count comes from the written quote.
 - CALC-003 keeps fixed/removable/not-stated as a descriptive quote label only.
 - Main package items stay visible; secondary package items default to `Not sure` under progressive disclosure.
-- Separate charges are added only when the user enters an amount.
-- Insurance remains user-entered, same-quote only.
-- Current arch calculators require Cloudflare rendered review before final UX PASS.
+- Result cards show main package details first and move secondary items into a collapsed `Other quote items` disclosure.
+- If insurance is entered while package details remain unclear, the result now says `Needs quote details` rather than an unexplained `Not shown` value.
+- Reference-strip wording now says reference-only / not used in the result rather than `calculator math`.
+- Current corrected arch renders require one final Cloudflare visual confirmation before UX PASS.
 
 Editorial/control updates:
 - `briefs/DEN-001.md` → approved representative UX + plain-language control
-- `briefs/DEN-003.md` → `EVIDENCE_CONTROLLED_WITH_CONTEXT_LIMIT + GUIDED_UX_IMPLEMENTED`
-- `briefs/DEN-012.md` → `EVIDENCE_CONTROLLED_WITH_SCOPE_CAVEAT + GUIDED_UX_IMPLEMENTED`
-- DEN-003 / DEN-012 heading wording reconciled to integrated page vectors
-- `scripts/build.mjs` now guards guided assets, three-step markers, hidden calculator IDs and controlled heading sequences
+- `briefs/DEN-003.md` → `EVIDENCE_CONTROLLED_WITH_CONTEXT_LIMIT + GUIDED_UX_IMPLEMENTED + PLACEMENT_REVISED`
+- `briefs/DEN-012.md` → `EVIDENCE_CONTROLLED_WITH_SCOPE_CAVEAT + GUIDED_UX_IMPLEMENTED + PLACEMENT_REVISED`
+- `content/implants/DEN-003_DRAFT_v3.md` and `DEN-012_DRAFT_v3.md` match the higher calculator placement and plain-language framing
+- `scripts/build.mjs` guards guided assets, concise H1s, three-step markers, hidden calculator IDs, calculator-heading anchors and revised H2 sequences
 
 ## Automated QA
 - CALC-008 fixtures remain 22/22 passing
@@ -135,14 +142,14 @@ Editorial/control updates:
 - build QA enforces the controlled H2 sequence for DEN-001, DEN-003, DEN-007 and DEN-012
 - build QA rejects visible `[CALCULATOR:` metadata on implant pages
 - guided arch implementation head `d1d5309d14c50b676165634ce6d26a94685dccb6` passed GitHub Actions `test-and-build`
-- current control head `2f3fdad53c8970ff280f3b5e767b03d8326288a6` also passed GitHub Actions
+- higher-placement/focus/result revision through `60b432e8f2b93dca7c7506275e63f2d9491ca33c` passed `npm run qa` in GitHub Actions
 
 ## Implant content status
 Briefs:
 - `briefs/DEN-001.md` — EVIDENCE_CONTROLLED + UX/PLAIN-LANGUAGE APPROVED
-- `briefs/DEN-003.md` — EVIDENCE_CONTROLLED_WITH_CONTEXT_LIMIT + GUIDED_UX_IMPLEMENTED
+- `briefs/DEN-003.md` — EVIDENCE_CONTROLLED_WITH_CONTEXT_LIMIT + GUIDED_UX_IMPLEMENTED + PLACEMENT_REVISED
 - `briefs/DEN-007.md` — EVIDENCE_CONTROLLED
-- `briefs/DEN-012.md` — EVIDENCE_CONTROLLED_WITH_SCOPE_CAVEAT + GUIDED_UX_IMPLEMENTED
+- `briefs/DEN-012.md` — EVIDENCE_CONTROLLED_WITH_SCOPE_CAVEAT + GUIDED_UX_IMPLEMENTED + PLACEMENT_REVISED
 
 Gemini QA:
 - `evidence/qa/GEMINI_IMPLANTS_CLUSTER_DRAFT_QA_v1.md`
@@ -150,9 +157,9 @@ Gemini QA:
 
 Controlled editorial files:
 - `content/implants/DEN-001_DRAFT_v4.md` — current plain-language representative page source
-- `content/implants/DEN-003_DRAFT_v2.md`
+- `content/implants/DEN-003_DRAFT_v3.md` — higher-placement/plain-language revision
 - `content/implants/DEN-007_DRAFT_v2.md`
-- `content/implants/DEN-012_DRAFT_v2.md`
+- `content/implants/DEN-012_DRAFT_v3.md` — higher-placement/plain-language revision
 
 Main Content remains evidence-controlled; FAQs remain deferred.
 
@@ -173,18 +180,18 @@ Main Content remains evidence-controlled; FAQs remain deferred.
 ## Current milestone
 - M1 Baseline: IN PROGRESS
 - M2 Architecture/Evidence: architecture frozen; DEN-008 and implants cluster evidence/briefs/specs controlled
-- M3 Content/Tools: DEN-008 + implant-cluster content/tools implemented; CALC-001 UX approved; CALC-003/CALC-003-A04 guided UX implemented
-- M4 Design/Media: IN PROGRESS — arch calculators need rendered approval; media not started
+- M3 Content/Tools: DEN-008 + implant-cluster content/tools implemented; CALC-001 UX approved; CALC-003/CALC-003-A04 corrected after first rendered review
+- M4 Design/Media: IN PROGRESS — corrected arch calculators need final rendered confirmation; media not started
 - M5 Final Candidate: NOT STARTED
 - M6 Production: BLOCKED
 
 ## Current verification
-- GitHub Actions: PASS at current head `2f3fdad53c8970ff280f3b5e767b03d8326288a6`
+- GitHub Actions: PASS for arch focus/placement/result revision through `60b432e8f2b93dca7c7506275e63f2d9491ca33c`
 - CALC-001: user confirmed final requested rendered changes are implemented
-- Cloudflare PR bot comment is stale on an older commit; latest CALC-003/CALC-003-A04 guided render still needs confirmation
+- CALC-003/CALC-003-A04: first guided renders reviewed; corrections committed; latest corrected Cloudflare render still needs confirmation
 
 ## Known hard-gate exceptions
-- CALC-003/CALC-003-A04 latest Cloudflare rendered UX not yet reviewed.
+- CALC-003/CALC-003-A04 corrected Cloudflare rendered UX not yet confirmed.
 - Real multi-viewport browser QA at 320/390/768/1280/1920 remains incomplete.
 - Manual keyboard/screen-reader QA is NOT TESTED.
 - CALC-008 still needs representative rendered UX review before its older form pattern is considered final.
