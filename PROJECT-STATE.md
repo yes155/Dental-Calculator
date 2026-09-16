@@ -36,18 +36,21 @@ Implants cluster authoritative evidence:
 - `data/source-register.csv`
 - Sources include FDA, AAP, CareCredit, Humana, Cigna, Delta Dental, CMS, Nobel Biocare and Forbes secondary context.
 
-NotebookLM history:
-- first return: FAIL — external corpus missing / unsupported synthesis
-- second return: FAIL — v2 source preflight not followed / mandatory corpus still absent
-- neither NotebookLM return is an evidence authority
+External-model history:
+- NotebookLM return 1: FAIL — external corpus missing / unsupported synthesis
+- NotebookLM return 2: FAIL — v2 source preflight not followed / mandatory corpus still absent
+- Gemini production drafts: FAIL AS RECEIVED — incomplete frozen H2 vectors plus several scope/wording overstatements
+- ChatGPT correction pass: COMPLETE — evidence-safe v2 drafts rebuilt to frozen heading vectors and integrated
+
+External-model lineage: `handoffs/EXTERNAL_MODEL_HANDOFF_MANIFEST.md`.
 
 ## Implemented pages and tools
 Implemented preview pages:
 - DEN-008 `/tooth-extraction-cost/` + CALC-008
-- DEN-001 `/dental-implant-cost-calculator/` + CALC-001 preview implementation
-- DEN-003 `/full-mouth-dental-implants-cost/` + CALC-003 preview implementation
+- DEN-001 `/dental-implant-cost-calculator/` + CALC-001
+- DEN-003 `/full-mouth-dental-implants-cost/` + CALC-003
 - DEN-007 `/dental-bone-graft-cost/` cost guide; no calculator assigned
-- DEN-012 `/all-on-4-dental-implants-cost/` + CALC-003-A04 preview implementation
+- DEN-012 `/all-on-4-dental-implants-cost/` + CALC-003-A04
 
 Preview policy remains `noindex,nofollow`.
 
@@ -75,9 +78,11 @@ Behavior:
 
 Automated QA:
 - CALC-008 fixtures remain 22/22 passing
-- implant calculator regression suite covers CALC-001, CALC-003 and CALC-003-A04 logic, scope warnings, insurance bounds, normalization and zero/blank/error behavior
-- build QA now requires all five preview pages, calculator assets, noindex directives, single H1 and calculator/ARIA markers
-- GitHub Actions push + PR runs passed at implementation SHA `86c68b8de04957bb5e24584cb25b6460449a0030`
+- implant regression suite covers CALC-001, CALC-003 and CALC-003-A04 arithmetic/scope behavior
+- build QA requires all five preview pages, calculator assets, noindex directives, exactly one H1 and calculator/ARIA markers
+- build QA now also enforces the frozen H2 sequence for DEN-001, DEN-003, DEN-007 and DEN-012
+- implementation SHA `86c68b8de04957bb5e24584cb25b6460449a0030` passed push + PR GitHub Actions
+- corrected-copy/H2-gate code commit `397515b387090079793bb1d7153acf0893ffc648` has a GitHub Actions run; final branch-head verification is tracked in the prelaunch audit
 
 ## Implant content status
 Briefs:
@@ -86,16 +91,20 @@ Briefs:
 - `briefs/DEN-007.md` — EVIDENCE_CONTROLLED
 - `briefs/DEN-012.md` — EVIDENCE_CONTROLLED_WITH_SCOPE_CAVEAT
 
-Current HTML copy in `src/` is a **preview implementation scaffold**, not final production editorial copy.
+Gemini QA:
+- `evidence/qa/GEMINI_IMPLANTS_CLUSTER_DRAFT_QA_v1.md`
+- Returned v1 drafts rejected as production copy.
 
-Production drafting handoff:
-- `handoffs/gemini/GEMINI_IMPLANTS_CLUSTER_DRAFT_REQUEST_v1.md`
-- Expected drafts: `DEN-001_DRAFT_v1.md`, `DEN-003_DRAFT_v1.md`, `DEN-007_DRAFT_v1.md`, `DEN-012_DRAFT_v1.md`
-- Status: READY_FOR_GEMINI
-- ChatGPT must audit and integrate returned prose before content gate passes
+Corrected production drafts:
+- `content/implants/DEN-001_DRAFT_v2.md`
+- `content/implants/DEN-003_DRAFT_v2.md`
+- `content/implants/DEN-007_DRAFT_v2.md`
+- `content/implants/DEN-012_DRAFT_v2.md`
+
+Corrected v2 prose is integrated into the corresponding `src/` HTML pages. Main Content follows the frozen heading vectors; FAQs remain deferred.
 
 ## Key approved implant evidence
-- DEN-001: CareCredit $2,143 average; $1,646–$4,157 range for artificial-root implantation process/material; crown excluded; 50 states + DC, 2023–2024 research.
+- DEN-001: CareCredit $2,143 average; $1,646–$4,157 dedicated single-tooth range; artificial-root implantation process/material scope; crown excluded; national 50 states + DC research.
 - DEN-003: Forbes reports ADA-attributed $20,000–$45,000 for a “mouthful of implants,” but exact arch count/prosthesis/package scope is undefined; context only, not calculator default.
 - DEN-007: CareCredit per-graft ranges — allograft $652–$1,575; alloplast $576–$1,375; autograft $2,161–$5,148; xenograft $549–$1,386.
 - DEN-012: CareCredit All-on-4 $15,176 average; $11,640–$27,500 range; 2024 research across 50 states + DC; package inclusions unknown and arch count must be confirmed from quote.
@@ -111,18 +120,17 @@ Production drafting handoff:
 ## Current milestone
 - M1 Baseline: IN PROGRESS
 - M2 Architecture/Evidence: architecture frozen; DEN-008 and implants cluster evidence/briefs/specs controlled
-- M3 Content/Tools: CALC-008 plus implant-cluster calculator logic/pages implemented as preview scaffolds; production implant prose awaiting Gemini return + ChatGPT QA
+- M3 Content/Tools: DEN-008 + implant-cluster calculator logic and corrected implant editorial copy implemented on noindex preview
 - M4 Design/Media: NOT STARTED
 - M5 Final Candidate: NOT STARTED
 - M6 Production: BLOCKED
 
 ## Current verification
-- GitHub Actions: PASS at implementation SHA `86c68b8de04957bb5e24584cb25b6460449a0030`
-- Cloudflare: earlier preview deployment path exists, but the PR bot comment observed during this batch was stale/in-progress on an earlier implant-page commit; latest implementation-head deployment is not yet recorded as verified
+- GitHub Actions: implementation baseline PASS; final corrected-copy/control-head confirmation still required before candidate promotion
+- Cloudflare: branch preview exists, but latest corrected-copy head is not yet recorded as verified/rendered in this chat
 
 ## Known hard-gate exceptions
-- Production prose for DEN-001/DEN-003/DEN-007/DEN-012 not yet returned/audited from Gemini.
-- Latest Cloudflare implementation head not yet verified.
+- Latest corrected-copy Cloudflare preview not yet verified.
 - Real multi-viewport browser QA is NOT TESTED.
 - Automated accessibility + manual keyboard/screen-reader QA are NOT TESTED.
 - Trust/legal/methodology surfaces incomplete.
