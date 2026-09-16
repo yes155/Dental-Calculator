@@ -1,7 +1,27 @@
 /* Guided CALC-003 / CALC-003-A04 refinements */
+
+/* Treat the dollar prefix and amount as one interactive control. */
+.arch-guided .money {
+  min-height: 2.85rem;
+  overflow: visible;
+}
+
+.arch-guided .money input {
+  min-width: 0;
+}
+
+.arch-guided .money:focus-within {
+  outline: 4px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.arch-guided .money input:focus-visible {
+  outline: 0;
+}
+
 .arch-guided .money:has(input[aria-invalid="true"]) {
-  outline: 3px solid var(--danger);
-  outline-offset: 1px;
+  border-color: var(--danger);
+  box-shadow: 0 0 0 2px var(--danger);
 }
 
 .arch-guided .money input[aria-invalid="true"] {
@@ -9,7 +29,7 @@
 }
 
 .arch-guided .field-money-compact {
-  width: min(100%, 18rem);
+  width: min(100%, 20rem);
 }
 
 .arch-guided .arch-choice-grid {
@@ -33,6 +53,23 @@
 
 .arch-guided .result-grid--guided > div {
   min-height: 7rem;
+}
+
+.arch-guided .result-details {
+  margin-top: .85rem;
+  padding: .75rem .9rem;
+  border: 1px solid var(--line);
+  border-radius: .7rem;
+  background: #fff;
+}
+
+.arch-guided .result-details > summary {
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.arch-guided .result-details .scope-summary {
+  margin-bottom: 0;
 }
 
 @media (max-width: 760px) {
