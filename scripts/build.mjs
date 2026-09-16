@@ -93,8 +93,8 @@ const pageChecks = [
       'not a per-arch price',
     ],
     headings: [
-      "How much do full-mouth dental implants cost?",
       "Full-mouth dental implant cost calculator",
+      "How much do full-mouth dental implants cost?",
       "Full-arch and full-mouth quotes are not the same unit",
       "What does a full-arch implant quote include?",
       "Fixed and removable implant restorations can be quoted differently",
@@ -145,8 +145,8 @@ const pageChecks = [
       '$11,640–$27,500',
     ],
     headings: [
-      "How much do All-on-4 dental implants cost?",
       "All-on-4 cost calculator",
+      "How much do All-on-4 dental implants cost?",
       "What does All-on-4 mean in a dental quote?",
       "Is an All-on-4 price per arch or for a full mouth?",
       "What may be included in an All-on-4 package?",
@@ -183,6 +183,14 @@ for (const check of pageChecks) {
       const index = html.indexOf(token, cursor + 1);
       if (index === -1) throw new Error(`${check.path}: frozen H2 missing or out of order: ${heading}`);
       cursor = index;
+    }
+  }
+
+  if (["full-mouth-dental-implants-cost/index.html", "all-on-4-dental-implants-cost/index.html"].includes(check.path)) {
+    const calculatorIndex = html.indexOf('id="calculator-heading"');
+    const firstDetailIndex = html.indexOf('<h2>How much do ');
+    if (calculatorIndex === -1 || firstDetailIndex === -1 || calculatorIndex > firstDetailIndex) {
+      throw new Error(`${check.path}: calculator must appear immediately after the answer-first header and before detailed H2 content`);
     }
   }
 }
