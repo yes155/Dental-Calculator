@@ -31,9 +31,20 @@ const ADDITIONAL_COMPONENT_IDS = IMPLANT_COMPONENTS
   .map(({ id }) => id)
   .filter((id) => !PRIMARY_COMPONENT_IDS.has(id));
 
+const componentNames = {
+  implant: "Implant placement",
+  abutment: "Connector (abutment)",
+  crown: "Final crown",
+  extraction: "Tooth removal (extraction)",
+  graft: "Bone graft",
+  imaging: "Exam or X-rays / scans",
+  sedation: "Sedation / anesthesia",
+  other: "Another charge",
+};
+
 const stateLabels = {
   included: "Included",
-  separately_quoted: "Separate fee",
+  separately_quoted: "Separate charge",
   not_on_quote: "Not listed",
   unknown: "Not sure",
 };
@@ -58,6 +69,13 @@ function focusErrorField(error) {
   return form.querySelector(`[data-field="${CSS.escape(error.field)}"]`) ||
     form.querySelector(`[name="${CSS.escape(error.field)}"]`) ||
     form.querySelector(`[data-error-field="${CSS.escape(error.field)}"]`);
+}
+
+function friendlyAmountError(reason) {
+  if (reason.includes("blank is different from zero")) return "Enter an amount.";
+  if (reason.includes("no commas")) return "Enter dollars and cents, for example 2500 or 2500.00.";
+  if (reason.includes("$0.00 to $1,000,000.00")) return "Enter an amount between $0 and $1,000,000.";
+  return "Enter a valid dollar amount.";
 }
 
 function renderErrors(errors) {
@@ -126,11 +144,12 @@ function updateInsurance() {
 
 function createComponentChoice(component, target) {
   const fieldset = document.createElement("fieldset");
+  const displayName = componentNames[component.id] ?? component.label;
   fieldset.className = "component-choice";
   fieldset.dataset.errorField = `components.${component.id}.state`;
   fieldset.innerHTML = `
-    <legend>${escapeHtml(component.label)}</legend>
-    <div class="segmented-options" role="radiogroup" aria-label="${escapeHtml(component.label)} quote status">
+    <legend>${escapeHtml(displayName)}</legend>
+    <div class="segmented-options" role="radiogroup" aria-label="${escapeHtml(displayName)} status on your quote">
       ${Object.entries(stateLabels).map(([value, label]) => `
         <label class="segment-option">
           <input type="radio" name="component-${component.id}" value="${value}">
@@ -138,7 +157,7 @@ function createComponentChoice(component, target) {
         </label>`).join("")}
     </div>
     <div class="component-amount compact-money" hidden>
-      <label for="component-${component.id}-amount">Separate ${escapeHtml(component.label.toLowerCase())} amount</label>
+      <label for="component-${component.id}-amount">Separate charge amount</label>
       <div class="money"><span aria-hidden="true">$</span><input id="component-${component.id}-amount" data-component-amount="${component.id}" data-field="components.${component.id}.amount" inputmode="decimal" autocomplete="off" placeholder="0.00" disabled></div>
     </div>`;
 
@@ -179,15 +198,15 @@ function addItemizedLine() {
   const row = document.createElement("fieldset");
   row.className = "quote-line guided-quote-line";
   row.innerHTML = `
-    <legend>Quote line ${index + 1}</legend>
-    <button type="button" class="remove-line button-link" aria-label="Remove quote line ${index + 1}">Remove</button>
+    <legend>Charge ${index + 1}</legend>
+    <button type="button" class="remove-line button-link" aria-label="Remove charge ${index + 1}">Remove</button>
     <div class="line-grid">
-      <div class="line-label-field"><label for="line-${index}-label">Provider line-item label</label><input id="line-${index}-label" data-role="line-label" data-field="itemized.${index}.label" autocomplete="off" placeholder="e.g. implant placement"></div>
-      <div><label for="line-${index}-amount">Quoted amount</label><div class="money compact-money-input"><span aria-hidden="true">$</span><input id="line-${index}-amount" data-role="line-amount" data-field="itemized.${index}.amount" inputmode="decimal" autocomplete="off" placeholder="0.00"></div></div>
-      <div><label for="line-${index}-scope">How is this amount priced?</label><select id="line-${index}-scope" data-role="line-scope" data-field="itemized.${index}.scope"><option value="">Choose one</option><option value="case_total">Case total</option><option value="per_tooth">Per tooth</option><option value="other_explicit_scope">Other explicit multiplier</option></select></div>
-      <div class="line-quantity" hidden><label for="line-${index}-quantity">Quantity / multiplier</label><input id="line-${index}-quantity" data-role="line-quantity" data-field="itemized.${index}.quantity" inputmode="numeric" autocomplete="off" disabled></div>
+      <div class="line-label-field"><label for="line-${index}-label">Name of charge</label><input id="line-${index}-label" data-role="line-label" data-field="itemized.${index}.label" autocomplete="off" placeholder="e.g. implant placement"></div>
+      <div><label for="line-${index}-amount">Amount</label><div class="money compact-money-input"><span aria-hidden="true">$</span><input id="line-${index}-amount" data-role="line-amount" data-field="itemized.${index}.amount" inputmode="decimal" autocomplete="off" placeholder="0.00"></div></div>
+      <div><label for="line-${index}-scope">What does this amount cover?</label><select id="line-${index}-scope" data-role="line-scope" data-field="itemized.${index}.scope"><option value="">Choose one</option><option value="case_total">The whole quote</option><option value="per_tooth">Each tooth</option><option value="other_explicit_scope">Another quantity shown</option></select></div>
+      <div class="line-quantity" hidden><label for="line-${index}-quantity">Quantity shown</label><input id="line-${index}-quantity" data-role="line-quantity" data-field="itemized.${index}.quantity" inputmode="numeric" autocomplete="off" disabled></div>
     </div>
-    <label class="check use-tooth-count" hidden><input type="checkbox" data-role="line-use-tooth-count"> Use the tooth count entered above for this per-tooth line</label>`;
+    <label class="check use-tooth-count" hidden><input type="checkbox" data-role="line-use-tooth-count"> Use the tooth count above</label>`;
 
   const scope = row.querySelector('[data-role="line-scope"]');
   const quantityWrap = row.querySelector(".line-quantity");
@@ -220,9 +239,9 @@ function addItemizedLine() {
 
 function reindexLines() {
   [...itemizedLines.children].forEach((row, index) => {
-    row.querySelector("legend").textContent = `Quote line ${index + 1}`;
+    row.querySelector("legend").textContent = `Charge ${index + 1}`;
     const remove = row.querySelector(".remove-line");
-    remove.setAttribute("aria-label", `Remove quote line ${index + 1}`);
+    remove.setAttribute("aria-label", `Remove charge ${index + 1}`);
     remove.hidden = itemizedLines.children.length === 1;
     for (const [role, suffix] of [["line-label", "label"], ["line-amount", "amount"], ["line-scope", "scope"], ["line-quantity", "quantity"]]) {
       const field = row.querySelector(`[data-role="${role}"]`);
@@ -241,15 +260,15 @@ function validateStepOne() {
   const toothText = document.querySelector("#tooth-count").value.trim();
   const toothCount = Number(toothText);
   if (!/^\d+$/.test(toothText) || toothCount < 1 || toothCount > 32) {
-    errors.push({ field: "toothCount", message: "Enter a whole-number tooth count from 1 to 32." });
+    errors.push({ field: "toothCount", message: "Enter how many teeth this quote covers (1–32)." });
   }
 
   const mode = selectedValue("quoteMode");
-  if (!mode) errors.push({ field: "quoteMode", message: "Choose whether your quote has one total or itemized lines." });
+  if (!mode) errors.push({ field: "quoteMode", message: "Choose one total or separate charges." });
 
   if (mode === "bundle") {
     const parsed = parseUsdToCents(document.querySelector("#bundle-amount").value);
-    if (!parsed.ok) errors.push({ field: "bundleAmount", message: parsed.reason });
+    if (!parsed.ok) errors.push({ field: "bundleAmount", message: friendlyAmountError(parsed.reason) });
   }
 
   if (mode === "itemized") {
@@ -257,15 +276,15 @@ function validateStepOne() {
       const label = row.querySelector('[data-role="line-label"]').value.trim();
       const amount = row.querySelector('[data-role="line-amount"]').value;
       const scope = row.querySelector('[data-role="line-scope"]').value;
-      if (!label) errors.push({ field: `itemized.${index}.label`, message: `Enter a label for quote line ${index + 1}.` });
+      if (!label) errors.push({ field: `itemized.${index}.label`, message: `Add a name for charge ${index + 1}.` });
       const parsed = parseUsdToCents(amount);
-      if (!parsed.ok) errors.push({ field: `itemized.${index}.amount`, message: `Quote line ${index + 1}: ${parsed.reason}` });
-      if (!scope) errors.push({ field: `itemized.${index}.scope`, message: `Choose the pricing scope for quote line ${index + 1}.` });
+      if (!parsed.ok) errors.push({ field: `itemized.${index}.amount`, message: `Charge ${index + 1}: ${friendlyAmountError(parsed.reason)}` });
+      if (!scope) errors.push({ field: `itemized.${index}.scope`, message: `Choose what the amount covers for charge ${index + 1}.` });
       if (scope === "per_tooth" || scope === "other_explicit_scope") {
         const useCount = row.querySelector('[data-role="line-use-tooth-count"]').checked;
         const quantity = row.querySelector('[data-role="line-quantity"]').value.trim();
         if (!(scope === "per_tooth" && useCount) && !/^\d+$/.test(quantity)) {
-          errors.push({ field: `itemized.${index}.quantity`, message: `Enter the explicit quantity for quote line ${index + 1}.` });
+          errors.push({ field: `itemized.${index}.quantity`, message: `Enter the quantity shown for charge ${index + 1}.` });
         }
       }
     });
@@ -276,11 +295,10 @@ function validateStepOne() {
 function validateStepTwo() {
   const errors = [];
   for (const id of PRIMARY_COMPONENT_IDS) {
-    const component = IMPLANT_COMPONENTS.find((entry) => entry.id === id);
     if (!selectedValue(`component-${id}`)) {
       errors.push({
         field: `components.${id}.state`,
-        message: `Choose whether ${component.label.toLowerCase()} is included, separate, not listed, or not sure.`,
+        message: `Choose Included, Separate charge, Not listed, or Not sure for ${componentNames[id].toLowerCase()}.`,
       });
     }
   }
@@ -320,47 +338,52 @@ function collectInput() {
 }
 
 function insuranceLabel(mode) {
-  if (mode === "none") return "No insurer contribution entered";
-  if (mode === "entered_estimate") return "Same-scope insurer estimate entered";
+  if (mode === "none") return "No insurance amount subtracted";
+  if (mode === "entered_estimate") return "Insurance estimate entered";
   return "Insurance amount not known";
 }
 
 function renderScopeList(rows) {
-  return `<ul class="scope-summary">${rows.map((row) => `<li><span>${escapeHtml(row.label)}</span><strong>${escapeHtml(stateLabels[row.state])}${row.amountCents !== null ? ` · ${formatUsd(row.amountCents)}` : ""}</strong></li>`).join("")}</ul>`;
+  return `<ul class="scope-summary">${rows.map((row) => `<li><span>${escapeHtml(componentNames[row.id] ?? row.label)}</span><strong>${escapeHtml(stateLabels[row.state])}${row.amountCents !== null ? ` · ${formatUsd(row.amountCents)}` : ""}</strong></li>`).join("")}</ul>`;
 }
 
 function renderResult(outcome, input) {
   result.hidden = false;
   result.classList.toggle("result-incomplete", outcome.status === "incomplete");
-  resultTitle.textContent = outcome.status === "incomplete" ? "Your entered quote — scope incomplete" : "Your entered quote summary";
+  resultTitle.textContent = outcome.status === "incomplete" ? "Some parts of your quote are still unclear" : "Your quote summary";
 
-  const insurer = outcome.insurerCents === null ? "Unknown" : formatUsd(outcome.insurerCents);
+  const insurer = outcome.insurerCents === null ? "Not known" : formatUsd(outcome.insurerCents);
   const patient = outcome.patientCents === null ? "Not shown" : formatUsd(outcome.patientCents);
-  const perTooth = outcome.perToothCents === null ? "Not shown" : `${outcome.perToothApproximate ? "Approx. " : ""}${formatUsd(outcome.perToothCents)}`;
+  const perTooth = outcome.perToothCents === null ? "Not shown" : `${outcome.perToothApproximate ? "About " : ""}${formatUsd(outcome.perToothCents)}`;
+  const patientLabel = input.insurance.mode === "entered_estimate"
+    ? "Quote amount after insurance estimate"
+    : input.insurance.mode === "none"
+      ? "Total with no insurance amount"
+      : "After insurance";
 
   resultValues.innerHTML = `
     <dl class="result-grid result-grid--guided">
-      <div class="result-primary"><dt>Entered quote total</dt><dd>${formatUsd(outcome.totalCents)}</dd></div>
-      <div><dt>Per-tooth normalization</dt><dd>${perTooth}</dd></div>
-      <div><dt>Estimated patient amount</dt><dd>${patient}</dd></div>
+      <div class="result-primary"><dt>Total from your quote</dt><dd>${formatUsd(outcome.totalCents)}</dd></div>
+      <div><dt>Cost per tooth from this quote</dt><dd>${perTooth}</dd></div>
+      <div><dt>${patientLabel}</dt><dd>${patient}</dd></div>
     </dl>
-    <p class="result-note">Insurer estimate: ${insurer}. The calculator uses only amounts you entered; it does not calculate plan benefits.</p>`;
+    <p class="result-note">Insurance estimate: ${insurer}. We only use the amounts you enter; we do not calculate your plan benefits.</p>`;
 
   resultContext.innerHTML = `
-    <div class="result-chips" aria-label="Quote context">
+    <div class="result-chips" aria-label="Quote details">
       <span>${outcome.toothCount} ${outcome.toothCount === 1 ? "tooth" : "teeth"}</span>
-      <span>${input.quoteMode === "bundle" ? "One total / bundle" : "Itemized quote"}</span>
+      <span>${input.quoteMode === "bundle" ? "One total" : "Separate charges"}</span>
       <span>${escapeHtml(insuranceLabel(input.insurance.mode))}</span>
     </div>`;
 
   if (input.quoteMode === "bundle") {
-    resultScope.innerHTML = `<h3>What your quote says it includes</h3>${renderScopeList(outcome.componentRows)}`;
+    resultScope.innerHTML = `<h3>What your quote says is included</h3>${renderScopeList(outcome.componentRows)}`;
   } else {
-    resultScope.innerHTML = `<h3>Your itemized quote lines</h3><ul class="scope-summary">${outcome.lineRows.map((row) => `<li><span>${escapeHtml(row.label)}</span><strong>${formatUsd(row.lineTotalCents ?? 0)}</strong></li>`).join("")}</ul>`;
+    resultScope.innerHTML = `<h3>Charges you entered</h3><ul class="scope-summary">${outcome.lineRows.map((row) => `<li><span>${escapeHtml(row.label)}</span><strong>${formatUsd(row.lineTotalCents ?? 0)}</strong></li>`).join("")}</ul>`;
   }
 
   if (outcome.status === "incomplete") {
-    resultScope.insertAdjacentHTML("beforeend", '<p class="notice-inline"><strong>Scope warning:</strong> at least one component is not confirmed or has a separate fee without an amount. The known total is shown, but do not treat it as all-inclusive.</p>');
+    resultScope.insertAdjacentHTML("beforeend", '<p class="notice-inline"><strong>Some details are still unclear:</strong> an item is marked “Not sure,” or a separate charge has no amount. The total above includes only the amounts you entered.</p>');
   }
 
   result.scrollIntoView({
