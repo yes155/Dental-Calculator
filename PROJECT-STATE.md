@@ -43,12 +43,21 @@ Updated 2026-09-16.
 
 ## Current implants evidence batch
 - Batch: DEN-001 + DEN-003 + DEN-007 + DEN-012
-- Handoff request: `handoffs/notebooklm/NLM_IMPLANTS_CLUSTER_EVIDENCE_REQUEST_v1.md`
-- Expected returned file: `NLM_IMPLANTS_CLUSTER_EVIDENCE-PACK_v1.md`
-- Handoff status: READY_FOR_NOTEBOOKLM
+- v1 request: `handoffs/notebooklm/NLM_IMPLANTS_CLUSTER_EVIDENCE_REQUEST_v1.md`
+- v1 returned pack: received from user 2026-09-16
+- v1 QA verdict: **FAIL — external source corpus was not ingested; unsupported synthesis values appeared**
+- v1 QA report: `evidence/qa/NLM_IMPLANTS_CLUSTER_EVIDENCE_QA_v1.md`
+- v2 request: `handoffs/notebooklm/NLM_IMPLANTS_CLUSTER_EVIDENCE_REQUEST_v2.md`
+- v2 expected returned file: `NLM_IMPLANTS_CLUSTER_EVIDENCE-PACK_v2.md`
+- v2 handoff status: READY_FOR_NOTEBOOKLM
+- v2 change: mandatory source-ingestion preflight; task specification may control architecture only, not serve as clinical/price evidence
 - Semantic briefs prepared: `briefs/DEN-001.md`, `briefs/DEN-003.md`, `briefs/DEN-007.md`, `briefs/DEN-012.md`
-- Numeric price claims: blocked until NotebookLM evidence return + ChatGPT QA
-- Source corpus: 20 URLs prioritizing FDA, ADA, AAP, CMS, broad cost datasets and insurer documentation; manufacturer evidence is restricted to narrow branded terminology
+- Numeric implant/full-mouth/graft/All-on-4 claims: blocked until v2 evidence return + ChatGPT QA
+- Implant calculator formulas/defaults: blocked until v2 evidence passes
+- Gemini drafting: blocked until v2 evidence passes and briefs are evidence-finalized
+
+## Independent source availability check
+On 2026-09-16 ChatGPT independently confirmed that core intended public sources are live, including FDA dental implant guidance, ADA MouthHealthy implants, AAP implant/full-mouth/ridge pages, CareCredit implant/single-tooth/All-on-4/bone-graft cost pages, Humana implant cost/coverage, and Nobel Biocare All-on-4 manufacturer material. This availability check does not itself migrate prices into project evidence; NotebookLM v2 must return source-grounded claim blocks before source-register population.
 
 ## Data / calculators
 - Current source register: `data/source-register.csv` (DEN-008 evidence migrated; other pages pending evidence QA)
@@ -77,8 +86,8 @@ Updated 2026-09-16.
 
 ## Current milestone
 - M1 Baseline: IN PROGRESS
-- M2 Architecture/Evidence: architecture frozen/correctly migrated; DEN-008 evidence/spec complete; implants evidence batch prepared and waiting for NotebookLM
-- M3 Content/Tools: representative DEN-008 + CALC-008 implemented; implants briefs prepared but not drafted
+- M2 Architecture/Evidence: architecture frozen/correctly migrated; DEN-008 evidence/spec complete; implants v1 evidence rejected and v2 source-preflight rerun prepared
+- M3 Content/Tools: representative DEN-008 + CALC-008 implemented; implant briefs prepared but not drafted
 - M4 Design/Media: NOT STARTED
 - M5 Final Candidate: NOT STARTED
 - M6 Production: BLOCKED
@@ -88,12 +97,10 @@ Updated 2026-09-16.
 - Original fully verified implementation candidate: `e3dea30b3c40cd7645ab6d0634db5034d64128d9`
 - CI at original candidate: PASS
 - Cloudflare deployment at original candidate: PASS
-- GitHub Actions `Prelaunch QA` also passed at brief head `efdda5593d07de909dcb473b222419c04bccce13`
-- Cloudflare current-head confirmation is not yet recorded; latest observed bot deployment was still in progress at `297f39cd`
-- Project-control-only commits after that head must receive normal CI/preview confirmation before promotion
+- Later project-control/evidence-QA commits require normal CI/preview confirmation before candidate promotion
 
 ## Known hard-gate exceptions
-- NotebookLM implant evidence pack not yet returned/audited.
+- NotebookLM implants v2 evidence pack not yet returned/audited.
 - Real multi-viewport browser QA is still NOT TESTED.
 - Automated accessibility and manual keyboard/screen-reader QA are still NOT TESTED.
 - Planned internal-link targets are not live.
