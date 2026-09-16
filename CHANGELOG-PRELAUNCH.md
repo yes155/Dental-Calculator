@@ -19,17 +19,17 @@
 ### Implants evidence batch — external-model QA
 - Created NotebookLM v1 and v2 evidence handoffs for DEN-001, DEN-003, DEN-007 and DEN-012.
 - First NotebookLM return failed because required external sources were missing and unsupported synthesis values appeared.
-- Second return also failed the v2 preflight: it still identified itself as v1 and used an 11-source corpus that omitted the required ADA/AAP/CareCredit/Humana evidence set.
+- Second return also failed the v2 preflight: it still identified itself as v1 and omitted the required ADA/AAP/CareCredit/Humana evidence set.
 - Preserved both failures in `handoffs/EXTERNAL_MODEL_HANDOFF_MANIFEST.md` rather than silently accepting partial evidence.
 
 ### Direct implants source verification
-- Switched the cluster to direct live-source verification to avoid a third failed NotebookLM loop.
+- Switched the cluster to direct live-source verification rather than running a third failed NotebookLM loop.
 - Added `evidence/implants/IMPLANTS_CLUSTER_DIRECT_VERIFIED_EVIDENCE_v1.md`.
 - Verified/migrated evidence from FDA, AAP, CareCredit, Humana, Cigna, Delta Dental, CMS, Nobel Biocare and Forbes secondary context.
 - Expanded `data/source-register.csv` with implant, graft, All-on-4 and insurance-methodology rows.
 
 ### Evidence decisions
-- DEN-001: CareCredit $2,143 average / $1,646–$4,157 range for artificial-root implantation process/material; crown excluded.
+- DEN-001: CareCredit $2,143 average / $1,646–$4,157 dedicated single-tooth range; artificial-root implantation process/material; crown excluded.
 - DEN-003: Forbes ADA-attributed $20,000–$45,000 “mouthful of implants” figure retained only as broad context because arch/prosthesis/package scope is not defined; not a calculator default.
 - DEN-007: CareCredit separate per-graft ranges for allograft, alloplast, autograft and xenograft; no sinus-lift price on this URL.
 - DEN-012: CareCredit All-on-4 $15,176 average / $11,640–$27,500 range with 2024 national research; package inclusions remain unknown and quote arch count must be confirmed.
@@ -62,22 +62,34 @@
 - Added DEN-007 `/dental-bone-graft-cost/` as a non-calculator cost guide.
 - Added DEN-012 `/all-on-4-dental-implants-cost/` with CALC-003-A04.
 - All four pages remain `noindex,nofollow`.
-- Current copy is preview implementation scaffold, not final production editorial copy.
 
 ### Build / automated QA
 - Extended `scripts/build.mjs` to require all five implemented procedure pages plus calculator assets.
 - Added build checks for noindex, one H1 per page, calculator markers, ARIA result regions and key evidence tokens.
 - GitHub Actions push run and PR run both passed at implementation SHA `86c68b8de04957bb5e24584cb25b6460449a0030`.
 
-### Gemini production drafting handoff
+### Gemini production drafting and correction
 - Added `handoffs/gemini/GEMINI_IMPLANTS_CLUSTER_DRAFT_REQUEST_v1.md`.
-- Expected production drafts: `DEN-001_DRAFT_v1.md`, `DEN-003_DRAFT_v1.md`, `DEN-007_DRAFT_v1.md`, `DEN-012_DRAFT_v1.md`.
-- Gemini may draft prose only from frozen evidence/briefs/specs; it may not change URLs, calculator logic, price scope or source decisions.
-- ChatGPT will audit and integrate the returned drafts before the content gate passes.
+- User returned four Gemini drafts: DEN-001, DEN-003, DEN-007 and DEN-012.
+- Added `evidence/qa/GEMINI_IMPLANTS_CLUSTER_DRAFT_QA_v1.md`.
+- Gemini v1 drafts were rejected as production copy because they collapsed the frozen H2 vectors and contained several evidence overstatements.
+- Reverified live CareCredit/Forbes price evidence before correction.
+- Created corrected production drafts:
+  - `content/implants/DEN-001_DRAFT_v2.md`
+  - `content/implants/DEN-003_DRAFT_v2.md`
+  - `content/implants/DEN-007_DRAFT_v2.md`
+  - `content/implants/DEN-012_DRAFT_v2.md`
+- Integrated corrected v2 prose into all four `src/` implant pages.
+- Preserved answer-first writing, source/date/geography/unit/package scope, canonical ownership and YMYL boundaries.
+- FAQs remain deferred until Main Content/site-level supplementary planning.
+
+### Heading-vector regression control
+- Strengthened `scripts/build.mjs` so DEN-001, DEN-003, DEN-007 and DEN-012 must retain the exact frozen H2 sequence in order.
+- This prevents future model drafts from silently collapsing required semantic sections.
 
 ### Still open
-- Gemini production implant drafts + ChatGPT semantic/evidence/YMYL QA and integration.
-- Verify latest implant implementation on Cloudflare branch preview.
+- Confirm final branch-head GitHub Actions after the editorial/control-file updates.
+- Verify the corrected implant pages on the Cloudflare branch preview.
 - Browser rendering at 320/390/768/1280/1920 px.
 - Automated accessibility + manual keyboard/screen-reader QA.
 - Trust/legal/methodology routes.
