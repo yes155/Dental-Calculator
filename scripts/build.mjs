@@ -47,6 +47,17 @@ const pageChecks = [
       '$2,143',
       '$1,646–$4,157',
     ],
+    headings: [
+      "How much does a dental implant cost?",
+      "What does a single-tooth implant quote include?",
+      "Implant post, abutment and crown costs are different quote components",
+      "What changes the price of a dental implant quote?",
+      "Dental implant cost calculator",
+      "How insurance can change out-of-pocket cost",
+      "Mini, zirconia and immediate-load implant quote labels",
+      "When extraction or bone graft fees are separate",
+      "Related dental implant cost guides",
+    ],
   },
   {
     path: "full-mouth-dental-implants-cost/index.html",
@@ -60,6 +71,17 @@ const pageChecks = [
       '$20,000–$45,000',
       'no national per-arch default',
     ],
+    headings: [
+      "How much do full-mouth dental implants cost?",
+      "Full-arch and full-mouth quotes are not the same unit",
+      "What does a full-arch implant quote include?",
+      "Fixed and removable implant restorations can be quoted differently",
+      "What changes a full-mouth implant quote?",
+      "Full-mouth dental implant cost calculator",
+      "How insurance can affect the patient estimate",
+      "When the quote is specifically All-on-4",
+      "Related implant and replacement cost guides",
+    ],
   },
   {
     path: "dental-bone-graft-cost/index.html",
@@ -69,6 +91,16 @@ const pageChecks = [
       '$652–$1,575',
       '$2,161–$5,148',
       'Sinus-lift pricing is intentionally excluded',
+    ],
+    headings: [
+      "How much does a dental bone graft cost?",
+      "Bone graft prices depend on the graft type and quoted site",
+      "Autograft, allograft, xenograft and alloplast are different quote categories",
+      "Is the bone graft included in an implant or extraction quote?",
+      "What can change the bone graft quote?",
+      "How insurance can affect the patient cost",
+      "What this page does not price or decide",
+      "Related dental cost guides",
     ],
   },
   {
@@ -83,6 +115,17 @@ const pageChecks = [
       '$15,176',
       '$11,640–$27,500',
     ],
+    headings: [
+      "How much do All-on-4 dental implants cost?",
+      "What does All-on-4 mean in a dental quote?",
+      "Is an All-on-4 price per arch or for a full mouth?",
+      "What may be included in an All-on-4 package?",
+      "What changes an All-on-4 quote?",
+      "All-on-4 cost calculator",
+      "How insurance can affect out-of-pocket cost",
+      "All-on-4 vs. generic full-arch implant quotes",
+      "Related dental implant cost guides",
+    ],
   },
 ];
 
@@ -93,6 +136,16 @@ for (const check of pageChecks) {
   }
   const h1Count = (html.match(/<h1\b/g) || []).length;
   if (h1Count !== 1) throw new Error(`${check.path}: expected exactly one H1; found ${h1Count}`);
+
+  if (check.headings) {
+    let cursor = -1;
+    for (const heading of check.headings) {
+      const token = `<h2>${heading}</h2>`;
+      const index = html.indexOf(token, cursor + 1);
+      if (index === -1) throw new Error(`${check.path}: frozen H2 missing or out of order: ${heading}`);
+      cursor = index;
+    }
+  }
 }
 
 const files = await readdir(output, { recursive: true });
