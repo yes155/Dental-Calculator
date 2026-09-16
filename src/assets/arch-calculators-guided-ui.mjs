@@ -239,8 +239,20 @@ function insuranceLabel(mode) {
   return "Insurance amount not known";
 }
 
-function renderScopeList(rows) {
-  return `<ul class="scope-summary">${rows.map((row) => `<li><span>${escapeHtml(componentNames[row.id] ?? row.label)}</span><strong>${escapeHtml(stateLabels[row.state])}${row.amountCents !== null ? ` · ${formatUsd(row.amountCents)}` : ""}</strong></li>`).join("")}</ul>`;
+function renderRows(rows) {
+  return rows.map((row) => `<li><span>${escapeHtml(componentNames[row.id] ?? row.label)}</span><strong>${escapeHtml(stateLabels[row.state])}${row.amountCents !== null ? ` · ${formatUsd(row.amountCents)}` : ""}</strong></li>`).join("");
+}
+
+function renderScopeSummary(rows) {
+  const mainRows = rows.filter((row) => PRIMARY_COMPONENT_IDS.has(row.id));
+  const otherRows = rows.filter((row) => !PRIMARY_COMPONENT_IDS.has(row.id));
+  const unclearOtherCount = otherRows.filter((row) => row.state === "unknown" || (row.state === "separately_quoted" && row.amountCents === null)).length;
+  const detailsLabel = unclearOtherCount
+    ? `Other quote items — ${unclearOtherCount} still unclear`
+    : "Other quote items";
+  return `
+    <ul class="scope-summary">${renderRows(mainRows)}</ul>
+    ${otherRows.length ? `<details class="result-details"><summary>${escapeHtml(detailsLabel)}</summary><ul class="scope-summary">${renderRows(otherRows)}</ul></details>` : ""}`;
 }
 
 function renderResult(outcome, input) {
@@ -249,10 +261,12 @@ function renderResult(outcome, input) {
   resultTitle.textContent = outcome.status === "incomplete" ? "Some parts of your quote are still unclear" : "Your quote summary";
 
   const insurer = outcome.insurerCents === null ? "Not known" : formatUsd(outcome.insurerCents);
-  const patient = outcome.patientCents === null ? "Not shown" : formatUsd(outcome.patientCents);
+  const patient = outcome.patientCents === null
+    ? (input.insurance.mode === "entered_estimate" && outcome.status === "incomplete" ? "Needs quote details" : "Not shown")
+    : formatUsd(outcome.patientCents);
   const perArch = outcome.perArchCents === null ? "Not shown" : `${outcome.perArchApproximate ? "About " : ""}${formatUsd(outcome.perArchCents)}`;
   const patientLabel = input.insurance.mode === "entered_estimate"
-    ? "Quote amount after insurance estimate"
+    ? "Amount after insurance estimate"
     : input.insurance.mode === "none"
       ? "Total with no insurance amount"
       : "After insurance";
@@ -263,7 +277,9 @@ function renderResult(outcome, input) {
       <div><dt>Cost per arch from this quote</dt><dd>${perArch}</dd></div>
       <div><dt>${patientLabel}</dt><dd>${patient}</dd></div>
     </dl>
-    <p class="result-note">Insurance estimate: ${insurer}. We only use amounts you enter; we do not calculate your plan benefits.</p>`;
+    <p class="result-note">${input.insurance.mode === "entered_estimate" && outcome.status === "incomplete"
+      ? `Insurance estimate: ${insurer}. We do not show an after-insurance amount until the quote details above are clear.`
+      : `Insurance estimate: ${insurer}. We only use amounts you enter; we do not calculate your plan benefits.`}</p>`;
 
   resultContext.innerHTML = `
     <div class="result-chips" aria-label="Quote details">
@@ -272,7 +288,7 @@ function renderResult(outcome, input) {
       <span>${escapeHtml(insuranceLabel(input.insurance.mode))}</span>
     </div>`;
 
-  resultScope.innerHTML = `<h3>What your quote says is included</h3>${renderScopeList(outcome.componentRows)}`;
+  resultScope.innerHTML = `<h3>Main package details</h3>${renderScopeSummary(outcome.componentRows)}`;
   if (outcome.prosthesisWarning) {
     resultScope.insertAdjacentHTML("beforeend", '<p class="notice-inline"><strong>Check the teeth/bridge details:</strong> the quote does not clearly confirm whether temporary or final teeth are included.</p>');
   }
