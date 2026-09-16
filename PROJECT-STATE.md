@@ -80,9 +80,9 @@ Automated QA:
 - CALC-008 fixtures remain 22/22 passing
 - implant regression suite covers CALC-001, CALC-003 and CALC-003-A04 arithmetic/scope behavior
 - build QA requires all five preview pages, calculator assets, noindex directives, exactly one H1 and calculator/ARIA markers
-- build QA now also enforces the frozen H2 sequence for DEN-001, DEN-003, DEN-007 and DEN-012
+- build QA enforces the frozen H2 sequence for DEN-001, DEN-003, DEN-007 and DEN-012
 - implementation SHA `86c68b8de04957bb5e24584cb25b6460449a0030` passed push + PR GitHub Actions
-- corrected-copy/H2-gate code commit `397515b387090079793bb1d7153acf0893ffc648` has a GitHub Actions run; final branch-head verification is tracked in the prelaunch audit
+- corrected-copy/control candidate `14f1bccec02e759e7d79eac5b3c324230fe97877` passed the GitHub Actions `test-and-build` job, including `npm run qa`
 
 ## Implant content status
 Briefs:
@@ -126,8 +126,8 @@ Corrected v2 prose is integrated into the corresponding `src/` HTML pages. Main 
 - M6 Production: BLOCKED
 
 ## Current verification
-- GitHub Actions: implementation baseline PASS; final corrected-copy/control-head confirmation still required before candidate promotion
-- Cloudflare: branch preview exists, but latest corrected-copy head is not yet recorded as verified/rendered in this chat
+- GitHub Actions: PASS for corrected-copy candidate `14f1bccec02e759e7d79eac5b3c324230fe97877`
+- Cloudflare: GitHub bot still reports earlier commit `fa921e62` as in progress; latest corrected-copy deployment/rendering is not yet verified
 
 ## Known hard-gate exceptions
 - Latest corrected-copy Cloudflare preview not yet verified.
