@@ -21,9 +21,15 @@ const componentRoot = document.querySelector("#components");
 const primaryComponents = document.querySelector("#primary-components");
 const additionalComponents = document.querySelector("#additional-components-list");
 const additionalDetails = document.querySelector("#additional-components");
+const markAdditionalNotListed = document.querySelector("#additional-not-listed");
 const insuranceEstimateFields = document.querySelector("#insurance-estimate-fields");
 const progressItems = [...document.querySelectorAll("[data-step-indicator]")];
 const steps = [...document.querySelectorAll(".calc-step[data-step]")];
+
+const PRIMARY_COMPONENT_IDS = new Set(["implant", "abutment", "crown"]);
+const ADDITIONAL_COMPONENT_IDS = IMPLANT_COMPONENTS
+  .map(({ id }) => id)
+  .filter((id) => !PRIMARY_COMPONENT_IDS.has(id));
 
 const stateLabels = {
   included: "Included",
@@ -31,8 +37,6 @@ const stateLabels = {
   not_on_quote: "Not listed",
   unknown: "Not sure",
 };
-
-let currentStep = 1;
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>'"]/g, (character) => ({
@@ -80,7 +84,6 @@ function renderErrors(errors) {
 }
 
 function setStep(stepNumber, { focus = true } = {}) {
-  currentStep = stepNumber;
   const mode = selectedValue("quoteMode");
   steps.forEach((step) => { step.hidden = Number(step.dataset.step) !== stepNumber; });
   progressItems.forEach((item) => {
@@ -93,9 +96,11 @@ function setStep(stepNumber, { focus = true } = {}) {
   });
   clearErrors();
   if (focus) {
-    const heading = document.querySelector(`#calc-step-${stepNumber}-heading`);
-    heading?.focus({ preventScroll: true });
-    document.querySelector("#calculator-heading")?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    document.querySelector(`#calc-step-${stepNumber}-heading`)?.focus({ preventScroll: true });
+    document.querySelector("#calculator-heading")?.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "start",
+    });
   }
 }
 
@@ -136,6 +141,7 @@ function createComponentChoice(component, target) {
       <label for="component-${component.id}-amount">Separate ${escapeHtml(component.label.toLowerCase())} amount</label>
       <div class="money"><span aria-hidden="true">$</span><input id="component-${component.id}-amount" data-component-amount="${component.id}" data-field="components.${component.id}.amount" inputmode="decimal" autocomplete="off" placeholder="0.00" disabled></div>
     </div>`;
+
   fieldset.addEventListener("change", (event) => {
     if (event.target.name !== `component-${component.id}`) return;
     const amountWrap = fieldset.querySelector(".component-amount");
@@ -149,9 +155,22 @@ function createComponentChoice(component, target) {
 }
 
 function buildComponents() {
-  const primaryIds = new Set(["implant", "abutment", "crown"]);
   for (const component of IMPLANT_COMPONENTS) {
-    createComponentChoice(component, primaryIds.has(component.id) ? primaryComponents : additionalComponents);
+    createComponentChoice(component, PRIMARY_COMPONENT_IDS.has(component.id) ? primaryComponents : additionalComponents);
+  }
+}
+
+function setAdditionalState(value) {
+  for (const id of ADDITIONAL_COMPONENT_IDS) {
+    const radio = form.querySelector(`input[name="component-${CSS.escape(id)}"][value="${CSS.escape(value)}"]`);
+    if (radio) radio.checked = true;
+    const amount = document.querySelector(`#component-${id}-amount`);
+    const amountWrap = amount?.closest(".component-amount");
+    if (amount) {
+      amount.value = "";
+      amount.disabled = value !== "separately_quoted";
+    }
+    if (amountWrap) amountWrap.hidden = value !== "separately_quoted";
   }
 }
 
@@ -224,12 +243,15 @@ function validateStepOne() {
   if (!/^\d+$/.test(toothText) || toothCount < 1 || toothCount > 32) {
     errors.push({ field: "toothCount", message: "Enter a whole-number tooth count from 1 to 32." });
   }
+
   const mode = selectedValue("quoteMode");
   if (!mode) errors.push({ field: "quoteMode", message: "Choose whether your quote has one total or itemized lines." });
+
   if (mode === "bundle") {
     const parsed = parseUsdToCents(document.querySelector("#bundle-amount").value);
     if (!parsed.ok) errors.push({ field: "bundleAmount", message: parsed.reason });
   }
+
   if (mode === "itemized") {
     [...itemizedLines.children].forEach((row, index) => {
       const label = row.querySelector('[data-role="line-label"]').value.trim();
@@ -253,13 +275,14 @@ function validateStepOne() {
 
 function validateStepTwo() {
   const errors = [];
-  for (const component of IMPLANT_COMPONENTS) {
-    if (!selectedValue(`component-${component.id}`)) {
-      errors.push({ field: `components.${component.id}.state`, message: `Choose whether ${component.label.toLowerCase()} is included, separate, not listed, or not sure.` });
+  for (const id of PRIMARY_COMPONENT_IDS) {
+    const component = IMPLANT_COMPONENTS.find((entry) => entry.id === id);
+    if (!selectedValue(`component-${id}`)) {
+      errors.push({
+        field: `components.${id}.state`,
+        message: `Choose whether ${component.label.toLowerCase()} is included, separate, not listed, or not sure.`,
+      });
     }
-  }
-  if (errors.some((error) => ["extraction", "graft", "imaging", "sedation", "other"].some((id) => error.field.includes(`.${id}.`)))) {
-    additionalDetails.open = true;
   }
   return errors;
 }
@@ -310,6 +333,7 @@ function renderResult(outcome, input) {
   result.hidden = false;
   result.classList.toggle("result-incomplete", outcome.status === "incomplete");
   resultTitle.textContent = outcome.status === "incomplete" ? "Your entered quote — scope incomplete" : "Your entered quote summary";
+
   const insurer = outcome.insurerCents === null ? "Unknown" : formatUsd(outcome.insurerCents);
   const patient = outcome.patientCents === null ? "Not shown" : formatUsd(outcome.patientCents);
   const perTooth = outcome.perToothCents === null ? "Not shown" : `${outcome.perToothApproximate ? "Approx. " : ""}${formatUsd(outcome.perToothCents)}`;
@@ -334,13 +358,19 @@ function renderResult(outcome, input) {
   } else {
     resultScope.innerHTML = `<h3>Your itemized quote lines</h3><ul class="scope-summary">${outcome.lineRows.map((row) => `<li><span>${escapeHtml(row.label)}</span><strong>${formatUsd(row.lineTotalCents ?? 0)}</strong></li>`).join("")}</ul>`;
   }
+
   if (outcome.status === "incomplete") {
     resultScope.insertAdjacentHTML("beforeend", '<p class="notice-inline"><strong>Scope warning:</strong> at least one component is not confirmed or has a separate fee without an amount. The known total is shown, but do not treat it as all-inclusive.</p>');
   }
-  result.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+
+  result.scrollIntoView({
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    block: "start",
+  });
 }
 
 buildComponents();
+setAdditionalState("unknown");
 addItemizedLine();
 updateQuoteMode();
 updateInsurance();
@@ -349,6 +379,11 @@ setStep(1, { focus: false });
 form.addEventListener("change", (event) => {
   if (event.target.name === "quoteMode") updateQuoteMode();
   if (event.target.name === "insuranceMode") updateInsurance();
+});
+
+markAdditionalNotListed?.addEventListener("click", () => {
+  setAdditionalState("not_on_quote");
+  clearErrors();
 });
 
 document.querySelector("#add-line").addEventListener("click", addItemizedLine);
@@ -388,7 +423,11 @@ form.addEventListener("reset", () => {
     addItemizedLine();
     componentRoot.querySelectorAll("input[type=radio]").forEach((input) => { input.checked = false; });
     componentRoot.querySelectorAll(".component-amount").forEach((group) => { group.hidden = true; });
-    componentRoot.querySelectorAll("[data-component-amount]").forEach((input) => { input.value = ""; input.disabled = true; });
+    componentRoot.querySelectorAll("[data-component-amount]").forEach((input) => {
+      input.value = "";
+      input.disabled = true;
+    });
+    setAdditionalState("unknown");
     additionalDetails.open = false;
     updateQuoteMode();
     updateInsurance();
