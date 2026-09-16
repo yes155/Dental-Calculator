@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Dental Implant Cost Calculator: Single-Tooth Quote Components</title>
+  <meta name="description" content="Compare a written dental implant quote by tooth count, implant components, separately quoted items, and a same-scope insurer estimate.">
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="preview-banner">Prelaunch preview — noindex. Cost education only; not a dental quote or treatment recommendation.</div>
+<header class="site-header"><p>Dental Calculator</p></header>
+<main id="main" class="article-shell">
+  <header class="article-header">
+    <p class="eyebrow">Dental implant costs</p>
+    <h1>Dental implant cost calculator: single-tooth quote components</h1>
+    <p class="intro">A dental implant quote can cover the implant body alone or a wider treatment package. This page separates the amounts and inclusions so you can compare a written quote without assuming that every fee is bundled.</p>
+    <p class="byline">Research and written by Farrukh Abdullah</p>
+    <p class="updated">Evidence checked September 16, 2026</p>
+  </header>
+
+  <article class="article-body">
+    <h2>How much does a dental implant cost?</h2>
+    <p>CareCredit reports a national average of <strong>$2,143</strong> and a reported range of <strong>$1,646–$4,157</strong> for the dental implant process/artificial root. Its 2023–2024 research covers all 50 states plus Washington, D.C. The source explicitly says the <strong>crown is not included</strong>; state figures also exclude tooth extraction and some office-related fees.</p>
+    <p>That makes this a useful reference for the implant portion of treatment, but it is not an all-inclusive single-tooth replacement price. Your own written quote may list the implant body, abutment, crown, extraction, grafting, imaging or other services separately.</p>
+
+    <h2>What does a single-tooth implant quote include?</h2>
+    <p>The FDA describes a dental implant system as an implant body placed in the jaw, an abutment attached to the implant body, and an artificial tooth or prosthetic restoration above it. Those components can appear as separate line items in a dental quote.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Quote component</th><th>What to verify</th></tr></thead>
+        <tbody>
+          <tr><td>Implant body / process</td><td>Whether the amount is for the artificial root and placement only</td></tr>
+          <tr><td>Abutment</td><td>Whether included with the implant or billed separately</td></tr>
+          <tr><td>Final crown / prosthesis</td><td>Whether included; the CareCredit implant benchmark above excludes the crown</td></tr>
+          <tr><td>Extraction, graft, imaging or sedation</td><td>Whether included, separate, absent from the quote, or still unknown</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Implant post, abutment and crown costs are different quote components</h2>
+    <p>A figure labeled “implant cost” does not always mean a complete restored tooth. For this reason, this site does not add an estimated crown or abutment price automatically to the CareCredit implant benchmark. The safest comparison is to keep each provider’s written scope visible.</p>
+
+    <h2>What changes the price of a dental implant quote?</h2>
+    <p>Published prices vary by location, provider and what the quoted package includes. CareCredit also reports a separate average of <strong>$3,255</strong> for an immediate-load implant category, but that number is kept separate from the standard implant benchmark rather than blended into one synthetic range.</p>
+    <p>Materials can also be described differently. FDA guidance notes that implant systems may use titanium or zirconium oxide (zirconia). A zirconia implant body is not the same thing as a zirconia crown, so a material label should always be tied to the component it describes.</p>
+
+    <h2>Dental implant cost calculator</h2>
+    <p>Use the amounts from a written dental quote. The tool adds only what you enter and never supplies a hidden treatment price.</p>
+  </article>
+
+  <section class="calculator-embed" aria-labelledby="calculator-heading">
+    <div class="calculator-card">
+      <h2 id="calculator-heading">Organize your written implant quote</h2>
+      <p class="hint">[CALCULATOR: CALC-001 — quote-input normalization only]</p>
+      <div id="error-summary" class="notice notice-error" tabindex="-1" hidden></div>
+      <form id="calculator" data-calculator="calc001" novalidate>
+        <fieldset>
+          <legend>Quote scope</legend>
+          <div class="field-grid">
+            <div><label for="tooth-count">Number of teeth covered by this written quote</label><input id="tooth-count" data-field="toothCount" inputmode="numeric" autocomplete="off" placeholder="1"></div>
+          </div>
+          <div class="choice-grid" role="group" aria-label="Quote mode">
+            <label class="choice" for="quote-mode-bundle"><input id="quote-mode-bundle" data-field="quoteMode" type="radio" name="quoteMode" value="bundle"> One written total / bundle</label>
+            <label class="choice" for="quote-mode-itemized"><input id="quote-mode-itemized" data-field="quoteMode" type="radio" name="quoteMode" value="itemized"> Itemized quote lines</label>
+          </div>
+        </fieldset>
+
+        <fieldset id="bundle-section" hidden>
+          <legend>Written total</legend>
+          <div class="field-grid"><div><label for="bundle-amount">Quoted total (USD)</label><div class="money"><span aria-hidden="true">$</span><input id="bundle-amount" data-field="bundleAmount" inputmode="decimal" autocomplete="off" placeholder="0.00"></div></div></div>
+          <h3>What does that total say it includes?</h3>
+          <div id="components"></div>
+        </fieldset>
+
+        <fieldset id="itemized-section" hidden>
+          <legend>Itemized written quote</legend>
+          <p class="hint">Enter only amounts and multipliers explicitly shown or confirmed on the quote.</p>
+          <div id="itemized-lines"></div>
+          <button id="add-line" class="button-secondary" type="button">Add quote line</button>
+        </fieldset>
+
+        <fieldset>
+          <legend>Insurance estimate</legend>
+          <label for="insurance-mode">What insurance information do you have?</label>
+          <select id="insurance-mode" data-field="insurance.mode">
+            <option value="">Choose one</option>
+            <option value="none">No insurance contribution for this estimate</option>
+            <option value="entered_estimate">I have an insurer estimate for this same quote scope</option>
+            <option value="unknown">Insurance amount is unknown</option>
+          </select>
+          <div id="insurance-estimate-fields" hidden>
+            <div class="field-grid"><div><label for="insurance-amount">Insurer estimate amount (USD)</label><div class="money"><span aria-hidden="true">$</span><input id="insurance-amount" data-field="insurance.amount" inputmode="decimal" autocomplete="off" placeholder="0.00"></div></div></div>
+            <label class="check" for="same-scope"><input id="same-scope" data-field="insurance.sameScopeConfirmed" type="checkbox"> I confirm this insurer estimate applies to the same quote lines and scope entered above.</label>
+          </div>
+        </fieldset>
+
+        <div class="actions"><button class="button-primary" type="submit">Calculate entered quote</button><button class="button-secondary" type="reset">Reset</button></div>
+      </form>
+      <div id="result" class="result" aria-live="polite" hidden><h2 id="result-title"></h2><div id="result-values"></div><div id="result-scope"></div></div>
+      <div class="panel">
+        <h3>Published reference — not a calculator default</h3>
+        <p><strong>$2,143 average; $1,646–$4,157 reported range</strong> for the dental implant process/artificial root in CareCredit’s 2023–2024 national research. Crown excluded; state figures also exclude extraction and some office-related fees.</p>
+      </div>
+      <p class="privacy-note">This tool organizes amounts from a written dental quote and published cost references. It is not a diagnosis, treatment recommendation, coverage guarantee or dental quote. Entered amounts are not stored, sent externally or placed in the URL.</p>
+    </div>
+  </section>
+
+  <article class="article-body">
+    <h2>How insurance can change out-of-pocket cost</h2>
+    <p>Dental implant coverage varies by plan. Deductibles, annual or lifetime maximums, waiting periods, exclusions and allowed-amount rules can affect the final patient cost. This calculator therefore accepts only an insurer estimate that you already have for the same quote scope; it does not assume that insurance pays a fixed percentage.</p>
+
+    <h2>Mini, zirconia and immediate-load implant quote labels</h2>
+    <p>Different labels may describe different implant systems, materials or timing. The current evidence set supports a separate CareCredit immediate-load benchmark, but it does not support national default prices for mini implants or zirconia implant bodies. Those categories are not filled in by the calculator.</p>
+
+    <h2>When extraction or bone graft fees are separate</h2>
+    <p>Extraction and bone grafting may be separate quote components. Marking an item “not on quote” means only that it is not listed in the written quote; it does not mean the service is clinically unnecessary.</p>
+
+    <h2>Related dental implant cost guides</h2>
+    <ul class="related-links">
+      <li><a href="/full-mouth-dental-implants-cost/">Full-mouth dental implant cost</a></li>
+      <li><a href="/all-on-4-dental-implants-cost/">All-on-4 dental implant cost</a></li>
+      <li><a href="/dental-bone-graft-cost/">Dental bone graft cost</a></li>
+      <li><a href="/tooth-extraction-cost/">Tooth extraction cost</a></li>
+      <li><a href="/dental-bridge-cost/">Dental bridge cost</a></li>
+      <li><a href="/dentures-cost/">Dentures cost</a></li>
+    </ul>
+    <p class="evidence-date"><strong>Sources:</strong> FDA, “Dental Implants: What You Should Know”; CareCredit, “Dental Implants Cost and Procedure Guide”; Humana, “Dental implants: costs and coverage”; Cigna and Delta Dental insurance education. Source lineage is recorded in the project source register.</p>
+  </article>
+</main>
+<footer class="site-footer"><p>Dental Calculator</p><p>Cost education only; not dental or insurance advice.</p></footer>
+<script type="module" src="/assets/implant-calculators-ui.mjs"></script>
+</body>
+</html>
