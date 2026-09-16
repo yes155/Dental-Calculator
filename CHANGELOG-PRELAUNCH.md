@@ -145,7 +145,21 @@
 - Updated `scripts/build.mjs` to require the arch guided assets/three-step markers and to reject visible internal calculator IDs on implant pages.
 - Guided arch implementation head `d1d5309d14c50b676165634ce6d26a94685dccb6` passed GitHub Actions `test-and-build`; control head `2f3fdad53c8970ff280f3b5e767b03d8326288a6` also passed.
 
+### Arch calculators rendered review and correction
+- User supplied live CALC-003 and CALC-003-A04 screenshots and identified the same yellow focus-outline anomaly plus additional UX problems.
+- Fixed arch money fields so focus/error outlines wrap the entire `$ + amount` control, matching the approved CALC-001 behavior.
+- Shortened H1s to `Full-mouth dental implants cost` and `All-on-4 dental implant cost`.
+- Moved CALC-003 higher: after the direct cost answer and the full-arch/full-mouth unit explanation.
+- Moved CALC-003-A04 higher: after the direct answer, All-on-4 definition and arch-unit caveat.
+- Added `id="calculator-heading"` to both calculator H2s so guided Back/Continue navigation has a valid focus/scroll target.
+- Simplified reference-strip wording from internal `calculator math` language to `reference only` / `not used in your calculator result`.
+- Shortened result output: the three main package items stay visible while secondary package items are collapsed under `Other quote items`.
+- When an insurance estimate is entered but package details remain incomplete, the result now says `Needs quote details` and explains why an after-insurance amount is withheld.
+- Created `content/implants/DEN-003_DRAFT_v3.md` and `DEN-012_DRAFT_v3.md` and updated both briefs to match the new placement/H2 vectors.
+- Updated build QA to require concise H1s, calculator-heading anchors, revised H2 order and new reference wording.
+- Higher-placement/focus/result revision through `60b432e8f2b93dca7c7506275e63f2d9491ca33c` passed GitHub Actions `npm run qa`.
+
 ### Current preview status
 - CALC-001 representative UX is user-approved.
-- Cloudflare's PR bot comment is stale on an older commit, so current CALC-003/CALC-003-A04 rendered review remains open.
-- Production remains blocked pending rendered/multi-viewport/accessibility QA, trust/legal/methodology pages, remaining evidence clusters, media, technical SEO, performance and rollback documentation.
+- CALC-003/CALC-003-A04 first guided renders were reviewed; corrected renders now require one final visual confirmation.
+- Production remains blocked pending corrected arch render confirmation, multi-viewport/accessibility QA, trust/legal/methodology pages, remaining evidence clusters, media, technical SEO, performance and rollback documentation.
