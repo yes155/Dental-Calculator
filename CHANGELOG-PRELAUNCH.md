@@ -18,8 +18,7 @@
 ### Deployment verification
 - GitHub Actions `Prelaunch QA` passed at the original implementation candidate `e3dea30b3c40cd7645ab6d0634db5034d64128d9`.
 - Cloudflare branch preview deployment succeeded for that implementation candidate.
-- GitHub Actions also passes at current brief head `efdda5593d07de909dcb473b222419c04bccce13`.
-- Cloudflare current-head confirmation is still pending; the latest bot status observed during this batch was in progress at `297f39cd`.
+- GitHub Actions also passed at prior brief head `efdda5593d07de909dcb473b222419c04bccce13`.
 - Production merge, domain connection and indexation remain blocked.
 
 ### Project controls
@@ -40,12 +39,19 @@
 ### Implants evidence batch
 - Created `handoffs/notebooklm/NLM_IMPLANTS_CLUSTER_EVIDENCE_REQUEST_v1.md` for DEN-001, DEN-003, DEN-007 and DEN-012.
 - Added a 20-source acquisition list prioritizing FDA, ADA, AAP, CMS, broad cost datasets and insurer documentation; Nobel Biocare is restricted to narrow branded-concept terminology.
-- Added `handoffs/EXTERNAL_MODEL_HANDOFF_MANIFEST.md`.
 - Added evidence-gated semantic briefs for DEN-001, DEN-003, DEN-007 and DEN-012.
-- Numeric implant/full-mouth/graft/All-on-4 claims remain blocked until the NotebookLM Evidence Pack is returned and audited.
+- User returned `NLM_IMPLANTS_CLUSTER_EVIDENCE-PACK_v1.md`.
+- ChatGPT QA rejected v1 because NotebookLM reported the required external source corpus as missing and relied on the task specification for factual support.
+- Rejected unsupported synthesis prices that appeared despite missing source lineage.
+- Detected and corrected a DEN-008 canonical-reference error in the returned pack (`/dental-extraction-cost/` → `/tooth-extraction-cost/`).
+- Independently confirmed that the core intended public sources are live, including FDA/AAP/ADA implant guidance and current CareCredit/Humana cost pages.
+- Added `evidence/qa/NLM_IMPLANTS_CLUSTER_EVIDENCE_QA_v1.md`.
+- Added `handoffs/notebooklm/NLM_IMPLANTS_CLUSTER_EVIDENCE_REQUEST_v2.md` with a mandatory source-ingestion preflight and stop condition.
+- Updated the external-model manifest: v1 = FAIL; v2 = READY_FOR_NOTEBOOKLM.
+- Numeric implant/full-mouth/graft/All-on-4 claims, implant calculator formulas/defaults and Gemini drafting remain blocked until v2 passes evidence QA.
 
 ### Still open
-- NotebookLM implant-cluster evidence pack and ChatGPT evidence QA.
+- NotebookLM implants v2 evidence pack and ChatGPT evidence QA.
 - Browser rendering at 320/390/768/1280/1920 px.
 - Automated accessibility plus manual keyboard/screen-reader QA.
 - Site-wide source register/cost data and remaining calculator specs.
