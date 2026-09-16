@@ -66,7 +66,7 @@ const pageChecks = [
   },
   {
     path: "dental-cleaning-cost/index.html",
-    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Dental cleaning cost</h1>','data-calculator-id="CALC-002"','data-calculator="calc002"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/cleaning-calculator-ui.mjs','/assets/cleaning-calculator.css','$85–$160','without dental benefits','$104','$80–$109','Orlando, Florida','$203','not used on this page as a standalone cleaning price'],
+    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Dental cleaning cost</h1>','data-calculator-id="CALC-002"','data-calculator="calc002"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/cleaning-calculator-ui.mjs','/assets/cleaning-calculator.css','$85–$160','without dental benefits','$104','$80–$109','Orlando, Florida','$203','broader bundle'],
     headings: ["How much does a dental cleaning cost?","Dental cleaning cost calculator","What does a standard dental cleaning price include?","Are the exam and X-rays included in a cleaning quote?","What can change a dental cleaning quote?","How insurance can change what you pay","Routine cleaning, deep cleaning and periodontal maintenance are different","Related dental cost guides"],
   },
 ];
