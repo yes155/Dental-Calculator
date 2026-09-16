@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Dental Cleaning Cost: Standard Cleaning Price and Quote Calculator</title>
+  <meta name="description" content="Compare a standard dental cleaning price and organize a written quote with exam, X-ray, fluoride, other charges, and an optional same-quote insurance estimate.">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/cleaning-calculator.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="preview-banner">Prelaunch preview — noindex. Cost education only; not a dental quote or treatment recommendation.</div>
+<header class="site-header"><p>Dental Calculator</p></header>
+<main id="main" class="article-shell">
+<header class="article-header">
+  <p class="eyebrow">Dental cleaning costs</p>
+  <h1>Dental cleaning cost</h1>
+  <p class="intro">Delta Dental reports that a <strong>standard dental cleaning costs about $85–$160 without dental benefits</strong>. That figure is for a standard cleaning, not a deep cleaning, periodontal maintenance visit, or a broader exam/cleaning/X-ray package. Your written estimate should show whether exam, X-rays, fluoride or other items are included or charged separately.</p>
+  <p class="byline">Research and written by Farrukh Abdullah</p>
+  <p class="updated">Evidence checked September 17, 2026</p>
+</header>
+
+<article class="article-body">
+  <h2>How much does a dental cleaning cost?</h2>
+  <p>Delta Dental currently reports an average cost of <strong>$85–$160 for a standard dental cleaning without dental benefits</strong>. Its consumer page does not disclose the exact static-range sample or data date, so this is a current publisher-reported benchmark rather than an independently verified national fee survey.</p>
+  <p>Cigna reports an adult cleaning average of roughly <strong>$104</strong>, citing the ADA Health Policy Institute's 2022 Survey of Dental Fees. Humana reports <strong>$80–$109 without insurance for an adult routine cleaning in the Orlando, Florida area</strong>. Keep that Humana figure local; do not generalize it nationally.</p>
+
+  <h2 id="calculator-heading">Dental cleaning cost calculator</h2>
+  <p>Have a written cleaning estimate? Enter the amount, record what is included, and add insurance information only if you already have it for the same quote. The published $85–$160 reference never fills in the calculator or changes its arithmetic.</p>
+</article>
+
+<section class="calculator-embed calculator-embed--guided cleaning-guided" aria-labelledby="calculator-heading" data-calculator-id="CALC-002">
+  <div class="calculator-card calculator-card--guided">
+    <ol class="calc-progress" aria-label="Calculator progress">
+      <li data-step-indicator="1" class="is-current" aria-current="step"><span>1</span><strong>Your quote</strong></li>
+      <li data-step-indicator="2"><span>2</span><strong>What's included</strong></li>
+      <li data-step-indicator="3"><span>3</span><strong>Insurance & result</strong></li>
+    </ol>
+
+    <div id="error-summary" class="notice notice-error" tabindex="-1" hidden></div>
+
+    <form id="calculator" data-calculator="calc002" novalidate>
+      <section class="calc-step" data-step="1" aria-labelledby="calc-step-1-heading">
+        <div class="step-heading">
+          <p class="step-kicker">Step 1 of 3</p>
+          <h3 id="calc-step-1-heading" tabindex="-1">Enter what your written quote shows</h3>
+          <p>Use the amounts from the dental office. Do not add services that are not on the estimate.</p>
+        </div>
+
+        <fieldset class="guided-group" data-error-field="quoteMode">
+          <legend>Does your quote show one total or separate charges?</legend>
+          <div class="choice-grid choice-grid--cards">
+            <label class="choice choice-card"><input data-field="quoteMode" type="radio" name="quoteMode" value="one_total"><span><strong>One total</strong><small>The estimate shows one combined amount.</small></span></label>
+            <label class="choice choice-card"><input data-field="quoteMode" type="radio" name="quoteMode" value="separate_charges"><span><strong>Separate charges</strong><small>The cleaning has its own amount.</small></span></label>
+          </div>
+        </fieldset>
+
+        <div id="one-total-fields" class="guided-subpanel" hidden>
+          <div class="field-money-compact"><label for="written-total">Total on your quote</label><div class="money"><span aria-hidden="true">$</span><input id="written-total" data-field="writtenTotal" inputmode="decimal" autocomplete="off" placeholder="0.00" disabled></div></div>
+        </div>
+        <div id="separate-fields" class="guided-subpanel" hidden>
+          <div class="field-money-compact"><label for="cleaning-fee">Standard cleaning charge</label><div class="money"><span aria-hidden="true">$</span><input id="cleaning-fee" data-field="cleaningFee" inputmode="decimal" autocomplete="off" placeholder="0.00" disabled></div></div>
+        </div>
+
+        <div class="step-actions step-actions--end"><button id="step-1-next" class="button-primary" type="button">Continue</button></div>
+      </section>
+
+      <section class="calc-step" data-step="2" aria-labelledby="calc-step-2-heading" hidden>
+        <div class="step-heading">
+          <p class="step-kicker">Step 2 of 3</p>
+          <h3 id="calc-step-2-heading" tabindex="-1">What else does the quote say?</h3>
+          <p>For each item, choose what the written estimate shows. Leave it as “Not sure” when the quote is unclear.</p>
+        </div>
+        <div id="component-list"></div>
+        <div class="step-actions"><button id="step-2-back" class="button-secondary" type="button">Back</button><button id="step-2-next" class="button-primary" type="button">Continue to insurance</button></div>
+      </section>
+
+      <section class="calc-step" data-step="3" aria-labelledby="calc-step-3-heading" hidden>
+        <div class="step-heading">
+          <p class="step-kicker">Step 3 of 3</p>
+          <h3 id="calc-step-3-heading" tabindex="-1">Add insurance info if you have it</h3>
+          <p>We do not guess what your plan will pay.</p>
+        </div>
+        <fieldset class="guided-group insurance-choice-group">
+          <legend>Did your insurance company give you an estimated payment for this same quote?</legend>
+          <div class="choice-grid choice-grid--insurance">
+            <label class="choice choice-card"><input data-field="insurance.mode" type="radio" name="insuranceMode" value="entered_estimate"><span><strong>Yes</strong><small>I have an estimated insurance payment.</small></span></label>
+            <label class="choice choice-card"><input data-field="insurance.mode" type="radio" name="insuranceMode" value="none"><span><strong>No insurance amount</strong><small>Do not subtract an insurance amount.</small></span></label>
+            <label class="choice choice-card"><input data-field="insurance.mode" type="radio" name="insuranceMode" value="unknown"><span><strong>Not yet</strong><small>I do not know what insurance may pay.</small></span></label>
+          </div>
+        </fieldset>
+        <div id="insurance-estimate-fields" class="guided-subpanel" hidden>
+          <div class="field-money-compact"><label for="insurance-amount">Estimated insurance payment</label><div class="money"><span aria-hidden="true">$</span><input id="insurance-amount" data-field="insurance.amount" inputmode="decimal" autocomplete="off" placeholder="0.00" disabled></div></div>
+          <label class="check" for="same-scope"><input id="same-scope" data-field="insurance.sameScopeConfirmed" type="checkbox" disabled> This insurance estimate covers the same quote I entered above.</label>
+        </div>
+        <div class="step-actions"><button id="step-3-back" class="button-secondary" type="button">Back</button><button class="button-primary" type="submit">Show my quote summary</button><button class="button-link reset-link" type="reset">Start over</button></div>
+      </section>
+    </form>
+
+    <div id="result" class="result result--guided" aria-live="polite" hidden>
+      <h2 id="result-title"></h2><div id="result-values"></div><div id="result-scope"></div>
+      <p class="result-disclaimer"><strong>About this result:</strong> we only add the numbers you entered from your written quote. This is not a dentist's quote, treatment recommendation, or insurance guarantee.</p>
+    </div>
+
+    <aside class="reference-strip" aria-label="Published standard cleaning cost reference">
+      <div><span class="reference-label">Published reference — not a calculator default</span><strong>$85–$160 for a standard cleaning without dental benefits</strong></div>
+      <p>Delta Dental consumer guidance. The source does not disclose the exact static-range data date or sample methodology. This reference is not used in your calculator result.</p>
+    </aside>
+    <p class="privacy-note privacy-note--compact">The amounts you enter stay on this page while you use the calculator. They are not sent elsewhere or added to the page URL.</p>
+  </div>
+</section>
+
+<article class="article-body">
+  <h2>What does a standard dental cleaning price include?</h2>
+  <p>A quoted “standard cleaning” amount does not prove that every part of the visit is bundled. The controlling question is what the written estimate actually says.</p>
+  <p>If the provider lists one combined total, record whether exam, imaging, fluoride or another charge is included. If the provider lists separate charges, enter those separately rather than subtracting unrelated benchmark prices to invent a cleaning-only amount.</p>
+
+  <h2>Are the exam and X-rays included in a cleaning quote?</h2>
+  <p>They may be included, separate, or absent from a particular written estimate. Do not assume one arrangement applies to every office.</p>
+  <p>CareCredit publishes a <strong>$203</strong> observation labeled as a dental exam with cleaning and X-rays. That is a broader bundle and is <strong>not</strong> used on this page as a standalone cleaning price. X-ray type-level costs belong on the <a href="/dental-x-ray-cost/">dental X-ray cost</a> page; exam-led pricing belongs on the <a href="/dentist-visit-cost/">dentist visit cost</a> page.</p>
+
+  <h2>What can change a dental cleaning quote?</h2>
+  <p>Published prices vary by source, geography and scope. The current evidence supports a broad Delta Dental standard-cleaning benchmark, an older Cigna/ADA adult average, and a Humana Orlando example. It does not support a universal formula that adjusts a cleaning quote by ZIP code, age, visit frequency or symptoms.</p>
+  <p>The written quote may also differ because exam, imaging, fluoride or other services are included or billed separately.</p>
+
+  <h2>How insurance can change what you pay</h2>
+  <p>Dental-plan rules vary. Some plans may cover preventive services differently from other services, but there is no universal percentage or guaranteed $0 cleaning visit.</p>
+  <p>CALC-002 does not calculate deductibles, coinsurance, network allowed amounts, annual maximums or frequency limits. It subtracts only a same-quote insurer estimate that the user enters directly.</p>
+
+  <h2>Routine cleaning, deep cleaning and periodontal maintenance are different</h2>
+  <p>This page owns standard/routine cleaning cost. Scaling and root planing, often called deep cleaning, has a different pricing unit and belongs on the <a href="/deep-teeth-cleaning-cost/">deep teeth cleaning cost</a> page. Ongoing periodontal maintenance has its own visit-level pricing page.</p>
+  <p>The calculator does not decide which service a reader needs and does not turn symptoms into a treatment category.</p>
+
+  <h2>Related dental cost guides</h2>
+  <ul class="related-links">
+    <li><a href="/deep-teeth-cleaning-cost/">Deep teeth cleaning cost</a></li>
+    <li><a href="/periodontal-maintenance-cost/">Periodontal maintenance cost</a></li>
+    <li><a href="/dental-x-ray-cost/">Dental X-ray cost</a></li>
+    <li><a href="/dentist-visit-cost/">Dentist visit cost</a></li>
+    <li><a href="/dental-insurance-out-of-pocket-costs/">Dental insurance and out-of-pocket costs</a></li>
+  </ul>
+  <p class="evidence-date"><strong>Sources:</strong> Delta Dental standard-cleaning cost guidance; Cigna adult cleaning cost context citing ADA HPI 2022; Humana Orlando local cleaning example; CareCredit exam/cleaning/X-ray bundle scope. Cost education only.</p>
+</article>
+</main>
+<footer class="site-footer"><p>Dental Calculator</p><p>Cost education only; not dental or insurance advice.</p></footer>
+<script type="module" src="/assets/cleaning-calculator-ui.mjs"></script>
+</body>
+</html>
