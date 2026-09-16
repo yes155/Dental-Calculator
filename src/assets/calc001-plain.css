@@ -1,0 +1,52 @@
+/* CALC-001 representative UX refinements after rendered review */
+.article-header h1 {
+  max-width: 46rem;
+  font-size: clamp(2rem, 5.1vw, 3.15rem);
+  line-height: 1.08;
+}
+
+.guided-quote-line .line-grid {
+  align-items: end;
+}
+
+.guided-quote-line .line-grid > div {
+  min-width: 0;
+}
+
+.money {
+  min-height: 2.85rem;
+  overflow: visible;
+}
+
+.money input {
+  min-width: 0;
+}
+
+/* Treat the dollar prefix and its input as one validation control. */
+.money:has(input[aria-invalid="true"]) {
+  outline: 3px solid var(--danger);
+  outline-offset: 1px;
+}
+
+.money input[aria-invalid="true"] {
+  outline: 0;
+}
+
+.result-grid--guided {
+  align-items: stretch;
+}
+
+.result-grid--guided > div {
+  min-height: 7rem;
+}
+
+@media (max-width: 760px) {
+  .article-header h1 {
+    max-width: none;
+    font-size: clamp(2rem, 9vw, 2.65rem);
+  }
+
+  .result-grid--guided > div {
+    min-height: 0;
+  }
+}
