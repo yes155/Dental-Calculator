@@ -17,12 +17,14 @@ const required = [
   "all-on-4-dental-implants-cost/index.html",
   "assets/site.css",
   "assets/calc001-plain.css",
+  "assets/arch-calculators-guided.css",
   "assets/calc008-core.mjs",
   "assets/calc008-ui.mjs",
   "assets/implant-calculators-core.mjs",
   "assets/implant-calculators-ui.mjs",
   "assets/calc001-guided-ui.mjs",
   "assets/calc001-charge-select.mjs",
+  "assets/arch-calculators-guided-ui.mjs",
 ];
 
 for (const path of required) await access(resolve(output, path));
@@ -75,12 +77,19 @@ const pageChecks = [
     tokens: [
       '<meta name="robots" content="noindex,nofollow">',
       '<h1>Full-mouth dental implant cost: per-arch quote guide</h1>',
-      '[CALCULATOR: CALC-003',
+      'data-calculator-id="CALC-003"',
       'data-calculator="calc003"',
       'id="calculator"',
       'aria-live="polite"',
+      'data-step-indicator="1"',
+      'data-step-indicator="2"',
+      'data-step-indicator="3"',
+      '/assets/arch-calculators-guided-ui.mjs',
+      '/assets/arch-calculators-guided.css',
+      'How many arches does this quote cover?',
+      'Estimated insurance payment',
       '$20,000–$45,000',
-      'no national per-arch default',
+      'not a per-arch price',
     ],
     headings: [
       "How much do full-mouth dental implants cost?",
@@ -119,10 +128,17 @@ const pageChecks = [
     tokens: [
       '<meta name="robots" content="noindex,nofollow">',
       '<h1>All-on-4 dental implant cost: per-arch quote guide</h1>',
-      '[CALCULATOR: CALC-003-A04',
+      'data-calculator-id="CALC-003-A04"',
       'data-calculator="calc003-a04"',
       'id="calculator"',
       'aria-live="polite"',
+      'data-step-indicator="1"',
+      'data-step-indicator="2"',
+      'data-step-indicator="3"',
+      '/assets/arch-calculators-guided-ui.mjs',
+      '/assets/arch-calculators-guided.css',
+      'How many arches does this quote cover?',
+      'Estimated insurance payment',
       '$15,176',
       '$11,640–$27,500',
     ],
@@ -147,6 +163,10 @@ for (const check of pageChecks) {
   }
   const h1Count = (html.match(/<h1\b/g) || []).length;
   if (h1Count !== 1) throw new Error(`${check.path}: expected exactly one H1; found ${h1Count}`);
+
+  if (check.path !== "tooth-extraction-cost/index.html" && html.includes("[CALCULATOR:")) {
+    throw new Error(`${check.path}: internal calculator ID must not be visible in rendered copy`);
+  }
 
   if (check.headings) {
     let cursor = -1;
