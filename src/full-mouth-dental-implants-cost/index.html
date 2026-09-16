@@ -7,6 +7,7 @@
   <title>Full-Mouth Dental Implant Cost: Per-Arch Quote Guide</title>
   <meta name="description" content="Normalize a written full-mouth or full-arch dental implant quote by confirmed arch count and visible package inclusions.">
   <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/arch-calculators-guided.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -43,47 +44,118 @@
   <p>All-on-4-specific pricing is not substituted for generic full-arch treatment. A branded All-on-4 quote belongs on the dedicated All-on-4 page.</p>
 
   <h2>Full-mouth dental implant cost calculator</h2>
-  <p>CALC-003 is a quote normalizer, not a national-price estimator. Enter the total from the written estimate, confirm whether it covers one or two arches, record package inclusions, and optionally add a same-scope insurer estimate that you already have.</p>
-  <p>The tool then shows the entered total and a normalized per-arch amount based only on the confirmed scope. It does not choose treatment, infer implant count, or supply a market-price default.</p>
+  <p>Use the calculator with your written estimate. Enter the total, confirm whether it covers one arch or both arches, note what the package includes, and add insurance information only if you already have an estimate for the same quote.</p>
+  <p>The tool shows the entered total and a per-arch amount based only on the arch count you confirm. It does not choose treatment, infer implant count, or supply a market-price default.</p>
 </article>
 
-<section class="calculator-embed" aria-labelledby="calculator-heading">
-  <div class="calculator-card">
-    <h2 id="calculator-heading">Normalize a written full-arch or full-mouth quote</h2>
-    <p class="hint">[CALCULATOR: CALC-003 — quote normalization; no national per-arch default]</p>
+<section class="calculator-embed calculator-embed--guided arch-guided" aria-label="Full-mouth dental implant cost calculator" data-calculator-id="CALC-003">
+  <div class="calculator-card calculator-card--guided">
+    <div class="calculator-intro-row">
+      <div>
+        <p class="eyebrow">Use your written estimate</p>
+        <p class="calculator-lead"><strong>Understand your full-arch quote in three short steps.</strong> Start with the total and arch count, check what the package includes, then add insurance information only if you have it.</p>
+      </div>
+    </div>
+
+    <ol class="calc-progress" aria-label="Calculator progress">
+      <li data-step-indicator="1" class="is-current" aria-current="step"><span>1</span><strong>Your quote</strong></li>
+      <li data-step-indicator="2"><span>2</span><strong>What's included</strong></li>
+      <li data-step-indicator="3"><span>3</span><strong>Insurance & result</strong></li>
+    </ol>
+
     <div id="error-summary" class="notice notice-error" tabindex="-1" hidden></div>
+
     <form id="calculator" data-calculator="calc003" novalidate>
-      <fieldset>
-        <legend>Written quote</legend>
-        <div class="field-grid">
-          <div><label for="quoted-total">Quoted total (USD)</label><div class="money"><span aria-hidden="true">$</span><input id="quoted-total" data-field="quotedTotal" inputmode="decimal" autocomplete="off" placeholder="0.00"></div></div>
-          <div><label for="arch-count">Number of arches explicitly covered</label><select id="arch-count" data-field="archCount"><option value="">Choose one</option><option value="1">1 arch</option><option value="2">2 arches</option></select></div>
-          <div><label for="restoration-label">How does the quote describe the restoration?</label><select id="restoration-label" data-field="restorationLabel"><option value="not_stated">Not stated</option><option value="fixed">Fixed</option><option value="removable">Removable</option></select></div>
+      <section class="calc-step" data-step="1" aria-labelledby="calc-step-1-heading">
+        <div class="step-heading">
+          <p class="step-kicker">Step 1 of 3</p>
+          <h3 id="calc-step-1-heading" tabindex="-1">Start with the total and arch count</h3>
+          <p>Copy the total from the written quote. Then choose the number of arches only if the quote clearly states it.</p>
         </div>
-        <label class="check" for="arch-scope-confirmed"><input id="arch-scope-confirmed" data-field="archScopeConfirmed" type="checkbox"> I confirm the written quote explicitly covers the selected number of arches.</label>
-      </fieldset>
 
-      <fieldset>
-        <legend>Package scope</legend>
-        <p class="hint">Mark only what the written quote says. “Not on quote” does not mean a service is clinically unnecessary.</p>
-        <div id="components"></div>
-      </fieldset>
-
-      <fieldset>
-        <legend>Insurance estimate</legend>
-        <label for="insurance-mode">What insurance information do you have?</label>
-        <select id="insurance-mode" data-field="insurance.mode"><option value="">Choose one</option><option value="none">No insurance contribution for this estimate</option><option value="entered_estimate">I have an insurer estimate for this same quote scope</option><option value="unknown">Insurance amount is unknown</option></select>
-        <div id="insurance-estimate-fields" hidden>
-          <div class="field-grid"><div><label for="insurance-amount">Insurer estimate amount (USD)</label><div class="money"><span aria-hidden="true">$</span><input id="insurance-amount" data-field="insurance.amount" inputmode="decimal" autocomplete="off" placeholder="0.00"></div></div></div>
-          <label class="check" for="same-scope"><input id="same-scope" data-field="insurance.sameScopeConfirmed" type="checkbox"> I confirm this insurer estimate applies to the same quote and scope entered above.</label>
+        <div class="guided-field-row">
+          <div class="field-money-compact">
+            <label for="quoted-total">Total on your quote</label>
+            <div class="money"><span aria-hidden="true">$</span><input id="quoted-total" data-field="quotedTotal" inputmode="decimal" autocomplete="off" placeholder="0.00"></div>
+          </div>
         </div>
-      </fieldset>
 
-      <div class="actions"><button class="button-primary" type="submit">Normalize entered quote</button><button class="button-secondary" type="reset">Reset</button></div>
+        <fieldset class="guided-group" data-error-field="archCount">
+          <legend>How many arches does this quote cover?</legend>
+          <p class="hint">One arch means either the upper or lower jaw. Two arches means both.</p>
+          <div class="arch-choice-grid">
+            <label class="choice choice-card"><input data-field="archCount" type="radio" name="archCount" value="1"><span><strong>1 arch</strong><small>Upper or lower jaw.</small></span></label>
+            <label class="choice choice-card"><input data-field="archCount" type="radio" name="archCount" value="2"><span><strong>2 arches</strong><small>Both upper and lower jaws.</small></span></label>
+          </div>
+          <label class="check arch-confirmation" for="arch-scope-confirmed"><input id="arch-scope-confirmed" data-field="archScopeConfirmed" type="checkbox"> The written quote clearly covers the number of arches I selected.</label>
+        </fieldset>
+
+        <fieldset class="guided-group">
+          <legend>How does the quote describe the replacement teeth?</legend>
+          <div class="restoration-choice-grid">
+            <label class="choice choice-card"><input type="radio" name="restorationLabel" value="fixed"><span><strong>Fixed</strong><small>The quote says the teeth are fixed in place.</small></span></label>
+            <label class="choice choice-card"><input type="radio" name="restorationLabel" value="removable"><span><strong>Removable</strong><small>The quote says the teeth can be removed.</small></span></label>
+            <label class="choice choice-card"><input type="radio" name="restorationLabel" value="not_stated" checked><span><strong>Not stated</strong><small>The quote does not clearly say.</small></span></label>
+          </div>
+        </fieldset>
+
+        <div class="step-actions step-actions--end"><button id="step-1-next" class="button-primary" type="button">Continue</button></div>
+      </section>
+
+      <section class="calc-step" data-step="2" aria-labelledby="calc-step-2-heading" hidden>
+        <div class="step-heading">
+          <p class="step-kicker">Step 2 of 3</p>
+          <h3 id="calc-step-2-heading" tabindex="-1">What does your quote include?</h3>
+          <p>Choose what the written estimate says. If you cannot tell, leave the item as “Not sure.”</p>
+        </div>
+        <div id="components">
+          <div class="component-group"><h4>Main package items</h4><div id="primary-components"></div></div>
+          <details id="additional-components" class="additional-components">
+            <summary><span><strong>Other items on the quote (optional)</strong><small>Connectors, tooth removal, grafting, X-rays/scans, sedation, follow-up visits, or another charge.</small></span></summary>
+            <div class="additional-components-body">
+              <div class="additional-components-toolbar">
+                <p>Leave these as “Not sure” if the quote is unclear. If none appear on the written quote, mark them all “Not listed.”</p>
+                <button id="additional-not-listed" class="button-secondary button-compact" type="button">Mark all as Not listed</button>
+              </div>
+              <div id="additional-components-list"></div>
+            </div>
+          </details>
+        </div>
+        <div class="step-actions"><button id="step-2-back" class="button-secondary" type="button">Back</button><button id="step-2-next" class="button-primary" type="button">Continue to insurance</button></div>
+      </section>
+
+      <section class="calc-step" data-step="3" aria-labelledby="calc-step-3-heading" hidden>
+        <div class="step-heading">
+          <p class="step-kicker">Step 3 of 3</p>
+          <h3 id="calc-step-3-heading" tabindex="-1">Add insurance info if you have it</h3>
+          <p>We do not guess what your plan will pay.</p>
+        </div>
+        <fieldset class="guided-group insurance-choice-group">
+          <legend>Did your insurance company give you an estimated payment for this same quote?</legend>
+          <div class="choice-grid choice-grid--insurance">
+            <label class="choice choice-card"><input data-field="insurance.mode" type="radio" name="insuranceMode" value="entered_estimate"><span><strong>Yes</strong><small>I have an estimated insurance payment.</small></span></label>
+            <label class="choice choice-card"><input data-field="insurance.mode" type="radio" name="insuranceMode" value="none"><span><strong>No insurance amount</strong><small>Do not subtract an insurance amount.</small></span></label>
+            <label class="choice choice-card"><input data-field="insurance.mode" type="radio" name="insuranceMode" value="unknown"><span><strong>Not yet</strong><small>I do not know what insurance may pay.</small></span></label>
+          </div>
+        </fieldset>
+        <div id="insurance-estimate-fields" class="guided-subpanel" hidden>
+          <div class="field-money-compact"><label for="insurance-amount">Estimated insurance payment</label><div class="money"><span aria-hidden="true">$</span><input id="insurance-amount" data-field="insurance.amount" inputmode="decimal" autocomplete="off" placeholder="0.00" disabled></div></div>
+          <label class="check" for="same-scope"><input id="same-scope" data-field="insurance.sameScopeConfirmed" type="checkbox" disabled> This insurance estimate covers the same quote I entered above.</label>
+        </div>
+        <div class="step-actions"><button id="step-3-back" class="button-secondary" type="button">Back</button><button class="button-primary" type="submit">Show my quote summary</button><button class="button-link reset-link" type="reset">Start over</button></div>
+      </section>
     </form>
-    <div id="result" class="result" aria-live="polite" hidden><h2 id="result-title"></h2><div id="result-values"></div><div id="result-scope"></div></div>
-    <div class="panel"><h3>Broad U.S. context — not a calculator default</h3><p>Forbes Advisor reports an ADA-attributed <strong>$20,000–$45,000</strong> figure for a “mouthful of implants.” The cited page does not define exact arch count, implant count, restoration type or package inclusions, so this range is not converted into a per-arch default.</p></div>
-    <p class="privacy-note">This tool organizes amounts from a written dental quote. It does not determine treatment, implant count, restoration suitability or insurance benefits. Entered values are not stored, sent externally or written to the URL.</p>
+
+    <div id="result" class="result result--guided" aria-live="polite" hidden>
+      <h2 id="result-title"></h2><div id="result-context"></div><div id="result-values"></div><div id="result-scope"></div>
+      <p class="result-disclaimer"><strong>About this result:</strong> we only add the numbers you entered from your written quote. This is not a dentist's quote, treatment recommendation, or insurance guarantee.</p>
+    </div>
+
+    <aside class="reference-strip" aria-label="Published cost context">
+      <div><span class="reference-label">Broad U.S. context — not used in calculator math</span><strong>$20,000–$45,000 reported “mouthful of implants” estimate</strong></div>
+      <p>The cited source does not define exact arch count, restoration type, implant count, or package inclusions. We do not convert it into a per-arch default.</p>
+    </aside>
+    <p class="privacy-note privacy-note--compact">The numbers you enter stay in this browser session. The tool does not store them, send them elsewhere, or put them in the page URL.</p>
   </div>
 </section>
 
@@ -106,6 +178,6 @@
 </article>
 </main>
 <footer class="site-footer"><p>Dental Calculator</p><p>Cost education only; not dental or insurance advice.</p></footer>
-<script type="module" src="/assets/implant-calculators-ui.mjs"></script>
+<script type="module" src="/assets/arch-calculators-guided-ui.mjs"></script>
 </body>
 </html>
