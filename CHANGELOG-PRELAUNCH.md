@@ -37,7 +37,7 @@
 
 ### Briefs finalized
 - `briefs/DEN-001.md` → EVIDENCE_CONTROLLED
-- `briefs/DEN-003.md` → PARTIAL_EVIDENCE_CONTROLLED
+- `briefs/DEN-003.md` → EVIDENCE_CONTROLLED_WITH_CONTEXT_LIMIT
 - `briefs/DEN-007.md` → EVIDENCE_CONTROLLED
 - `briefs/DEN-012.md` → EVIDENCE_CONTROLLED_WITH_SCOPE_CAVEAT
 
@@ -47,12 +47,40 @@
 - `data/calculator-specs/CALC-003-A04.md`
 - All three use quote-input/quote-normalization logic; published benchmarks are informational and never hidden defaults.
 
+### Implant calculator implementation
+- Added shared calculator core: `src/assets/implant-calculators-core.mjs`.
+- Added shared accessible UI controller: `src/assets/implant-calculators-ui.mjs`.
+- Added regression suite: `tests/implant-calculators.test.mjs`.
+- Implemented CALC-001 bundle/itemized quote math, explicit tooth-count normalization, unknown-scope handling and same-scope insurer subtraction.
+- Implemented CALC-003 confirmed 1/2-arch normalization with no national per-arch default.
+- Implemented CALC-003-A04 on the same arch core; CareCredit All-on-4 reference data never affects arithmetic.
+- Preserved zero vs blank distinction, integer-cent arithmetic, $1,000,000 ceiling, duplicate-line detection and no automatic insurance percentage.
+
+### Implant preview pages
+- Added DEN-001 `/dental-implant-cost-calculator/` with CALC-001.
+- Added DEN-003 `/full-mouth-dental-implants-cost/` with CALC-003.
+- Added DEN-007 `/dental-bone-graft-cost/` as a non-calculator cost guide.
+- Added DEN-012 `/all-on-4-dental-implants-cost/` with CALC-003-A04.
+- All four pages remain `noindex,nofollow`.
+- Current copy is preview implementation scaffold, not final production editorial copy.
+
+### Build / automated QA
+- Extended `scripts/build.mjs` to require all five implemented procedure pages plus calculator assets.
+- Added build checks for noindex, one H1 per page, calculator markers, ARIA result regions and key evidence tokens.
+- GitHub Actions push run and PR run both passed at implementation SHA `86c68b8de04957bb5e24584cb25b6460449a0030`.
+
+### Gemini production drafting handoff
+- Added `handoffs/gemini/GEMINI_IMPLANTS_CLUSTER_DRAFT_REQUEST_v1.md`.
+- Expected production drafts: `DEN-001_DRAFT_v1.md`, `DEN-003_DRAFT_v1.md`, `DEN-007_DRAFT_v1.md`, `DEN-012_DRAFT_v1.md`.
+- Gemini may draft prose only from frozen evidence/briefs/specs; it may not change URLs, calculator logic, price scope or source decisions.
+- ChatGPT will audit and integrate the returned drafts before the content gate passes.
+
 ### Still open
-- Implement/test CALC-001, CALC-003 and CALC-003-A04.
-- Draft and QA implant-cluster pages from finalized briefs.
+- Gemini production implant drafts + ChatGPT semantic/evidence/YMYL QA and integration.
+- Verify latest implant implementation on Cloudflare branch preview.
 - Browser rendering at 320/390/768/1280/1920 px.
 - Automated accessibility + manual keyboard/screen-reader QA.
 - Trust/legal/methodology routes.
 - Remaining site-cluster evidence/content/calculators.
-- Media contract, technical SEO, performance and rollback procedure.
+- Media contract, final technical SEO, performance and rollback procedure.
 - Production merge/domain/indexation remain blocked.
