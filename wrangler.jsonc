@@ -2,6 +2,8 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "dental-calculator",
   "compatibility_date": "2026-09-16",
+  "workers_dev": true,
+  "preview_urls": true,
   "build": {
     "command": "npm run build"
   },
