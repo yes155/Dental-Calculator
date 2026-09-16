@@ -26,6 +26,144 @@
     <p>For the artificial-root implant process/material, CareCredit reports a <strong>$2,143 national average</strong> and a <strong>$1,646–$4,157 range</strong>. The final crown is excluded from that benchmark, so it should not be presented as the price of a fully restored tooth. Extraction and some office-related fees are also excluded from CareCredit’s state-level implant values.</p>
     <p>A separate clean national default for a complete implant + abutment + crown package is not established by the current evidence set. Compare a provider’s written quote by its actual components instead of adding unsupported default fees.</p>
 
+    <h2 id="calculator-heading">Dental implant cost calculator</h2>
+    <p>Use CALC-001 with a written dental quote. It adds only the amounts you enter, keeps quote inclusions visible, and subtracts an insurer estimate only when you already have one for the same scope. It does not choose treatment, infer how many implants you need, or insert hidden market prices.</p>
+  </article>
+
+  <section class="calculator-embed calculator-embed--guided" aria-labelledby="calculator-heading">
+    <div class="calculator-card calculator-card--guided">
+      <div class="calculator-intro-row">
+        <div>
+          <p class="eyebrow">Use your written estimate</p>
+          <p class="calculator-lead"><strong>Organize your implant quote in three short steps.</strong> Start with the quote amount, confirm what it says is included, then add insurance information only if you already have it.</p>
+        </div>
+        <p class="calculator-badge">[CALCULATOR: CALC-001]</p>
+      </div>
+
+      <ol class="calc-progress" aria-label="Calculator progress">
+        <li data-step-indicator="1" class="is-current" aria-current="step"><span>1</span><strong>Your quote</strong></li>
+        <li data-step-indicator="2"><span>2</span><strong>Included items</strong></li>
+        <li data-step-indicator="3"><span>3</span><strong>Insurance & result</strong></li>
+      </ol>
+
+      <div id="error-summary" class="notice notice-error" tabindex="-1" hidden></div>
+
+      <form id="calculator" data-calculator="calc001" novalidate>
+        <section class="calc-step" data-step="1" aria-labelledby="calc-step-1-heading">
+          <div class="step-heading">
+            <p class="step-kicker">Step 1 of 3</p>
+            <h3 id="calc-step-1-heading" tabindex="-1">Enter what your quote actually says</h3>
+            <p>Use the number of teeth and dollar amounts shown on the written estimate. Do not add services that are not listed.</p>
+          </div>
+
+          <div class="guided-field-row">
+            <div class="field-compact">
+              <label for="tooth-count">How many teeth does this quote cover?</label>
+              <input id="tooth-count" data-field="toothCount" inputmode="numeric" autocomplete="off" placeholder="1">
+            </div>
+          </div>
+
+          <fieldset class="guided-group">
+            <legend>How is the quote written?</legend>
+            <div class="choice-grid choice-grid--cards">
+              <label class="choice choice-card" for="quote-mode-bundle"><input id="quote-mode-bundle" data-field="quoteMode" type="radio" name="quoteMode" value="bundle"><span><strong>One total / bundle</strong><small>The estimate gives one main total.</small></span></label>
+              <label class="choice choice-card" for="quote-mode-itemized"><input id="quote-mode-itemized" data-field="quoteMode" type="radio" name="quoteMode" value="itemized"><span><strong>Itemized quote</strong><small>The estimate lists separate priced lines.</small></span></label>
+            </div>
+          </fieldset>
+
+          <div id="bundle-section" class="guided-subpanel" hidden>
+            <div class="field-money-compact">
+              <label for="bundle-amount">Quoted total</label>
+              <div class="money"><span aria-hidden="true">$</span><input id="bundle-amount" data-field="bundleAmount" inputmode="decimal" autocomplete="off" placeholder="0.00"></div>
+            </div>
+          </div>
+
+          <fieldset id="itemized-section" class="guided-subpanel" hidden>
+            <legend>Itemized quote lines</legend>
+            <p class="hint">Enter each priced line exactly as written. Use a multiplier only when the quote explicitly gives one.</p>
+            <div id="itemized-lines"></div>
+            <button id="add-line" class="button-secondary" type="button">+ Add another quote line</button>
+          </fieldset>
+
+          <div class="step-actions step-actions--end">
+            <button id="step-1-next" class="button-primary" type="button">Continue to included items</button>
+          </div>
+        </section>
+
+        <section class="calc-step" data-step="2" aria-labelledby="calc-step-2-heading" hidden>
+          <div class="step-heading">
+            <p class="step-kicker">Step 2 of 3</p>
+            <h3 id="calc-step-2-heading" tabindex="-1">What does that total say it includes?</h3>
+            <p>Choose what the written quote says. “Not listed” describes the document only; it does not mean a service is unnecessary.</p>
+          </div>
+
+          <div id="components">
+            <div class="component-group">
+              <h4>Core implant components</h4>
+              <div id="primary-components"></div>
+            </div>
+            <details id="additional-components" class="additional-components">
+              <summary><span><strong>Check additional quote items</strong><small>Extraction, grafting, imaging, sedation and other adjuncts</small></span></summary>
+              <div id="additional-components-list"></div>
+            </details>
+          </div>
+
+          <div class="step-actions">
+            <button id="step-2-back" class="button-secondary" type="button">Back</button>
+            <button id="step-2-next" class="button-primary" type="button">Continue to insurance</button>
+          </div>
+        </section>
+
+        <section class="calc-step" data-step="3" aria-labelledby="calc-step-3-heading" hidden>
+          <div class="step-heading">
+            <p class="step-kicker">Step 3 of 3</p>
+            <h3 id="calc-step-3-heading" tabindex="-1">Add insurance information only if you have it</h3>
+            <p>The calculator does not guess a coverage percentage, deductible, annual maximum or allowed amount.</p>
+          </div>
+
+          <fieldset class="guided-group insurance-choice-group">
+            <legend>Do you already have an insurer estimate for this same quote?</legend>
+            <div class="choice-grid choice-grid--insurance">
+              <label class="choice choice-card"><input data-field="insurance.mode" type="radio" name="insuranceMode" value="entered_estimate"><span><strong>Yes</strong><small>I have an insurer estimate for this same scope.</small></span></label>
+              <label class="choice choice-card"><input data-field="insurance.mode" type="radio" name="insuranceMode" value="none"><span><strong>No contribution</strong><small>Do not subtract an insurer amount.</small></span></label>
+              <label class="choice choice-card"><input data-field="insurance.mode" type="radio" name="insuranceMode" value="unknown"><span><strong>Not sure</strong><small>Leave the patient amount unknown.</small></span></label>
+            </div>
+          </fieldset>
+
+          <div id="insurance-estimate-fields" class="guided-subpanel" hidden>
+            <div class="field-money-compact">
+              <label for="insurance-amount">Insurer estimate amount</label>
+              <div class="money"><span aria-hidden="true">$</span><input id="insurance-amount" data-field="insurance.amount" inputmode="decimal" autocomplete="off" placeholder="0.00" disabled></div>
+            </div>
+            <label class="check" for="same-scope"><input id="same-scope" data-field="insurance.sameScopeConfirmed" type="checkbox" disabled> I confirm this insurer estimate applies to the same quote lines and scope entered above.</label>
+          </div>
+
+          <div class="step-actions">
+            <button id="step-3-back" class="button-secondary" type="button">Back</button>
+            <button class="button-primary" type="submit">Calculate my entered quote</button>
+            <button class="button-link reset-link" type="reset">Start over</button>
+          </div>
+        </section>
+      </form>
+
+      <div id="result" class="result result--guided" aria-live="polite" hidden>
+        <h2 id="result-title"></h2>
+        <div id="result-context"></div>
+        <div id="result-values"></div>
+        <div id="result-scope"></div>
+        <p class="result-disclaimer"><strong>What this result means:</strong> it is arithmetic on amounts you entered from a written quote. It is not a dental quote, treatment recommendation or coverage guarantee.</p>
+      </div>
+
+      <aside class="reference-strip" aria-label="Published cost reference">
+        <div><span class="reference-label">Published reference — not a calculator default</span><strong>$2,143 average · $1,646–$4,157 reported range</strong></div>
+        <p>CareCredit’s national reference applies to the implant/artificial-root process and excludes the crown. State figures also exclude extraction and some office-related fees.</p>
+      </aside>
+
+      <p class="privacy-note privacy-note--compact">Entered amounts stay in your browser session only: this tool does not store them, send them externally or place them in the URL.</p>
+    </div>
+  </section>
+
+  <article class="article-body">
     <h2>What does a single-tooth implant quote include?</h2>
     <p>FDA guidance distinguishes the implant body placed in the jaw from the abutment that supports the artificial tooth above it. A written implant quote may therefore list the implant body/process, abutment and final crown or prosthesis as separate components.</p>
     <div class="table-wrap">
@@ -50,68 +188,6 @@
     <p>Humana publishes a local implant example of <strong>$856–$2,122 in Orlando, Florida</strong>. That is a local pricing example, not a national benchmark, and it is not blended with CareCredit’s nationwide study.</p>
     <p>FDA guidance notes that implant systems may use materials such as titanium or zirconium oxide. A zirconia implant body is not the same component as a zirconia crown, so material labels should stay attached to the specific part of the quote they describe.</p>
 
-    <h2>Dental implant cost calculator</h2>
-    <p>CALC-001 organizes a written dental quote. You can enter a bundle or itemized quote, confirm the number of teeth covered, record component-inclusion status, and add a same-scope insurer estimate if one has already been supplied to you. The tool does not choose a treatment, infer how many implants you need, or supply hidden market prices.</p>
-  </article>
-
-  <section class="calculator-embed" aria-labelledby="calculator-heading">
-    <div class="calculator-card">
-      <h2 id="calculator-heading">Organize your written implant quote</h2>
-      <p class="hint">[CALCULATOR: CALC-001 — quote-input normalization only]</p>
-      <div id="error-summary" class="notice notice-error" tabindex="-1" hidden></div>
-      <form id="calculator" data-calculator="calc001" novalidate>
-        <fieldset>
-          <legend>Quote scope</legend>
-          <div class="field-grid">
-            <div><label for="tooth-count">Number of teeth covered by this written quote</label><input id="tooth-count" data-field="toothCount" inputmode="numeric" autocomplete="off" placeholder="1"></div>
-          </div>
-          <div class="choice-grid" role="group" aria-label="Quote mode">
-            <label class="choice" for="quote-mode-bundle"><input id="quote-mode-bundle" data-field="quoteMode" type="radio" name="quoteMode" value="bundle"> One written total / bundle</label>
-            <label class="choice" for="quote-mode-itemized"><input id="quote-mode-itemized" data-field="quoteMode" type="radio" name="quoteMode" value="itemized"> Itemized quote lines</label>
-          </div>
-        </fieldset>
-
-        <fieldset id="bundle-section" hidden>
-          <legend>Written total</legend>
-          <div class="field-grid"><div><label for="bundle-amount">Quoted total (USD)</label><div class="money"><span aria-hidden="true">$</span><input id="bundle-amount" data-field="bundleAmount" inputmode="decimal" autocomplete="off" placeholder="0.00"></div></div></div>
-          <h3>What does that total say it includes?</h3>
-          <div id="components"></div>
-        </fieldset>
-
-        <fieldset id="itemized-section" hidden>
-          <legend>Itemized written quote</legend>
-          <p class="hint">Enter only amounts and multipliers explicitly shown or confirmed on the quote.</p>
-          <div id="itemized-lines"></div>
-          <button id="add-line" class="button-secondary" type="button">Add quote line</button>
-        </fieldset>
-
-        <fieldset>
-          <legend>Insurance estimate</legend>
-          <label for="insurance-mode">What insurance information do you have?</label>
-          <select id="insurance-mode" data-field="insurance.mode">
-            <option value="">Choose one</option>
-            <option value="none">No insurance contribution for this estimate</option>
-            <option value="entered_estimate">I have an insurer estimate for this same quote scope</option>
-            <option value="unknown">Insurance amount is unknown</option>
-          </select>
-          <div id="insurance-estimate-fields" hidden>
-            <div class="field-grid"><div><label for="insurance-amount">Insurer estimate amount (USD)</label><div class="money"><span aria-hidden="true">$</span><input id="insurance-amount" data-field="insurance.amount" inputmode="decimal" autocomplete="off" placeholder="0.00"></div></div></div>
-            <label class="check" for="same-scope"><input id="same-scope" data-field="insurance.sameScopeConfirmed" type="checkbox"> I confirm this insurer estimate applies to the same quote lines and scope entered above.</label>
-          </div>
-        </fieldset>
-
-        <div class="actions"><button class="button-primary" type="submit">Calculate entered quote</button><button class="button-secondary" type="reset">Reset</button></div>
-      </form>
-      <div id="result" class="result" aria-live="polite" hidden><h2 id="result-title"></h2><div id="result-values"></div><div id="result-scope"></div></div>
-      <div class="panel">
-        <h3>Published reference — not a calculator default</h3>
-        <p><strong>$2,143 average; $1,646–$4,157 reported range</strong> for the dental implant process/artificial root in CareCredit’s national research. Crown excluded; state figures also exclude extraction and some office-related fees.</p>
-      </div>
-      <p class="privacy-note">This tool organizes amounts from a written dental quote and published cost references. It is not a diagnosis, treatment recommendation, coverage guarantee or dental quote. Entered amounts are not stored, sent externally or placed in the URL.</p>
-    </div>
-  </section>
-
-  <article class="article-body">
     <h2>How insurance can change out-of-pocket cost</h2>
     <p>There is no universal fixed implant coverage percentage. Dental benefits vary by plan, and patient responsibility can be affected by deductibles, waiting periods, exclusions, annual or lifetime maximums, network/allowed-amount rules, and the exact services on the treatment plan.</p>
     <p>The calculator subtracts an insurer amount only when you enter an estimate that applies to the same quote scope. Verify benefits with the insurer or plan administrator before treatment.</p>
@@ -135,6 +211,6 @@
   </article>
 </main>
 <footer class="site-footer"><p>Dental Calculator</p><p>Cost education only; not dental or insurance advice.</p></footer>
-<script type="module" src="/assets/implant-calculators-ui.mjs"></script>
+<script type="module" src="/assets/calc001-guided-ui.mjs"></script>
 </body>
 </html>
