@@ -5,56 +5,54 @@
 ### Repository baseline
 - Initialized `yes155/Dental-Calculator` with `main` as production branch and `chatgpt-work` as working branch.
 - Established dependency-free Node.js static build (`npm run build` -> `dist`).
-- Added GitHub Actions prelaunch QA.
-- Added Cloudflare Workers configuration for preview deployment.
+- Added GitHub Actions prelaunch QA and Cloudflare preview configuration.
 
 ### Representative page/tool
-- Integrated DEN-008 `/tooth-extraction-cost/` as the first representative procedure-cost page.
-- Integrated CALC-008 as an embedded quote-input calculator.
-- Preserved the approved boundary: no treatment selection, no inferred tooth count, no guessed/default dental price, no diagnosis, no insurance recalculation.
-- Added 13 shared quote-input fixtures and nine extraction-specific tests; 22/22 pass.
-- Preview remains `noindex,nofollow`.
-
-### Deployment verification
-- GitHub Actions `Prelaunch QA` passed at the original implementation candidate `e3dea30b3c40cd7645ab6d0634db5034d64128d9`.
-- Cloudflare branch preview deployment succeeded for that implementation candidate.
-- GitHub Actions also passed at prior brief head `efdda5593d07de909dcb473b222419c04bccce13`.
-- Production merge, domain connection and indexation remain blocked.
-
-### Project controls
-- Updated `docs/PRELAUNCH-STATUS.md` after initial CI/preview success.
-- Added `PROJECT-STATE.md`.
-- Added `PRELAUNCH-AUDIT.md`.
-- Added this `CHANGELOG-PRELAUNCH.md`.
-- Added `data/source-register.csv` for DEN-008 evidence.
-- Added `data/calculator-specs/CALC-008.md`.
+- Integrated DEN-008 `/tooth-extraction-cost/` + CALC-008.
+- Preserved quote-input boundary: no diagnosis, treatment selection, guessed/default price or automatic insurance recalculation.
+- Added 13 shared + 9 extraction-specific tests; 22/22 pass.
 
 ### Architecture registry correction
-- Detected that the first manually migrated `data/page-registry.csv` did not exactly match the approved architecture workbook.
-- Rebuilt the canonical registry directly from `Dental_Topical_Map_and_Page_Registry.xlsx` and applied the user's 2026-09-15 architecture approval to the planned rows.
-- Correct canonical IDs/URLs now include DEN-019 veneers, DEN-024 bridge, DEN-025 dentist visit, DEN-030 dentures and DEN-032 periodontal maintenance.
-- Registry now contains exactly 38 approved planned URLs plus 5 deferred non-build candidates.
-- No new article was drafted against the incorrect registry mapping.
+- Rebuilt `data/page-registry.csv` from the approved workbook after detecting shifted IDs/URLs in the first manual migration.
+- Canonical registry now contains exactly 38 approved planned URLs + 5 deferred non-build candidates.
 
-### Implants evidence batch
-- Created `handoffs/notebooklm/NLM_IMPLANTS_CLUSTER_EVIDENCE_REQUEST_v1.md` for DEN-001, DEN-003, DEN-007 and DEN-012.
-- Added a 20-source acquisition list prioritizing FDA, ADA, AAP, CMS, broad cost datasets and insurer documentation; Nobel Biocare is restricted to narrow branded-concept terminology.
-- Added evidence-gated semantic briefs for DEN-001, DEN-003, DEN-007 and DEN-012.
-- User returned `NLM_IMPLANTS_CLUSTER_EVIDENCE-PACK_v1.md`.
-- ChatGPT QA rejected v1 because NotebookLM reported the required external source corpus as missing and relied on the task specification for factual support.
-- Rejected unsupported synthesis prices that appeared despite missing source lineage.
-- Detected and corrected a DEN-008 canonical-reference error in the returned pack (`/dental-extraction-cost/` → `/tooth-extraction-cost/`).
-- Independently confirmed that the core intended public sources are live, including FDA/AAP/ADA implant guidance and current CareCredit/Humana cost pages.
-- Added `evidence/qa/NLM_IMPLANTS_CLUSTER_EVIDENCE_QA_v1.md`.
-- Added `handoffs/notebooklm/NLM_IMPLANTS_CLUSTER_EVIDENCE_REQUEST_v2.md` with a mandatory source-ingestion preflight and stop condition.
-- Updated the external-model manifest: v1 = FAIL; v2 = READY_FOR_NOTEBOOKLM.
-- Numeric implant/full-mouth/graft/All-on-4 claims, implant calculator formulas/defaults and Gemini drafting remain blocked until v2 passes evidence QA.
+### Implants evidence batch — external-model QA
+- Created NotebookLM v1 and v2 evidence handoffs for DEN-001, DEN-003, DEN-007 and DEN-012.
+- First NotebookLM return failed because required external sources were missing and unsupported synthesis values appeared.
+- Second return also failed the v2 preflight: it still identified itself as v1 and used an 11-source corpus that omitted the required ADA/AAP/CareCredit/Humana evidence set.
+- Preserved both failures in `handoffs/EXTERNAL_MODEL_HANDOFF_MANIFEST.md` rather than silently accepting partial evidence.
+
+### Direct implants source verification
+- Switched the cluster to direct live-source verification to avoid a third failed NotebookLM loop.
+- Added `evidence/implants/IMPLANTS_CLUSTER_DIRECT_VERIFIED_EVIDENCE_v1.md`.
+- Verified/migrated evidence from FDA, AAP, CareCredit, Humana, Cigna, Delta Dental, CMS, Nobel Biocare and Forbes secondary context.
+- Expanded `data/source-register.csv` with implant, graft, All-on-4 and insurance-methodology rows.
+
+### Evidence decisions
+- DEN-001: CareCredit $2,143 average / $1,646–$4,157 range for artificial-root implantation process/material; crown excluded.
+- DEN-003: Forbes ADA-attributed $20,000–$45,000 “mouthful of implants” figure retained only as broad context because arch/prosthesis/package scope is not defined; not a calculator default.
+- DEN-007: CareCredit separate per-graft ranges for allograft, alloplast, autograft and xenograft; no sinus-lift price on this URL.
+- DEN-012: CareCredit All-on-4 $15,176 average / $11,640–$27,500 range with 2024 national research; package inclusions remain unknown and quote arch count must be confirmed.
+- Insurance: no universal implant coverage percentage; deductible/maximum/waiting-period/coverage inputs remain plan-specific.
+
+### Briefs finalized
+- `briefs/DEN-001.md` → EVIDENCE_CONTROLLED
+- `briefs/DEN-003.md` → PARTIAL_EVIDENCE_CONTROLLED
+- `briefs/DEN-007.md` → EVIDENCE_CONTROLLED
+- `briefs/DEN-012.md` → EVIDENCE_CONTROLLED_WITH_SCOPE_CAVEAT
+
+### Calculator specs frozen
+- `data/calculator-specs/CALC-001.md`
+- `data/calculator-specs/CALC-003.md`
+- `data/calculator-specs/CALC-003-A04.md`
+- All three use quote-input/quote-normalization logic; published benchmarks are informational and never hidden defaults.
 
 ### Still open
-- NotebookLM implants v2 evidence pack and ChatGPT evidence QA.
+- Implement/test CALC-001, CALC-003 and CALC-003-A04.
+- Draft and QA implant-cluster pages from finalized briefs.
 - Browser rendering at 320/390/768/1280/1920 px.
-- Automated accessibility plus manual keyboard/screen-reader QA.
-- Site-wide source register/cost data and remaining calculator specs.
+- Automated accessibility + manual keyboard/screen-reader QA.
 - Trust/legal/methodology routes.
-- Final metadata/canonical/robots/sitemap/schema and live internal-link targets.
-- Media system, performance baseline and rollback procedure.
+- Remaining site-cluster evidence/content/calculators.
+- Media contract, technical SEO, performance and rollback procedure.
+- Production merge/domain/indexation remain blocked.
