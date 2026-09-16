@@ -22,6 +22,7 @@ const required = [
   "assets/implant-calculators-core.mjs",
   "assets/implant-calculators-ui.mjs",
   "assets/calc001-guided-ui.mjs",
+  "assets/calc001-charge-select.mjs",
 ];
 
 for (const path of required) await access(resolve(output, path));
@@ -42,7 +43,7 @@ const pageChecks = [
     tokens: [
       '<meta name="robots" content="noindex,nofollow">',
       '<h1>Dental implant cost calculator</h1>',
-      '[CALCULATOR: CALC-001]',
+      'data-calculator-id="CALC-001"',
       'data-calculator="calc001"',
       'id="calculator"',
       'aria-live="polite"',
@@ -50,6 +51,7 @@ const pageChecks = [
       'data-step-indicator="2"',
       'data-step-indicator="3"',
       '/assets/calc001-guided-ui.mjs',
+      '/assets/calc001-charge-select.mjs',
       '/assets/calc001-plain.css',
       'Does your quote show one total or separate charges?',
       'Estimated insurance payment',
