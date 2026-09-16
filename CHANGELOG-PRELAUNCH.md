@@ -108,12 +108,27 @@
 - Updated `scripts/build.mjs` to require the guided asset, the three progress markers and the revised DEN-001 H2 sequence.
 - GitHub Actions `test-and-build` passed at guided head `d54c2edc9966ee9b595edcfb85906957b0cd80c4`, including `npm run qa`.
 
+### CALC-001 rendered review round 2 — plain language and alignment
+- User review of the next live screenshots identified three issues: the prefixed money field validation outline was visually misaligned, the calculator/page language was too technical for a general consumer, and the long H1 wrapped into an unnecessary technical second phrase.
+- Reviewed comparable consumer tools from Delta Dental, CareCredit and FAIR Health plus CDC plain-language guidance; documented the findings in `evidence/ux/CALCULATOR_UX_RESEARCH_v1.md`.
+- Shortened the user-facing H1 to `Dental implant cost calculator`; single-tooth scope remains explicit in the answer copy and SEO title.
+- Replaced visible internal terms such as bundle, itemized quote, provider line-item label, quoted amount, pricing scope and per-tooth normalization with everyday questions/labels where possible.
+- Kept unavoidable dental terms but paired them with explanations, including `Connector (abutment)` and `Tooth removal (extraction)`.
+- Changed the three-stage visible labels to `Your quote` → `What's included` → `Insurance & result`.
+- Secondary quote items now begin as `Not sure` and stay optional/collapsed; only explicit user action can mark them all `Not listed`.
+- Result language now uses `Total from your quote`, `Cost per tooth from this quote`, and a clearer uncertainty warning.
+- Added `src/assets/calc001-plain.css` so a money-field validation outline wraps the `$` prefix and amount input as one control.
+- Added `content/implants/DEN-001_DRAFT_v4.md` and updated `briefs/DEN-001.md` to `EVIDENCE_CONTROLLED + UX_FLOW_APPROVED + PLAIN_LANGUAGE_APPROVED`.
+- Updated `scripts/build.mjs` to require the plain-language CSS asset, concise H1, plain-language UI tokens and current controlled H2 sequence.
+- GitHub Actions `test-and-build` passed at plain-language/UX research head `692c9315b59032fcc5243e880d1c0f6360d957ea`, including `npm run qa`.
+
 ### Cloudflare preview status
-- Cloudflare confirmed successful deployment of corrected-content commit `a50f7d57a63348994e5b9e7ba37724419ec9da4a`.
-- Latest guided CALC-001 UX deployment/render still requires verification before the pattern is reused on CALC-003/CALC-003-A04.
+- Cloudflare confirmed successful deployment of corrected-content commit `a50f7d57a63348994e5b9e7ba37724419ec9da4a` and later guided UX commit `495cf615b1ab5a7c7cadb031f0331c30de1ebabe`.
+- User supplied rendered screenshots of the guided flow and optional-adjunct behavior.
+- Latest plain-language/alignment head still requires Cloudflare render verification before the pattern is frozen for reuse.
 
 ### Still open
-- Verify the guided CALC-001 branch preview on Cloudflare.
+- Verify the latest plain-language CALC-001 branch preview on Cloudflare.
 - Browser rendering at 320/390/768/1280/1920 px.
 - Manual calculator interaction, keyboard-only navigation and screen-reader/accessibility QA.
 - Do not roll the guided interaction pattern to other calculators until representative CALC-001 approval.
