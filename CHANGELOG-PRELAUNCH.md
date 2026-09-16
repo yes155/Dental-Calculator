@@ -79,19 +79,44 @@
   - `content/implants/DEN-003_DRAFT_v2.md`
   - `content/implants/DEN-007_DRAFT_v2.md`
   - `content/implants/DEN-012_DRAFT_v2.md`
-- Integrated corrected v2 prose into all four `src/` implant pages.
+- Integrated corrected prose into all four `src/` implant pages.
 - Preserved answer-first writing, source/date/geography/unit/package scope, canonical ownership and YMYL boundaries.
 - FAQs remain deferred until Main Content/site-level supplementary planning.
 
 ### Heading-vector regression control
-- Strengthened `scripts/build.mjs` so DEN-001, DEN-003, DEN-007 and DEN-012 must retain the exact frozen H2 sequence in order.
+- Strengthened `scripts/build.mjs` so DEN-001, DEN-003, DEN-007 and DEN-012 must retain the controlled H2 sequence in order.
 - This prevents future model drafts from silently collapsing required semantic sections.
 
+### CareCredit DEN-001 discrepancy control
+- Detected that CareCredit's general implant guide currently shows a conflicting top-summary upper bound (`$4,175`) while its body and the dedicated single-tooth page show `$4,157`.
+- Added `evidence/qa/DEN001_CARECREDIT_RANGE_DISCREPANCY_2026-09-16.md`.
+- Kept `$4,157` as the controlling DEN-001 upper bound because the dedicated single-tooth source supports it; recorded the discrepancy in `data/source-register.csv`.
+
+### CALC-001 representative UX redesign
+- Reviewed the first live DEN-001 preview and identified excessive form length, repetitive status dropdowns, weak progress cues and a calculator position that was too low for calculator-dominant intent.
+- Kept the direct price answer first, then moved `## Dental implant cost calculator` immediately after the first answer section.
+- Added dedicated presentation controller `src/assets/calc001-guided-ui.mjs`; the underlying `implant-calculators-core.mjs` arithmetic did not change.
+- Constrained the guided calculator card to about 60rem / 960px instead of the full article shell width.
+- Reworked CALC-001 into three stages: `Your quote` → `Included items` → `Insurance & result`.
+- Replaced repetitive component status dropdowns with explicit choices: Included / Separate fee / Not listed / Not sure.
+- Added conditional reveal for separate-fee amounts and insurance estimate fields.
+- Kept core implant components visible while moving extraction/graft/imaging/sedation/other adjuncts behind progressive disclosure.
+- Itemized quotes skip the bundle-component stage under the existing frozen arithmetic model.
+- Strengthened result presentation with quote total, per-tooth normalization, conditional patient amount, tooth count, quote type and insurance-state context.
+- Added mobile reflow, 16px mobile inputs, focusable step headings, visible progress, reduced-motion behavior and touch-friendly controls.
+- Updated `briefs/DEN-001.md` to `EVIDENCE_CONTROLLED + UX_FLOW_APPROVED` and created `content/implants/DEN-001_DRAFT_v3.md` for the revised flow.
+- Updated `scripts/build.mjs` to require the guided asset, the three progress markers and the revised DEN-001 H2 sequence.
+- GitHub Actions `test-and-build` passed at guided head `d54c2edc9966ee9b595edcfb85906957b0cd80c4`, including `npm run qa`.
+
+### Cloudflare preview status
+- Cloudflare confirmed successful deployment of corrected-content commit `a50f7d57a63348994e5b9e7ba37724419ec9da4a`.
+- Latest guided CALC-001 UX deployment/render still requires verification before the pattern is reused on CALC-003/CALC-003-A04.
+
 ### Still open
-- Confirm final branch-head GitHub Actions after the editorial/control-file updates.
-- Verify the corrected implant pages on the Cloudflare branch preview.
+- Verify the guided CALC-001 branch preview on Cloudflare.
 - Browser rendering at 320/390/768/1280/1920 px.
-- Automated accessibility + manual keyboard/screen-reader QA.
+- Manual calculator interaction, keyboard-only navigation and screen-reader/accessibility QA.
+- Do not roll the guided interaction pattern to other calculators until representative CALC-001 approval.
 - Trust/legal/methodology routes.
 - Remaining site-cluster evidence/content/calculators.
 - Media contract, final technical SEO, performance and rollback procedure.
