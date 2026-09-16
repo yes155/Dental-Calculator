@@ -94,8 +94,8 @@ const pageChecks = [
     ],
     headings: [
       "How much do full-mouth dental implants cost?",
-      "Full-arch and full-mouth quotes are not the same unit",
       "Full-mouth dental implant cost calculator",
+      "Full-arch and full-mouth quotes are not the same unit",
       "What does a full-arch implant quote include?",
       "Fixed and removable implant restorations can be quoted differently",
       "What changes a full-mouth implant quote?",
@@ -146,9 +146,9 @@ const pageChecks = [
     ],
     headings: [
       "How much do All-on-4 dental implants cost?",
+      "All-on-4 cost calculator",
       "What does All-on-4 mean in a dental quote?",
       "Is an All-on-4 price per arch or for a full mouth?",
-      "All-on-4 cost calculator",
       "What may be included in an All-on-4 package?",
       "What changes an All-on-4 quote?",
       "How insurance can affect out-of-pocket cost",
