@@ -1,0 +1,47 @@
+/* Guided CALC-003 / CALC-003-A04 refinements */
+.arch-guided .money:has(input[aria-invalid="true"]) {
+  outline: 3px solid var(--danger);
+  outline-offset: 1px;
+}
+
+.arch-guided .money input[aria-invalid="true"] {
+  outline: 0;
+}
+
+.arch-guided .field-money-compact {
+  width: min(100%, 18rem);
+}
+
+.arch-guided .arch-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .75rem;
+}
+
+.arch-guided .restoration-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+}
+
+.arch-guided .arch-confirmation {
+  margin-top: 1rem;
+  padding: .9rem 1rem;
+  background: var(--soft);
+  border-radius: .7rem;
+}
+
+.arch-guided .result-grid--guided > div {
+  min-height: 7rem;
+}
+
+@media (max-width: 760px) {
+  .arch-guided .arch-choice-grid,
+  .arch-guided .restoration-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .arch-guided .result-grid--guided > div {
+    min-height: 0;
+  }
+}
