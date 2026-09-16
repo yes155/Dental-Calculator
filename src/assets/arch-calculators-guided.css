@@ -1,5 +1,18 @@
 /* Guided CALC-003 / CALC-003-A04 refinements */
 
+/* The page-level calculator intro already explains the task. Avoid repeating it inside the card. */
+.arch-guided .calculator-intro-row {
+  display: none;
+}
+
+.arch-guided .calculator-card--guided {
+  padding-top: clamp(1rem, 2vw, 1.4rem);
+}
+
+.arch-guided .calc-progress {
+  margin-bottom: 1.1rem;
+}
+
 /* Treat the dollar prefix and amount as one interactive control. */
 .arch-guided .money {
   min-height: 2.85rem;
@@ -72,6 +85,18 @@
   margin-bottom: 0;
 }
 
+/* Keep supporting context available without letting it dominate the task. */
+.arch-guided .reference-strip {
+  margin-top: 1rem;
+  padding: .85rem 1rem;
+}
+
+.arch-guided .privacy-note--compact {
+  margin-top: .7rem;
+  padding: .7rem .9rem;
+  font-size: .88rem;
+}
+
 @media (max-width: 760px) {
   .arch-guided .arch-choice-grid,
   .arch-guided .restoration-choice-grid {
@@ -80,5 +105,9 @@
 
   .arch-guided .result-grid--guided > div {
     min-height: 0;
+  }
+
+  .arch-guided .calculator-card--guided {
+    padding-top: 1rem;
   }
 }
