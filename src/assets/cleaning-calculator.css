@@ -1,0 +1,19 @@
+/* CALC-002 guided cleaning quote refinements */
+.cleaning-guided .money {
+  min-height: 2.85rem;
+  overflow: visible;
+}
+.cleaning-guided .money input { min-width: 0; }
+.cleaning-guided .money:focus-within { outline: 4px solid var(--focus); outline-offset: 3px; }
+.cleaning-guided .money input:focus-visible { outline: 0; }
+.cleaning-guided .money:has(input[aria-invalid="true"]) { border-color: var(--danger); box-shadow: 0 0 0 2px var(--danger); }
+.cleaning-guided .money input[aria-invalid="true"] { outline: 0; }
+.cleaning-guided .component-amount { margin-top: .7rem; }
+.cleaning-guided .result-grid--guided > div { min-height: 7rem; }
+@media (max-width: 760px) {
+  .cleaning-guided .segmented-options,
+  .cleaning-guided .choice-grid--cards,
+  .cleaning-guided .choice-grid--insurance,
+  .cleaning-guided .result-grid { grid-template-columns: 1fr; }
+  .cleaning-guided .result-grid--guided > div { min-height: 0; }
+}
