@@ -122,17 +122,30 @@
 - Updated `scripts/build.mjs` to require the plain-language CSS asset, concise H1, plain-language UI tokens and current controlled H2 sequence.
 - GitHub Actions `test-and-build` passed at plain-language/UX research head `692c9315b59032fcc5243e880d1c0f6360d957ea`, including `npm run qa`.
 
-### Cloudflare preview status
-- Cloudflare confirmed successful deployment of corrected-content commit `a50f7d57a63348994e5b9e7ba37724419ec9da4a` and later guided UX commit `495cf615b1ab5a7c7cadb031f0331c30de1ebabe`.
-- User supplied rendered screenshots of the guided flow and optional-adjunct behavior.
-- Latest plain-language/alignment head still requires Cloudflare render verification before the pattern is frozen for reuse.
+## 2026-09-17
 
-### Still open
-- Verify the latest plain-language CALC-001 branch preview on Cloudflare.
-- Browser rendering at 320/390/768/1280/1920 px.
-- Manual calculator interaction, keyboard-only navigation and screen-reader/accessibility QA.
-- Do not roll the guided interaction pattern to other calculators until representative CALC-001 approval.
-- Trust/legal/methodology routes.
-- Remaining site-cluster evidence/content/calculators.
-- Media contract, final technical SEO, performance and rollback procedure.
-- Production merge/domain/indexation remain blocked.
+### CALC-001 final rendered approval
+- User confirmed the final requested CALC-001 changes are implemented.
+- Fixed the `$ + amount` focus/error anomaly so the prefixed money control behaves as one visual field.
+- Removed visible `[CALCULATOR: CALC-001]` development metadata; calculator ID is now non-visible `data-calculator-id` metadata guarded by build QA.
+- Replaced free-text itemized `Name of charge` with a dropdown containing common quote labels plus `Other charge`; the calculator still uses the selected label only as quote organization, never clinical inference.
+- CALC-001 is now frozen as the approved representative calculator UX contract.
+
+### Guided arch-calculator rollout
+- Added `src/assets/arch-calculators-guided-ui.mjs` and `src/assets/arch-calculators-guided.css`.
+- Reworked CALC-003 and CALC-003-A04 into three stages: `Your quote` → `What's included` → `Insurance & result`.
+- Preserved the shared tested arch-normalization core; no formula or evidence defaults changed.
+- Step 1 requires the written total, one/two-arch choice and explicit confirmation that the selected arch count is stated by the written quote.
+- CALC-003 keeps fixed/removable/not-stated as a descriptive quote label only; no suitability decision is made.
+- Main package items remain visible while secondary items use progressive disclosure and default to `Not sure`.
+- Separate-charge amounts appear only when the user explicitly marks an item as separate.
+- Insurance remains optional user-entered same-quote information; no percentage, deductible or annual-maximum calculation was added.
+- Published $20,000–$45,000 full-mouth context and $15,176 / $11,640–$27,500 All-on-4 reference remain visually separate and never affect arithmetic.
+- Updated `briefs/DEN-003.md` and `briefs/DEN-012.md` with the approved guided UX rules and reconciled their heading wording to the integrated page vectors.
+- Updated `scripts/build.mjs` to require the arch guided assets/three-step markers and to reject visible internal calculator IDs on implant pages.
+- Guided arch implementation head `d1d5309d14c50b676165634ce6d26a94685dccb6` passed GitHub Actions `test-and-build`; control head `2f3fdad53c8970ff280f3b5e767b03d8326288a6` also passed.
+
+### Current preview status
+- CALC-001 representative UX is user-approved.
+- Cloudflare's PR bot comment is stale on an older commit, so current CALC-003/CALC-003-A04 rendered review remains open.
+- Production remains blocked pending rendered/multi-viewport/accessibility QA, trust/legal/methodology pages, remaining evidence clusters, media, technical SEO, performance and rollback documentation.
