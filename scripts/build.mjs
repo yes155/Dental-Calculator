@@ -20,6 +20,7 @@ const required = [
   "assets/calc008-ui.mjs",
   "assets/implant-calculators-core.mjs",
   "assets/implant-calculators-ui.mjs",
+  "assets/calc001-guided-ui.mjs",
 ];
 
 for (const path of required) await access(resolve(output, path));
@@ -40,19 +41,23 @@ const pageChecks = [
     tokens: [
       '<meta name="robots" content="noindex,nofollow">',
       '<h1>Dental implant cost calculator: single-tooth quote components</h1>',
-      '[CALCULATOR: CALC-001',
+      '[CALCULATOR: CALC-001]',
       'data-calculator="calc001"',
       'id="calculator"',
       'aria-live="polite"',
+      'data-step-indicator="1"',
+      'data-step-indicator="2"',
+      'data-step-indicator="3"',
+      '/assets/calc001-guided-ui.mjs',
       '$2,143',
       '$1,646–$4,157',
     ],
     headings: [
       "How much does a dental implant cost?",
+      "Dental implant cost calculator",
       "What does a single-tooth implant quote include?",
       "Implant post, abutment and crown costs are different quote components",
       "What changes the price of a dental implant quote?",
-      "Dental implant cost calculator",
       "How insurance can change out-of-pocket cost",
       "Mini, zirconia and immediate-load implant quote labels",
       "When extraction or bone graft fees are separate",
@@ -140,7 +145,7 @@ for (const check of pageChecks) {
   if (check.headings) {
     let cursor = -1;
     for (const heading of check.headings) {
-      const token = `<h2>${heading}</h2>`;
+      const token = `<h2${heading === "Dental implant cost calculator" ? ' id="calculator-heading"' : ""}>${heading}</h2>`;
       const index = html.indexOf(token, cursor + 1);
       if (index === -1) throw new Error(`${check.path}: frozen H2 missing or out of order: ${heading}`);
       cursor = index;
