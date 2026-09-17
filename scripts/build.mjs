@@ -15,12 +15,14 @@ const required = [
   "full-mouth-dental-implants-cost/index.html",
   "dental-bone-graft-cost/index.html",
   "dental-inlay-cost/index.html",
+  "dental-onlay-cost/index.html",
   "all-on-4-dental-implants-cost/index.html",
   "dental-x-ray-cost/index.html",
   "dental-cleaning-cost/index.html",
   "deep-teeth-cleaning-cost/index.html",
   "dental-insurance-out-of-pocket-costs/index.html",
   "assets/site.css",
+  "assets/inlay-page.css",
   "assets/calc001-plain.css",
   "assets/arch-calculators-guided.css",
   "assets/cleaning-calculator.css",
@@ -63,6 +65,11 @@ const pageChecks = [
     path: "dental-inlay-cost/index.html",
     tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Dental inlay cost</h1>','$976 average','$755–$1,774','ceramic inlay or onlay','does not establish an inlay-only national average or range','There is no universal insurance percentage or copay for an inlay.'],
     headings: ["How much does a dental inlay cost?","Why the current national price data combines inlays and onlays","What should an inlay quote identify?","Are laboratory and visit costs included in an inlay price?","What can change an inlay quote?","How insurance can affect what you pay","Inlay cost versus onlay and filling cost","Related dental cost guides"],
+  },
+  {
+    path: "dental-onlay-cost/index.html",
+    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Dental onlay cost</h1>','$976 average','$755–$1,774','ceramic inlay or onlay','does not provide a clean onlay-only national range','There is no universal insurance percentage or copay for an onlay.','onlay repair'],
+    headings: ["How much does a dental onlay cost?","Why the current national price data combines onlays and inlays","What makes an onlay a distinct restoration?","What should an onlay quote identify?","Are laboratory and related service costs included in an onlay price?","What can change an onlay quote?","Onlay repair is not the same price category as a new onlay","How insurance can affect what you pay","Onlay cost versus inlay, filling and crown cost","Related dental cost guides"],
   },
   {
     path: "all-on-4-dental-implants-cost/index.html",
@@ -121,6 +128,13 @@ for (const check of pageChecks) {
     if (html.includes("data-calculator-id=") || html.includes('id="calculator"')) throw new Error("DEN-004: no calculator is assigned in the frozen registry");
     if (html.includes("$250–$1,500")) throw new Error("DEN-004: older secondary inlay-only range must not appear in first-version reader copy");
     if (html.includes("$755–$1,774 inlay-only") || html.includes("inlay-only range of $755–$1,774")) throw new Error("DEN-004: combined ceramic inlay/onlay range must not be relabeled as inlay-only");
+  }
+
+  if (check.path === "dental-onlay-cost/index.html") {
+    if (html.includes("data-calculator-id=") || html.includes('id="calculator"')) throw new Error("DEN-013: no calculator is assigned in the frozen registry");
+    if (html.includes("$350–$1,500")) throw new Error("DEN-013: older secondary onlay-only range must not appear in first-version reader copy");
+    if (html.includes("$755–$1,774 onlay-only") || html.includes("onlay-only range of $755–$1,774")) throw new Error("DEN-013: combined ceramic inlay/onlay range must not be relabeled as onlay-only");
+    if (html.includes("$141") || html.includes("$315") || html.includes("$342") || html.includes("$362")) throw new Error("DEN-013: named-plan copays must not be published as onlay price benchmarks");
   }
 
   if (check.path === "dental-x-ray-cost/index.html") {
