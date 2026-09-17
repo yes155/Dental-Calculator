@@ -1,0 +1,11 @@
+.article-body .table-wrap td:last-child,
+.article-body .table-wrap th:last-child {
+  text-align: left;
+  white-space: normal;
+}
+
+.article-body > h3 {
+  margin: 1.5rem 0 .45rem;
+  font-size: 1.08rem;
+  line-height: 1.3;
+}
