@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test tests/*.test.mjs",
-    "build": "node scripts/build.mjs && node scripts/verify-wave-a.mjs && node scripts/verify-orthodontics.mjs && node scripts/verify-cosmetic.mjs",
+    "build": "node scripts/build.mjs && node scripts/verify-wave-a.mjs && node scripts/verify-orthodontics.mjs && node scripts/verify-cosmetic.mjs && node scripts/verify-prosthetics.mjs && node scripts/verify-final-procedures.mjs",
     "qa": "npm test && npm run build"
   },
   "engines": {
