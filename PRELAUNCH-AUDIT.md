@@ -4,55 +4,54 @@ Updated 2026-09-17.
 
 Status values: PASS / FAIL / IN PROGRESS / DEFERRED / NOT TESTED
 
-| ID | Category | Severity | Scope | Evidence | Fix / Next action | Verification | Status |
-|---|---|---|---|---|---|---|---|
-| A-001 | Architecture | HARD | Site | Canonical registry reconciled to approved workbook: 38 planned URLs + 5 deferred candidates | Preserve frozen ownership | Registry/workbook reconciliation | PASS |
-| E-001 | Evidence/Pricing | HARD | DEN-008 | Controlled CareCredit + Humana + ADA evidence in source register | Keep synchronized | Source-to-claim reconciliation | PASS |
-| E-002 | Evidence/Pricing | HARD | Implants NotebookLM | Two returned NotebookLM packs failed source-ingestion requirements; neither is evidence authority | Preserve rejected lineage only | External model manifest | FAIL |
-| E-003 | Evidence/Pricing | HARD | Implants direct verification | FDA/AAP/CareCredit/Humana/Cigna/Delta/CMS/Nobel/Forbes evidence verified and migrated | Keep evidence/register synchronized with copy | Claim/source reconciliation | PASS |
-| E-004 | Evidence/Pricing | HARD | Remaining site | Remaining clusters not yet evidence-controlled | Build next cluster evidence | Cluster QA | IN PROGRESS |
-| Y-001 | YMYL/Clinical | HARD | DEN-008/CALC-008 | No diagnosis/treatment selection/benefit recalculation | Preserve | Regression tests | PASS |
-| Y-002 | YMYL/Clinical | HARD | Implants | Controlled copy and calculator specs prohibit candidacy, graft-need, material/system recommendation, brand superiority and benefit guarantees | Preserve in future edits | Content + calculator QA | PASS |
-| C-001 | Calculator | HARD | CALC-008 | Written spec + 22/22 fixtures pass | Keep synchronized | `npm run qa` | PASS |
-| C-002 | Calculator | HIGH | CALC-008 rendered UX | Multi-viewport/manual interaction not yet verified | Render/browser QA | Browser evidence | NOT TESTED |
-| C-003 | Calculator | HARD | CALC-001 arithmetic | Frozen quote-input logic remains in shared core; bundle/itemized math, tooth normalization, component state and insurer bounds regression-tested | Preserve formula | Automated regression tests | PASS |
-| C-004 | Calculator | HARD | CALC-003 arithmetic | Frozen arch-quote normalizer implemented; no national per-arch default; confirmed 1/2-arch normalization only | Preserve formula | Automated regression tests | PASS |
-| C-005 | Calculator | HARD | CALC-003-A04 arithmetic | Shares arch core; reference card non-computational; arch count explicit; package unknowns preserved | Preserve formula | Automated regression tests | PASS |
-| C-006 | Calculator | HARD | Implant shared core | Integer cents, blank/zero distinction, max ceiling, unknown scope, insurer bounds, duplicate lines and normalization regression-tested | Preserve fixtures with future changes | Node test suite | PASS |
-| C-007 | Calculator UX | HIGH | CALC-001 representative pattern | Multiple user-reviewed Cloudflare renders; final requested money-field alignment, hidden ID metadata, charge dropdown and plain-language changes confirmed implemented by user | Freeze as representative pattern | User rendered approval + GitHub QA | PASS |
-| C-008 | Calculator UX | HIGH | CALC-003 / CALC-003-A04 | User review found both arch calculators still too buried after the first placement revision; source now places each calculator immediately after the direct `How much...` answer while retaining mandatory arch confirmation in Step 1 | Verify calculator-first Cloudflare render before final UX PASS | GitHub QA + rendered review | IN PROGRESS |
-| T-001 | Trust | HARD | Site | No false reviewer claim; trust routes frozen | Build trust/legal/methodology pages | Route/content/schema review | IN PROGRESS |
-| D-001 | Design | HIGH | CALC-001 representative calculator | Width/placement/guided flow/plain-language controls corrected through user screenshot review | Preserve pattern; multi-viewport check remains under accessibility/design gate | User rendered approval | PASS |
-| D-002 | Design | HIGH | Arch calculators | H1s shortened, money-control focus corrected, result detail compressed, and calculator moved immediately below direct answer on both DEN-003 and DEN-012 | Review calculator-first desktop/mobile render | Multi-viewport review | IN PROGRESS |
-| M-001 | Media | HIGH | Site | No final media system | Define media contract/manifest | Manifest + render QA | NOT TESTED |
-| S-001 | SEO/Schema | HARD | Preview | All implemented pages intentionally noindex; build gate checks preview noindex tokens | Finalize canonical/robots/sitemap/schema only after trust/routes/content finalize | Automated technical SEO QA | IN PROGRESS |
-| L-001 | Internal Links | HARD | Site | Implant pages contain canonical relationship links but some target pages are not live yet | Complete routes before release | Link crawler | IN PROGRESS |
-| X-001 | Accessibility | HARD | Guided calculators | Native controls, visible labels, live result regions and reduced-motion handling implemented; arch calculator H2s expose the `calculator-heading` target used by step navigation; prefixed money controls focus as one unit | Run keyboard-only, focus-order, screen-reader and mobile checks | Browser/accessibility evidence | IN PROGRESS |
-| P-001 | Performance | HIGH | Site | Dependency-free static implementation; no third-party calculator requests | Measure after representative UX stabilizes | Performance audit | NOT TESTED |
-| R-001 | Security/Privacy | HARD | Calculators | Local arithmetic only; no storage/network/URL serialization in implementation | Re-check rendered network behavior | Source/network/privacy review | PASS |
-| B-001 | Build/Deploy | HARD | Calculator-first arch candidate | Build gate now enforces calculator-first H2 sequence and current arch UX assets; final branch-head CI is pending this control update | Verify latest workflow run | GitHub Actions | IN PROGRESS |
-| B-002 | Cloudflare preview | HARD | CALC-003 / CALC-003-A04 | Prior guided renders reviewed; calculator-first versions have not yet been visually confirmed | Verify latest branch deployment with calculator immediately after direct answer | Cloudflare preview | IN PROGRESS |
-| B-003 | Rollback | HARD | Release process | Rollback procedure not documented | Document before production | Dry-run/document review | NOT TESTED |
-| G-001 | Editorial workflow | HARD | Gemini implant production copy | Gemini v1 drafts returned; QA found missing heading vectors and evidence overstatements; corrected controlled drafts rebuilt and integrated | Preserve corrected editorial lineage; no FAQ expansion yet | Draft QA + integrated HTML | PASS |
-| G-002 | Content/UX flow | HIGH | DEN-001 | Direct price answer remains first; calculator follows immediately; concise H1 and plain-language v4 source are user-approved in rendered form | Preserve | Rendered content review | PASS |
-| G-003 | Health literacy | HIGH | Calculator UX contract | Delta Dental, CareCredit and FAIR Health patterns reviewed; CDC plain-language guidance applied; unavoidable dental terms paired with everyday explanations | Reuse selectively where task fits | Research file + user approval | PASS |
-| G-004 | Brief/source parity | HIGH | DEN-003 / DEN-012 | Briefs, build gate and new v4 editorial sources all use `answer → calculator → detail` ordering; scope/arch caveats remain in direct copy and calculator Step 1 | Preserve parity | Brief/draft/build comparison | PASS |
+| ID | Category | Severity | Scope | Evidence / current state | Next verification | Status |
+|---|---|---|---|---|---|---|
+| A-001 | Architecture | HARD | Site | Frozen registry: 38 planned URLs + 5 deferred candidates; canonical `data/page-registry.csv` reconciled to approved workbook | Preserve ownership in every new batch | PASS |
+| E-001 | Evidence/Pricing | HARD | DEN-008 | Controlled source register and page claims | Periodic source refresh | PASS |
+| E-002 | Evidence/Pricing | HARD | Implants | Direct verified evidence + source register; rejected NotebookLM packs retained only as lineage | Periodic source refresh | PASS |
+| E-003 | Evidence/Pricing | HARD | Preventive cluster | DEN-002, DEN-006 and DEN-011 controlled against preventive direct-verified evidence/source register | Refresh time-sensitive price sources | PASS |
+| E-004 | Evidence/Insurance | HARD | GUI-001 | Corrected evidence-audited source; named-plan scope and exceptions preserved | Recheck policy-sensitive sources before production | PASS |
+| E-005 | Evidence/Pricing | HARD | Remaining site | Other procedure clusters remain unverified/unimplemented | Continue cluster-by-cluster evidence work | IN PROGRESS |
+| Y-001 | YMYL/Clinical | HARD | Implemented calculators | No diagnosis, candidacy, treatment selection or symptom-to-price logic | Preserve regression controls | PASS |
+| Y-002 | YMYL/Clinical | HARD | DEN-002 / DEN-006 | Routine-vs-deep cleaning and quadrant need are never selected by the site; published ranges are reference-only | Render/manual review | PASS |
+| Y-003 | YMYL/Insurance | HARD | GUI-001 + calculators | No universal coverage percentage/guarantee; named plan examples remain scoped; only user-entered same-quote insurer estimates are subtracted in calculators | Recheck source wording before production | PASS |
+| C-001 | Calculator | HARD | CALC-008 | Frozen spec + automated fixtures | Rendered UX review still open | PASS |
+| C-002 | Calculator | HARD | CALC-001 | Frozen quote-input logic; representative UX user-approved | Preserve | PASS |
+| C-003 | Calculator | HARD | CALC-003 / CALC-003-A04 | Frozen arch normalization; no national per-arch default; quote arch count explicit | Final multi-viewport/manual review | PASS |
+| C-004 | Calculator | HARD | CALC-002 | Frozen spec; core/UI/tests implemented; reference range never changes arithmetic | Render/mobile/keyboard QA | PASS |
+| C-005 | Calculator | HARD | CALC-006 | Frozen spec; quote-based quadrant count; no 4× reference multiplication; core/UI/tests implemented | Render/mobile/keyboard QA | PASS |
+| C-006 | Calculator UX | HIGH | CALC-002 / CALC-006 | Three-step guided pattern, constrained width, plain-language states, conditional fields | Cloudflare screenshots + keyboard testing | IN PROGRESS |
+| G-001 | Content | HIGH | DEN-002 | Evidence-controlled page; bundle-vs-cleaning guard; calculator immediately after answer-first price section | Rendered review | PASS |
+| G-002 | Content | HIGH | DEN-006 | Evidence-controlled page; per-quadrant scope explicit; no default full-mouth total; calculator immediately after answer-first section | Rendered review | PASS |
+| G-003 | Content | HIGH | DEN-011 | Seven named X-ray rows preserved; no synthetic all-X-ray range; no calculator | Table/mobile render QA | PASS |
+| G-004 | Content | HIGH | GUI-001 | Corrected eight-heading source integrated; hypothetical arithmetic explicitly labeled; no generic procedure-price benchmark | Render/manual review | PASS |
+| T-001 | Trust | HARD | Site | No false dental reviewer/credential claim; trust routes frozen but not fully implemented | Build trust/legal/methodology pages | IN PROGRESS |
+| D-001 | Design | HIGH | Representative calculator pattern | CALC-001 pattern approved by user; preventive calculators use the same task-first principles | Differential multi-viewport QA | IN PROGRESS |
+| M-001 | Media | HIGH | Site | No final media system/manifest approval | Define media contract and representative assets | NOT TESTED |
+| S-001 | SEO/Schema | HARD | Preview | Implemented pages intentionally `noindex,nofollow`; build gates check preview directives | Canonical/robots/sitemap/schema at final candidate | IN PROGRESS |
+| L-001 | Internal Links | HARD | Implemented cluster | DEN-002/DEN-006/DEN-011 now link to implemented GUI-001; some planned targets remain absent | Crawl once next related routes exist | IN PROGRESS |
+| X-001 | Accessibility | HARD | Calculators/site | Native controls, visible labels, focus targets and live regions implemented | Manual keyboard, screen reader, 320/390/768/1280/1920 checks | IN PROGRESS |
+| P-001 | Performance | HIGH | Site | Dependency-free static implementation; no third-party calculator requests | Measure representative pages after design stabilizes | NOT TESTED |
+| R-001 | Security/Privacy | HARD | Calculators | Local arithmetic; no storage/network/URL serialization in calculator code | Browser network verification | PASS |
+| B-001 | Build | HARD | Current implementation | `npm run qa` passed on implementation head `b9c683dc69b3565ce8f30e9aa41e5ec76427b954`; build gates cover DEN-002, DEN-006, DEN-011 and GUI-001 | Confirm latest control-only head CI | PASS |
+| B-002 | Preview | HARD | Cloudflare | Branch preview configured; newest preventive/GUI routes not yet visually confirmed in this audit pass | Open latest branch preview and verify routes | IN PROGRESS |
+| B-003 | Rollback | HARD | Release process | Rollback procedure not yet documented/tested | Document + dry run before production | NOT TESTED |
 
 ## Hard-gate summary
 
 | Gate | Status | Evidence |
 |---|---|---|
-| G0 Baseline | IN PROGRESS | Repo/build/preview/control files established |
-| G1 Research/Architecture | PASS | Frozen registry + direct implants evidence authority established |
-| G2 Content/Trust | IN PROGRESS | Implant Main Content controlled; trust surfaces and remaining pages incomplete |
-| G3 Design/Media/Accessibility | IN PROGRESS | CALC-001 representative UX approved; arch calculators now calculator-first; multi-viewport/accessibility and media remain |
-| G4 SEO/Schema/Links | IN PROGRESS | Preview noindex guarded; final technical SEO/routes incomplete |
-| G5 Calculators/Data | PASS for implemented arithmetic | CALC-008 and implant calculator cores/specs pass automated QA; arch rendered UX still open |
-| G6 Build/Security/Performance | IN PROGRESS | Calculator-first branch-head CI and performance remain |
-| G7 Preview | IN PROGRESS | CALC-001 representative UX approved; calculator-first CALC-003/CALC-003-A04 render verification pending |
+| G0 Baseline | IN PROGRESS | Repo/build/preview/control files established; full site baseline not finished |
+| G1 Research/Architecture | PASS | Frozen registry; implemented clusters evidence-controlled |
+| G2 Content/Trust | IN PROGRESS | Nine preview routes implemented; trust pages and remaining procedures incomplete |
+| G3 Design/Media/Accessibility | IN PROGRESS | Representative calculator pattern established; preventive rendered/mobile/accessibility QA and media remain |
+| G4 SEO/Schema/Links | IN PROGRESS | Preview noindex guarded; final canonical/sitemap/schema/link crawl incomplete |
+| G5 Calculators/Data | PASS for implemented arithmetic | CALC-008, CALC-001, CALC-003, CALC-003-A04, CALC-002 and CALC-006 specs/automated tests controlled |
+| G6 Build/Security/Performance | IN PROGRESS | Automated implementation build passes; performance and browser-network confirmation remain |
+| G7 Preview | IN PROGRESS | Cloudflare branch configured; newest preventive/GUI rendered routes need confirmation |
 | G8 Rollback | NOT TESTED | Procedure pending |
-| G9 Production | FAIL | Intentional block until hard gates pass |
+| G9 Production | FAIL | Intentional block until all hard gates pass |
 
 ## Current release decision
 
-**NO-GO for production.** CALC-001 is the approved representative calculator UX. CALC-003 and CALC-003-A04 were adapted to that pattern, then moved again after user review showed they were still too buried. Both now follow `direct cost answer → calculator → explanatory detail`, while Step 1 still requires explicit quote-based arch confirmation before any per-arch result. The next gate is one calculator-first Cloudflare rendered review plus mobile/keyboard/accessibility checks. Trust pages, remaining evidence clusters, media, final technical SEO, performance and rollback remain open.
+**NO-GO for production.** Automated source/build/calculator gates are healthy for the implemented routes, including the preventive batch and GUI-001. The next release-relevant work is rendered Cloudflare verification of DEN-002, DEN-006, DEN-011 and GUI-001; mobile/keyboard/accessibility checks; then continued evidence/content work, trust/methodology pages, media, final technical SEO, performance and rollback.
