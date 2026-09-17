@@ -105,13 +105,16 @@ const canonicalTagPattern = /<link\b[^>]*\brel=["']canonical["'][^>]*>/i;
 const socialTagPattern = /<meta\b[^>]*(?:property|name)=["'](?:og:|twitter:)[^"']*["'][^>]*>/i;
 const previewRobotsPattern = /<meta\b[^>]*\bname=["']robots["'][^>]*\bcontent=["']noindex,nofollow["'][^>]*>/i;
 const robotsTagPattern = /<meta\b[^>]*\bname=["']robots["'][^>]*>/i;
+const previewBannerPattern = /\n?\s*<([a-z][a-z0-9]*)\b[^>]*\bclass=["'][^"']*\bpreview-banner\b[^"']*["'][^>]*>[\s\S]*?<\/\1>\s*\n?/i;
+const oldPreviewBrandPattern = /Dental cost preview/gi;
 
 for (const route of approvedRoutes) {
   const path = outputPathForRoute(route);
   await access(path);
   let html = await readFile(path, "utf8");
 
-  const title = extractTitle(html, route);
+  const sourceTitle = extractTitle(html, route);
+  const title = production ? sourceTitle.replace(oldPreviewBrandPattern, "Dental Calculator") : sourceTitle;
   const { tag: descriptionTag, content: description } = extractDescriptionTag(html, route);
 
   if (canonicalTagPattern.test(html) || socialTagPattern.test(html)) {
@@ -138,14 +141,16 @@ for (const route of approvedRoutes) {
     `  <meta name="twitter:description" content="${escapeAttr(description)}">`,
   ].join("\n");
 
+  html = html.replace(oldPreviewBrandPattern, "Dental Calculator");
   html = html.replace(robotsTagPattern, '<meta name="robots" content="index,follow,max-image-preview:large">');
   html = html.replace(descriptionTag, `${descriptionTag}\n${metadata}`);
-  html = html.replace(/\n?\s*<div class="preview-banner">[\s\S]*?<\/div>\s*\n?/i, "\n");
+  html = html.replace(previewBannerPattern, "\n");
 
   if (/noindex/i.test(html)) throw new Error(`${route}: production artifact still contains noindex`);
-  if (/preview-banner|Prelaunch preview/i.test(html)) throw new Error(`${route}: production artifact still contains preview UI`);
+  if (/preview-banner|Prelaunch preview|Dental cost preview/i.test(html)) throw new Error(`${route}: production artifact still contains preview UI or branding`);
   if ((html.match(/rel=["']canonical["']/gi) || []).length !== 1) throw new Error(`${route}: production artifact must contain exactly one canonical`);
   if (!html.includes(`property="og:url" content="${escapeAttr(canonical)}"`)) throw new Error(`${route}: OG URL does not match canonical`);
+  if (!html.includes(`property="og:title" content="${escapeAttr(title)}"`)) throw new Error(`${route}: OG title does not match normalized production title`);
   if (!html.includes('name="twitter:card" content="summary"')) throw new Error(`${route}: Twitter/X card metadata missing`);
 
   await writeFile(path, html, "utf8");
