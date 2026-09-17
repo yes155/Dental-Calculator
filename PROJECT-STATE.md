@@ -35,6 +35,7 @@ Primary evidence controls currently in repo:
 - DEN-008: `data/source-register.csv`
 - Implants: `evidence/implants/IMPLANTS_CLUSTER_DIRECT_VERIFIED_EVIDENCE_v1.md` + source register
 - Preventive/diagnostic: `evidence/preventive/PREVENTIVE_CLUSTER_DIRECT_VERIFIED_EVIDENCE_v1.md` + source register
+- Restorations/root canals: `evidence/restorations/RESTORATIONS_ROOT_CANAL_DIRECT_VERIFIED_EVIDENCE_v1.md` + source register
 - Calculator UX research: `evidence/ux/CALCULATOR_UX_RESEARCH_v1.md`
 - GUI-001 source lineage: corrected Library source `GUI-001_dental-insurance-out-of-pocket-costs_v2.md`, `GUI-001_DRAFT_AUDIT_v2.md`, migrated repo source `content/guides/GUI-001_dental-insurance-out-of-pocket-costs_v2.md`
 
@@ -50,6 +51,8 @@ External-model outputs are never evidence authority by themselves. Rejected/clea
 7. DEN-006 `/deep-teeth-cleaning-cost/` + CALC-006
 8. DEN-011 `/dental-x-ray-cost/` — no calculator
 9. GUI-001 `/dental-insurance-out-of-pocket-costs/` — no calculator
+10. DEN-005 `/root-canal-cost/` + CALC-005
+11. DEN-010 `/dental-filling-cost/` + CALC-010
 
 ## Calculator implementation status
 ### Approved representative UX
@@ -72,6 +75,8 @@ CALC-001 is the user-approved representative interaction pattern where the same 
 - CALC-003-A04 — All-on-4 quote normalizer
 - CALC-002 — standard cleaning quote organizer
 - CALC-006 — SRP/deep-cleaning quote organizer by user-confirmed quadrant count
+- CALC-005 — root-canal quote organizer with restoration/add-on separation
+- CALC-010 — filling quote organizer with descriptive material/surface/location labels
 
 Common controls:
 - integer-cent arithmetic
@@ -115,6 +120,33 @@ Common controls:
 - Automated build QA: PASS.
 - Rendered table/mobile QA: OPEN.
 
+## Restorations / root-canal cluster status
+### DEN-005 / CALC-005
+- Evidence-controlled under `RESTORATIONS_ROOT_CANAL_DIRECT_VERIFIED_EVIDENCE_v1.md`.
+- CareCredit `$1,165` national average / `$500–$1,800` broad reported range retained with separate tooth-category ranges.
+- Humana Orlando anterior `$900`, premolar `$1,017`, molar `$1,175` remain local examples explicitly excluding final restoration.
+- Crown/filling/build-up/post/imaging/other items are explicit quote states; none receives a hidden default price.
+- Retreatment is a descriptive quote category only; no national retreatment benchmark is generated.
+- CALC-005 spec frozen at `data/calculator-specs/CALC-005.md`.
+- Core, guided UI, page regression tests and page implementation completed.
+- Automated QA: PASS at head `41dbd0dc6432fae573b6e0fa2dd50f34aeb126dc`.
+- Rendered multi-viewport/manual keyboard QA: OPEN.
+
+### DEN-010 / CALC-010
+- Evidence-controlled under the same restorations evidence file.
+- Material-specific CareCredit ranges remain separate: amalgam `$108–$256`, composite `$173–$439`, gold `$361–$817`, porcelain/ceramic `$755–$1,774`, glass ionomer `$116–$285`.
+- Synthetic `$108–$1,774` generic filling range is prohibited and regression-tested.
+- Humana surface/location examples remain Orlando-only context.
+- Material, surface count and tooth location are descriptive quote labels only; they never change arithmetic.
+- CALC-010 spec frozen at `data/calculator-specs/CALC-010.md`.
+- Core, guided UI, page regression tests and page implementation completed.
+- Automated QA: PASS at head `41dbd0dc6432fae573b6e0fa2dd50f34aeb126dc`.
+- Rendered multi-viewport/manual keyboard QA: OPEN.
+
+### DEN-022
+- Direct evidence already verified in `RESTORATIONS_ROOT_CANAL_DIRECT_VERIFIED_EVIDENCE_v1.md`.
+- Semantic brief/calculator spec/page implementation are the next work in this cluster.
+
 ## GUI-001 insurance guide status
 - Corrected/evidence-audited source migrated into repo.
 - Implemented preview route `/dental-insurance-out-of-pocket-costs/`.
@@ -136,7 +168,7 @@ Common controls:
 ## Automated QA
 Current test/build system checks:
 - calculator unit/regression fixtures
-- required page/assets exist
+- required page/assets for earlier build-controlled routes
 - `noindex,nofollow` preview directive
 - exactly one H1 per implemented page
 - controlled H2 order
@@ -147,8 +179,10 @@ Current test/build system checks:
 - DEN-002 bundle-scope safeguards
 - DEN-006 no-default-quadrant/no-4x safeguards
 - GUI-001 no-calculator/hypothetical-example/generic-price safeguards
+- DEN-005 root-canal scope/retreatment/restoration safeguards
+- DEN-010 material-range/local-scope/calculator-placement safeguards
 
-Implementation head `b9c683dc69b3565ce8f30e9aa41e5ec76427b954` completed the actual `npm run qa` step successfully. Later brief/state-only commits require routine branch CI confirmation but do not change calculator/page runtime logic.
+Current restorative implementation head `41dbd0dc6432fae573b6e0fa2dd50f34aeb126dc` completed `npm run qa` successfully.
 
 ## Trust / people
 - Author shown: Farrukh Abdullah, research/writing only
@@ -159,28 +193,29 @@ Implementation head `b9c683dc69b3565ce8f30e9aa41e5ec76427b954` completed the act
 ## Media / design / accessibility
 - Final media manifest/hero contract: not yet approved
 - Representative calculator visual pattern: established through CALC-001 review
-- Preventive calculators still need rendered desktop/mobile review
+- Preventive and restorative calculators still need rendered desktop/mobile review
 - Manual keyboard/screen-reader testing remains open
 - 320/390/768/1280/1920 differential visual checks remain open
 
 ## Current milestone
 - M1 Baseline: IN PROGRESS
-- M2 Architecture/Evidence: architecture frozen; DEN-008, implants and preventive evidence controlled; additional procedure clusters remain
-- M3 Content/Tools: 9 preview routes implemented; 6 calculators implemented/tested
+- M2 Architecture/Evidence: architecture frozen; DEN-008, implants, preventive and current restorations evidence controlled; additional procedure clusters remain
+- M3 Content/Tools: 11 preview routes implemented; 8 calculators implemented/tested
 - M4 Design/Media: IN PROGRESS — representative calculator pattern exists; broader rendered QA/media remains
 - M5 Final Candidate: NOT STARTED
 - M6 Production: BLOCKED
 
 ## Next logical work
-1. Confirm current Cloudflare preview for DEN-002, DEN-006, DEN-011 and GUI-001.
-2. Run representative rendered/mobile/keyboard QA on CALC-002 and CALC-006.
-3. Resolve DEN-025 exam-only evidence gap before implementing `/dentist-visit-cost/`.
-4. Decide whether DEN-032 evidence is strong enough for Wave B implementation or needs one additional source.
-5. Continue next Wave A procedure cluster evidence/spec/content batch.
-6. Build trust/methodology pages before production candidate stage.
+1. Implement DEN-022 / CALC-022 from the already verified crown evidence.
+2. Confirm current Cloudflare preview for DEN-002, DEN-006, DEN-011, GUI-001, DEN-005 and DEN-010.
+3. Run representative rendered/mobile/keyboard QA on CALC-002, CALC-006, CALC-005 and CALC-010.
+4. Resolve DEN-025 exam-only evidence gap before implementing `/dentist-visit-cost/`.
+5. Decide whether DEN-032 evidence is strong enough for Wave B implementation or needs one additional source.
+6. Continue remaining Wave A procedure-cluster evidence/spec/content batches.
+7. Build trust/methodology pages before production candidate stage.
 
 ## Known hard-gate exceptions
-- CALC-002/CALC-006 rendered multi-viewport/manual accessibility QA incomplete.
+- CALC-002/CALC-006/CALC-005/CALC-010 rendered multi-viewport/manual accessibility QA incomplete.
 - DEN-011 table/mobile render QA incomplete.
 - GUI-001 rendered/manual accessibility QA incomplete.
 - CALC-008 older form pattern still needs representative rendered review.
