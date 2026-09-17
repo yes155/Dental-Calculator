@@ -29,6 +29,7 @@ function normalizeInternalHref(href) {
 
 const approved = parseRegistry(registryText).filter((row) => row.status.startsWith('APPROVED'));
 const approvedRoutes = new Set(approved.map((row) => row.url));
+const siblingProjectDomains = /(?:skinkpedia\.online|myaxolotl\.us|bettafish\.website)/i;
 
 test('every approved registry route has a source index.html', async () => {
   assert.equal(approved.length, 39, 'expected the frozen registry plus controlled reviewer addition to contain 39 approved routes');
@@ -47,6 +48,7 @@ test('every approved page has basic preview metadata and publication-clean copy'
     assert.match(html, /<meta\s+name="description"\s+content="[^"]+"/i, `${row.url}: missing meta description`);
     assert.match(html, /<meta\s+name="robots"\s+content="noindex,nofollow"/i, `${row.url}: preview robots must remain noindex,nofollow`);
     assert.doesNotMatch(html, forbidden, `${row.url}: unresolved or stale publication wording`);
+    assert.doesNotMatch(html, siblingProjectDomains, `${row.url}: cross-project domain reference is not allowed`);
   }
 });
 
