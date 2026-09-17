@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Dental Filling Cost by Material and Quote Scope</title>
+  <meta name="description" content="Compare dental filling prices by material and organize a written filling quote without guessing treatment need or material choice.">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/restorative-calculator.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="preview-banner">Prelaunch preview — noindex. Cost education only; not a dental quote or treatment recommendation.</div>
+<header class="site-header"><p>Dental Calculator</p></header>
+<main id="main" class="article-shell">
+<header class="article-header">
+  <p class="eyebrow">Dental filling costs</p>
+  <h1>Dental filling cost by material</h1>
+  <p class="intro">Published filling prices vary by material. CareCredit reports U.S. ranges including <strong>$108–$256 for silver amalgam</strong> and <strong>$173–$439 for composite resin</strong>. Gold, porcelain/ceramic and glass ionomer have their own ranges, so the site does not merge all materials into one synthetic filling price.</p>
+  <p class="byline">Research and written by Farrukh Abdullah</p>
+  <p class="updated">Evidence checked September 17, 2026</p>
+</header>
+
+<article class="article-body">
+  <h2>How much does a dental filling cost?</h2>
+  <p>CareCredit's 2024 Synchrony/ASQ360° research across the 50 states and District of Columbia reports separate material-specific ranges: silver amalgam <strong>$108–$256</strong>, composite resin <strong>$173–$439</strong>, gold <strong>$361–$817</strong>, porcelain/ceramic <strong>$755–$1,774</strong>, and glass ionomer <strong>$116–$285</strong>.</p>
+  <p>These figures are publisher-reported observations, not guaranteed office charges or insurer allowed amounts. Do not treat the lowest value from one material and the highest value from another as a single standard-filling range.</p>
+
+  <h2 id="calculator-heading">Dental filling cost calculator</h2>
+  <p>Use CALC-010 with a written estimate. Enter the total or itemized restoration charges, confirm the number of restorations on the quote, and record material/surface/location labels only if the written quote states them. Published reference prices never fill the calculator.</p>
+</article>
+
+<section class="calculator-embed calculator-embed--guided restorative-guided" aria-labelledby="calculator-heading" data-calculator-id="CALC-010">
+  <div class="calculator-card calculator-card--guided">
+    <ol class="calc-progress" aria-label="Calculator progress">
+      <li data-step-indicator="1" class="is-current" aria-current="step"><span>1</span><strong>Your quote</strong></li>
+      <li data-step-indicator="2"><span>2</span><strong>What's included</strong></li>
+      <li data-step-indicator="3"><span>3</span><strong>Insurance &amp; result</strong></li>
+    </ol>
+    <div id="error-summary" class="notice notice-error" tabindex="-1" hidden></div>
+    <form id="calculator" data-calculator="calc010" novalidate>
+      <section class="calc-step" data-step="1" aria-labelledby="calc-step-1-heading">
+        <div class="step-heading"><p class="step-kicker">Step 1 of 3</p><h3 id="calc-step-1-heading" tabindex="-1">Enter what the filling quote says</h3><p>Copy the amount and restoration count from the written estimate. Material, surfaces and tooth location are descriptive labels only.</p></div>
+        <fieldset class="guided-group" data-error-field="quoteMode">
+          <legend>How is the quote written?</legend>
+          <div class="choice-grid choice-grid--cards">
+            <label class="choice choice-card"><input data-field="quoteMode" type="radio" name="quoteMode" value="one_total"><span><strong>One total</strong><small>The estimate shows one combined filling/restoration amount.</small></span></label>
+            <label class="choice choice-card"><input data-field="quoteMode" type="radio" name="quoteMode" value="itemized_restorations"><span><strong>Separate restoration lines</strong><small>The estimate lists each filling/restoration amount separately.</small></span></label>
+          </div>
+        </fieldset>
+        <div class="descriptor-grid">
+          <div><label for="restoration-count">How many restorations does the quote cover?</label><input id="restoration-count" data-field="restorationCount" type="number" min="1" max="32" step="1" value="1"></div>
+          <div><label for="material">Material on the quote</label><select id="material"><option value="not_stated">Not stated</option><option value="amalgam">Silver amalgam</option><option value="composite_resin">Composite resin</option><option value="gold">Gold</option><option value="porcelain_ceramic">Porcelain / ceramic</option><option value="glass_ionomer">Glass ionomer</option><option value="other">Other material</option></select></div>
+          <div><label for="surface-count">Surface count on the quote</label><select id="surface-count"><option value="not_stated">Not stated</option><option value="1">1 surface</option><option value="2">2 surfaces</option><option value="3">3 surfaces</option><option value="4_plus">4+ surfaces</option><option value="mixed">Mixed</option></select></div>
+          <div><label for="tooth-location">Tooth location on the quote</label><select id="tooth-location"><option value="not_stated">Not stated</option><option value="anterior">Anterior / front</option><option value="posterior">Posterior / back</option><option value="mixed">Mixed</option></select></div>
+        </div>
+        <label class="check" for="restoration-count-confirmed"><input id="restoration-count-confirmed" data-field="restorationCountConfirmed" type="checkbox"> The written quote clearly covers this number of restorations.</label>
+        <div id="one-total-fields" class="guided-subpanel" hidden><div class="field-money-compact"><label for="written-total">Total filling/restoration amount on your quote</label><div class="money"><span aria-hidden="true">$</span><input id="written-total" data-field="writtenTotal" inputmode="decimal" autocomplete="off" placeholder="0.00" disabled></div></div></div>
+        <div id="itemized-fields" class="guided-subpanel" hidden><p><strong>Enter each restoration amount exactly as written.</strong></p><div id="restoration-inputs" class="line-items"></div></div>
+        <div class="step-actions step-actions--end"><button id="step-1-next" class="button-primary" type="button">Continue</button></div>
+      </section>
+
+      <section class="calc-step" data-step="2" aria-labelledby="calc-step-2-heading" hidden>
+        <div class="step-heading"><p class="step-kicker">Step 2 of 3</p><h3 id="calc-step-2-heading" tabindex="-1">What else does the quote include?</h3><p>Use the written estimate only. “Not listed” describes the document; it does not mean the service is unnecessary.</p></div>
+        <fieldset id="examImaging-choice" class="component-choice"></fieldset>
+        <fieldset id="anesthesia-choice" class="component-choice"></fieldset>
+        <fieldset id="other-choice" class="component-choice"></fieldset>
+        <div class="step-actions"><button id="step-2-back" class="button-secondary" type="button">Back</button><button id="step-2-next" class="button-primary" type="button">Continue to insurance</button></div>
+      </section>
+
+      <section class="calc-step" data-step="3" aria-labelledby="calc-step-3-heading" hidden>
+        <div class="step-heading"><p class="step-kicker">Step 3 of 3</p><h3 id="calc-step-3-heading" tabindex="-1">Add insurance info only if you have it</h3><p>The calculator does not guess coverage, deductible, annual maximum or network pricing.</p></div>
+        <fieldset class="guided-group"><legend>Did your insurer give you an estimated payment for this same quote?</legend><div class="choice-grid choice-grid--insurance">
+          <label class="choice choice-card"><input data-field="insurance.mode" type="radio" name="insuranceMode" value="entered_estimate"><span><strong>Yes</strong><small>I have an estimated insurer payment.</small></span></label>
+          <label class="choice choice-card"><input data-field="insurance.mode" type="radio" name="insuranceMode" value="none"><span><strong>No insurance amount</strong><small>Do not subtract an insurer amount.</small></span></label>
+          <label class="choice choice-card"><input data-field="insurance.mode" type="radio" name="insuranceMode" value="unknown"><span><strong>Not yet</strong><small>I do not know what insurance may pay.</small></span></label>
+        </div></fieldset>
+        <div id="insurance-estimate-fields" class="guided-subpanel" hidden><div class="field-money-compact"><label for="insurance-amount">Estimated insurer payment</label><div class="money"><span aria-hidden="true">$</span><input id="insurance-amount" data-field="insurance.amount" inputmode="decimal" autocomplete="off" placeholder="0.00" disabled></div></div><label class="check" for="same-scope"><input id="same-scope" data-field="insurance.sameScopeConfirmed" type="checkbox" disabled> This insurer estimate covers the same written quote.</label></div>
+        <div class="step-actions"><button id="step-3-back" class="button-secondary" type="button">Back</button><button class="button-primary" type="submit">Show my quote summary</button><button class="button-link reset-link" type="reset">Start over</button></div>
+      </section>
+    </form>
+
+    <div id="result" class="result result--guided" aria-live="polite" hidden><h2 id="result-title"></h2><div id="result-values"></div><div id="result-scope"></div><p class="result-disclaimer"><strong>About this result:</strong> we only add the numbers you entered from your written quote. This is not a diagnosis, dentist's quote, material recommendation or insurance guarantee.</p></div>
+
+    <aside class="reference-strip" aria-label="Published filling price reference"><div><span class="reference-label">Published references — not calculator defaults</span><strong>Amalgam $108–$256 · Composite $173–$439</strong></div><p>Other materials have separate published ranges. The calculator never combines material ranges or uses them to fill your quote.</p></aside>
+    <p class="privacy-note privacy-note--compact">The amounts and quote labels you enter stay on this page while you use the calculator. They are not sent elsewhere or added to the page URL.</p>
+  </div>
+</section>
+
+<article class="article-body">
+  <h2>Dental filling prices by material</h2>
+  <div class="table-wrap"><table><thead><tr><th>Material</th><th>Reported U.S. range</th></tr></thead><tbody><tr><td>Silver amalgam</td><td>$108–$256</td></tr><tr><td>Composite resin</td><td>$173–$439</td></tr><tr><td>Gold</td><td>$361–$817</td></tr><tr><td>Porcelain / ceramic</td><td>$755–$1,774</td></tr><tr><td>Glass ionomer</td><td>$116–$285</td></tr></tbody></table></div>
+  <p>CareCredit also reports a <strong>$226 national average for composite</strong>. Keep each material label attached to its own price data; the endpoints across different materials are not one generic filling range.</p>
+
+  <h2>How surface count and tooth location can change a quote</h2>
+  <p>Humana's Orlando, Florida examples show that quoted filling amounts can differ by material, surface count and anterior/posterior location. Examples include composite one-surface anterior <strong>$199</strong>, one-surface posterior <strong>$217</strong>, two-surface posterior <strong>$274</strong>, three-surface posterior <strong>$333</strong>, and a two-surface amalgam example of <strong>$229</strong>.</p>
+  <p>These figures are local examples only. CALC-010 records surface count and location from the written quote as descriptive labels; it never adjusts a price automatically from those fields.</p>
+
+  <h2>What may be separate in a filling quote?</h2>
+  <p>The verified national material ranges do not establish that exam fees, imaging, anesthesia or other adjuncts are included. If a provider lists any of those separately, enter them as separate charges. If the quote does not say, leave the item as “Not sure.”</p>
+
+  <h2>What changes a dental filling quote?</h2>
+  <p>The current evidence supports keeping material, surface count, tooth location and restoration count visible when the written estimate provides them. The page does not use those labels to choose a material or determine clinical treatment.</p>
+
+  <h2>How insurance can affect the patient amount</h2>
+  <p>Dental-plan rules vary by exact service and plan. Deductibles, allowed amounts, coinsurance, network status, exclusions, waiting periods and annual maximums may affect the patient amount. CALC-010 does not assume any of them.</p>
+  <p>Only a user-entered insurer estimate confirmed for the same written quote can be subtracted.</p>
+
+  <h2>Fillings, bonding, inlays and onlays are different quote categories</h2>
+  <p>DEN-010 owns filling/restoration pricing. Cosmetic bonding belongs on the planned <a href="/dental-bonding-cost/">dental bonding cost</a> page. Inlay and onlay pricing belongs on <a href="/dental-inlay-cost/">dental inlay cost</a> and <a href="/dental-onlay-cost/">dental onlay cost</a>. Root-canal treatment belongs on the <a href="/root-canal-cost/">root canal cost</a> page.</p>
+  <p>The presence of porcelain/ceramic in a filling price source does not authorize this page to choose an inlay, onlay or other restoration for a reader.</p>
+
+  <h2>Related dental cost guides</h2>
+  <ul class="related-links"><li><a href="/root-canal-cost/">Root canal cost</a></li><li><a href="/dental-crown-cost/">Dental crown cost</a></li><li><a href="/dental-inlay-cost/">Dental inlay cost</a></li><li><a href="/dental-onlay-cost/">Dental onlay cost</a></li><li><a href="/dental-insurance-out-of-pocket-costs/">Dental insurance and out-of-pocket costs</a></li></ul>
+  <p class="evidence-date"><strong>Sources:</strong> CareCredit/Synchrony filling cost research; Humana Orlando filling examples; ADA MouthHealthy filling-material guidance. Cost education only.</p>
+</article>
+</main>
+<footer class="site-footer"><p>Dental Calculator</p><p>Cost education only; not dental or insurance advice.</p></footer>
+<script type="module" src="/assets/filling-calculator-ui.mjs"></script>
+</body>
+</html>
