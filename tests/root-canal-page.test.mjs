@@ -34,6 +34,13 @@ test("DEN-005 keeps retreatment benchmark unsupported", () => {
   assert.match(html, /does not generate or compare against a retreatment benchmark/);
 });
 
+test("DEN-005 does not leak internal page or calculator IDs into reader copy", () => {
+  assert.ok(!html.includes("Use CALC-005"));
+  assert.ok(!html.includes("CALC-005 can total"));
+  assert.ok(!html.includes("DEN-005 owns"));
+  assert.match(html, /Published price reference — not used in your result/);
+});
+
 test("DEN-005 has one H1 and controlled H2 order", () => {
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   const headings = [
