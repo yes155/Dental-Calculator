@@ -1,8 +1,16 @@
 # Deployment SEO contract
 
-Updated: 2026-09-17
+Updated: 2026-09-18
 
 This project keeps source HTML preview-safe and applies production-only SEO metadata during the build. `data/page-registry.csv` remains the authority for indexable route ownership.
+
+## Final production origin
+
+The approved production hostname is:
+
+`https://dentalcostcalculator.site`
+
+This origin is finalized for canonical URLs, sitemap URLs, production robots references, OG URLs and production JSON-LD. Finalization of the hostname does **not** by itself mean the custom domain is attached to Cloudflare or approved for launch.
 
 ## Preview behavior
 
@@ -33,26 +41,32 @@ The build fails instead of silently producing a production artifact when require
 
 ## Cloudflare Workers Builds contract
 
-Cloudflare Workers Builds provides `WORKERS_CI_BRANCH`. The deployment script treats `main` as the production branch by default and all other Workers branches as previews. `PRODUCTION_BRANCH` can override the production branch name if the repository policy changes later.
+Cloudflare Workers Builds provides `WORKERS_CI_BRANCH`. The deployment script treats `main` as the production branch by default and all other Workers branches as previews. `PRODUCTION_BRANCH` can override the production branch name if repository policy changes later.
 
-Before the first production deployment, set `SITE_ORIGIN` on the production build trigger to the final HTTPS site origin. Do not set a production origin on preview triggers.
+For the production build trigger, set:
 
-The current production domain is not connected, so `SITE_ORIGIN` must remain unset in the live production trigger until the final hostname is approved and attached.
+`SITE_ORIGIN=https://dentalcostcalculator.site`
+
+Do not set a production origin on preview triggers. The `chatgpt-work` preview must remain preview-mode/noindex until the production candidate is approved.
+
+The hostname is finalized but still requires Cloudflare custom-domain attachment, DNS/HTTPS verification and final-domain QA before production approval.
 
 ## CI production-artifact fixture
 
-GitHub Actions performs the normal preview QA and then runs a second build in production mode using the reserved test origin `https://dental-calculator.example`. This validates production canonical, robots, sitemap and OG/X generation without publishing that origin anywhere.
+GitHub Actions performs the normal preview QA and then runs a second build in production mode using the approved origin `https://dentalcostcalculator.site`. This validates the exact canonical, robots, sitemap, OG/X URL and schema origin that production will use. The CI build does not publish the site or connect the domain.
 
 ## Remaining launch checks
 
-This deployment layer does not itself close the remaining launch gates. Before production approval, still verify:
+Before production approval, still verify:
 
-- final production hostname and Cloudflare custom-domain attachment;
-- production `SITE_ORIGIN` value;
-- live canonical and redirect behavior;
+- Cloudflare custom-domain attachment for `dentalcostcalculator.site`;
+- production `SITE_ORIGIN=https://dentalcostcalculator.site` on the production build trigger;
+- HTTPS and preferred-host redirect behavior;
+- live canonicals on representative routes;
 - live `robots.txt` and `sitemap.xml`;
 - social preview image/`og:image` and X image metadata after media approval;
-- schema truth/parity;
-- rendered accessibility, keyboard, mobile and wide-screen checks;
-- performance, security/privacy and rollback documentation;
-- final Cloudflare preview audit tied to the candidate Git SHA.
+- schema truth/parity on the final domain;
+- representative final-domain accessibility, mobile and calculator checks;
+- final-domain performance/security/privacy checks;
+- final candidate SHA and rollback documentation;
+- final hard-blocker audit before any merge to `main`.

@@ -24,5 +24,5 @@ jobs:
       - name: Verify production SEO artifact build
         env:
           SITE_MODE: production
-          SITE_ORIGIN: https://dental-calculator.example
+          SITE_ORIGIN: https://dentalcostcalculator.site
         run: npm run build

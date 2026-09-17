@@ -7,8 +7,9 @@ Updated 2026-09-18.
 - Primary market: United States
 - Primary audience: people researching dental procedure costs and written quote/out-of-pocket estimates
 - Risk class: Health/YMYL-adjacent + financial estimation
-- Production domain: not connected
-- Production release: blocked until hard gates pass
+- Production domain: `dentalcostcalculator.site` — finalized, not yet attached/verified on Cloudflare
+- Production origin: `https://dentalcostcalculator.site`
+- Production release: blocked until remaining hard gates pass
 
 ## Repository / deployment
 - GitHub repo: `yes155/Dental-Calculator`
@@ -73,7 +74,8 @@ Common controls:
 - Preview source pages keep `noindex,nofollow`.
 - Live preview `robots.txt` was manually verified as `User-agent: *` + `Disallow: /`.
 - Live preview response headers were manually verified: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, restrictive `Permissions-Policy`, and `X-Robots-Tag: noindex`.
-- Production artifact generation requires a real HTTPS `SITE_ORIGIN`; production build fails if missing or invalid.
+- Final production origin is `https://dentalcostcalculator.site`.
+- Production artifact generation requires a valid HTTPS `SITE_ORIGIN`; CI now tests the exact finalized production origin.
 - Production artifacts generate self-canonicals, registry-driven `robots.txt`, registry-driven `sitemap.xml`, OG/X text metadata and production index directives.
 - Production-only JSON-LD is centralized and deliberately limited to truthful `WebSite`, `WebPage`, `ProfilePage` and `Person` usage.
 - Build guards block unsupported `MedicalWebPage`, `FAQPage`, `Organization`, `reviewedBy` and accidental reviewer attribution.
@@ -108,7 +110,7 @@ Current test/build system checks include:
 - schema guardrails
 - cluster verifier checks
 
-Latest validated CI: **Prelaunch QA run #460 — SUCCESS** at `0a2822208eee5b785104a60648d368fcc70b5140`.
+Latest validated CI before domain-origin update: **Prelaunch QA run #460 — SUCCESS** at `0a2822208eee5b785104a60648d368fcc70b5140`.
 
 ## Media / design / accessibility
 - Representative calculator visual pattern: established through CALC-001 review.
@@ -124,19 +126,19 @@ Latest validated CI: **Prelaunch QA run #460 — SUCCESS** at `0a2822208eee5b785
 - M2 Architecture/Evidence: PASS for implemented source-controlled routes
 - M3 Content/Tools: PASS for the 39 approved implemented routes and automated-tested calculators
 - M4 Design/Media: PASS for representative rendered/accessibility QA; final social image remains open
-- M5 Final Candidate: IN PROGRESS — blocked on real production hostname/social image/final-domain checks/rollback record
+- M5 Final Candidate: IN PROGRESS — production hostname finalized; blocked on domain attachment, social image, final-domain checks and rollback record
 - M6 Production: BLOCKED
 
 ## Next logical work
 1. Approve/create the final social/brand image and add `og:image` / X image metadata.
-2. Finalize/connect the real production domain and set production `SITE_ORIGIN`.
+2. Attach `dentalcostcalculator.site` to the Cloudflare production project and set `SITE_ORIGIN=https://dentalcostcalculator.site` on the production build trigger.
 3. Run final-domain canonical/robots/sitemap/schema/security/performance checks.
 4. Freeze a final candidate SHA and document/test rollback procedure.
 5. Run the final hard-blocker audit before any merge to `main`.
 
 ## Known hard-gate exceptions
 - Final social/brand image and `og:image` incomplete.
-- Real production domain/`SITE_ORIGIN` not connected.
+- Production domain is finalized but Cloudflare custom-domain attachment / production `SITE_ORIGIN` deployment setting are not yet verified.
 - Final-domain SEO/security/performance checks incomplete.
 - Rollback documentation incomplete.
-- Production merge/domain/indexation blocked.
+- Production merge/indexation blocked.
