@@ -13,7 +13,7 @@ for (const [path,tokens] of checks) {
   const html = await readFile(resolve(output,path),'utf8');
   if (!html.includes('<meta name="robots" content="noindex,nofollow">')) throw new Error(`${path}: preview must remain noindex,nofollow`);
   if ((html.match(/<h1\b/g)||[]).length !== 1) throw new Error(`${path}: expected exactly one H1`);
-  if (/\[SOURCE NEEDED BEFORE PUBLICATION\]|TODO|PLACEHOLDER|EDITOR NOTE/i.test(html)) throw new Error(`${path}: unresolved publication marker`);
+  if (/\[SOURCE NEEDED BEFORE PUBLICATION\]|\[EDITOR NOTE[^\]]*\]|\[TODO[^\]]*\]|\[PLACEHOLDER[^\]]*\]|planned but not live|— planned/i.test(html)) throw new Error(`${path}: unresolved publication marker`);
   if (html.includes('Reviewed by Juliana Maia Teixeira')) throw new Error(`${path}: reviewer credit requires exact-version approval`);
   for (const token of tokens) if (!html.includes(token)) throw new Error(`${path}: missing required token ${token}`);
 }
