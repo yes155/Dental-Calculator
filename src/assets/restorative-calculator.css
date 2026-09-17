@@ -1,0 +1,22 @@
+/* Guided quote-calculator refinements for CALC-005 and CALC-010 */
+.restorative-guided .money {
+  min-height: 2.85rem;
+  overflow: visible;
+}
+.restorative-guided .money input { min-width: 0; }
+.restorative-guided .money:focus-within { outline: 4px solid var(--focus); outline-offset: 3px; }
+.restorative-guided .money input:focus-visible { outline: 0; }
+.restorative-guided .money:has(input[aria-invalid="true"]) { border-color: var(--danger); box-shadow: 0 0 0 2px var(--danger); }
+.restorative-guided .money input[aria-invalid="true"] { outline: 0; }
+.restorative-guided .component-amount { margin-top: .7rem; }
+.restorative-guided .result-grid--guided > div { min-height: 7rem; }
+.restorative-guided .descriptor-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1rem; }
+.restorative-guided .line-items { display: grid; gap: .9rem; }
+@media (max-width: 760px) {
+  .restorative-guided .segmented-options,
+  .restorative-guided .choice-grid--cards,
+  .restorative-guided .choice-grid--insurance,
+  .restorative-guided .result-grid,
+  .restorative-guided .descriptor-grid { grid-template-columns: 1fr; }
+  .restorative-guided .result-grid--guided > div { min-height: 0; }
+}
