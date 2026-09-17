@@ -53,6 +53,7 @@ External-model outputs are never evidence authority by themselves. Rejected/clea
 9. GUI-001 `/dental-insurance-out-of-pocket-costs/` — no calculator
 10. DEN-005 `/root-canal-cost/` + CALC-005
 11. DEN-010 `/dental-filling-cost/` + CALC-010
+12. DEN-022 `/dental-crown-cost/` + CALC-022
 
 ## Calculator implementation status
 ### Approved representative UX
@@ -77,6 +78,7 @@ CALC-001 is the user-approved representative interaction pattern where the same 
 - CALC-006 — SRP/deep-cleaning quote organizer by user-confirmed quadrant count
 - CALC-005 — root-canal quote organizer with restoration/add-on separation
 - CALC-010 — filling quote organizer with descriptive material/surface/location labels
+- CALC-022 — crown quote organizer with descriptive material/type and explicit build-up/add-on states
 
 Common controls:
 - integer-cent arithmetic
@@ -129,7 +131,7 @@ Common controls:
 - Retreatment is a descriptive quote category only; no national retreatment benchmark is generated.
 - CALC-005 spec frozen at `data/calculator-specs/CALC-005.md`.
 - Core, guided UI, page regression tests and page implementation completed.
-- Automated QA: PASS at head `41dbd0dc6432fae573b6e0fa2dd50f34aeb126dc`.
+- Automated QA: PASS.
 - Rendered multi-viewport/manual keyboard QA: OPEN.
 
 ### DEN-010 / CALC-010
@@ -140,12 +142,20 @@ Common controls:
 - Material, surface count and tooth location are descriptive quote labels only; they never change arithmetic.
 - CALC-010 spec frozen at `data/calculator-specs/CALC-010.md`.
 - Core, guided UI, page regression tests and page implementation completed.
-- Automated QA: PASS at head `41dbd0dc6432fae573b6e0fa2dd50f34aeb126dc`.
+- Automated QA: PASS.
 - Rendered multi-viewport/manual keyboard QA: OPEN.
 
-### DEN-022
-- Direct evidence already verified in `RESTORATIONS_ROOT_CANAL_DIRECT_VERIFIED_EVIDENCE_v1.md`.
-- Semantic brief/calculator spec/page implementation are the next work in this cluster.
+### DEN-022 / CALC-022
+- Evidence-controlled under the same restorations evidence file.
+- CareCredit crown averages/ranges remain separated by material/type; `$697–$1,399` is not treated as the full crown-price range.
+- Humana material examples remain Orlando-only context.
+- Build-up/foundation can be recorded as included/separate/not listed/not sure, but has no site default price.
+- Broken-crown repair `$765` and recementing `$126` remain separate service categories and cannot be relabeled as replacement-crown prices.
+- Implant-supported crown pricing remains owned by DEN-001.
+- CALC-022 spec frozen at `data/calculator-specs/CALC-022.md`.
+- Core, guided UI, page implementation and crown page regression gate completed.
+- Automated QA: PASS at head `ce21954fcb516d6ffde743e1498c3961f4948ceb`.
+- Rendered multi-viewport/manual keyboard QA: OPEN.
 
 ## GUI-001 insurance guide status
 - Corrected/evidence-audited source migrated into repo.
@@ -168,7 +178,7 @@ Common controls:
 ## Automated QA
 Current test/build system checks:
 - calculator unit/regression fixtures
-- required page/assets for earlier build-controlled routes
+- required page/assets for implemented build-controlled routes
 - `noindex,nofollow` preview directive
 - exactly one H1 per implemented page
 - controlled H2 order
@@ -181,8 +191,9 @@ Current test/build system checks:
 - GUI-001 no-calculator/hypothetical-example/generic-price safeguards
 - DEN-005 root-canal scope/retreatment/restoration safeguards
 - DEN-010 material-range/local-scope/calculator-placement safeguards
+- DEN-022 crown material/repair/recement/build-up/calculator-placement safeguards
 
-Current restorative implementation head `41dbd0dc6432fae573b6e0fa2dd50f34aeb126dc` completed `npm run qa` successfully.
+Current crown implementation head `ce21954fcb516d6ffde743e1498c3961f4948ceb` completed `npm run qa` successfully.
 
 ## Trust / people
 - Author shown: Farrukh Abdullah, research/writing only
@@ -200,22 +211,21 @@ Current restorative implementation head `41dbd0dc6432fae573b6e0fa2dd50f34aeb126d
 ## Current milestone
 - M1 Baseline: IN PROGRESS
 - M2 Architecture/Evidence: architecture frozen; DEN-008, implants, preventive and current restorations evidence controlled; additional procedure clusters remain
-- M3 Content/Tools: 11 preview routes implemented; 8 calculators implemented/tested
+- M3 Content/Tools: 12 preview routes implemented; 9 calculators implemented/tested
 - M4 Design/Media: IN PROGRESS — representative calculator pattern exists; broader rendered QA/media remains
 - M5 Final Candidate: NOT STARTED
 - M6 Production: BLOCKED
 
 ## Next logical work
-1. Implement DEN-022 / CALC-022 from the already verified crown evidence.
-2. Confirm current Cloudflare preview for DEN-002, DEN-006, DEN-011, GUI-001, DEN-005 and DEN-010.
-3. Run representative rendered/mobile/keyboard QA on CALC-002, CALC-006, CALC-005 and CALC-010.
-4. Resolve DEN-025 exam-only evidence gap before implementing `/dentist-visit-cost/`.
-5. Decide whether DEN-032 evidence is strong enough for Wave B implementation or needs one additional source.
-6. Continue remaining Wave A procedure-cluster evidence/spec/content batches.
-7. Build trust/methodology pages before production candidate stage.
+1. Confirm current Cloudflare preview for DEN-002, DEN-006, DEN-011, GUI-001, DEN-005, DEN-010 and DEN-022.
+2. Run representative rendered/mobile/keyboard QA on CALC-002, CALC-006, CALC-005, CALC-010 and CALC-022.
+3. Resolve DEN-025 exam-only evidence gap before implementing `/dentist-visit-cost/`.
+4. Decide whether DEN-032 evidence is strong enough for Wave B implementation or needs one additional source.
+5. Continue remaining Wave A procedure-cluster evidence/spec/content batches.
+6. Build trust/methodology pages before production candidate stage.
 
 ## Known hard-gate exceptions
-- CALC-002/CALC-006/CALC-005/CALC-010 rendered multi-viewport/manual accessibility QA incomplete.
+- CALC-002/CALC-006/CALC-005/CALC-010/CALC-022 rendered multi-viewport/manual accessibility QA incomplete.
 - DEN-011 table/mobile render QA incomplete.
 - GUI-001 rendered/manual accessibility QA incomplete.
 - CALC-008 older form pattern still needs representative rendered review.
