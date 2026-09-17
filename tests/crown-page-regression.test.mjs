@@ -64,3 +64,11 @@ test("DEN-022 does not collapse or relabel crown price categories", () => {
   assert.ok(!html.includes("$126 replacement crown"), "recementing must not be relabeled as replacement pricing");
   assert.ok(!html.includes("data-default-buildup"), "build-up must not receive a hidden default price");
 });
+
+test("DEN-022 does not expose internal page or calculator IDs in reader copy", () => {
+  const readerVisible = html
+    .replace(/data-calculator-id="[^"]+"/g, "")
+    .replace(/data-calculator="[^"]+"/g, "");
+  assert.ok(!readerVisible.includes("CALC-022"), "CALC-022 must remain implementation metadata only");
+  assert.ok(!readerVisible.includes("DEN-022"), "DEN-022 must remain implementation metadata only");
+});
