@@ -10,7 +10,7 @@ This branch is a prelaunch preview candidate only. It now implements the frozen 
 - PR: #1 (draft)
 - Cloudflare project: `dental-calculator`
 - Branch preview: `https://chatgpt-work-dental-calculator.f-abdullah79.workers.dev`
-- Current tracked head before final CI: `d45dcca1f1a0f3f72571314bbeda11f3e92e35e3`
+- Current tracked head before final CI: `2901e26170233d1aebe1250b6edef55da04be49a`
 - Production branch: `main`
 - Production status: blocked / not approved
 - Production domain: not connected
