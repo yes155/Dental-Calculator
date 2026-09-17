@@ -41,7 +41,7 @@ test('methodology preserves key cost and calculator safeguards', async () => {
   const cost = await readFile(new URL('../src/cost-data-methodology/index.html', import.meta.url),'utf8');
   const calc = await readFile(new URL('../src/calculator-methodology/index.html', import.meta.url),'utf8');
   assert.match(cost,/does not merge unrelated local fees, plan copays or differently scoped sources/);
-  assert.match(cost,/\[SOURCE NEEDED BEFORE PUBLICATION\]/);
+  assert.match(cost,/held from publication until appropriate evidence is added/);
   assert.match(calc,/Blank is not zero/);
   assert.match(calc,/not an actual dental quote and not a coverage guarantee/);
   assert.doesNotMatch(calc,/universal.*insurance.*percentage.*\d+%/i);
