@@ -14,6 +14,7 @@ const required = [
   "dental-implant-cost-calculator/index.html",
   "full-mouth-dental-implants-cost/index.html",
   "dental-bone-graft-cost/index.html",
+  "dental-inlay-cost/index.html",
   "all-on-4-dental-implants-cost/index.html",
   "dental-x-ray-cost/index.html",
   "dental-cleaning-cost/index.html",
@@ -57,6 +58,11 @@ const pageChecks = [
     path: "dental-bone-graft-cost/index.html",
     tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Dental bone graft cost by graft type and quote scope</h1>','$652–$1,575','$2,161–$5,148','Sinus-lift pricing is intentionally excluded'],
     headings: ["How much does a dental bone graft cost?","Bone graft prices depend on the graft type and quoted site","Autograft, allograft, xenograft and alloplast are different quote categories","Is the bone graft included in an implant or extraction quote?","What can change the bone graft quote?","How insurance can affect the patient cost","What this page does not price or decide","Related dental cost guides"],
+  },
+  {
+    path: "dental-inlay-cost/index.html",
+    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Dental inlay cost</h1>','$976 average','$755–$1,774','ceramic inlay or onlay','does not establish an inlay-only national average or range','There is no universal insurance percentage or copay for an inlay.'],
+    headings: ["How much does a dental inlay cost?","Why the current national price data combines inlays and onlays","What should an inlay quote identify?","Are laboratory and visit costs included in an inlay price?","What can change an inlay quote?","How insurance can affect what you pay","Inlay cost versus onlay and filling cost","Related dental cost guides"],
   },
   {
     path: "all-on-4-dental-implants-cost/index.html",
@@ -109,6 +115,12 @@ for (const check of pageChecks) {
     const calculatorIndex = html.indexOf('id="calculator-heading"');
     const firstDetailIndex = html.indexOf('<h2>How much do ');
     if (calculatorIndex === -1 || firstDetailIndex === -1 || calculatorIndex > firstDetailIndex) throw new Error(`${check.path}: calculator must appear immediately after the answer-first header and before detailed H2 content`);
+  }
+
+  if (check.path === "dental-inlay-cost/index.html") {
+    if (html.includes("data-calculator-id=") || html.includes('id="calculator"')) throw new Error("DEN-004: no calculator is assigned in the frozen registry");
+    if (html.includes("$250–$1,500")) throw new Error("DEN-004: older secondary inlay-only range must not appear in first-version reader copy");
+    if (html.includes("$755–$1,774 inlay-only") || html.includes("inlay-only range of $755–$1,774")) throw new Error("DEN-004: combined ceramic inlay/onlay range must not be relabeled as inlay-only");
   }
 
   if (check.path === "dental-x-ray-cost/index.html") {
