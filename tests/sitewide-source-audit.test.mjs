@@ -52,6 +52,19 @@ test('every approved page has basic preview metadata and publication-clean copy'
   }
 });
 
+test('approved people images stay local to the dental site', async () => {
+  await assert.doesNotReject(access(resolve(src, 'assets/people/farrukh-abdullah.webp')), 'Farrukh author photo asset is missing');
+  await assert.doesNotReject(access(resolve(src, 'assets/people/juliana-maia-teixeira.webp')), 'Reviewer photo asset is missing');
+
+  const homepage = await readFile(resolve(src, 'index.html'), 'utf8');
+  const about = await readFile(routeToFile('/about/'), 'utf8');
+  const author = await readFile(routeToFile('/authors/farrukh-abdullah/'), 'utf8');
+
+  for (const [label, html] of Object.entries({ homepage, about, author })) {
+    assert.match(html, /src="\/assets\/people\/farrukh-abdullah\.webp"/i, `${label}: Farrukh author photo must use the local asset`);
+  }
+});
+
 test('all root-relative internal page links resolve to an implemented approved route or asset', async () => {
   const broken = [];
   for (const row of approved) {
