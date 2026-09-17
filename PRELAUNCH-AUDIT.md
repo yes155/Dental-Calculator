@@ -4,54 +4,68 @@ Updated 2026-09-17.
 
 Status values: PASS / FAIL / IN PROGRESS / DEFERRED / NOT TESTED
 
+Latest validated implementation head before documentation sync: `1bac5c306e44274579791c83ea1b825d01db1e50`  
+Latest validated CI: **Prelaunch QA run #437 — SUCCESS**
+
 | ID | Category | Severity | Scope | Evidence / current state | Next verification | Status |
 |---|---|---|---|---|---|---|
-| A-001 | Architecture | HARD | Site | Frozen registry: 38 planned URLs + 5 deferred candidates; canonical `data/page-registry.csv` reconciled to approved workbook | Preserve ownership in every new batch | PASS |
-| E-001 | Evidence/Pricing | HARD | DEN-008 | Controlled source register and page claims | Periodic source refresh | PASS |
-| E-002 | Evidence/Pricing | HARD | Implants | Direct verified evidence + source register; rejected NotebookLM packs retained only as lineage | Periodic source refresh | PASS |
-| E-003 | Evidence/Pricing | HARD | Preventive cluster | DEN-002, DEN-006 and DEN-011 controlled against preventive direct-verified evidence/source register | Refresh time-sensitive price sources | PASS |
-| E-004 | Evidence/Insurance | HARD | GUI-001 | Corrected evidence-audited source; named-plan scope and exceptions preserved | Recheck policy-sensitive sources before production | PASS |
-| E-005 | Evidence/Pricing | HARD | Remaining site | Other procedure clusters remain unverified/unimplemented | Continue cluster-by-cluster evidence work | IN PROGRESS |
-| Y-001 | YMYL/Clinical | HARD | Implemented calculators | No diagnosis, candidacy, treatment selection or symptom-to-price logic | Preserve regression controls | PASS |
-| Y-002 | YMYL/Clinical | HARD | DEN-002 / DEN-006 | Routine-vs-deep cleaning and quadrant need are never selected by the site; published ranges are reference-only | Render/manual review | PASS |
-| Y-003 | YMYL/Insurance | HARD | GUI-001 + calculators | No universal coverage percentage/guarantee; named plan examples remain scoped; only user-entered same-quote insurer estimates are subtracted in calculators | Recheck source wording before production | PASS |
-| C-001 | Calculator | HARD | CALC-008 | Frozen spec + automated fixtures | Rendered UX review still open | PASS |
-| C-002 | Calculator | HARD | CALC-001 | Frozen quote-input logic; representative UX user-approved | Preserve | PASS |
-| C-003 | Calculator | HARD | CALC-003 / CALC-003-A04 | Frozen arch normalization; no national per-arch default; quote arch count explicit | Final multi-viewport/manual review | PASS |
-| C-004 | Calculator | HARD | CALC-002 | Frozen spec; core/UI/tests implemented; reference range never changes arithmetic | Render/mobile/keyboard QA | PASS |
-| C-005 | Calculator | HARD | CALC-006 | Frozen spec; quote-based quadrant count; no 4× reference multiplication; core/UI/tests implemented | Render/mobile/keyboard QA | PASS |
-| C-006 | Calculator UX | HIGH | CALC-002 / CALC-006 | Three-step guided pattern, constrained width, plain-language states, conditional fields | Cloudflare screenshots + keyboard testing | IN PROGRESS |
-| G-001 | Content | HIGH | DEN-002 | Evidence-controlled page; bundle-vs-cleaning guard; calculator immediately after answer-first price section | Rendered review | PASS |
-| G-002 | Content | HIGH | DEN-006 | Evidence-controlled page; per-quadrant scope explicit; no default full-mouth total; calculator immediately after answer-first section | Rendered review | PASS |
-| G-003 | Content | HIGH | DEN-011 | Seven named X-ray rows preserved; no synthetic all-X-ray range; no calculator | Table/mobile render QA | PASS |
-| G-004 | Content | HIGH | GUI-001 | Corrected eight-heading source integrated; hypothetical arithmetic explicitly labeled; no generic procedure-price benchmark | Render/manual review | PASS |
-| T-001 | Trust | HARD | Site | No false dental reviewer/credential claim; trust routes frozen but not fully implemented | Build trust/legal/methodology pages | IN PROGRESS |
-| D-001 | Design | HIGH | Representative calculator pattern | CALC-001 pattern approved by user; preventive calculators use the same task-first principles | Differential multi-viewport QA | IN PROGRESS |
-| M-001 | Media | HIGH | Site | No final media system/manifest approval | Define media contract and representative assets | NOT TESTED |
-| S-001 | SEO/Schema | HARD | Preview | Implemented pages intentionally `noindex,nofollow`; build gates check preview directives | Canonical/robots/sitemap/schema at final candidate | IN PROGRESS |
-| L-001 | Internal Links | HARD | Implemented cluster | DEN-002/DEN-006/DEN-011 now link to implemented GUI-001; some planned targets remain absent | Crawl once next related routes exist | IN PROGRESS |
-| X-001 | Accessibility | HARD | Calculators/site | Native controls, visible labels, focus targets and live regions implemented | Manual keyboard, screen reader, 320/390/768/1280/1920 checks | IN PROGRESS |
-| P-001 | Performance | HIGH | Site | Dependency-free static implementation; no third-party calculator requests | Measure representative pages after design stabilizes | NOT TESTED |
-| R-001 | Security/Privacy | HARD | Calculators | Local arithmetic; no storage/network/URL serialization in calculator code | Browser network verification | PASS |
-| B-001 | Build | HARD | Current implementation | `npm run qa` passed on implementation head `b9c683dc69b3565ce8f30e9aa41e5ec76427b954`; build gates cover DEN-002, DEN-006, DEN-011 and GUI-001 | Confirm latest control-only head CI | PASS |
-| B-002 | Preview | HARD | Cloudflare | Branch preview configured; newest preventive/GUI routes not yet visually confirmed in this audit pass | Open latest branch preview and verify routes | IN PROGRESS |
-| B-003 | Rollback | HARD | Release process | Rollback procedure not yet documented/tested | Document + dry run before production | NOT TESTED |
+| A-001 | Architecture | HARD | Site | Frozen `data/page-registry.csv`: 39 APPROVED build routes + 5 DEFERRED non-build candidates. All 39 approved routes have source implementations. | Preserve ownership; no new URL without architecture review. | PASS |
+| A-002 | Cannibalization | HARD | Site | Frozen one-owner URL architecture retained; deferred routes remain outside the build/sitemap. | Final crawl/control-page review after real domain is set. | PASS |
+| E-001 | Evidence/Pricing | HARD | Site | Procedure clusters have repo evidence packs/source-register lineage; automated page safeguards preserve price type, geographic scope and category boundaries. | Recheck time-sensitive source freshness immediately before production. | PASS |
+| E-002 | Evidence/Insurance | HARD | Site/calculators | No universal coverage guarantee; named-plan examples remain scoped; calculators use only user-entered same-quote insurer estimates where supported. | Final wording/source refresh before production. | PASS |
+| Y-001 | YMYL/Clinical | HARD | Site/calculators | No diagnosis, treatment selection, candidacy decision or symptom-to-price logic. | Preserve through rendered/final candidate audit. | PASS |
+| Y-002 | YMYL/Reviewer | HARD | Site | Author/reviewer roles are explicit; automated QA blocks page-specific reviewer credit without exact-version approval. | Preserve during final schema/render review. | PASS |
+| C-001 | Calculators | HARD | Registry-assigned tools | Calculator cores/UIs/specs implemented with blank≠zero, scope controls, reference-data separation and insurance safeguards; automated regression suite green. | Rendered keyboard/viewport checks. | PASS |
+| C-002 | Calculator output safety | HARD | Site | Results remain educational quote summaries/estimates, not treatment recommendations, dentist quotes or coverage guarantees. | Representative live-browser verification. | PASS |
+| G-001 | Content | HARD | Approved routes | All 39 approved routes implemented; publication-marker audit is clean. | Final rendered differential QA. | PASS |
+| G-002 | Internal links | HARD | Approved routes | Automated sitewide test verifies root-relative page links resolve to implemented approved routes/assets. | Final-domain crawl after candidate deployment. | PASS |
+| T-001 | Trust | HARD | Site | About, Editorial Policy, Author, Contact, Privacy, Terms, Corrections & Updates, Cost Data Methodology, Calculator Methodology, Disclosures, Medical Disclaimer and reviewer profile implemented. | Render/live parity check. | PASS |
+| T-002 | Credentials/review | HARD | People/pages | No fabricated dentist qualification or automatic reviewer endorsement; reviewer profile explicitly limits page-level credit. | Preserve on production artifacts. | PASS |
+| S-001 | Preview indexation | HARD | Preview | Preview HTML remains `noindex,nofollow`; generated preview `robots.txt` blocks crawling; `workers.dev` `_headers` rule adds `X-Robots-Tag: noindex, nofollow`. | Verify actual Cloudflare response headers/robots at edge. | IN PROGRESS |
+| S-002 | Canonicals | HARD | Production artifact | Production build requires HTTPS `SITE_ORIGIN` and generates exactly one self-canonical per approved route. CI production fixture passes. | Set real hostname and verify canonical URLs on Cloudflare production candidate. | IN PROGRESS |
+| S-003 | Sitemap | HARD | Production artifact | `sitemap.xml` is generated only from 39 APPROVED registry URLs; deferred routes are excluded. CI production fixture passes. | Verify real-domain sitemap and HTTP status before launch. | IN PROGRESS |
+| S-004 | Robots | HARD | Production artifact | Production `robots.txt` allows crawling and points to `${SITE_ORIGIN}/sitemap.xml`; preview uses blocking robots. | Verify both edge environments. | IN PROGRESS |
+| S-005 | OG/X metadata | HIGH | Production artifact | OG title/description/url/site + X summary title/description are generated centrally and tied to canonical/title/description. | Approve social image; then add/verify `og:image` and X image metadata. | IN PROGRESS |
+| S-006 | Schema | HARD | Production artifact | CI-generated JSON-LD is limited to truthful `WebSite`, `WebPage`, `ProfilePage` and `Person`; overclaims such as `MedicalWebPage`, `FAQPage`, `Organization`, `reviewedBy` are blocked. Run #436 passed. | Real-domain rendered/schema validation. | PASS |
+| D-001 | Design | HIGH | Site/calculators | Shared responsive CSS and representative guided calculator pattern implemented. | 320/390/768/1280/1920 rendered differential QA. | IN PROGRESS |
+| X-001 | Accessibility — source | HARD | Site/calculators | Skip link, focus-visible, native controls, labels, fieldsets/legends, focused error summaries, aria-invalid, live results, mobile form sizing and reduced-motion handling present. | Browser/manual keyboard and screen-reader spot checks. | PASS |
+| X-002 | Accessibility — rendered | HARD | Representative pages/tools | Source inspection cannot prove keyboard order, clipping, zoom, focus visibility or screen-reader behavior at runtime. | Manual rendered QA at required viewports. | IN PROGRESS |
+| M-001 | Media | HIGH | Site | Current source tree has no large media bundle; reviewer image is local. Final site-wide hero/social-image contract is not fully closed. | Approve final representative/social assets and verify mapping/crops. | IN PROGRESS |
+| P-001 | Performance | HIGH | Source/static payload | Current source is lightweight: shared CSS ~15.5 KB; largest calculator UI module ~20.3 KB; HTML pages generally small; no large media bundle. No performance rewrite justified yet. | Measure representative Cloudflare pages after rendered candidate exists. | IN PROGRESS |
+| R-001 | Security headers | HARD | Static assets | `_headers` supplies `X-Frame-Options: DENY`, `nosniff`, strict-origin referrer policy and restrictive unused-feature Permissions-Policy. Run #437 passed. | Verify actual edge response headers. | IN PROGRESS |
+| R-002 | Privacy | HARD | Calculators | Calculator arithmetic is local; code/test policy states quote values are not intentionally sent, stored or serialized into URL. | Browser network verification on representative calculators. | IN PROGRESS |
+| R-003 | CSP/HSTS | HIGH | Final domain | CSP intentionally deferred to avoid untested resource breakage; HSTS deferred until real production domain/zone exists. | Decide/test on production candidate hostname. | DEFERRED |
+| B-001 | Build | HARD | Site | `npm run qa` passes; 212/212 automated tests green; preview build + cluster verifiers + production-artifact fixture pass. Latest implementation run #437 SUCCESS. | Keep green after documentation/media/final candidate changes. | PASS |
+| B-002 | Cloudflare preview | HARD | `chatgpt-work` | Branch preview hostname is known, but this audit environment could not reliably resolve/inspect it. | Verify representative URLs, calculators, robots and headers at the actual edge. | IN PROGRESS |
+| B-003 | Production hostname | HARD | Release | Real production hostname not connected/set; build refuses to invent `SITE_ORIGIN`. | Connect/finalize domain and set production build variable. | IN PROGRESS |
+| B-004 | Rollback | HARD | Release | No final candidate SHA + tested rollback record yet. | Document rollback target/procedure and dry-run/verify before production. | NOT TESTED |
 
 ## Hard-gate summary
 
 | Gate | Status | Evidence |
 |---|---|---|
-| G0 Baseline | IN PROGRESS | Repo/build/preview/control files established; full site baseline not finished |
-| G1 Research/Architecture | PASS | Frozen registry; implemented clusters evidence-controlled |
-| G2 Content/Trust | IN PROGRESS | Nine preview routes implemented; trust pages and remaining procedures incomplete |
-| G3 Design/Media/Accessibility | IN PROGRESS | Representative calculator pattern established; preventive rendered/mobile/accessibility QA and media remain |
-| G4 SEO/Schema/Links | IN PROGRESS | Preview noindex guarded; final canonical/sitemap/schema/link crawl incomplete |
-| G5 Calculators/Data | PASS for implemented arithmetic | CALC-008, CALC-001, CALC-003, CALC-003-A04, CALC-002 and CALC-006 specs/automated tests controlled |
-| G6 Build/Security/Performance | IN PROGRESS | Automated implementation build passes; performance and browser-network confirmation remain |
-| G7 Preview | IN PROGRESS | Cloudflare branch configured; newest preventive/GUI rendered routes need confirmation |
-| G8 Rollback | NOT TESTED | Procedure pending |
-| G9 Production | FAIL | Intentional block until all hard gates pass |
+| G0 Baseline | PASS for source/build; rendered edge baseline OPEN | Source inventory, route registry, build/QA and deployment controls are established. |
+| G1 Research/Architecture | PASS | 39 approved routes frozen; 5 deferred non-build routes excluded; current procedure clusters evidence-controlled. |
+| G2 Content/Trust | PASS for source | All approved source routes and trust/methodology surfaces implemented; publication copy clean. |
+| G3 Design/Media/Accessibility | IN PROGRESS | Source-level responsive/accessibility controls are present; rendered multi-viewport/keyboard QA and final media/social image remain open. |
+| G4 SEO/Schema/Links | IN PROGRESS | Canonical/robots/sitemap/OG-X/JSON-LD automation passes CI; real production hostname and edge verification remain open; social image metadata not yet added. |
+| G5 Calculators/Data | PASS for automated logic | Registry-assigned tools have automated arithmetic/scope/YMYL safeguards; rendered interaction verification remains part of G3/G7. |
+| G6 Build/Performance/Security/Privacy | IN PROGRESS | Build/CI and source security controls pass; edge headers/network/performance measurements remain open. |
+| G7 Candidate/Preview | IN PROGRESS | Working branch is green, but Cloudflare branch preview has not been independently verified in this audit environment. |
+| G8 Rollback | NOT TESTED | Final candidate and rollback procedure not yet frozen/tested. |
+| G9 Production | FAIL | Intentional NO-GO until remaining hard gates pass. |
 
 ## Current release decision
 
-**NO-GO for production.** Automated source/build/calculator gates are healthy for the implemented routes, including the preventive batch and GUI-001. The next release-relevant work is rendered Cloudflare verification of DEN-002, DEN-006, DEN-011 and GUI-001; mobile/keyboard/accessibility checks; then continued evidence/content work, trust/methodology pages, media, final technical SEO, performance and rollback.
+**NO-GO for production.**
+
+What is already green: architecture, approved-route source implementation, evidence/scope controls, trust pages, calculator regression logic, internal-link checks, publication cleanliness, build, production SEO generation, truthful JSON-LD, and low-risk static security-header configuration.
+
+Remaining release blockers are concentrated rather than content-wide:
+1. actual Cloudflare branch-preview/edge verification;
+2. rendered multi-viewport + keyboard/accessibility checks;
+3. final media/social-image decision and social image metadata;
+4. real production hostname + `SITE_ORIGIN` and final canonical/robots/sitemap/schema verification;
+5. representative edge network/performance/security-header verification and final-domain CSP/HSTS decision where appropriate;
+6. final candidate SHA + rollback procedure;
+7. final hard-blocker audit before any merge to `main`.
