@@ -221,3 +221,20 @@
 - DEN-011 requires table/mobile render review.
 - GUI-001 requires rendered/manual accessibility review.
 - Production remains blocked pending trust/legal/methodology pages, remaining evidence clusters, media, final technical SEO, accessibility, performance and rollback documentation.
+
+### Consolidated prelaunch closeout — supersedes the earlier current-preview snapshot
+- Expanded the source implementation to all **39 approved registry routes**; the **5 deferred** candidates remain non-build routes.
+- Completed the approved trust/methodology route set and strengthened author/reviewer role boundaries.
+- Expanded automated QA to **212 tests**, with all 212 passing on the validated implementation line.
+- Cleared stale publication wording as a sitewide class rather than page-by-page; publication-marker checks now block unresolved bracketed editorial markers, `planned but not live`, and `— planned` without false-positive matching ordinary HTML `placeholder` attributes.
+- Corrected stale build assertions and standardized all cluster verifier marker checks.
+- Prelaunch QA run **#432** passed after the verifier cleanup.
+- Added centralized `scripts/prepare-deploy-seo.mjs` deployment logic. Preview artifacts remain noindex and crawl-blocked; production artifacts require an explicit HTTPS `SITE_ORIGIN` and generate self-canonicals, registry-driven `robots.txt`/`sitemap.xml`, OG/X text metadata and production index directives.
+- Added a CI production-artifact fixture using a reserved `.example` origin so production metadata/indexability generation is tested without inventing a real domain.
+- Hardened production preview-banner removal and normalized old `Dental cost preview` branding only in production artifacts. Prelaunch QA run **#435** passed.
+- Added truthful production-only JSON-LD: homepage `WebSite + WebPage`, ordinary routes `WebPage`, and the two people profiles `ProfilePage + Person`. Build guards explicitly block unsupported `MedicalWebPage`, `FAQPage`, `Organization`, `reviewedBy`, and accidental reviewer attribution on ordinary pages. Prelaunch QA run **#436** passed.
+- Added Cloudflare static `_headers` controls: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, restrictive unused-feature `Permissions-Policy`, plus `X-Robots-Tag: noindex, nofollow` on `workers.dev` hostnames. Prelaunch QA run **#437** passed at implementation SHA `1bac5c306e44274579791c83ea1b825d01db1e50`.
+- Source-level accessibility audit confirmed skip links, visible focus, native labelled controls, fieldsets/legends, error focus/`aria-invalid`, live results, responsive fallbacks, 16px mobile controls and reduced-motion support. Rendered keyboard/screen-reader/viewport verification remains open.
+- Static payload review found no current large-asset problem: shared CSS and calculator modules are small and no large media bundle is present. Aggressive cache changes were intentionally avoided because assets are not content-fingerprinted.
+- Updated `PROJECT-STATE.md`, `PRELAUNCH-AUDIT.md` and `docs/PRELAUNCH-STATUS.md` to reflect the actual closeout state.
+- Production remains **NO-GO** pending actual Cloudflare edge verification, rendered multi-viewport/keyboard QA, final media/social image, real production hostname/`SITE_ORIGIN`, final-domain SEO/security verification, rollback documentation and the final hard-blocker audit.
