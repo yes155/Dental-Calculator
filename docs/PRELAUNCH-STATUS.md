@@ -2,53 +2,48 @@
 
 Updated 2026-09-17.
 
-This branch is in **prelaunch closeout**. It is not approved for production or indexation.
+This branch is a prelaunch preview candidate only. It now implements the frozen approved route set for source/build validation while keeping production release blocked until remaining edge, rendered, media, domain and rollback gates pass.
 
-## Current branch
+## Current preview
 
-- Working branch: `chatgpt-work`
-- Production branch: `main` — untouched
-- PR: #1
+- Branch: `chatgpt-work`
+- PR: #1 (draft)
 - Cloudflare project: `dental-calculator`
-- Known branch preview: `https://chatgpt-work-dental-calculator.f-abdullah79.workers.dev`
-- Latest validated implementation head before documentation sync: `1bac5c306e44274579791c83ea1b825d01db1e50`
-- Latest validated implementation CI: Prelaunch QA run #437 — SUCCESS
+- Branch preview: `https://chatgpt-work-dental-calculator.f-abdullah79.workers.dev`
+- Current tracked head before final CI: `d45dcca1f1a0f3f72571314bbeda11f3e92e35e3`
+- Production branch: `main`
+- Production status: blocked / not approved
+- Production domain: not connected
 
-## Passed in source / CI
+## Passed in source/build QA before the latest author-photo commit
 
-- Frozen registry: 39 approved build routes + 5 deferred non-build candidates.
-- All 39 approved routes implemented in `src/`.
-- Trust and methodology route set implemented.
-- 212/212 automated tests pass on the validated implementation line.
-- Calculator arithmetic/scope/YMYL regression controls pass.
-- Sitewide approved-route and internal-link checks pass.
-- Reader-facing publication-marker audit is clean.
-- Preview build passes.
-- CI production-artifact fixture passes using a reserved `.example` origin.
-- Production build requires an explicit HTTPS `SITE_ORIGIN`; it will not invent a hostname.
-- Production deployment layer generates self-canonicals, robots, registry-driven sitemap, OG/X text metadata and truthful JSON-LD.
-- Deferred URLs are excluded from the sitemap.
-- Schema is limited to supported `WebSite`, `WebPage`, `ProfilePage` and `Person` facts; unsupported reviewer/medical/FAQ/organization claims are blocked.
-- Low-risk Cloudflare static security headers are configured in `src/_headers`.
-- `workers.dev` hostnames are configured with `X-Robots-Tag: noindex, nofollow` in addition to preview HTML/robots safeguards.
-- Current source payload is lightweight; no large static asset/media bundle currently justifies a performance rewrite.
-- Source-level accessibility controls include skip link, visible focus, native labelled controls, error focus, live results, responsive layouts and reduced-motion handling.
+- Frozen Page Registry is represented by 39 approved source routes; 5 deferred routes stay out of build output.
+- Quote-based calculator logic is regression-tested and does not diagnose, select treatment, infer coverage or create provider fees.
+- Preview pages keep `noindex,nofollow`.
+- Deployment SEO script keeps previews crawl-blocked and requires a real HTTPS `SITE_ORIGIN` for production canonicals, production robots and sitemap.
+- Production-artifact fixture validates canonical, sitemap, OG/X text metadata and JSON-LD generation without inventing the real production hostname.
+- Schema is deliberately limited to supported `WebSite`, `WebPage`, `ProfilePage` and `Person` entities.
+- Cloudflare static `_headers` include low-risk security/privacy headers and `X-Robots-Tag: noindex, nofollow` for `workers.dev` previews.
+- Regression checks block cross-project domains from approved dental pages.
+
+## Latest media/trust update
+
+- User supplied Farrukh Abdullah's author photo.
+- Added local asset: `/assets/people/farrukh-abdullah.webp`.
+- Wired the local photo into the homepage, About page and Farrukh author profile.
+- Kept the old cross-project-domain guard so Skinkpedia/MyAxolotl/BettaFish references cannot return.
+- No fake credential, fake review or fake clinical role was added.
 
 ## Open hard gates
 
-- Verify the actual Cloudflare branch preview at the edge: representative URLs, HTTP security/indexation headers, preview `robots.txt`, sitemap absence and calculator behavior.
-- Rendered differential checks at 320 / 390 / 768 / 1280 / 1920 px.
-- Manual keyboard and representative screen-reader checks.
-- Final media/social-image approval; `og:image` / X image metadata intentionally remains absent until an asset is approved.
-- Connect/finalize the real production hostname and set `SITE_ORIGIN`.
-- Verify final-domain canonical, robots, sitemap, JSON-LD, social metadata and indexability.
-- Verify representative browser network/privacy behavior and edge performance.
-- Decide/test HSTS and any CSP policy on the actual production candidate; these are intentionally not forced before browser/domain verification.
-- Freeze a final candidate SHA and document/test rollback.
-- Run the final hard-blocker audit.
+- Confirm latest GitHub Actions run for the author-photo head.
+- Confirm latest Cloudflare branch preview deploys the new local image without failed `farrukh-abdullah` requests.
+- Verify preview response headers in the browser: `X-Robots-Tag`, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`.
+- Rendered viewport QA at 320, 390, 768, 1280 and 1920 px.
+- Manual keyboard/screen-reader QA for representative calculators.
+- Final social/brand image and `og:image` / X image metadata.
+- Real production domain and production `SITE_ORIGIN`.
+- Final-domain SEO/security/performance verification.
+- Rollback documentation and final hard-blocker audit.
 
-## Release decision
-
-**NO-GO for production.**
-
-The remaining blockers are concentrated in rendered/edge/media/domain/release verification rather than unfinished route implementation or calculator logic. Production merge, production domain/indexation and live launch remain blocked until those gates pass.
+Production merge, production domain connection and indexation remain blocked.
