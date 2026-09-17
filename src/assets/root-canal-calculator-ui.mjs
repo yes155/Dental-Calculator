@@ -12,6 +12,7 @@ const resultTitle = document.querySelector("#result-title");
 const resultValues = document.querySelector("#result-values");
 const resultScope = document.querySelector("#result-scope");
 const stateLabels = { included: "Included", separately_quoted: "Separate charge", not_on_quote: "Not listed", unknown: "Not sure" };
+const resultRowLabels = { restoration: "Final crown or filling", buildupPost: "Build-up or post", imagingExam: "Exam or imaging", other: "Other charge" };
 
 const selected = name => form.querySelector(`input[name="${CSS.escape(name)}"]:checked`)?.value ?? "";
 const escapeHtml = value => String(value).replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"})[c]);
@@ -122,17 +123,17 @@ function renderResult(out, input) {
   result.classList.toggle("result-incomplete", out.status === "incomplete");
   resultTitle.textContent = out.status === "incomplete" ? "Some parts of your quote are still unclear" : "Your root-canal quote summary";
   const avg = `${out.averageApproximate ? "About " : ""}${formatRootCanalUsd(out.averagePerToothCents)}`;
-  const patient = out.patientCents === null ? "Not shown" : formatRootCanalUsd(out.patientCents);
-  resultValues.innerHTML = `<dl class="result-grid result-grid--guided"><div class="result-primary"><dt>Total from your quote</dt><dd>${formatRootCanalUsd(out.totalCents)}</dd></div><div><dt>Average per confirmed tooth</dt><dd>${avg}</dd></div><div><dt>Amount after insurance estimate</dt><dd>${patient}</dd></div></dl>`;
+  const patient = out.patientCents === null ? "Needs quote details" : formatRootCanalUsd(out.patientCents);
+  resultValues.innerHTML = `<dl class="result-grid result-grid--guided"><div class="result-primary"><dt>Total from your quote</dt><dd>${formatRootCanalUsd(out.totalCents)}</dd></div><div><dt>Average per tooth in this quote</dt><dd>${avg}</dd></div><div><dt>Amount after insurance estimate</dt><dd>${patient}</dd></div></dl>`;
   const category = document.querySelector("#tooth-category").selectedOptions[0].textContent;
   const retreatment = document.querySelector("#retreatment-flag").selectedOptions[0].textContent;
-  resultScope.innerHTML = `<div class="result-chips"><span>${out.toothCount} ${out.toothCount === 1 ? "tooth" : "teeth"} confirmed</span><span>${escapeHtml(category)}</span><span>${escapeHtml(retreatment)}</span></div><h3>What your quote says</h3><ul class="scope-summary">${out.componentRows.map(row => `<li><span>${escapeHtml(row.label)}</span><strong>${escapeHtml(stateLabels[row.state])}${row.amountCents !== null ? ` · ${formatRootCanalUsd(row.amountCents)}` : ""}</strong></li>`).join("")}</ul>`;
+  resultScope.innerHTML = `<div class="result-chips"><span>${out.toothCount} ${out.toothCount === 1 ? "tooth" : "teeth"} confirmed</span><span>${escapeHtml(category)}</span><span>${escapeHtml(retreatment)}</span></div><h3>What your quote says</h3><ul class="scope-summary">${out.componentRows.map(row => `<li><span>${escapeHtml(resultRowLabels[row.id] ?? row.label)}</span><strong>${escapeHtml(stateLabels[row.state])}${row.amountCents !== null ? ` · ${formatRootCanalUsd(row.amountCents)}` : ""}</strong></li>`).join("")}</ul>`;
   if (out.retreatmentFlag === "retreatment") resultScope.insertAdjacentHTML("beforeend", '<p class="notice-inline"><strong>Retreatment:</strong> this calculator totals only the amount you entered. It does not supply or compare against a national retreatment price.</p>');
-  if (out.status === "incomplete") resultScope.insertAdjacentHTML("beforeend", '<p class="notice-inline"><strong>Scope incomplete:</strong> at least one item is marked “Not sure.” The total includes only amounts you entered.</p>');
+  if (out.status === "incomplete") resultScope.insertAdjacentHTML("beforeend", '<p class="notice-inline"><strong>Some details are unclear:</strong> at least one item is marked “Not sure.” The total includes only amounts you entered.</p>');
   result.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
 }
 
-buildComponent("restoration", "Final crown, filling or other restoration", true);
+buildComponent("restoration", "Final crown or filling", true);
 buildComponent("buildupPost", "Build-up or post");
 buildComponent("imagingExam", "Exam or imaging");
 buildComponent("other", "Other quoted charge");
