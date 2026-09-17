@@ -159,7 +159,65 @@
 - Updated build QA to require concise H1s, calculator-heading anchors, revised H2 order and new reference wording.
 - Higher-placement/focus/result revision through `60b432e8f2b93dca7c7506275e63f2d9491ca33c` passed GitHub Actions `npm run qa`.
 
+### Preventive / diagnostic evidence reuse
+- Reopened existing completed preventive evidence instead of launching a duplicate research batch.
+- Promoted `evidence/preventive/PREVENTIVE_CLUSTER_DIRECT_VERIFIED_EVIDENCE_v1.md` and existing source-register rows as the controlling evidence for the implemented preventive pages.
+- Preserved source boundaries: national/broad consumer references remain separate from Orlando local examples; the CareCredit `$203` exam/cleaning/X-ray observation is not a cleaning-only price.
+
+### DEN-011 dental X-ray cost
+- Implemented `/dental-x-ray-cost/` as a no-calculator type-comparison guide.
+- Preserved seven separate CareCredit/Synchrony price rows for bitewing, periapical, full-mouth series, occlusal, panoramic, cephalometric and CBCT imaging.
+- Added a regression guard preventing the bitewing `$52–$120` range from being generalized to all dental X-rays.
+- Kept imaging need/frequency as a dentist-determined clinical decision rather than a cost-calculator rule.
+- Updated `briefs/DEN-011.md` to `EVIDENCE_CONTROLLED + IMPLEMENTED_PREVIEW + AUTOMATED_QA_PASS`.
+
+### DEN-002 / CALC-002 dental cleaning
+- Implemented `/dental-cleaning-cost/` + CALC-002.
+- Primary published reference: Delta Dental `$85–$160` for a standard cleaning without dental benefits.
+- Kept Cigna `about $104` as older corroborating context and Humana `$80–$109` as an Orlando, Florida local example.
+- Explicitly prevented the CareCredit `$203` broader exam/cleaning/X-ray bundle from being relabeled as a cleaning-only fee.
+- Added `src/assets/cleaning-calculator-core.mjs`, `cleaning-calculator-ui.mjs`, `cleaning-calculator.css` and `tests/cleaning-calculator.test.mjs`.
+- CALC-002 organizes a written quote only: one-total or separate-charge mode, exam/X-ray/fluoride/other inclusion states, and optional same-quote insurer estimate.
+- Published price references never initialize or alter calculator arithmetic.
+- Positioned CALC-002 immediately after the answer-first price section.
+- Updated `briefs/DEN-002.md` to `EVIDENCE_CONTROLLED + CALCULATOR_SPEC_FROZEN + IMPLEMENTED_PREVIEW + AUTOMATED_QA_PASS`.
+
+### DEN-006 / CALC-006 deep cleaning
+- Implemented `/deep-teeth-cleaning-cost/` + CALC-006.
+- Primary published reference: Delta Dental `$180–$295` without dental benefits for one quadrant.
+- Humana `$235–$303` remains an Orlando, Florida local comparison only.
+- Corrected the returned external draft rather than accepting unsupported statements about adjunct billing or mandatory post-SRP care pathways.
+- Added `src/assets/deep-cleaning-calculator-core.mjs`, `deep-cleaning-calculator-ui.mjs` and `tests/deep-cleaning-calculator.test.mjs`.
+- Quadrant count must be explicitly selected and confirmed from the written quote; the calculator never infers treatment extent.
+- The tool can compute an average per quoted quadrant from user-entered quote amounts, but never multiplies the published reference into a default full-mouth total.
+- Separate anesthesia/other charges can affect the entered total without contaminating the SRP base average.
+- Added build guards against default quadrant metadata and synthetic four-quadrant reference ranges.
+- Updated `briefs/DEN-006.md` to `EVIDENCE_CONTROLLED + CALCULATOR_SPEC_FROZEN + IMPLEMENTED_PREVIEW + AUTOMATED_QA_PASS`.
+
+### GUI-001 dental insurance and out-of-pocket costs
+- Migrated the previously corrected/audited `GUI-001_dental-insurance-out-of-pocket-costs_v2.md` source into the repo and implemented `/dental-insurance-out-of-pocket-costs/`.
+- Added `briefs/GUI-001.md` with the frozen eight-H2 vector and no-calculator boundary.
+- Preserved 2026 Delta Dental FEDVIP examples as named-plan examples only; they are not generalized to all dental plans.
+- Preserved the worked example as explicitly invented/hypothetical arithmetic rather than procedure pricing or a calculator default.
+- Added build gates rejecting a calculator or generic procedure-price benchmark on GUI-001.
+- This implementation closes the shared insurance-guide route used by DEN-002 and DEN-006 instead of leaving those links pointed at a missing planned page.
+
+### Preventive / insurance build and QA controls
+- Extended `scripts/build.mjs` to require DEN-002, DEN-006, DEN-011 and GUI-001 plus their relevant calculator assets.
+- Added frozen heading-order checks, `noindex,nofollow` checks, calculator-placement checks and source-scope regression tokens.
+- CALC-002 and CALC-006 regression suites joined the existing calculator test suite.
+- Implementation head `b9c683dc69b3565ce8f30e9aa41e5ec76427b954` passed the actual `npm run qa` step.
+- Control-file head `3bde39d45bab0889e206abd55eefbc7341ed3ace` completed GitHub Actions `Prelaunch QA` successfully.
+
+### Cloudflare preventive-batch preview
+- Cloudflare bot reported a successful `chatgpt-work` deployment for the preventive implementation tree.
+- Branch preview remains `https://chatgpt-work-dental-calculator.f-abdullah79.workers.dev`.
+- Deployment success verifies the build/deploy path, but rendered visual/mobile/keyboard QA remains a separate open gate.
+
 ### Current preview status
+- Nine preview routes are implemented; six calculators have frozen/tested arithmetic.
 - CALC-001 representative UX is user-approved.
-- CALC-003/CALC-003-A04 first guided renders were reviewed; corrected renders now require one final visual confirmation.
-- Production remains blocked pending corrected arch render confirmation, multi-viewport/accessibility QA, trust/legal/methodology pages, remaining evidence clusters, media, technical SEO, performance and rollback documentation.
+- DEN-002/CALC-002 and DEN-006/CALC-006 require rendered multi-viewport and keyboard review.
+- DEN-011 requires table/mobile render review.
+- GUI-001 requires rendered/manual accessibility review.
+- Production remains blocked pending trust/legal/methodology pages, remaining evidence clusters, media, final technical SEO, accessibility, performance and rollback documentation.
