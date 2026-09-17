@@ -42,7 +42,7 @@ for (const path of [...waveARoutes, ...requiredAssets]) {
   await access(resolve(output, path));
 }
 
-const forbiddenReaderMarkers = /\[SOURCE NEEDED BEFORE PUBLICATION\]|TODO|PLACEHOLDER|EDITOR NOTE/i;
+const forbiddenReaderMarkers = /\[SOURCE NEEDED BEFORE PUBLICATION\]|\[EDITOR NOTE[^\]]*\]|\[TODO[^\]]*\]|\[PLACEHOLDER[^\]]*\]|planned but not live|— planned/i;
 
 for (const path of waveARoutes) {
   const html = await readFile(resolve(output, path), "utf8");
