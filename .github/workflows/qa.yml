@@ -21,4 +21,8 @@ jobs:
           cache: npm
       - run: npm install --ignore-scripts
       - run: npm run qa
-
+      - name: Verify production SEO artifact build
+        env:
+          SITE_MODE: production
+          SITE_ORIGIN: https://dental-calculator.example
+        run: npm run build
