@@ -17,6 +17,7 @@ const required = [
   "all-on-4-dental-implants-cost/index.html",
   "dental-x-ray-cost/index.html",
   "dental-cleaning-cost/index.html",
+  "deep-teeth-cleaning-cost/index.html",
   "assets/site.css",
   "assets/calc001-plain.css",
   "assets/arch-calculators-guided.css",
@@ -30,6 +31,8 @@ const required = [
   "assets/arch-calculators-guided-ui.mjs",
   "assets/cleaning-calculator-core.mjs",
   "assets/cleaning-calculator-ui.mjs",
+  "assets/deep-cleaning-calculator-core.mjs",
+  "assets/deep-cleaning-calculator-ui.mjs",
 ];
 
 for (const path of required) await access(resolve(output, path));
@@ -69,9 +72,14 @@ const pageChecks = [
     tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Dental cleaning cost</h1>','data-calculator-id="CALC-002"','data-calculator="calc002"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/cleaning-calculator-ui.mjs','/assets/cleaning-calculator.css','$85–$160','without dental benefits','$104','$80–$109','Orlando, Florida','$203','broader bundle'],
     headings: ["How much does a dental cleaning cost?","Dental cleaning cost calculator","What does a standard dental cleaning price include?","Are the exam and X-rays included in a cleaning quote?","What can change a dental cleaning quote?","How insurance can change what you pay","Routine cleaning, deep cleaning and periodontal maintenance are different","Related dental cost guides"],
   },
+  {
+    path: "deep-teeth-cleaning-cost/index.html",
+    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Deep teeth cleaning cost by quadrant</h1>','data-calculator-id="CALC-006"','data-calculator="calc006"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/deep-cleaning-calculator-ui.mjs','$180–$295','per quadrant','$235–$303','Orlando, Florida','not a default full-mouth total','Published reference — not a calculator default'],
+    headings: ["How much does deep teeth cleaning cost?","Deep cleaning cost calculator","What does “per quadrant” mean in a deep cleaning quote?","What can be included or charged separately?","What changes a scaling and root planing quote?","Routine cleaning, deep cleaning, debridement and maintenance are not the same","How insurance can affect the patient amount","Related dental cost guides"],
+  },
 ];
 
-const calculatorHeadings = new Set(["Dental implant cost calculator","Full-mouth dental implant cost calculator","All-on-4 cost calculator","Dental cleaning cost calculator"]);
+const calculatorHeadings = new Set(["Dental implant cost calculator","Full-mouth dental implant cost calculator","All-on-4 cost calculator","Dental cleaning cost calculator","Deep cleaning cost calculator"]);
 
 for (const check of pageChecks) {
   const html = await readFile(resolve(output, check.path), "utf8");
@@ -108,6 +116,15 @@ for (const check of pageChecks) {
     const nextDetailIndex = html.indexOf('<h2>What does a standard dental cleaning price include?</h2>');
     if (!(priceIndex !== -1 && calculatorIndex > priceIndex && calculatorIndex < nextDetailIndex)) throw new Error("DEN-002: calculator must immediately follow the answer-first cleaning price section");
     if (html.includes("$203 standard cleaning")) throw new Error("DEN-002: CareCredit $203 bundle must not be relabeled as cleaning-only");
+  }
+
+  if (check.path === "deep-teeth-cleaning-cost/index.html") {
+    const priceIndex = html.indexOf('<h2>How much does deep teeth cleaning cost?</h2>');
+    const calculatorIndex = html.indexOf('id="calculator-heading"');
+    const nextDetailIndex = html.indexOf('<h2>What does “per quadrant” mean in a deep cleaning quote?</h2>');
+    if (!(priceIndex !== -1 && calculatorIndex > priceIndex && calculatorIndex < nextDetailIndex)) throw new Error("DEN-006: calculator must immediately follow the answer-first per-quadrant price section");
+    if (html.includes("$720–$1,180") || html.includes("$940–$1,212")) throw new Error("DEN-006: published per-quadrant references must not be multiplied into a four-quadrant default");
+    if (html.includes("data-default-quadrants")) throw new Error("DEN-006: calculator must not infer or default the quadrant count");
   }
 }
 
