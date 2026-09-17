@@ -93,6 +93,78 @@ function normalizeOrigin(raw) {
   return url.origin;
 }
 
+function schemaForRoute(route, origin, canonical, title, description) {
+  const websiteId = `${origin}/#website`;
+  const webpageId = `${canonical}#webpage`;
+  const page = {
+    "@type": route === "/authors/farrukh-abdullah/" || route === "/reviewers/juliana-maia-teixeira/" ? "ProfilePage" : "WebPage",
+    "@id": webpageId,
+    url: canonical,
+    name: title,
+    description,
+    isPartOf: { "@id": websiteId },
+  };
+
+  const graph = [];
+  if (route === "/") {
+    graph.push({
+      "@type": "WebSite",
+      "@id": websiteId,
+      url: `${origin}/`,
+      name: "Dental Calculator",
+      description: "Evidence-led U.S. dental cost education and quote-based calculators.",
+    });
+  }
+
+  if (route === "/authors/farrukh-abdullah/") {
+    const personId = `${canonical}#person`;
+    page.mainEntity = { "@id": personId };
+    graph.push(page, {
+      "@type": "Person",
+      "@id": personId,
+      name: "Farrukh Abdullah",
+      jobTitle: "Researcher & Writer",
+      description: "Editorial researcher and writer for Dental Calculator.",
+      url: canonical,
+      sameAs: ["https://www.linkedin.com/in/farrukh-abdullah-5a218424/"],
+    });
+  } else if (route === "/reviewers/juliana-maia-teixeira/") {
+    const personId = `${canonical}#person`;
+    page.mainEntity = { "@id": personId };
+    graph.push(page, {
+      "@type": "Person",
+      "@id": personId,
+      name: "Juliana Maia Teixeira",
+      jobTitle: "Clinical & Scientific Reviewer",
+      description: "Biomedical scientist, scientific editor and medical/science writer with dental-research expertise.",
+      url: canonical,
+      sameAs: [
+        "https://www.kolabtree.com/find-an-expert/juliana-t.",
+        "https://www.linkedin.com/in/juliana-maia-teixeira",
+      ],
+    });
+  } else {
+    graph.push(page);
+  }
+
+  return { "@context": "https://schema.org", "@graph": graph };
+}
+
+function jsonLdTag(schema) {
+  const json = JSON.stringify(schema).replaceAll("<", "\\u003c");
+  return `  <script type="application/ld+json">${json}</script>`;
+}
+
+function parseGeneratedSchema(html, route) {
+  const matches = [...html.matchAll(/<script\b[^>]*\btype=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
+  if (matches.length !== 1) throw new Error(`${route}: production artifact must contain exactly one JSON-LD block`);
+  try {
+    return JSON.parse(matches[0][1]);
+  } catch {
+    throw new Error(`${route}: generated JSON-LD is not valid JSON`);
+  }
+}
+
 const registry = await readFile(registryPath, "utf8");
 const approvedRoutes = parseRegistry(registry);
 
@@ -103,6 +175,7 @@ if (approvedRoutes.length !== 39) {
 const origin = production ? normalizeOrigin((process.env.SITE_ORIGIN || "").trim()) : null;
 const canonicalTagPattern = /<link\b[^>]*\brel=["']canonical["'][^>]*>/i;
 const socialTagPattern = /<meta\b[^>]*(?:property|name)=["'](?:og:|twitter:)[^"']*["'][^>]*>/i;
+const jsonLdPattern = /<script\b[^>]*\btype=["']application\/ld\+json["'][^>]*>/i;
 const previewRobotsPattern = /<meta\b[^>]*\bname=["']robots["'][^>]*\bcontent=["']noindex,nofollow["'][^>]*>/i;
 const robotsTagPattern = /<meta\b[^>]*\bname=["']robots["'][^>]*>/i;
 const previewBannerPattern = /\n?\s*<([a-z][a-z0-9]*)\b[^>]*\bclass=["'][^"']*\bpreview-banner\b[^"']*["'][^>]*>[\s\S]*?<\/\1>\s*\n?/i;
@@ -117,8 +190,8 @@ for (const route of approvedRoutes) {
   const title = production ? sourceTitle.replace(oldPreviewBrandPattern, "Dental Calculator") : sourceTitle;
   const { tag: descriptionTag, content: description } = extractDescriptionTag(html, route);
 
-  if (canonicalTagPattern.test(html) || socialTagPattern.test(html)) {
-    throw new Error(`${route}: canonical/OG/X metadata is centrally owned by prepare-deploy-seo.mjs`);
+  if (canonicalTagPattern.test(html) || socialTagPattern.test(html) || jsonLdPattern.test(html)) {
+    throw new Error(`${route}: canonical/OG/X/JSON-LD metadata is centrally owned by prepare-deploy-seo.mjs`);
   }
 
   if (!previewRobotsPattern.test(html)) {
@@ -128,6 +201,7 @@ for (const route of approvedRoutes) {
   if (!production) continue;
 
   const canonical = canonicalUrl(origin, route);
+  const schema = schemaForRoute(route, origin, canonical, title, description);
   const metadata = [
     `  <link rel="canonical" href="${escapeAttr(canonical)}">`,
     `  <meta property="og:type" content="website">`,
@@ -139,6 +213,7 @@ for (const route of approvedRoutes) {
     `  <meta name="twitter:card" content="summary">`,
     `  <meta name="twitter:title" content="${escapeAttr(title)}">`,
     `  <meta name="twitter:description" content="${escapeAttr(description)}">`,
+    jsonLdTag(schema),
   ].join("\n");
 
   html = html.replace(oldPreviewBrandPattern, "Dental Calculator");
@@ -152,6 +227,32 @@ for (const route of approvedRoutes) {
   if (!html.includes(`property="og:url" content="${escapeAttr(canonical)}"`)) throw new Error(`${route}: OG URL does not match canonical`);
   if (!html.includes(`property="og:title" content="${escapeAttr(title)}"`)) throw new Error(`${route}: OG title does not match normalized production title`);
   if (!html.includes('name="twitter:card" content="summary"')) throw new Error(`${route}: Twitter/X card metadata missing`);
+
+  const generatedSchema = parseGeneratedSchema(html, route);
+  const graph = generatedSchema?.["@graph"];
+  if (generatedSchema?.["@context"] !== "https://schema.org" || !Array.isArray(graph)) {
+    throw new Error(`${route}: generated JSON-LD must use schema.org and an @graph`);
+  }
+  const pageNode = graph.find((node) => node?.["@id"] === `${canonical}#webpage`);
+  const expectedPageType = route === "/authors/farrukh-abdullah/" || route === "/reviewers/juliana-maia-teixeira/" ? "ProfilePage" : "WebPage";
+  if (!pageNode || pageNode["@type"] !== expectedPageType || pageNode.url !== canonical || pageNode.isPartOf?.["@id"] !== `${origin}/#website`) {
+    throw new Error(`${route}: generated page schema does not match canonical/site identity`);
+  }
+  if (route === "/" && !graph.some((node) => node?.["@type"] === "WebSite" && node?.["@id"] === `${origin}/#website` && node?.url === `${origin}/`)) {
+    throw new Error("homepage: WebSite schema missing or inconsistent");
+  }
+  if (route === "/authors/farrukh-abdullah/" && !graph.some((node) => node?.["@type"] === "Person" && node?.name === "Farrukh Abdullah" && node?.jobTitle === "Researcher & Writer")) {
+    throw new Error("author profile: truthful Person schema missing");
+  }
+  if (route === "/reviewers/juliana-maia-teixeira/" && !graph.some((node) => node?.["@type"] === "Person" && node?.name === "Juliana Maia Teixeira" && node?.jobTitle === "Clinical & Scientific Reviewer")) {
+    throw new Error("reviewer profile: truthful Person schema missing");
+  }
+  if (route !== "/reviewers/juliana-maia-teixeira/" && JSON.stringify(generatedSchema).includes("Juliana Maia Teixeira")) {
+    throw new Error(`${route}: site-level reviewer must not become page-level schema credit`);
+  }
+  if (/MedicalWebPage|reviewedBy|Organization|FAQPage/.test(JSON.stringify(generatedSchema))) {
+    throw new Error(`${route}: unsupported or overclaimed schema type/property detected`);
+  }
 
   await writeFile(path, html, "utf8");
 }
@@ -180,5 +281,5 @@ if (!production) {
     throw new Error("Deferred routes must not appear in the production sitemap");
   }
 
-  console.log(`Deploy SEO prepared in production mode: ${approvedRoutes.length} canonical URLs + robots.txt + sitemap.xml for ${origin}.`);
+  console.log(`Deploy SEO prepared in production mode: ${approvedRoutes.length} canonical URLs + truthful JSON-LD + robots.txt + sitemap.xml for ${origin}.`);
 }
