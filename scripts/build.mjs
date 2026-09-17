@@ -65,7 +65,7 @@ const pageChecks = [
   },
   {
     path: "dental-inlay-cost/index.html",
-    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Dental inlay cost</h1>','$976 average','$755–$1,774','ceramic inlay or onlay','does not establish an inlay-only national average or range','There is no universal insurance percentage or copay for an inlay.'],
+    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Dental inlay cost</h1>','$976 average','$755–$1,774','ceramic inlay or onlay','does not provide a clean inlay-only national range','There is no universal insurance percentage or copay for an inlay.'],
     headings: ["How much does a dental inlay cost?","Why the current national price data combines inlays and onlays","What should an inlay quote identify?","Are laboratory and visit costs included in an inlay price?","What can change an inlay quote?","How insurance can affect what you pay","Inlay cost versus onlay and filling cost","Related dental cost guides"],
   },
   {
