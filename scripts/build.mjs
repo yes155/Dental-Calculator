@@ -16,6 +16,8 @@ const required = [
   "dental-bone-graft-cost/index.html",
   "dental-inlay-cost/index.html",
   "dental-onlay-cost/index.html",
+  "dentist-visit-cost/index.html",
+  "affordable-dental-care/index.html",
   "all-on-4-dental-implants-cost/index.html",
   "dental-x-ray-cost/index.html",
   "dental-cleaning-cost/index.html",
@@ -70,6 +72,16 @@ const pageChecks = [
     path: "dental-onlay-cost/index.html",
     tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Dental onlay cost</h1>','$976 average','$755–$1,774','ceramic inlay or onlay','does not provide a clean onlay-only national range','There is no universal insurance percentage or copay for an onlay.','onlay repair'],
     headings: ["How much does a dental onlay cost?","Why the current national price data combines onlays and inlays","What makes an onlay a distinct restoration?","What should an onlay quote identify?","Are laboratory and related service costs included in an onlay price?","What can change an onlay quote?","Onlay repair is not the same price category as a new onlay","How insurance can affect what you pay","Onlay cost versus inlay, filling and crown cost","Related dental cost guides"],
+  },
+  {
+    path: "dentist-visit-cost/index.html",
+    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Dentist visit cost</h1>','$203 average','$50–$350','includes a full cleaning and X-rays','There is no universal insurance percentage, copay or number of covered exams'],
+    headings: ["How much does a dentist visit cost?","Why the current national price is a bundled visit, not an exam-only fee","What kind of dental visit is on the quote?","What should a dentist-visit quote identify?","Are cleaning and X-rays included in a dental checkup price?","What can change a dentist-visit quote?","How insurance can affect what you pay for a dental visit","Dentist visit cost versus cleaning and X-ray cost","Related dental cost guides"],
+  },
+  {
+    path: "affordable-dental-care/index.html",
+    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Affordable dental care</h1>','Availability, fees, eligibility and services vary','sliding-fee eligibility is based on income and family size','Adult Medicaid dental benefits are different: states decide','does not maintain a local clinic directory'],
+    headings: ["Where can I look for lower-cost dental care?","Dental and dental-hygiene school clinics","Federally funded health centers and sliding fees","Medicaid and CHIP dental coverage","State, local and community resources","What to verify before booking lower-cost care","Compare the written quote, not just the advertised discount","What this guide does not promise","Related dental cost guides"],
   },
   {
     path: "all-on-4-dental-implants-cost/index.html",
@@ -135,6 +147,17 @@ for (const check of pageChecks) {
     if (html.includes("$350–$1,500")) throw new Error("DEN-013: older secondary onlay-only range must not appear in first-version reader copy");
     if (html.includes("$755–$1,774 onlay-only") || html.includes("onlay-only range of $755–$1,774")) throw new Error("DEN-013: combined ceramic inlay/onlay range must not be relabeled as onlay-only");
     if (html.includes("$141") || html.includes("$315") || html.includes("$342") || html.includes("$362")) throw new Error("DEN-013: named-plan copays must not be published as onlay price benchmarks");
+  }
+
+  if (check.path === "dentist-visit-cost/index.html") {
+    if (html.includes("data-calculator-id=") || html.includes('id="calculator"')) throw new Error("DEN-025: no calculator is assigned in the frozen registry");
+    if (html.includes("$203 exam-only") || html.includes("exam-only price of $203") || html.includes("exam-only range of $50–$350")) throw new Error("DEN-025: bundled exam/cleaning/X-ray reference must not be relabeled as exam-only");
+  }
+
+  if (check.path === "affordable-dental-care/index.html") {
+    if (html.includes("data-calculator-id=") || html.includes('id="calculator"')) throw new Error("GUI-002: no calculator is assigned in the frozen registry");
+    if (/\$\d/.test(html)) throw new Error("GUI-002: access guide must not introduce procedure-price dollar benchmarks");
+    if (html.includes("guaranteed free dental care") || html.includes("you qualify")) throw new Error("GUI-002: must not guarantee assistance or determine eligibility");
   }
 
   if (check.path === "dental-x-ray-cost/index.html") {
