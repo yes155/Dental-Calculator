@@ -18,6 +18,7 @@ const required = [
   "dental-x-ray-cost/index.html",
   "dental-cleaning-cost/index.html",
   "deep-teeth-cleaning-cost/index.html",
+  "dental-insurance-out-of-pocket-costs/index.html",
   "assets/site.css",
   "assets/calc001-plain.css",
   "assets/arch-calculators-guided.css",
@@ -77,6 +78,11 @@ const pageChecks = [
     tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Deep teeth cleaning cost by quadrant</h1>','data-calculator-id="CALC-006"','data-calculator="calc006"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/deep-cleaning-calculator-ui.mjs','$180–$295','per quadrant','$235–$303','Orlando, Florida','not a default full-mouth total','Published reference — not a calculator default'],
     headings: ["How much does deep teeth cleaning cost?","Deep cleaning cost calculator","What does “per quadrant” mean in a deep cleaning quote?","What can be included or charged separately?","What changes a scaling and root planing quote?","Routine cleaning, deep cleaning, debridement and maintenance are not the same","How insurance can affect the patient amount","Related dental cost guides"],
   },
+  {
+    path: "dental-insurance-out-of-pocket-costs/index.html",
+    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Dental insurance and out-of-pocket costs</h1>','A coverage percentage alone does not tell you what you will pay.','2026 Delta Dental Federal Employees Dental Program (FEDVIP)','Every dollar amount and percentage below is invented for education.','This is an unnamed service under an imaginary plan','$1,000','$800','$50','20%','Patient responsibility','pretreatment estimate is nonbinding','Explanation of Benefits (EOB)'],
+    headings: ["What determines your dental out-of-pocket cost?","Billed fees, allowed amounts and network status","Deductibles, coinsurance and copays","Annual maximums, exclusions and waiting periods","A worked example with hypothetical numbers","What changes for orthodontic benefits?","What to check before treatment and after a claim","Find the cost guide for your procedure"],
+  },
 ];
 
 const calculatorHeadings = new Set(["Dental implant cost calculator","Full-mouth dental implant cost calculator","All-on-4 cost calculator","Dental cleaning cost calculator","Deep cleaning cost calculator"]);
@@ -125,6 +131,12 @@ for (const check of pageChecks) {
     if (!(priceIndex !== -1 && calculatorIndex > priceIndex && calculatorIndex < nextDetailIndex)) throw new Error("DEN-006: calculator must immediately follow the answer-first per-quadrant price section");
     if (html.includes("$720–$1,180") || html.includes("$940–$1,212")) throw new Error("DEN-006: published per-quadrant references must not be multiplied into a four-quadrant default");
     if (html.includes("data-default-quadrants")) throw new Error("DEN-006: calculator must not infer or default the quadrant count");
+  }
+
+  if (check.path === "dental-insurance-out-of-pocket-costs/index.html") {
+    if (html.includes("data-calculator-id=") || html.includes('id="calculator"')) throw new Error("GUI-001: no calculator is assigned in the frozen registry");
+    if (!html.includes("hypothetical") && !html.includes("imaginary plan")) throw new Error("GUI-001: worked numbers must remain explicitly hypothetical");
+    if (html.includes("average dental cost") || html.includes("national dental cost range")) throw new Error("GUI-001: cross-procedure insurance guide must not introduce a generic procedure-price benchmark");
   }
 }
 
