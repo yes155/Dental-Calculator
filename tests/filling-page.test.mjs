@@ -34,6 +34,14 @@ test("DEN-010 keeps Orlando examples local", () => {
   for (const token of ["$199", "$217", "$274", "$333", "$229"]) assert.ok(html.includes(token));
 });
 
+test("DEN-010 does not leak internal IDs into reader copy", () => {
+  for (const token of ["Use CALC-010", "CALC-010 records", "CALC-010 does not", "DEN-010 owns"]) {
+    assert.ok(!html.includes(token), `reader-facing internal ID leaked: ${token}`);
+  }
+  assert.match(html, /Use this calculator with a written estimate/);
+  assert.match(html, /This page covers filling\/restoration pricing/);
+});
+
 test("DEN-010 has one H1 and controlled H2 order", () => {
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   const headings = [
