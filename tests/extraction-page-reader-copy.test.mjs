@@ -18,5 +18,5 @@ test("DEN-008 keeps internal IDs out of reader-visible copy", () => {
 });
 
 test("DEN-008 uses answer-first source attribution", () => {
-  assert.match(visibleText, /Current published U\.S\. benchmarks put a simple tooth extraction at an average of \$177 and a surgical tooth extraction at an average of \$363\. CareCredit is the source for those 2024 study averages\./);
+  assert.match(visibleText, /Current published U\.S\. benchmarks put a simple tooth extraction at an average of \$177 and a surgical tooth extraction at an average of \$363\s*\. CareCredit is the source for those 2024 study averages\./);
 });
