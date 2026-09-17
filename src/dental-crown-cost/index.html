@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Dental Crown Cost by Material and Quote Components</title>
+  <meta name="description" content="Compare dental crown prices by material and organize a written crown quote without confusing new crowns with repair, recementing or implant-supported crowns.">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/restorative-calculator.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="preview-banner">Prelaunch preview — noindex. Cost education only; not a dental quote or treatment recommendation.</div>
+<header class="site-header"><p>Dental Calculator</p></header>
+<main id="main" class="article-shell">
+<header class="article-header">
+  <p class="eyebrow">Dental crown costs</p>
+  <h1>Dental crown cost by material</h1>
+  <p class="intro">CareCredit reports separate U.S. prices by crown type, including <strong>$1,399 average / $915–$3,254 for porcelain</strong>, <strong>$1,114 / $770–$2,454 for porcelain fused to metal</strong>, and <strong>$1,211 / $821–$2,861 for metallic crowns</strong>. These categories are not interchangeable, and a written quote may list a build-up or other charge separately.</p>
+  <p class="byline">Research and written by Farrukh Abdullah</p>
+  <p class="updated">Evidence checked September 17, 2026</p>
+</header>
+
+<article class="article-body">
+  <h2>How much does a dental crown cost?</h2>
+  <p>Published prices vary substantially by crown material. CareCredit reports a <strong>$1,399 average and $915–$3,254 range for porcelain crowns</strong>, a <strong>$1,114 average and $770–$2,454 range for porcelain-fused-to-metal crowns</strong>, a <strong>$1,211 average and $821–$2,861 range for metallic crowns</strong>, and a <strong>$697 average and $488–$1,593 range for resin/temporary crowns</strong>.</p>
+  <p>The headline comparison of $697–$1,399 reflects average prices across types; it is not the full observed crown-price range. Keep each material label attached to its own average and range.</p>
+
+  <h2 id="calculator-heading">Dental crown cost calculator</h2>
+  <p>Use CALC-022 with a written crown estimate. Enter the quoted crown count and amount, record the material/type if stated, and add build-up or other charges only when the written quote lists them separately.</p>
+</article>
+
+<section class="calculator-embed calculator-embed--guided restorative-guided" aria-labelledby="calculator-heading" data-calculator-id="CALC-022">
+  <div class="calculator-card calculator-card--guided">
+    <ol class="calc-progress" aria-label="Calculator progress">
+      <li data-step-indicator="1" class="is-current" aria-current="step"><span>1</span><strong>Your quote</strong></li>
+      <li data-step-indicator="2"><span>2</span><strong>What's included</strong></li>
+      <li data-step-indicator="3"><span>3</span><strong>Insurance &amp; result</strong></li>
+    </ol>
+    <div id="error-summary" class="notice notice-error" tabindex="-1" hidden></div>
+    <form id="calculator" data-calculator="calc022" novalidate>
+      <section class="calc-step" data-step="1" aria-labelledby="calc-step-1-heading">
+        <div class="step-heading"><p class="step-kicker">Step 1 of 3</p><h3 id="calc-step-1-heading" tabindex="-1">Enter what the crown quote says</h3><p>Copy the crown count and amounts from the written estimate. Material is descriptive only and never changes the calculator math.</p></div>
+        <fieldset class="guided-group" data-error-field="quoteMode"><legend>How is the crown quote written?</legend><div class="choice-grid choice-grid--cards">
+          <label class="choice choice-card"><input data-field="quoteMode" type="radio" name="quoteMode" value="one_total"><span><strong>One total</strong><small>The estimate shows one crown total.</small></span></label>
+          <label class="choice choice-card"><input data-field="quoteMode" type="radio" name="quoteMode" value="itemized_crowns"><span><strong>Separate crown amounts</strong><small>Each crown is listed separately.</small></span></label>
+        </div></fieldset>
+        <div class="descriptor-grid">
+          <div><label for="crown-count">How many crowns does this quote cover?</label><input id="crown-count" data-field="crownCount" type="number" min="1" max="32" step="1" value="1"></div>
+          <div><label for="crown-material">Crown material/type on the quote</label><select id="crown-material"><option value="not_stated">Not stated</option><option value="porcelain">Porcelain / ceramic</option><option value="pfm">Porcelain fused to metal</option><option value="metallic">Metallic / full metal</option><option value="resin_temporary">Resin / temporary</option><option value="other">Other stated type</option></select></div>
+        </div>
+        <label class="check" for="crown-count-confirmed"><input id="crown-count-confirmed" data-field="crownCountConfirmed" type="checkbox"> The written quote clearly covers this number of crowns.</label>
+        <div id="one-total-fields" class="guided-subpanel" hidden><div class="field-money-compact"><label for="written-total">Crown total on your quote</label><div class="money"><span aria-hidden="true">$</span><input id="written-total" data-field="writtenTotal" inputmode="decimal" autocomplete="off" placeholder="0.00" disabled></div></div></div>
+        <div id="itemized-fields" class="guided-subpanel" hidden><p><strong>Enter each crown amount exactly as written.</strong></p><div id="crown-inputs" class="field-grid"></div></div>
+        <div class="step-actions step-actions--end"><button id="step-1-next" class="button-primary" type="button">Continue</button></div>
+      </section>
+
+      <section class="calc-step" data-step="2" aria-labelledby="calc-step-2-heading" hidden>
+        <div class="step-heading"><p class="step-kicker">Step 2 of 3</p><h3 id="calc-step-2-heading" tabindex="-1">What else does the quote include?</h3><p>Use the written estimate only. “Not listed” does not mean an item is unnecessary.</p></div>
+        <fieldset id="buildup-choice" class="component-choice"></fieldset>
+        <fieldset id="examImaging-choice" class="component-choice"></fieldset>
+        <fieldset id="other-choice" class="component-choice"></fieldset>
+        <div class="step-actions"><button id="step-2-back" class="button-secondary" type="button">Back</button><button id="step-2-next" class="button-primary" type="button">Continue to insurance</button></div>
+      </section>
+
+      <section class="calc-step" data-step="3" aria-labelledby="calc-step-3-heading" hidden>
+        <div class="step-heading"><p class="step-kicker">Step 3 of 3</p><h3 id="calc-step-3-heading" tabindex="-1">Add insurance info only if you have it</h3><p>The calculator does not guess a coverage percentage, deductible, annual maximum or allowed amount.</p></div>
+        <fieldset class="guided-group"><legend>Did your insurer give you an estimated payment for this same quote?</legend><div class="choice-grid choice-grid--insurance">
+          <label class="choice choice-card"><input data-field="insurance.mode" type="radio" name="insuranceMode" value="entered_estimate"><span><strong>Yes</strong><small>I have an estimated insurer payment.</small></span></label>
+          <label class="choice choice-card"><input data-field="insurance.mode" type="radio" name="insuranceMode" value="none"><span><strong>No insurance amount</strong><small>Do not subtract an insurer amount.</small></span></label>
+          <label class="choice choice-card"><input data-field="insurance.mode" type="radio" name="insuranceMode" value="unknown"><span><strong>Not yet</strong><small>I do not know what insurance may pay.</small></span></label>
+        </div></fieldset>
+        <div id="insurance-estimate-fields" class="guided-subpanel" hidden><div class="field-money-compact"><label for="insurance-amount">Estimated insurer payment</label><div class="money"><span aria-hidden="true">$</span><input id="insurance-amount" data-field="insurance.amount" inputmode="decimal" autocomplete="off" placeholder="0.00" disabled></div></div><label class="check" for="same-scope"><input id="same-scope" data-field="insurance.sameScopeConfirmed" type="checkbox" disabled> This insurer estimate covers the same written quote.</label></div>
+        <div class="step-actions"><button id="step-3-back" class="button-secondary" type="button">Back</button><button class="button-primary" type="submit">Show my quote summary</button><button class="button-link reset-link" type="reset">Start over</button></div>
+      </section>
+    </form>
+
+    <div id="result" class="result result--guided" aria-live="polite" hidden><h2 id="result-title"></h2><div id="result-values"></div><div id="result-scope"></div><p class="result-disclaimer"><strong>About this result:</strong> we only add the numbers you entered from your written quote. This is not a diagnosis, dentist's quote, treatment recommendation or insurance guarantee.</p></div>
+
+    <aside class="reference-strip" aria-label="Published dental crown price reference"><div><span class="reference-label">Published references — not calculator defaults</span><strong>Porcelain $1,399 avg · PFM $1,114 avg · Metallic $1,211 avg</strong></div><p>Material-specific CareCredit ranges remain separate and do not initialize your calculator.</p></aside>
+    <p class="privacy-note privacy-note--compact">The amounts you enter stay on this page while you use the calculator. They are not sent elsewhere or added to the page URL.</p>
+  </div>
+</section>
+
+<article class="article-body">
+  <h2>Dental crown prices by material</h2>
+  <div class="table-wrap"><table><thead><tr><th>Crown type</th><th>Average</th><th>Reported range</th></tr></thead><tbody><tr><td>Porcelain</td><td>$1,399</td><td>$915–$3,254</td></tr><tr><td>Porcelain fused to metal</td><td>$1,114</td><td>$770–$2,454</td></tr><tr><td>Metallic</td><td>$1,211</td><td>$821–$2,861</td></tr><tr><td>Resin / temporary</td><td>$697</td><td>$488–$1,593</td></tr></tbody></table></div>
+  <p>Humana also reports material-specific examples for Orlando, Florida. Those local examples support keeping exact material labels visible, but they are not U.S.-wide benchmarks.</p>
+
+  <h2>What may be separate in a crown quote?</h2>
+  <p>A build-up or foundation, exam, imaging or another service may appear as a separate line. Current verified evidence does not support a universal build-up price, so CALC-022 accepts only the amount written on the user's estimate.</p>
+
+  <h2>What changes a dental crown quote?</h2>
+  <p>The current evidence supports keeping crown material/type and quote scope visible. Provider/location and separately charged services may also affect the total, but the site does not apply a hidden adjustment formula for those factors.</p>
+
+  <h2>Crown repair and recementing are different price categories</h2>
+  <p>CareCredit's general procedure list reports <strong>$765 average for broken crown repair</strong> and <strong>$126 average for recementing a dislodged crown</strong>. Those are separate services and must not be relabeled as the cost of a new or replacement crown.</p>
+
+  <h2>How insurance can affect the patient amount</h2>
+  <p>Coverage depends on the exact plan and service. Deductibles, allowed amounts, coinsurance, annual maximums, waiting periods, exclusions and network rules may affect what a patient owes. CALC-022 subtracts only a same-quote insurer estimate entered by the user.</p>
+
+  <h2>Crown cost after a root canal or dental implant</h2>
+  <p>Standalone crown pricing belongs on this page. If a crown is separately quoted after root-canal treatment, the root-canal treatment fee belongs on the <a href="/root-canal-cost/">root canal cost</a> page. Implant-supported crown pricing belongs within the <a href="/dental-implant-cost-calculator/">dental implant cost</a> quote structure.</p>
+
+  <h2>Related dental cost guides</h2>
+  <ul class="related-links"><li><a href="/root-canal-cost/">Root canal cost</a></li><li><a href="/dental-filling-cost/">Dental filling cost</a></li><li><a href="/dental-implant-cost-calculator/">Dental implant cost calculator</a></li><li><a href="/dental-insurance-out-of-pocket-costs/">Dental insurance and out-of-pocket costs</a></li></ul>
+  <p class="evidence-date"><strong>Sources:</strong> CareCredit/Synchrony crown cost research; Humana Orlando crown examples; ADA MouthHealthy crown guidance. Cost education only.</p>
+</article>
+</main>
+<footer class="site-footer"><p>Dental Calculator</p><p>Cost education only; not dental or insurance advice.</p></footer>
+<script type="module" src="/assets/crown-calculator-ui.mjs"></script>
+</body>
+</html>
