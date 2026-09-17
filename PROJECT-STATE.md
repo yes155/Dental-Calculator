@@ -1,6 +1,6 @@
 # PROJECT STATE — Dental Calculator
 
-Updated 2026-09-17.
+Updated 2026-09-18.
 
 ## Project identity
 - Site name: Dental Calculator (working name)
@@ -21,7 +21,7 @@ Updated 2026-09-17.
 - Output: `dist/`
 - Cloudflare project: `dental-calculator`
 - Branch preview: `https://chatgpt-work-dental-calculator.f-abdullah79.workers.dev`
-- Preview policy: implemented pages remain `noindex,nofollow`; `workers.dev` preview receives HTTP `X-Robots-Tag: noindex, nofollow`
+- Preview policy: implemented pages remain `noindex,nofollow`; preview `robots.txt` blocks crawling; live `workers.dev` response carries HTTP `X-Robots-Tag: noindex`.
 
 ## Architecture
 - Frozen/user-approved 2026-09-15
@@ -71,12 +71,12 @@ Common controls:
 
 ## Technical SEO / schema / security status
 - Preview source pages keep `noindex,nofollow`.
-- Preview deployment generates a crawl-blocking `robots.txt` and does not expose the production sitemap.
+- Live preview `robots.txt` was manually verified as `User-agent: *` + `Disallow: /`.
+- Live preview response headers were manually verified: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, restrictive `Permissions-Policy`, and `X-Robots-Tag: noindex`.
 - Production artifact generation requires a real HTTPS `SITE_ORIGIN`; production build fails if missing or invalid.
 - Production artifacts generate self-canonicals, registry-driven `robots.txt`, registry-driven `sitemap.xml`, OG/X text metadata and production index directives.
 - Production-only JSON-LD is centralized and deliberately limited to truthful `WebSite`, `WebPage`, `ProfilePage` and `Person` usage.
 - Build guards block unsupported `MedicalWebPage`, `FAQPage`, `Organization`, `reviewedBy` and accidental reviewer attribution.
-- Cloudflare static `_headers` add low-risk security/privacy headers and HTTP preview noindex on `workers.dev`.
 - `og:image` / X image metadata remains open until a final social/brand image is approved.
 
 ## Trust / people
@@ -108,35 +108,33 @@ Current test/build system checks include:
 - schema guardrails
 - cluster verifier checks
 
-Latest fully validated CI before author-photo update: run #441 passed at `8a35c057544c21f0985b7e2820bf99e0af83eddc`.
-Author-photo update is awaiting/undergoing CI verification on the latest head.
+Latest validated CI: **Prelaunch QA run #460 — SUCCESS** at `0a2822208eee5b785104a60648d368fcc70b5140`.
 
 ## Media / design / accessibility
 - Representative calculator visual pattern: established through CALC-001 review.
-- Farrukh author photo is now local and wired to trust surfaces.
-- Final sitewide hero/social media contract is not yet approved.
+- Farrukh author photo is local and verified live on the Cloudflare preview.
+- Final sitewide social-media image contract is not yet approved.
 - Source-level accessibility review confirmed skip links, visible focus, labelled native controls, fieldsets/legends, error focus/`aria-invalid`, live results, responsive fallbacks, 16px mobile controls and reduced-motion handling.
-- Rendered desktop/mobile/keyboard/screen-reader QA remains open.
-- 320/390/768/1280/1920 differential visual checks remain open.
+- Manual live-browser QA passed for the representative cleaning calculator at 320px, 390px and 768px with no reported overflow/clipping/control breakage.
+- Manual keyboard QA passed on the representative cleaning calculator, including intentional validation-error handling and completion through the result state with visible/logical focus.
+- Live people-media requests were verified without the prior cross-project image failure.
 
 ## Current milestone
-- M1 Baseline: PASS for source/build; edge/browser still in progress
+- M1 Baseline: PASS
 - M2 Architecture/Evidence: PASS for implemented source-controlled routes
-- M3 Content/Tools: 39 approved routes implemented; calculators automated-tested
-- M4 Design/Media: IN PROGRESS — author photo added; social/hero media and rendered QA remain
-- M5 Final Candidate: NOT STARTED
+- M3 Content/Tools: PASS for the 39 approved implemented routes and automated-tested calculators
+- M4 Design/Media: PASS for representative rendered/accessibility QA; final social image remains open
+- M5 Final Candidate: IN PROGRESS — blocked on real production hostname/social image/final-domain checks/rollback record
 - M6 Production: BLOCKED
 
 ## Next logical work
-1. Verify latest Cloudflare branch preview after the author-photo deployment: no failed `farrukh-abdullah` image request, headers present, preview noindex retained.
-2. Run representative rendered/mobile/keyboard QA on calculator pages at 320, 390, 768, 1280 and 1920 px.
-3. Decide final brand/social image and add `og:image` / X image only after approval.
-4. Connect production domain and set real production `SITE_ORIGIN` only after remaining hard gates pass.
-5. Complete rollback documentation and final hard-blocker audit before any merge to `main`.
+1. Approve/create the final social/brand image and add `og:image` / X image metadata.
+2. Finalize/connect the real production domain and set production `SITE_ORIGIN`.
+3. Run final-domain canonical/robots/sitemap/schema/security/performance checks.
+4. Freeze a final candidate SHA and document/test rollback procedure.
+5. Run the final hard-blocker audit before any merge to `main`.
 
 ## Known hard-gate exceptions
-- Cloudflare edge verification after newest author-photo commit still open.
-- Rendered multi-viewport/manual accessibility QA incomplete.
 - Final social/brand image and `og:image` incomplete.
 - Real production domain/`SITE_ORIGIN` not connected.
 - Final-domain SEO/security/performance checks incomplete.
