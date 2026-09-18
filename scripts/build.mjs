@@ -115,6 +115,11 @@ for (const path of htmlPaths) {
     '<p class="article-meta"><span class="byline">Written by <a href="/authors/farrukh-abdullah/">Farrukh Abdullah</a></span><span class="updated">Last updated $1</span></p>'
   );
 
+  html = html.replace(
+    /<div class="procedure-meta">\s*<span>Written by (?:<a[^>]*>)?Farrukh Abdullah(?:<\/a>)?<\/span>\s*<span>Last updated ([^<]+)<\/span>\s*<\/div>/gi,
+    '<p class="article-meta"><span class="byline">Written by <a href="/authors/farrukh-abdullah/">Farrukh Abdullah</a></span><span class="updated">Last updated $1</span></p>'
+  );
+
   html = html.replace(/<link rel="icon"[^>]*>\s*/gi, "");
   html = html.replace("</head>", '  <link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg">\n</head>');
 
