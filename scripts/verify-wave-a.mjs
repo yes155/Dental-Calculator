@@ -36,6 +36,8 @@ const requiredAssets = [
   "assets/site.css",
   "assets/trust.css",
   "assets/people/juliana-maia-teixeira.webp",
+  "assets/media/home-dental-cost-hero.svg",
+  "assets/media/dental-cleaning-cost-hero.svg",
 ];
 
 for (const path of [...waveARoutes, ...requiredAssets]) {
@@ -56,7 +58,8 @@ for (const path of waveARoutes) {
 
 const homepage = await readFile(resolve(output, "index.html"), "utf8");
 for (const token of [
-  "Dental cost guides and quote-based calculators",
+  "<section class=\"home-hero\"",
+  "/assets/media/home-dental-cost-hero.svg",
   "/cost-data-methodology/",
   "/calculator-methodology/",
   "/authors/farrukh-abdullah/",
