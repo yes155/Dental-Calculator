@@ -40,6 +40,7 @@ const requiredAssets = [
   "assets/brand/favicon.svg",
   "assets/media/dental-cleaning-cost-hero.svg",
   "assets/site-chrome.mjs",
+  "assets/media/home-icons.svg",
 ];
 
 for (const path of [...waveARoutes, ...requiredAssets]) {
@@ -83,6 +84,9 @@ for (const token of [
   "Quick price guide",
   "Check these 4 things on your dental quote",
   "Questions about dental costs and our calculators",
+  "Find cost guides by type of dental care",
+  "Location &amp; provider",
+  "Calculate cost →",
 ]) {
   if (!homepage.includes(token)) throw new Error(`homepage: required Wave A trust/ownership token missing: ${token}`);
 }

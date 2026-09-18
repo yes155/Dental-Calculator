@@ -1637,3 +1637,100 @@ a:hover { text-decoration-thickness: .14em; }
   border-color: var(--danger);
   box-shadow: 0 0 0 4px var(--focus), inset 0 0 0 1px var(--danger);
 }
+
+
+/* Homepage visual navigation completion */
+.tool-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 1rem;
+}
+.tool-card {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  gap: .55rem;
+  padding: 1.2rem;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid #c8dadd;
+  border-radius: 1rem;
+  text-decoration: none;
+  box-shadow: 0 .45rem 1.3rem rgba(23,50,58,.05);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.tool-card:nth-child(3n+1) { background: #f2fbfa; }
+.tool-card:nth-child(3n+2) { background: #fff8ef; }
+.tool-card:nth-child(3n+3) { background: #f5f4fb; }
+.tool-card:hover {
+  transform: translateY(-3px);
+  border-color: #7ab7b2;
+  box-shadow: 0 .9rem 1.9rem rgba(23,50,58,.1);
+}
+.tool-card-icon,
+.treatment-group-icon,
+.driver-icon {
+  width: 2.6rem;
+  height: 2.6rem;
+  color: var(--accent-dark);
+}
+.tool-card strong { font-size: 1.15rem; line-height: 1.25; }
+.tool-card p { margin: 0; color: #486168; font-size: .9rem; }
+.tool-card .card-arrow { margin-top: .2rem; color: var(--accent-dark); font-weight: 850; }
+
+.home-section--explore { padding-top: clamp(2.5rem,6vw,4.5rem); }
+.treatment-group-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 1rem;
+}
+.treatment-group-card {
+  padding: 1.15rem;
+  background: #fff;
+  border: 1px solid #c8dadd;
+  border-radius: 1rem;
+}
+.treatment-group-card:nth-child(2n) { background: #f8fbfb; }
+.treatment-group-head {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: .75rem;
+}
+.treatment-group-head h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+.treatment-group-icon { width: 2.2rem; height: 2.2rem; flex: 0 0 auto; }
+.treatment-group-card > a {
+  display: block;
+  width: fit-content;
+  margin: .42rem 0;
+  font-weight: 700;
+  text-decoration-thickness: .08em;
+}
+
+.driver-card {
+  position: relative;
+  padding-top: 1.15rem;
+}
+.driver-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: .65rem;
+  color: #8fe0d9;
+}
+.driver-number {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+@media (max-width: 960px) {
+  .tool-card-grid,
+  .treatment-group-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 640px) {
+  .tool-card-grid,
+  .treatment-group-grid { grid-template-columns: 1fr; }
+}
