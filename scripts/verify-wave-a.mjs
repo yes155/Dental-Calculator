@@ -59,7 +59,7 @@ for (const path of waveARoutes) {
 
 const homepage = await readFile(resolve(output, "index.html"), "utf8");
 for (const token of [
-  "<section class=\"home-hero\"",
+  "home-hero--image",
   "/assets/media/home-dental-cost-hero.webp",
   "/cost-data-methodology/",
   "/calculator-methodology/",
