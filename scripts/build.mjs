@@ -121,7 +121,7 @@ for (const path of htmlPaths) {
   );
 
   html = html.replace(/<link rel="icon"[^>]*>\s*/gi, "");
-  html = html.replace("</head>", '  <link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg">\n</head>');
+  html = html.replace("</head>", '  <link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg">\n  <script type="module" src="/assets/site-chrome.mjs"></script>\n</head>');
 
   const headerPattern = /<header class="site-header[^"]*"[^>]*>[\s\S]*?<\/header>/i;
   if (headerPattern.test(html)) html = html.replace(headerPattern, sharedHeader);

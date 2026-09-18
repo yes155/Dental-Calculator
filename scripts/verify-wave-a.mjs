@@ -39,6 +39,7 @@ const requiredAssets = [
   "assets/media/home-dental-cost-hero.webp",
   "assets/brand/favicon.svg",
   "assets/media/dental-cleaning-cost-hero.svg",
+  "assets/site-chrome.mjs",
 ];
 
 for (const path of [...waveARoutes, ...requiredAssets]) {
@@ -55,6 +56,16 @@ for (const path of waveARoutes) {
   const h1Count = (html.match(/<h1\b/g) || []).length;
   if (h1Count !== 1) throw new Error(`${path}: expected exactly one H1; found ${h1Count}`);
   if (forbiddenReaderMarkers.test(html)) throw new Error(`${path}: unresolved internal publication marker reached reader copy`);
+}
+
+const siteCss = await readFile(resolve(output, "assets/site.css"), "utf8");
+for (const token of ["Universal interaction + calculator density contract", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
+  if (!siteCss.includes(token)) throw new Error(`site css: calculator density contract token missing: ${token}`);
+}
+
+const chromeScript = await readFile(resolve(output, "assets/site-chrome.mjs"), "utf8");
+for (const token of ["pointerdown", "Escape", "toggle"]) {
+  if (!chromeScript.includes(token)) throw new Error(`site chrome: dropdown behavior token missing: ${token}`);
 }
 
 const homepage = await readFile(resolve(output, "index.html"), "utf8");
