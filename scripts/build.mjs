@@ -53,20 +53,49 @@ const sharedHeader = `<header class="site-header site-header--nav" data-site-chr
 </header>`;
 
 const sharedFooter = `<footer class="site-footer site-footer--expanded" data-site-chrome="shared-v1">
-  <p><strong>Dental Cost Calculator</strong></p>
-  <div class="home-footer-links">
-    <a href="/about/">About</a>
-    <a href="/contact/">Contact</a>
-    <a href="/editorial-policy/">Editorial Policy</a>
-    <a href="/cost-data-methodology/">Cost Data Methodology</a>
-    <a href="/calculator-methodology/">Calculator Methodology</a>
-    <a href="/medical-disclaimer/">Medical Disclaimer</a>
-    <a href="/corrections-and-updates/">Corrections &amp; Updates</a>
-    <a href="/privacy/">Privacy</a>
-    <a href="/terms/">Terms</a>
-    <a href="/disclosures/">Disclosures</a>
+  <div class="site-footer-inner">
+    <div class="footer-brand-block">
+      <a class="footer-brand" href="/"><img src="/assets/brand/favicon.svg" alt="" width="38" height="38"><span>Dental Cost Calculator</span></a>
+      <p>Published dental-cost context and quote-based calculators for U.S. consumers. Cost education only; not dental or insurance advice.</p>
+    </div>
+    <div class="footer-grid">
+      <section>
+        <h2>Cost guides</h2>
+        <a href="/dental-cleaning-cost/">Dental cleaning</a>
+        <a href="/root-canal-cost/">Root canal</a>
+        <a href="/dental-crown-cost/">Dental crown</a>
+        <a href="/tooth-extraction-cost/">Tooth extraction</a>
+        <a href="/dental-implant-cost-calculator/">Dental implants</a>
+      </section>
+      <section>
+        <h2>Calculators</h2>
+        <a href="/dental-implant-cost-calculator/">Implant calculator</a>
+        <a href="/dental-cleaning-cost/">Cleaning calculator</a>
+        <a href="/deep-teeth-cleaning-cost/">Deep cleaning calculator</a>
+        <a href="/invisalign-cost-calculator/">Invisalign calculator</a>
+      </section>
+      <section>
+        <h2>Trust &amp; methodology</h2>
+        <a href="/editorial-policy/">Editorial Policy</a>
+        <a href="/cost-data-methodology/">Cost Data Methodology</a>
+        <a href="/calculator-methodology/">Calculator Methodology</a>
+        <a href="/corrections-and-updates/">Corrections &amp; Updates</a>
+        <a href="/medical-disclaimer/">Medical Disclaimer</a>
+      </section>
+      <section>
+        <h2>About &amp; legal</h2>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="/disclosures/">Disclosures</a>
+      </section>
+    </div>
+    <div class="footer-bottom">
+      <p>DentalCostCalculator.site</p>
+      <p>Cost education only; not a diagnosis, dental quote or insurance guarantee.</p>
+    </div>
   </div>
-  <p>Cost education only; not dental or insurance advice.</p>
 </footer>`;
 
 const htmlPaths = (await readdir(output, { recursive: true })).filter((path) => path.endsWith(".html"));

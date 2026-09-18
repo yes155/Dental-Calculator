@@ -68,6 +68,10 @@ for (const token of [
   "These are estimates based on your inputs and stated assumptions — not a dentist's fee and not a guarantee of coverage.",
   "/editorial-policy/",
   "/medical-disclaimer/",
+  "procedure-finder-form",
+  "Published price context",
+  "Four things to check on a dental quote",
+  "How to use Dental Cost Calculator",
 ]) {
   if (!homepage.includes(token)) throw new Error(`homepage: required Wave A trust/ownership token missing: ${token}`);
 }
