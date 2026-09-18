@@ -79,7 +79,7 @@ Common controls:
 - Production artifacts generate self-canonicals, registry-driven `robots.txt`, registry-driven `sitemap.xml`, OG/X text metadata and production index directives.
 - Production-only JSON-LD is centralized and deliberately limited to truthful `WebSite`, `WebPage`, `ProfilePage` and `Person` usage.
 - Build guards block unsupported `MedicalWebPage`, `FAQPage`, `Organization`, `reviewedBy` and accidental reviewer attribution.
-- `og:image` / X image metadata remains open until a final social/brand image is approved.
+- Final sitewide social image is local at `/assets/social/dentalcostcalculator-og.png` (1200×630 PNG). Production build validates PNG signature/dimensions and adds `og:image`, `og:image:secure_url`, image dimensions/alt text, and X `summary_large_image` metadata across all approved routes; preview mode skips this metadata.
 
 ## Trust / people
 - Author shown: Farrukh Abdullah, researcher and writer only.
@@ -110,12 +110,12 @@ Current test/build system checks include:
 - schema guardrails
 - cluster verifier checks
 
-Latest validated CI before domain-origin update: **Prelaunch QA run #460 — SUCCESS** at `0a2822208eee5b785104a60648d368fcc70b5140`.
+Latest validated CI: **Prelaunch QA run #464 — SUCCESS** at `4a96515e34ea3a2d9a217f342c0dbe043ed25101`.
 
 ## Media / design / accessibility
 - Representative calculator visual pattern: established through CALC-001 review.
 - Farrukh author photo is local and verified live on the Cloudflare preview.
-- Final sitewide social-media image contract is not yet approved.
+- Final sitewide social card is approved, local, 1200×630, and wired only into production metadata.
 - Source-level accessibility review confirmed skip links, visible focus, labelled native controls, fieldsets/legends, error focus/`aria-invalid`, live results, responsive fallbacks, 16px mobile controls and reduced-motion handling.
 - Manual live-browser QA passed for the representative cleaning calculator at 320px, 390px and 768px with no reported overflow/clipping/control breakage.
 - Manual keyboard QA passed on the representative cleaning calculator, including intentional validation-error handling and completion through the result state with visible/logical focus.
@@ -125,20 +125,19 @@ Latest validated CI before domain-origin update: **Prelaunch QA run #460 — SUC
 - M1 Baseline: PASS
 - M2 Architecture/Evidence: PASS for implemented source-controlled routes
 - M3 Content/Tools: PASS for the 39 approved implemented routes and automated-tested calculators
-- M4 Design/Media: PASS for representative rendered/accessibility QA; final social image remains open
-- M5 Final Candidate: IN PROGRESS — production hostname finalized; blocked on domain attachment, social image, final-domain checks and rollback record
+- M4 Design/Media: PASS — representative rendered/accessibility QA and final social image are complete
+- M5 Final Candidate: IN PROGRESS — production hostname and social image are finalized; blocked on Cloudflare domain attachment, final-domain checks and rollback verification
 - M6 Production: BLOCKED
 
 ## Next logical work
-1. Approve/create the final social/brand image and add `og:image` / X image metadata.
-2. Attach `dentalcostcalculator.site` to the Cloudflare production project and set `SITE_ORIGIN=https://dentalcostcalculator.site` on the production build trigger.
-3. Run final-domain canonical/robots/sitemap/schema/security/performance checks.
-4. Freeze a final candidate SHA and document/test rollback procedure.
+1. Attach `dentalcostcalculator.site` to the Cloudflare production project and set `SITE_ORIGIN=https://dentalcostcalculator.site` on the production build trigger.
+2. Run final-domain canonical/robots/sitemap/schema/security/performance checks.
+3. Freeze the final candidate SHA after this documentation sync passes CI; rollback target is recorded in `LAUNCH-REPORT.md`.
+4. Verify rollback procedure against the production-domain candidate.
 5. Run the final hard-blocker audit before any merge to `main`.
 
 ## Known hard-gate exceptions
-- Final social/brand image and `og:image` incomplete.
 - Production domain is finalized but Cloudflare custom-domain attachment / production `SITE_ORIGIN` deployment setting are not yet verified.
 - Final-domain SEO/security/performance checks incomplete.
-- Rollback documentation incomplete.
+- Rollback target/procedure are documented; live rollback verification remains open.
 - Production merge/indexation blocked.

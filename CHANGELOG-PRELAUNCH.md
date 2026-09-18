@@ -238,3 +238,14 @@
 - Static payload review found no current large-asset problem: shared CSS and calculator modules are small and no large media bundle is present. Aggressive cache changes were intentionally avoided because assets are not content-fingerprinted.
 - Updated `PROJECT-STATE.md`, `PRELAUNCH-AUDIT.md` and `docs/PRELAUNCH-STATUS.md` to reflect the actual closeout state.
 - Production remains **NO-GO** pending actual Cloudflare edge verification, rendered multi-viewport/keyboard QA, final media/social image, real production hostname/`SITE_ORIGIN`, final-domain SEO/security verification, rollback documentation and the final hard-blocker audit.
+
+
+### Final-origin and social-card closeout — 2026-09-18
+- Finalized production origin as `https://dentalcostcalculator.site`; non-www is the canonical host.
+- GitHub Actions production-artifact fixture now validates the exact finalized origin; Prelaunch QA run #463 passed.
+- Added final local social card at `src/assets/social/dentalcostcalculator-og.png`.
+- Added production-only `scripts/add-social-meta.mjs` and build integration.
+- Social metadata validates a real 1200×630 PNG and adds sitewide `og:image`/secure URL/type/dimensions/alt plus X `summary_large_image` and image metadata to all 39 approved routes.
+- Preview mode intentionally skips production social-image metadata.
+- Prelaunch QA run #464 passed at `4a96515e34ea3a2d9a217f342c0dbe043ed25101`.
+- Recorded rollback target as current `main` at `3e9db6a6458659c4db41b80b16a97558957b953b`; live rollback verification remains pending until the production-domain candidate exists.

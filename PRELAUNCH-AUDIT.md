@@ -4,7 +4,7 @@ Updated 2026-09-18.
 
 Status values: PASS / FAIL / IN PROGRESS / DEFERRED / NOT TESTED
 
-Latest validated CI: **Prelaunch QA run #460 — SUCCESS** at `0a2822208eee5b785104a60648d368fcc70b5140`.
+Latest validated CI: **Prelaunch QA run #464 — SUCCESS** at `4a96515e34ea3a2d9a217f342c0dbe043ed25101`.
 
 | ID | Category | Severity | Scope | Evidence / current state | Next verification | Status |
 |---|---|---|---|---|---|---|
@@ -24,20 +24,20 @@ Latest validated CI: **Prelaunch QA run #460 — SUCCESS** at `0a2822208eee5b785
 | S-002 | Canonicals | HARD | Production artifact | Production build requires HTTPS `SITE_ORIGIN` and generates exactly one self-canonical per approved route. CI production fixture passes. | Set real hostname and verify canonical URLs on Cloudflare production candidate. | IN PROGRESS |
 | S-003 | Sitemap | HARD | Production artifact | `sitemap.xml` is generated only from 39 APPROVED registry URLs; deferred routes are excluded. CI production fixture passes. | Verify real-domain sitemap and HTTP status before launch. | IN PROGRESS |
 | S-004 | Robots | HARD | Production artifact | Production `robots.txt` allows crawling and points to `${SITE_ORIGIN}/sitemap.xml`; preview blocking robots is verified live. | Verify production robots after hostname connection. | IN PROGRESS |
-| S-005 | OG/X metadata | HIGH | Production artifact | OG title/description/url/site + X summary title/description are generated centrally and tied to canonical/title/description. | Approve social image; then add/verify `og:image` and X image metadata. | IN PROGRESS |
+| S-005 | OG/X metadata | HIGH | Production artifact | Final 1200×630 local social card is validated during production build; all 39 approved routes receive `og:image`/secure URL/type/width/height/alt plus X `summary_large_image` + image metadata. Run #464 passed. | Verify the absolute image URL on the final production hostname. | PASS |
 | S-006 | Schema | HARD | Production artifact | CI-generated JSON-LD is limited to truthful `WebSite`, `WebPage`, `ProfilePage` and `Person`; overclaims such as `MedicalWebPage`, `FAQPage`, `Organization`, `reviewedBy` are blocked. Run #436 passed. | Real-domain schema validation. | PASS |
 | D-001 | Design | HIGH | Site/calculators | Shared responsive CSS and representative guided calculator pattern implemented. Manual live-browser checks passed at 320px, 390px and 768px on the representative cleaning calculator with no reported clipping/overflow/control breakage. | Final-domain control-page spot check. | PASS |
 | X-001 | Accessibility — source | HARD | Site/calculators | Skip link, focus-visible, native controls, labels, fieldsets/legends, focused error summaries, aria-invalid, live results, mobile form sizing and reduced-motion handling present. | Preserve through final candidate. | PASS |
 | X-002 | Accessibility — rendered | HARD | Representative pages/tools | Manual keyboard-only QA passed on the cleaning calculator, including intentional validation error and successful completion through the result state; focus remained visible/logical. Responsive checks passed at 320/390/768. | Final-domain spot check after deployment. | PASS |
-| M-001 | Media | HIGH | Site | Reviewer image and Farrukh author image are local and verified live; prior cross-project image failure is removed and regression-guarded. Final sitewide social image remains open. | Approve social image and verify final mapping/crop. | IN PROGRESS |
+| M-001 | Media | HIGH | Site | Reviewer/Farrukh people-media are local and verified live; final sitewide 1200×630 social card is local and build-validated; prior cross-project image failure is regression-guarded. | Final-domain asset/preview spot check. | PASS |
 | P-001 | Performance | HIGH | Source/static payload | Current source is lightweight: shared CSS ~15.5 KB; largest calculator UI module ~20.3 KB; HTML pages generally small; no large media bundle. Live preview document and static assets load successfully. | Measure representative final-domain pages before launch. | IN PROGRESS |
 | R-001 | Security headers | HARD | Preview/static | Live edge response manually verified: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, restrictive `Permissions-Policy`, plus preview `X-Robots-Tag: noindex`. | Recheck on final production hostname. | PASS |
 | R-002 | Privacy | HARD | Calculators | Calculator arithmetic is local; code/test policy states quote values are not intentionally sent, stored or serialized into URL. Manual calculator completion produced no reported privacy/network anomaly. | Final-domain network spot check. | PASS |
 | R-003 | CSP/HSTS | HIGH | Final domain | CSP intentionally deferred to avoid untested resource breakage; HSTS deferred until real production domain/zone exists. | Decide/test on production candidate hostname. | DEFERRED |
-| B-001 | Build | HARD | Site | `npm run qa` passes; automated tests/build/verifiers/production-artifact fixture are green. Latest validated run #460 SUCCESS. | Keep green after social-image/domain/final candidate changes. | PASS |
+| B-001 | Build | HARD | Site | `npm run qa` passes; automated tests/build/verifiers/production-artifact fixture are green. Latest validated run #464 SUCCESS at `4a96515e34ea3a2d9a217f342c0dbe043ed25101`, including the real production origin and social-image metadata path. | Keep green through documentation/final candidate freeze. | PASS |
 | B-002 | Cloudflare preview | HARD | `chatgpt-work` | Branch preview verified manually: homepage 200, people-media assets load, robots blocks crawling, and required security headers are present. | Preserve until production cutover. | PASS |
 | B-003 | Production hostname | HARD | Release | Real production hostname not connected/set; build refuses to invent `SITE_ORIGIN`. | Connect/finalize domain and set production build variable. | IN PROGRESS |
-| B-004 | Rollback | HARD | Release | No final candidate SHA + tested rollback record yet. | Document rollback target/procedure and dry-run/verify before production. | NOT TESTED |
+| B-004 | Rollback | HARD | Release | Rollback target is current `main` at `3e9db6a6458659c4db41b80b16a97558957b953b`; procedure is documented in `LAUNCH-REPORT.md`. It has not yet been tested against the live production-domain candidate. | Verify rollback after candidate deployment and before merge. | IN PROGRESS |
 
 ## Hard-gate summary
 
@@ -46,12 +46,12 @@ Latest validated CI: **Prelaunch QA run #460 — SUCCESS** at `0a2822208eee5b785
 | G0 Baseline | PASS | Source/build and live preview baseline verified. |
 | G1 Research/Architecture | PASS | 39 approved routes frozen; 5 deferred non-build routes excluded; current procedure clusters evidence-controlled. |
 | G2 Content/Trust | PASS | All approved source routes and trust/methodology surfaces implemented; publication copy clean; people-media verified live. |
-| G3 Design/Media/Accessibility | IN PROGRESS | Representative responsive + keyboard QA passes; only final social/brand image remains open in this gate. |
-| G4 SEO/Schema/Links | IN PROGRESS | Canonical/robots/sitemap/OG-X/JSON-LD automation passes CI; real production hostname and social image metadata remain open. |
+| G3 Design/Media/Accessibility | PASS | Representative responsive + keyboard QA passes; people-media and final 1200×630 sitewide social card are complete and build-validated. |
+| G4 SEO/Schema/Links | IN PROGRESS | Canonical/robots/sitemap/OG-X/JSON-LD automation passes CI against the finalized origin; only live final-domain verification remains open. |
 | G5 Calculators/Data | PASS | Registry-assigned tools have automated arithmetic/scope/YMYL safeguards and representative rendered interaction QA passed. |
 | G6 Build/Performance/Security/Privacy | IN PROGRESS | Build/CI, live preview security headers and representative privacy behavior pass; final-domain performance/security checks remain. |
 | G7 Candidate/Preview | PASS for preview | `chatgpt-work` preview manually verified at the edge; final production candidate still depends on domain/social image. |
-| G8 Rollback | NOT TESTED | Final candidate and rollback procedure not yet frozen/tested. |
+| G8 Rollback | IN PROGRESS | Rollback target/procedure documented; live candidate rollback verification remains open. |
 | G9 Production | FAIL | Intentional NO-GO until remaining final-release gates pass. |
 
 ## Current release decision
@@ -61,8 +61,7 @@ Latest validated CI: **Prelaunch QA run #460 — SUCCESS** at `0a2822208eee5b785
 What is now green: architecture, approved-route implementation, evidence/scope controls, trust pages, calculator regression logic, representative calculator keyboard/responsive QA, internal links, publication cleanliness, build, preview indexation controls, live Cloudflare preview, live security headers, truthful JSON-LD, and local people-media.
 
 Remaining release blockers are now limited to:
-1. final social/brand image + `og:image` / X image metadata;
-2. real production hostname + `SITE_ORIGIN`;
-3. final-domain canonical/robots/sitemap/schema/security/performance verification;
-4. final candidate SHA + rollback procedure;
-5. final hard-blocker audit before any merge to `main`.
+1. Cloudflare attachment of `dentalcostcalculator.site` + production `SITE_ORIGIN` setting;
+2. final-domain canonical/robots/sitemap/schema/security/performance verification;
+3. final candidate freeze + live rollback verification;
+4. final hard-blocker audit before any merge to `main`.
