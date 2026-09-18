@@ -68,287 +68,241 @@
     </section>
 
 
-    <section class="home-data-deck" aria-labelledby="procedure-finder-title">
-      <div class="procedure-finder-panel">
+    <section class="home-finder-strip" aria-labelledby="procedure-finder-title">
+      <div>
+        <p class="eyebrow">Find your procedure</p>
+        <h2 id="procedure-finder-title">What are you pricing?</h2>
+      </div>
+      <form id="procedure-finder-form" class="procedure-finder-form procedure-finder-form--inline">
+        <label class="sr-only" for="procedure-finder-select">Dental procedure</label>
+        <select id="procedure-finder-select" required>
+          <option value="">Choose a procedure</option>
+          <optgroup label="Preventive & diagnostic">
+            <option value="/dental-cleaning-cost/">Dental cleaning</option>
+            <option value="/deep-teeth-cleaning-cost/">Deep teeth cleaning</option>
+            <option value="/dentist-visit-cost/">Dentist visit</option>
+            <option value="/dental-x-ray-cost/">Dental X-rays</option>
+          </optgroup>
+          <optgroup label="Restorative & endodontic">
+            <option value="/dental-filling-cost/">Dental filling</option>
+            <option value="/root-canal-cost/">Root canal</option>
+            <option value="/dental-crown-cost/">Dental crown</option>
+            <option value="/dental-inlay-cost/">Dental inlay</option>
+            <option value="/dental-onlay-cost/">Dental onlay</option>
+          </optgroup>
+          <optgroup label="Oral surgery & implants">
+            <option value="/tooth-extraction-cost/">Tooth extraction</option>
+            <option value="/wisdom-teeth-removal-cost/">Wisdom teeth removal</option>
+            <option value="/dental-bone-graft-cost/">Dental bone graft</option>
+            <option value="/dental-implant-cost-calculator/">Dental implant</option>
+            <option value="/all-on-4-dental-implants-cost/">All-on-4 implants</option>
+            <option value="/full-mouth-dental-implants-cost/">Full-mouth implants</option>
+          </optgroup>
+          <optgroup label="Replacement, orthodontic & cosmetic">
+            <option value="/dental-bridge-cost/">Dental bridge</option>
+            <option value="/dentures-cost/">Dentures</option>
+            <option value="/braces-cost/">Braces</option>
+            <option value="/invisalign-cost-calculator/">Invisalign</option>
+            <option value="/dental-veneers-cost/">Dental veneers</option>
+            <option value="/teeth-whitening-cost-at-dentist/">Teeth whitening</option>
+          </optgroup>
+        </select>
+        <button type="submit">Show me</button>
+      </form>
+    </section>
+
+    <section id="popular-calculators" class="home-section home-section--popular">
+      <div class="home-section-heading home-section-heading--split">
         <div>
-          <p class="eyebrow">Find your procedure</p>
-          <h2 id="procedure-finder-title">What are you pricing?</h2>
-          <p>Choose the procedure named on your written estimate. We’ll take you to the matching cost guide or calculator.</p>
+          <p class="eyebrow">Popular dental costs</p>
+          <h2>See a published price, then check your own quote</h2>
         </div>
-        <form id="procedure-finder-form" class="procedure-finder-form">
-          <label for="procedure-finder-select">Dental procedure</label>
-          <div class="procedure-finder-controls">
-            <select id="procedure-finder-select" required>
-              <option value="">Choose a procedure</option>
-              <optgroup label="Preventive & diagnostic">
-                <option value="/dental-cleaning-cost/">Dental cleaning</option>
-                <option value="/deep-teeth-cleaning-cost/">Deep teeth cleaning</option>
-                <option value="/dentist-visit-cost/">Dentist visit</option>
-                <option value="/dental-x-ray-cost/">Dental X-rays</option>
-              </optgroup>
-              <optgroup label="Restorative & endodontic">
-                <option value="/dental-filling-cost/">Dental filling</option>
-                <option value="/root-canal-cost/">Root canal</option>
-                <option value="/dental-crown-cost/">Dental crown</option>
-                <option value="/dental-inlay-cost/">Dental inlay</option>
-                <option value="/dental-onlay-cost/">Dental onlay</option>
-              </optgroup>
-              <optgroup label="Oral surgery & implants">
-                <option value="/tooth-extraction-cost/">Tooth extraction</option>
-                <option value="/wisdom-teeth-removal-cost/">Wisdom teeth removal</option>
-                <option value="/dental-bone-graft-cost/">Dental bone graft</option>
-                <option value="/dental-implant-cost-calculator/">Dental implant</option>
-                <option value="/all-on-4-dental-implants-cost/">All-on-4 implants</option>
-                <option value="/full-mouth-dental-implants-cost/">Full-mouth implants</option>
-              </optgroup>
-              <optgroup label="Replacement, orthodontic & cosmetic">
-                <option value="/dental-bridge-cost/">Dental bridge</option>
-                <option value="/dentures-cost/">Dentures</option>
-                <option value="/braces-cost/">Braces</option>
-                <option value="/invisalign-cost-calculator/">Invisalign</option>
-                <option value="/dental-veneers-cost/">Dental veneers</option>
-                <option value="/teeth-whitening-cost-at-dentist/">Teeth whitening</option>
-              </optgroup>
-            </select>
-            <button type="submit">View cost page</button>
-          </div>
-          <p class="finder-note">Not sure? Use the exact procedure name on the estimate from your dental office. Don’t choose based on symptoms.</p>
-        </form>
+        <p>These are general U.S. price examples from sources used in our guides. Your dentist’s quote can be different.</p>
       </div>
 
-      <div class="home-section-heading home-section-heading--deck">
-        <p class="eyebrow">Quick price guide</p>
-        <h2>What common dental procedures cost</h2>
-        <p>These are published U.S. price examples from sources used in our guides. They are general references, not personal quotes, and they never fill in a calculator for you.</p>
+      <div class="popular-cost-layout">
+        <a class="popular-cost-card popular-cost-card--hero" href="/dental-cleaning-cost/">
+          <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#cleaning"></use></svg>
+          <span class="card-kicker">Standard cleaning</span>
+          <strong class="popular-price">$85–$160</strong>
+          <p>Delta Dental’s published range without dental benefits. Exams, X-rays and fluoride may cost extra.</p>
+          <span class="card-arrow">Check your cleaning quote →</span>
+        </a>
+
+        <div class="popular-cost-stack">
+          <a class="popular-cost-card" href="/deep-teeth-cleaning-cost/">
+            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#preventive"></use></svg>
+            <span class="card-kicker">Deep cleaning · per quadrant</span>
+            <strong class="popular-price">$180–$295</strong>
+            <span class="card-arrow">See deep cleaning cost →</span>
+          </a>
+          <a class="popular-cost-card" href="/dental-implant-cost-calculator/">
+            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#implant"></use></svg>
+            <span class="card-kicker">Implant root only</span>
+            <strong class="popular-price">$2,143 avg.</strong>
+            <span class="card-arrow">Check your implant quote →</span>
+          </a>
+          <a class="popular-cost-card" href="/dental-crown-cost/">
+            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#crown"></use></svg>
+            <span class="card-kicker">Porcelain crown</span>
+            <strong class="popular-price">$1,399 avg.</strong>
+            <span class="card-arrow">Check your crown quote →</span>
+          </a>
+        </div>
       </div>
 
-      <div class="snapshot-grid">
-        <a class="snapshot-card" href="/dental-cleaning-cost/">
-          <span class="snapshot-source">Delta Dental · standard cleaning</span>
-          <strong>$85–$160</strong>
-          <p>Delta Dental lists this range for a standard cleaning without dental benefits. Exams, X-rays and fluoride may cost extra.</p>
-          <span>See cleaning cost →</span>
-        </a>
-        <a class="snapshot-card" href="/deep-teeth-cleaning-cost/">
-          <span class="snapshot-source">Delta Dental · scaling & root planing</span>
-          <strong>$180–$295</strong>
-          <p>Delta Dental lists this amount per quadrant for scaling and root planing. It is not a full-mouth total.</p>
-          <span>See deep cleaning cost →</span>
-        </a>
-        <a class="snapshot-card" href="/dental-implant-cost-calculator/">
-          <span class="snapshot-source">CareCredit · full-size implant root</span>
-          <strong>$2,143 avg.</strong>
-          <p>CareCredit reports a U.S. range of $1,646–$4,157 for the implant root itself. The crown is separate.</p>
-          <span>See implant cost →</span>
-        </a>
-        <a class="snapshot-card" href="/dental-crown-cost/">
-          <span class="snapshot-source">CareCredit · porcelain crown</span>
-          <strong>$1,399 avg.</strong>
-          <p>CareCredit reports a U.S. range of $915–$3,254 for porcelain crowns. Other crown materials have their own prices.</p>
-          <span>See crown cost →</span>
-        </a>
+      <div class="quick-calculator-row" aria-label="More popular calculators">
+        <span>More calculators:</span>
+        <a href="/root-canal-cost/">Root canal</a>
+        <a href="/dental-filling-cost/">Filling</a>
+        <a href="/invisalign-cost-calculator/">Invisalign</a>
+        <a href="/dental-implant-cost-calculator/">Implant</a>
       </div>
     </section>
 
-    <section id="popular-calculators" class="home-section home-section--tight">
-      <div class="home-section-heading">
-        <p class="eyebrow">Popular calculators</p>
-        <h2>Use the calculator for your procedure</h2>
-        <p>Enter the prices from your written quote. We won’t replace them with national averages or guess what insurance will pay.</p>
-      </div>
-      <div class="tool-card-grid">
-        <a class="tool-card" href="/dental-implant-cost-calculator/">
-          <svg class="tool-card-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#implant"></use></svg>
-          <span class="card-kicker">Implants</span>
-          <strong>Dental implant cost calculator</strong>
-          <p>Organize a written implant estimate, including separate charges and any same-quote insurance estimate you already have.</p>
-          <span class="card-arrow">Calculate cost →</span>
-        </a>
-        <a class="tool-card" href="/dental-cleaning-cost/">
-          <svg class="tool-card-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#cleaning"></use></svg>
-          <span class="card-kicker">Preventive</span>
-          <strong>Dental cleaning cost calculator</strong>
-          <p>Enter the amount on your cleaning quote, note what is included, and add insurance only when you have an estimate for that quote.</p>
-          <span class="card-arrow">Calculate cost →</span>
-        </a>
-        <a class="tool-card" href="/root-canal-cost/">
-          <svg class="tool-card-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#root-canal"></use></svg>
-          <span class="card-kicker">Endodontic</span>
-          <strong>Root canal cost calculator</strong>
-          <p>Organize the treatment amount, tooth count, restoration items and insurer estimate from a written root-canal quote.</p>
-          <span class="card-arrow">Calculate cost →</span>
-        </a>
-        <a class="tool-card" href="/dental-crown-cost/">
-          <svg class="tool-card-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#crown"></use></svg>
-          <span class="card-kicker">Restorative</span>
-          <strong>Dental crown cost calculator</strong>
-          <p>Enter the crown amount and record the material, included items and insurance information shown on your estimate.</p>
-          <span class="card-arrow">Calculate cost →</span>
-        </a>
-        <a class="tool-card" href="/invisalign-cost-calculator/">
-          <svg class="tool-card-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#aligner"></use></svg>
-          <span class="card-kicker">Orthodontic</span>
-          <strong>Invisalign cost calculator</strong>
-          <p>Work from your written aligner quote and keep treatment amount, included services and insurance assumptions visible.</p>
-          <span class="card-arrow">Calculate cost →</span>
-        </a>
-        <a class="tool-card" href="/dental-filling-cost/">
-          <svg class="tool-card-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#filling"></use></svg>
-          <span class="card-kicker">Restorative</span>
-          <strong>Dental filling cost calculator</strong>
-          <p>Enter the filling charges from your estimate and keep tooth count, material and same-quote insurance details separate.</p>
-          <span class="card-arrow">Calculate cost →</span>
-        </a>
-      </div>
-    </section>
-
-    <section id="common-costs" class="home-section home-section--explore">
-      <div class="home-section-heading">
-        <p class="eyebrow">Explore dental costs</p>
-        <h2>Find cost guides by type of dental care</h2>
-        <p>Choose the group that matches the service on your estimate, then open the guide for that exact procedure.</p>
+    <section id="common-costs" class="home-section home-section--browser">
+      <div class="home-section-heading home-section-heading--split">
+        <div>
+          <p class="eyebrow">Browse dental costs</p>
+          <h2>Choose a type of dental care</h2>
+        </div>
+        <p>Pick a category to see only the procedures in that group.</p>
       </div>
 
-      <div class="treatment-group-grid">
-        <section class="treatment-group-card">
-          <div class="treatment-group-head">
-            <svg class="treatment-group-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#preventive"></use></svg>
+      <div class="cost-browser" data-cost-browser>
+        <div class="cost-browser-tabs" role="tablist" aria-label="Dental cost categories">
+          <button type="button" role="tab" aria-selected="true" aria-controls="cost-panel-preventive" id="cost-tab-preventive" data-cost-tab="preventive">
+            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#preventive"></use></svg><span>Preventive</span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="cost-panel-restorative" id="cost-tab-restorative" data-cost-tab="restorative">
+            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#restorative"></use></svg><span>Restorative</span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="cost-panel-implants" id="cost-tab-implants" data-cost-tab="implants">
+            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#implant"></use></svg><span>Implants</span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="cost-panel-orthodontics" id="cost-tab-orthodontics" data-cost-tab="orthodontics">
+            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#orthodontic"></use></svg><span>Orthodontics</span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="cost-panel-cosmetic" id="cost-tab-cosmetic" data-cost-tab="cosmetic">
+            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#cosmetic"></use></svg><span>Cosmetic</span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="cost-panel-replacement" id="cost-tab-replacement" data-cost-tab="replacement">
+            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#replacement"></use></svg><span>Replacement</span>
+          </button>
+        </div>
+
+        <div class="cost-browser-panels">
+          <section id="cost-panel-preventive" role="tabpanel" aria-labelledby="cost-tab-preventive" data-cost-panel="preventive">
             <h3>Preventive &amp; diagnostic</h3>
-          </div>
-          <a href="/dental-cleaning-cost/">Dental cleaning</a>
-          <a href="/deep-teeth-cleaning-cost/">Deep teeth cleaning</a>
-          <a href="/dentist-visit-cost/">Dentist visit</a>
-          <a href="/dental-x-ray-cost/">Dental X-rays</a>
-        </section>
+            <div class="browser-link-grid">
+              <a href="/dental-cleaning-cost/">Dental cleaning <span>→</span></a>
+              <a href="/deep-teeth-cleaning-cost/">Deep teeth cleaning <span>→</span></a>
+              <a href="/dentist-visit-cost/">Dentist visit <span>→</span></a>
+              <a href="/dental-x-ray-cost/">Dental X-rays <span>→</span></a>
+            </div>
+          </section>
 
-        <section class="treatment-group-card">
-          <div class="treatment-group-head">
-            <svg class="treatment-group-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#restorative"></use></svg>
-            <h3>Restorative</h3>
-          </div>
-          <a href="/dental-filling-cost/">Dental filling</a>
-          <a href="/root-canal-cost/">Root canal</a>
-          <a href="/dental-crown-cost/">Dental crown</a>
-          <a href="/dental-inlay-cost/">Dental inlay</a>
-          <a href="/dental-onlay-cost/">Dental onlay</a>
-        </section>
+          <section id="cost-panel-restorative" role="tabpanel" aria-labelledby="cost-tab-restorative" data-cost-panel="restorative" hidden>
+            <h3>Restorative &amp; endodontic</h3>
+            <div class="browser-link-grid">
+              <a href="/dental-filling-cost/">Dental filling <span>→</span></a>
+              <a href="/root-canal-cost/">Root canal <span>→</span></a>
+              <a href="/dental-crown-cost/">Dental crown <span>→</span></a>
+              <a href="/dental-inlay-cost/">Dental inlay <span>→</span></a>
+              <a href="/dental-onlay-cost/">Dental onlay <span>→</span></a>
+            </div>
+          </section>
 
-        <section class="treatment-group-card">
-          <div class="treatment-group-head">
-            <svg class="treatment-group-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#implant"></use></svg>
-            <h3>Implants</h3>
-          </div>
-          <a href="/dental-implant-cost-calculator/">Dental implant</a>
-          <a href="/all-on-4-dental-implants-cost/">All-on-4 implants</a>
-          <a href="/full-mouth-dental-implants-cost/">Full-mouth implants</a>
-          <a href="/dental-bone-graft-cost/">Dental bone graft</a>
-        </section>
+          <section id="cost-panel-implants" role="tabpanel" aria-labelledby="cost-tab-implants" data-cost-panel="implants" hidden>
+            <h3>Implants &amp; related procedures</h3>
+            <div class="browser-link-grid">
+              <a href="/dental-implant-cost-calculator/">Dental implant <span>→</span></a>
+              <a href="/all-on-4-dental-implants-cost/">All-on-4 implants <span>→</span></a>
+              <a href="/full-mouth-dental-implants-cost/">Full-mouth implants <span>→</span></a>
+              <a href="/dental-bone-graft-cost/">Dental bone graft <span>→</span></a>
+            </div>
+          </section>
 
-        <section class="treatment-group-card">
-          <div class="treatment-group-head">
-            <svg class="treatment-group-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#orthodontic"></use></svg>
+          <section id="cost-panel-orthodontics" role="tabpanel" aria-labelledby="cost-tab-orthodontics" data-cost-panel="orthodontics" hidden>
             <h3>Orthodontics</h3>
-          </div>
-          <a href="/braces-cost/">Braces</a>
-          <a href="/invisalign-cost-calculator/">Invisalign</a>
-          <a href="/dental-retainer-cost/">Dental retainer</a>
-        </section>
+            <div class="browser-link-grid">
+              <a href="/braces-cost/">Braces <span>→</span></a>
+              <a href="/invisalign-cost-calculator/">Invisalign <span>→</span></a>
+              <a href="/dental-retainer-cost/">Dental retainer <span>→</span></a>
+            </div>
+          </section>
 
-        <section class="treatment-group-card">
-          <div class="treatment-group-head">
-            <svg class="treatment-group-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#cosmetic"></use></svg>
+          <section id="cost-panel-cosmetic" role="tabpanel" aria-labelledby="cost-tab-cosmetic" data-cost-panel="cosmetic" hidden>
             <h3>Cosmetic</h3>
-          </div>
-          <a href="/dental-veneers-cost/">Dental veneers</a>
-          <a href="/teeth-whitening-cost-at-dentist/">Teeth whitening</a>
-          <a href="/dental-bonding-cost/">Dental bonding</a>
-        </section>
+            <div class="browser-link-grid">
+              <a href="/dental-veneers-cost/">Dental veneers <span>→</span></a>
+              <a href="/teeth-whitening-cost-at-dentist/">Teeth whitening <span>→</span></a>
+              <a href="/dental-bonding-cost/">Dental bonding <span>→</span></a>
+            </div>
+          </section>
 
-        <section class="treatment-group-card">
-          <div class="treatment-group-head">
-            <svg class="treatment-group-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#replacement"></use></svg>
+          <section id="cost-panel-replacement" role="tabpanel" aria-labelledby="cost-tab-replacement" data-cost-panel="replacement" hidden>
             <h3>Tooth replacement</h3>
-          </div>
-          <a href="/dental-bridge-cost/">Dental bridge</a>
-          <a href="/dentures-cost/">Dentures</a>
-          <a href="/tooth-extraction-cost/">Tooth extraction</a>
-          <a href="/wisdom-teeth-removal-cost/">Wisdom teeth removal</a>
-        </section>
+            <div class="browser-link-grid">
+              <a href="/dental-bridge-cost/">Dental bridge <span>→</span></a>
+              <a href="/dentures-cost/">Dentures <span>→</span></a>
+              <a href="/tooth-extraction-cost/">Tooth extraction <span>→</span></a>
+              <a href="/wisdom-teeth-removal-cost/">Wisdom teeth removal <span>→</span></a>
+            </div>
+          </section>
+        </div>
       </div>
     </section>
 
-    <section class="home-section home-section--drivers">
+    <section class="home-cost-flow" aria-labelledby="cost-flow-title">
       <div class="home-section-heading">
-        <p class="eyebrow">What changes the price</p>
-        <h2>Check these 4 things on your dental quote</h2>
-        <p>These details often explain why your quote can be different from a published price. Our calculators still use only the amounts and details you enter.</p>
+        <p class="eyebrow">Why prices differ</p>
+        <h2 id="cost-flow-title">What changes what you may pay</h2>
       </div>
-      <div class="driver-grid">
-        <article class="driver-card">
-          <svg class="driver-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#scope"></use></svg>
-          <span class="driver-number">01</span>
-          <h3>How the service is priced</h3>
-          <p>A price may be for one tooth, one quadrant, one arch, one filling or a package of services. Check which unit the price covers.</p>
-        </article>
-        <article class="driver-card">
-          <svg class="driver-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#location"></use></svg>
-          <span class="driver-number">02</span>
-          <h3>Location &amp; provider</h3>
-          <p>Published prices can vary by geographic area and provider setting. Keep local examples local instead of treating them as national prices.</p>
-        </article>
-        <article class="driver-card">
-          <svg class="driver-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#included"></use></svg>
-          <span class="driver-number">03</span>
-          <h3>What the quote includes</h3>
-          <p>Exam, imaging, anesthesia, build-up, grafting, crowns or other services may be bundled or listed separately depending on the quote.</p>
-        </article>
-        <article class="driver-card">
-          <svg class="driver-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#insurance"></use></svg>
-          <span class="driver-number">04</span>
-          <h3>Your insurance plan</h3>
-          <p>Your deductible, network, coinsurance, annual maximum, exclusions and remaining benefits can change what you pay.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="home-section">
-      <div class="home-section-heading">
-        <p class="eyebrow">Implants & tooth replacement</p>
-        <h2>Implants, bridges and dentures</h2>
-        <p>A single implant, a full arch of implants, a bridge and dentures are priced differently. Choose the treatment named on your quote.</p>
-      </div>
-      <div class="cost-card-grid">
-        <a class="cost-card" href="/dental-implant-cost-calculator/"><span class="card-kicker">Single implant</span><strong>Dental implant cost calculator</strong><span class="card-arrow">Open calculator →</span></a>
-        <a class="cost-card" href="/full-mouth-dental-implants-cost/"><span class="card-kicker">Full-mouth</span><strong>Full-mouth dental implants cost</strong><span class="card-arrow">View guide →</span></a>
-        <a class="cost-card" href="/all-on-4-dental-implants-cost/"><span class="card-kicker">Full-arch</span><strong>All-on-4 dental implants cost</strong><span class="card-arrow">View guide →</span></a>
-        <a class="cost-card" href="/dental-bridge-cost/"><span class="card-kicker">Replacement</span><strong>Dental bridge cost</strong><span class="card-arrow">View guide →</span></a>
-        <a class="cost-card" href="/dentures-cost/"><span class="card-kicker">Replacement</span><strong>Dentures cost</strong><span class="card-arrow">View guide →</span></a>
-        <a class="cost-card" href="/dental-bone-graft-cost/"><span class="card-kicker">Related procedure</span><strong>Dental bone graft cost</strong><span class="card-arrow">View guide →</span></a>
+      <div class="cost-flow-track">
+        <div class="cost-flow-step">
+          <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#scope"></use></svg>
+          <strong>Procedure</strong>
+          <span>Per tooth, quadrant, arch or package</span>
+        </div>
+        <div class="cost-flow-arrow" aria-hidden="true">→</div>
+        <div class="cost-flow-step">
+          <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#location"></use></svg>
+          <strong>Location</strong>
+          <span>Local prices can differ</span>
+        </div>
+        <div class="cost-flow-arrow" aria-hidden="true">→</div>
+        <div class="cost-flow-step">
+          <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#included"></use></svg>
+          <strong>What’s included</strong>
+          <span>Exam, imaging and add-ons may be separate</span>
+        </div>
+        <div class="cost-flow-arrow" aria-hidden="true">→</div>
+        <div class="cost-flow-step">
+          <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#insurance"></use></svg>
+          <strong>Insurance</strong>
+          <span>Benefits depend on your plan</span>
+        </div>
+        <div class="cost-flow-arrow" aria-hidden="true">→</div>
+        <div class="cost-flow-result">
+          <strong>Your cost</strong>
+          <span>Use your written quote</span>
+        </div>
       </div>
     </section>
 
-    <section class="home-section">
-      <div class="home-section-heading">
-        <p class="eyebrow">Paying for dental care</p>
-        <h2>Insurance and ways to lower costs</h2>
-        <p>See what can affect your out-of-pocket cost and where to look for lower-cost dental care.</p>
+    <section class="home-support-strip">
+      <div>
+        <span class="card-kicker">Insurance</span>
+        <h2>Trying to understand what insurance changes?</h2>
+        <a href="/dental-insurance-out-of-pocket-costs/">See insurance and out-of-pocket costs →</a>
       </div>
-      <div class="home-support-grid">
-        <a class="home-support-card" href="/dental-insurance-out-of-pocket-costs/">
-          <span class="card-kicker">Insurance</span>
-          <strong>Dental insurance and out-of-pocket costs</strong>
-          <p>Understand allowed amounts, deductibles, coinsurance, annual maximums and other plan details.</p>
-          <span class="card-arrow">Read guide →</span>
-        </a>
-        <a class="home-support-card" href="/affordable-dental-care/">
-          <span class="card-kicker">Access</span>
-          <strong>Affordable dental care resources</strong>
-          <p>Explore dental schools, health centers, Medicaid/CHIP information and other lower-cost care resources.</p>
-          <span class="card-arrow">Explore resources →</span>
-        </a>
+      <div>
+        <span class="card-kicker">Lower-cost care</span>
+        <h2>Looking for ways to reduce the cost of care?</h2>
+        <a href="/affordable-dental-care/">Explore affordable dental care resources →</a>
       </div>
     </section>
-
 
     <section class="home-section home-section--faq">
       <div class="home-section-heading">
@@ -406,6 +360,37 @@
       }
       window.location.assign(select.value);
     });
+
+    const browser = document.querySelector("[data-cost-browser]");
+    if (browser) {
+      const tabs = [...browser.querySelectorAll("[data-cost-tab]")];
+      const panels = [...browser.querySelectorAll("[data-cost-panel]")];
+      const activate = (name, focus = false) => {
+        tabs.forEach((tab) => {
+          const active = tab.dataset.costTab === name;
+          tab.setAttribute("aria-selected", String(active));
+          tab.tabIndex = active ? 0 : -1;
+          if (active && focus) tab.focus();
+        });
+        panels.forEach((panel) => {
+          panel.hidden = panel.dataset.costPanel !== name;
+        });
+      };
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => activate(tab.dataset.costTab));
+        tab.addEventListener("keydown", (event) => {
+          if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) return;
+          event.preventDefault();
+          let next = index;
+          if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+          if (event.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
+          if (event.key === "Home") next = 0;
+          if (event.key === "End") next = tabs.length - 1;
+          activate(tabs[next].dataset.costTab, true);
+        });
+      });
+      activate("preventive");
+    }
   })();
 </script>
 </body>

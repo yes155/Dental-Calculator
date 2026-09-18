@@ -84,9 +84,13 @@ for (const token of [
   "Quick price guide",
   "Check these 4 things on your dental quote",
   "Questions about dental costs and our calculators",
-  "Find cost guides by type of dental care",
-  "Location &amp; provider",
-  "Calculate cost →",
+  "data-cost-browser",
+  "Popular dental costs",
+  "What changes what you may pay",
+  "Trying to understand what insurance changes?",
+  "Choose a type of dental care",
+  "What changes what you may pay",
+  "Check your cleaning quote →",
 ]) {
   if (!homepage.includes(token)) throw new Error(`homepage: required Wave A trust/ownership token missing: ${token}`);
 }
