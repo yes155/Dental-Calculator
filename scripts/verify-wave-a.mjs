@@ -41,6 +41,8 @@ const requiredAssets = [
   "assets/media/dental-cleaning-cost-hero.svg",
   "assets/site-chrome.mjs",
   "assets/media/home-icons.svg",
+  "assets/state-costs.mjs",
+  "assets/data/state-dental-costs.json",
 ];
 
 for (const path of [...waveARoutes, ...requiredAssets]) {
@@ -92,6 +94,9 @@ for (const token of [
   "home-support-strip",
   "Trying to understand what insurance changes?",
   "Questions about dental costs and our calculators",
+  "data-state-costs",
+  "See how published dental prices vary by state",
+  "Compare all states in a table",
 ]) {
   if (!homepage.includes(token)) throw new Error(`homepage: required Wave A trust/ownership token missing: ${token}`);
 }
@@ -154,8 +159,12 @@ if (!calcMethod.includes("Blank is not zero") || !calcMethod.includes("not an ac
 }
 
 const costMethod = await readFile(resolve(output, "cost-data-methodology/index.html"), "utf8");
-if (!costMethod.includes("does not merge unrelated local fees, plan copays or differently scoped sources")) {
-  throw new Error("cost methodology: source-scope safeguard missing");
+for (const token of [
+  "does not merge unrelated local fees, plan copays or differently scoped sources",
+  "State-by-state price comparisons",
+  "does not create state-specific indexable URLs",
+]) {
+  if (!costMethod.includes(token)) throw new Error(`cost methodology: required geographic/source-scope token missing: ${token}`);
 }
 
 const trustPrefixes = [

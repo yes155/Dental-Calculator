@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" href="/assets/brand/favicon.png">
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/trust.css">
+  <script type="module" src="/assets/state-costs.mjs"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -166,6 +167,91 @@
         <a href="/invisalign-cost-calculator/">Invisalign</a>
         <a href="/dental-implant-cost-calculator/">Implant</a>
       </div>
+    </section>
+
+
+    <section class="home-state-costs" data-state-costs aria-labelledby="state-cost-title">
+      <div class="home-section-heading home-section-heading--split">
+        <div>
+          <p class="eyebrow">Dental costs by state</p>
+          <h2 id="state-cost-title">See how published dental prices vary by state</h2>
+        </div>
+        <p>Compare the same procedure across all 50 states and Washington, D.C. These are published state averages—not quotes for a specific dentist or ZIP code.</p>
+      </div>
+
+      <div class="state-cost-controls">
+        <label>
+          <span>Procedure</span>
+          <select data-state-procedure>
+            <option value="implant">Single-tooth implant</option>
+            <option value="crown">Porcelain crown</option>
+            <option value="filling">Composite filling</option>
+            <option value="simple_extraction">Simple extraction</option>
+            <option value="clear_aligners">Clear aligners</option>
+            <option value="metal_braces">Metal braces</option>
+          </select>
+        </label>
+        <label>
+          <span>State or district</span>
+          <select data-state-select>
+            <option value="">Choose a state</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="state-cost-layout">
+        <div class="state-map-panel">
+          <div class="state-map-heading">
+            <div>
+              <h3>U.S. state cost map</h3>
+              <p>Choose a state on the map or use the selector above.</p>
+            </div>
+            <div class="state-map-legend" aria-label="Map color scale">
+              <span>Lower published average</span>
+              <i aria-hidden="true"></i>
+              <span>Higher published average</span>
+            </div>
+          </div>
+          <div class="state-tile-scroll">
+            <div class="state-tile-map" data-state-map aria-label="Interactive U.S. state cost tile map"></div>
+          </div>
+          <p class="state-map-note">This is a tile map for comparison; tile positions are approximate and do not show geographic boundaries.</p>
+        </div>
+
+        <aside class="state-cost-summary" aria-live="polite">
+          <p class="eyebrow" data-state-summary-label>U.S. published average</p>
+          <strong class="state-summary-price" data-state-summary-price>Loading…</strong>
+          <p data-state-summary-unit></p>
+          <dl>
+            <div><dt>Compared with U.S. average</dt><dd data-state-summary-delta>—</dd></div>
+            <div><dt>Source study</dt><dd data-state-summary-study>—</dd></div>
+          </dl>
+          <p class="state-scope-note" data-state-scope></p>
+          <div class="state-summary-links">
+            <a data-state-guide href="/dental-implant-cost-calculator/">Open procedure guide →</a>
+            <a href="/cost-data-methodology/">How we use geographic cost data →</a>
+          </div>
+        </aside>
+      </div>
+
+      <details class="state-comparison-details">
+        <summary>Compare all states in a table</summary>
+        <div class="state-table-toolbar" aria-label="Sort comparison table">
+          <button type="button" data-state-sort="az" aria-pressed="true">A–Z</button>
+          <button type="button" data-state-sort="low" aria-pressed="false">Lower to higher</button>
+          <button type="button" data-state-sort="high" aria-pressed="false">Higher to lower</button>
+        </div>
+        <div class="state-table-wrap">
+          <table class="state-comparison-table">
+            <caption data-state-table-caption>Published state averages</caption>
+            <thead><tr><th scope="col">State</th><th scope="col">Published average</th><th scope="col">Vs. U.S. published average</th></tr></thead>
+            <tbody data-state-table-body></tbody>
+          </table>
+        </div>
+      </details>
+
+      <p class="state-cost-source-line">Source values are transcribed from named CareCredit/Synchrony procedure pages and keep each procedure’s original scope. We do not mix them with Medicaid reimbursement, insurer allowed amounts or clinic-specific prices.</p>
+      <p class="state-cost-error" data-state-error hidden>State comparison data is temporarily unavailable. The procedure guides and calculators still work normally.</p>
     </section>
 
     <section id="common-costs" class="home-section home-section--browser">
