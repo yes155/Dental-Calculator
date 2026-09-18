@@ -80,21 +80,27 @@ for (const token of [
   "These are estimates based on your inputs and stated assumptions — not a dentist's fee and not a guarantee of coverage.",
   "/editorial-policy/",
   "/medical-disclaimer/",
-  "procedure-finder-form",
   "home-calculator-entry",
+  "procedure-finder-form",
+  "Start with your procedure",
   "Open calculator",
-  "Quick price guide",
-  "Check these 4 things on your dental quote",
-  "Questions about dental costs and our calculators",
-  "data-cost-browser",
   "Popular dental costs",
-  "What changes what you may pay",
-  "Trying to understand what insurance changes?",
+  "Check your cleaning quote →",
+  "data-cost-browser",
   "Choose a type of dental care",
   "What changes what you may pay",
-  "Check your cleaning quote →",
+  "home-support-strip",
+  "Trying to understand what insurance changes?",
+  "Questions about dental costs and our calculators",
 ]) {
   if (!homepage.includes(token)) throw new Error(`homepage: required Wave A trust/ownership token missing: ${token}`);
+}
+
+const heroIndex = homepage.indexOf("home-hero--image");
+const calculatorIndex = homepage.indexOf("home-calculator-entry");
+const popularIndex = homepage.indexOf("Popular dental costs");
+if (!(heroIndex >= 0 && calculatorIndex > heroIndex && popularIndex > calculatorIndex)) {
+  throw new Error("homepage: expected order is hero → calculator entry → popular dental costs");
 }
 
 const homepageLinks = [...homepage.matchAll(/href="(\/[^"]*\/)"/g)].map((match) => match[1]);
