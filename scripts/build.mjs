@@ -1,4 +1,4 @@
-import { access, cp, mkdir, readFile, readdir, rm } from "node:fs/promises";
+import { access, cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
@@ -8,6 +8,94 @@ const output = resolve(root, "dist");
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 await cp(source, output, { recursive: true });
+
+const sharedHeader = \`<header class="site-header site-header--nav" data-site-chrome="shared-v1">
+  <div class="site-header-inner">
+    <a class="site-brand site-brand--with-icon" href="/">
+      <img class="site-brand-mark" src="/assets/brand/favicon.svg" alt="" width="34" height="34">
+      <span>Dental Cost Calculator</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/#common-costs">Cost guides</a>
+      <details class="nav-dropdown">
+        <summary>Calculators</summary>
+        <div class="nav-dropdown-panel">
+          <div>
+            <strong>Everyday &amp; restorative</strong>
+            <a href="/dental-cleaning-cost/">Dental cleaning</a>
+            <a href="/deep-teeth-cleaning-cost/">Deep cleaning</a>
+            <a href="/dental-filling-cost/">Dental filling</a>
+            <a href="/root-canal-cost/">Root canal</a>
+            <a href="/dental-crown-cost/">Dental crown</a>
+            <a href="/tooth-extraction-cost/">Tooth extraction</a>
+            <a href="/wisdom-teeth-removal-cost/">Wisdom teeth removal</a>
+          </div>
+          <div>
+            <strong>Implants &amp; replacement</strong>
+            <a href="/dental-implant-cost-calculator/">Dental implant</a>
+            <a href="/all-on-4-dental-implants-cost/">All-on-4</a>
+            <a href="/full-mouth-dental-implants-cost/">Full-mouth implants</a>
+            <a href="/dental-bridge-cost/">Dental bridge</a>
+            <a href="/dentures-cost/">Dentures</a>
+          </div>
+          <div>
+            <strong>Orthodontic &amp; cosmetic</strong>
+            <a href="/invisalign-cost-calculator/">Invisalign</a>
+            <a href="/braces-cost/">Braces</a>
+            <a href="/dental-veneers-cost/">Veneers</a>
+          </div>
+        </div>
+      </details>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>\`;
+
+const sharedFooter = \`<footer class="site-footer site-footer--expanded" data-site-chrome="shared-v1">
+  <p><strong>Dental Cost Calculator</strong></p>
+  <div class="home-footer-links">
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+    <a href="/editorial-policy/">Editorial Policy</a>
+    <a href="/cost-data-methodology/">Cost Data Methodology</a>
+    <a href="/calculator-methodology/">Calculator Methodology</a>
+    <a href="/medical-disclaimer/">Medical Disclaimer</a>
+    <a href="/corrections-and-updates/">Corrections &amp; Updates</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/terms/">Terms</a>
+    <a href="/disclosures/">Disclosures</a>
+  </div>
+  <p>Cost education only; not dental or insurance advice.</p>
+</footer>\`;
+
+const htmlPaths = (await readdir(output, { recursive: true })).filter((path) => path.endsWith(".html"));
+for (const path of htmlPaths) {
+  const target = resolve(output, path);
+  let html = await readFile(target, "utf8");
+
+  html = html.replace(/<link rel="icon"[^>]*>\s*/gi, "");
+  html = html.replace("</head>", '  <link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg">\n</head>');
+
+  const headerPattern = /<header class="site-header[^"]*"[^>]*>[\s\S]*?<\/header>/i;
+  if (headerPattern.test(html)) html = html.replace(headerPattern, sharedHeader);
+
+  const footerPattern = /<footer class="site-footer[^"]*"[^>]*>[\s\S]*?<\/footer>/i;
+  if (footerPattern.test(html)) html = html.replace(footerPattern, sharedFooter);
+
+  html = html
+    .replace(/<nav[^>]*class="[^"]*breadcrumbs?[^"]*"[^>]*>[\s\S]*?<\/nav>/gi, "")
+    .replace(/<div[^>]*class="[^"]*breadcrumbs?[^"]*"[^>]*>[\s\S]*?<\/div>/gi, "");
+
+  await writeFile(target, html);
+}
+
+for (const path of htmlPaths) {
+  const html = await readFile(resolve(output, path), "utf8");
+  if (!html.includes('data-site-chrome="shared-v1"')) throw new Error(\`\${path}: shared site chrome missing\`);
+  if (!html.includes('/assets/brand/favicon.svg')) throw new Error(\`\${path}: universal favicon missing\`);
+}
+
 
 const required = [
   "tooth-extraction-cost/index.html",

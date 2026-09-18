@@ -37,7 +37,7 @@ const requiredAssets = [
   "assets/trust.css",
   "assets/people/juliana-maia-teixeira.webp",
   "assets/media/home-dental-cost-hero.webp",
-  "assets/brand/favicon.png",
+  "assets/brand/favicon.svg",
   "assets/media/dental-cleaning-cost-hero.svg",
 ];
 
