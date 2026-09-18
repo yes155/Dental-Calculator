@@ -709,3 +709,197 @@ a:hover { text-decoration-thickness: .14em; }
   .home-method-grid,
   .home-trust-grid { grid-template-columns: 1fr; }
 }
+
+
+/* Visual refresh prototype — procedure page */
+.procedure-shell {
+  width: min(100% - 2rem, 74rem);
+  padding: 0;
+  overflow: hidden;
+}
+.procedure-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(21rem, .95fr);
+  gap: clamp(1.75rem, 5vw, 4rem);
+  align-items: center;
+  padding: clamp(2rem, 5vw, 4rem);
+  background:
+    linear-gradient(135deg, rgba(241,248,247,.96), rgba(255,255,255,.98)),
+    radial-gradient(circle at 90% 0%, rgba(8,123,117,.15), transparent 25rem);
+  border-bottom: 1px solid var(--line);
+}
+.procedure-hero-copy h1 {
+  margin: .4rem 0 .9rem;
+  max-width: 11ch;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: .98;
+  letter-spacing: -.04em;
+}
+.procedure-hero-copy .intro {
+  margin: 0;
+  color: #35535a;
+  font-size: clamp(1rem, 1.6vw, 1.12rem);
+}
+.procedure-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem .7rem;
+  margin-top: 1.25rem;
+}
+.procedure-meta span {
+  padding: .4rem .62rem;
+  border: 1px solid #c2d9d7;
+  border-radius: 999px;
+  background: rgba(255,255,255,.78);
+  color: #456168;
+  font-size: .8rem;
+  font-weight: 700;
+}
+.procedure-hero-media {
+  position: relative;
+  margin: 0;
+}
+.procedure-hero-media::before {
+  content: "";
+  position: absolute;
+  inset: 8% -4% -6% 9%;
+  border-radius: 1.6rem;
+  background: #d8efec;
+  transform: rotate(2deg);
+}
+.procedure-hero-media img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1200/630;
+  object-fit: cover;
+  border-radius: 1.25rem;
+  border: 1px solid #bad0d3;
+  box-shadow: 0 1.2rem 2.8rem rgba(23,50,58,.16);
+}
+.procedure-hero-media figcaption {
+  position: relative;
+  z-index: 1;
+  margin-top: .65rem;
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+.cost-snapshot {
+  margin: 0;
+  padding: clamp(2rem, 5vw, 3.2rem) clamp(1rem, 4vw, 3rem);
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+.cost-snapshot-head {
+  max-width: 48rem;
+  margin: 0 auto 1.4rem;
+}
+.cost-snapshot-head h2 {
+  margin: .35rem 0 .5rem;
+  font-size: clamp(1.65rem, 3vw, 2.25rem);
+}
+.cost-snapshot-head p:last-child { margin: 0; color: var(--muted); }
+.cost-snapshot-grid {
+  max-width: 62rem;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.cost-snapshot-card {
+  min-width: 0;
+  padding: 1.2rem;
+  border: 1px solid #cbdadd;
+  border-radius: 1rem;
+  background: #f8fbfb;
+}
+.cost-snapshot-card--primary {
+  border-color: #7ab7b2;
+  background: #eef9f7;
+}
+.cost-snapshot-card .snapshot-label {
+  display: block;
+  color: var(--muted);
+  font-size: .76rem;
+  font-weight: 850;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.cost-snapshot-card strong {
+  display: block;
+  margin: .25rem 0 .55rem;
+  color: var(--ink);
+  font-size: clamp(1.6rem, 3vw, 2.15rem);
+  line-height: 1;
+}
+.cost-snapshot-card p { margin: 0; color: #456168; font-size: .9rem; }
+
+.procedure-content {
+  padding-top: clamp(2rem, 5vw, 3.4rem);
+  padding-bottom: 0;
+}
+.calculator-intro-panel {
+  margin: 2.5rem 0 1.25rem;
+  padding: clamp(1.2rem, 3vw, 1.75rem);
+  border: 1px solid #a9cfcb;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #eff9f8, #ffffff);
+  box-shadow: 0 .6rem 1.8rem rgba(23,50,58,.06);
+}
+.calculator-intro-panel h2 {
+  margin: .35rem 0 .55rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+.calculator-intro-panel p { max-width: 44rem; }
+.calculator-intro-panel ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: .65rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.calculator-intro-panel li {
+  padding: .7rem .8rem;
+  border: 1px solid #d3e1e2;
+  border-radius: .7rem;
+  background: #fff;
+  font-size: .9rem;
+  font-weight: 700;
+}
+.procedure-content--lower {
+  padding-top: clamp(2rem, 5vw, 3rem);
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+.content-divider-card {
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.15rem;
+  border-left: .35rem solid var(--accent);
+  background: var(--soft);
+  border-radius: .75rem;
+}
+.content-divider-card h2 { margin: .25rem 0 0; }
+.procedure-shell .calculator-embed {
+  margin-left: 0;
+  margin-right: 0;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+}
+.procedure-shell .calculator-card--guided {
+  box-shadow: 0 1rem 2.5rem rgba(23,50,58,.08);
+}
+
+@media (max-width: 900px) {
+  .procedure-hero { grid-template-columns: 1fr; }
+  .procedure-hero-media { max-width: 42rem; }
+  .cost-snapshot-grid { grid-template-columns: 1fr; }
+  .calculator-intro-panel ul { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .procedure-shell { width: 100%; margin: 0; border-radius: 0; box-shadow: none; }
+  .procedure-hero { padding: 2rem 1rem; }
+  .cost-snapshot { padding-inline: 1rem; }
+  .procedure-content { padding-inline: 1rem; }
+  .procedure-shell .calculator-embed { margin-inline: 0; padding-inline: 0; }
+}
