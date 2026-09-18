@@ -1604,3 +1604,36 @@ a:hover { text-decoration-thickness: .14em; }
     padding: .9rem;
   }
 }
+
+
+/* Universal money-input focus contract — focus ring belongs to the whole $ + amount control */
+.money {
+  position: relative;
+  overflow: visible;
+}
+.money > span[aria-hidden="true"] {
+  align-self: stretch;
+  display: grid;
+  place-items: center;
+  padding: 0 .25rem 0 .75rem;
+}
+.money input,
+.money input:focus,
+.money input:focus-visible {
+  outline: 0 !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+.money:focus-within {
+  outline: 0;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--focus);
+}
+.money:has(input[aria-invalid="true"]) {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 2px var(--danger);
+}
+.money:has(input[aria-invalid="true"]):focus-within {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 4px var(--focus), inset 0 0 0 1px var(--danger);
+}
