@@ -36,7 +36,8 @@ const requiredAssets = [
   "assets/site.css",
   "assets/trust.css",
   "assets/people/juliana-maia-teixeira.webp",
-  "assets/media/home-dental-cost-hero.svg",
+  "assets/media/home-dental-cost-hero.webp",
+  "assets/brand/favicon.png",
   "assets/media/dental-cleaning-cost-hero.svg",
 ];
 
@@ -59,12 +60,14 @@ for (const path of waveARoutes) {
 const homepage = await readFile(resolve(output, "index.html"), "utf8");
 for (const token of [
   "<section class=\"home-hero\"",
-  "/assets/media/home-dental-cost-hero.svg",
+  "/assets/media/home-dental-cost-hero.webp",
   "/cost-data-methodology/",
   "/calculator-methodology/",
-  "/authors/farrukh-abdullah/",
-  "/reviewers/juliana-maia-teixeira/",
-  "Article-level reviewer credit is used only after that exact page version has been reviewed.",
+  "<details class=\"nav-dropdown\">",
+  "Find out what a dental procedure should cost — before you book it",
+  "These are estimates based on your inputs and stated assumptions — not a dentist's fee and not a guarantee of coverage.",
+  "/editorial-policy/",
+  "/medical-disclaimer/",
 ]) {
   if (!homepage.includes(token)) throw new Error(`homepage: required Wave A trust/ownership token missing: ${token}`);
 }
