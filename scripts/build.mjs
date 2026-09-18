@@ -56,7 +56,7 @@ const sharedFooter = `<footer class="site-footer site-footer--expanded" data-sit
   <div class="site-footer-inner">
     <div class="footer-brand-block">
       <a class="footer-brand" href="/"><img src="/assets/brand/favicon.svg" alt="" width="38" height="38"><span>Dental Cost Calculator</span></a>
-      <p>Published dental-cost context and quote-based calculators for U.S. consumers. Cost education only; not dental or insurance advice.</p>
+      <p>U.S. dental cost guides and quote-based calculators.</p>
     </div>
     <div class="footer-grid">
       <section>
@@ -75,7 +75,7 @@ const sharedFooter = `<footer class="site-footer site-footer--expanded" data-sit
         <a href="/invisalign-cost-calculator/">Invisalign calculator</a>
       </section>
       <section>
-        <h2>Trust &amp; methodology</h2>
+        <h2>How we work</h2>
         <a href="/editorial-policy/">Editorial Policy</a>
         <a href="/cost-data-methodology/">Cost Data Methodology</a>
         <a href="/calculator-methodology/">Calculator Methodology</a>
@@ -83,7 +83,7 @@ const sharedFooter = `<footer class="site-footer site-footer--expanded" data-sit
         <a href="/medical-disclaimer/">Medical Disclaimer</a>
       </section>
       <section>
-        <h2>About &amp; legal</h2>
+        <h2>About this site</h2>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
         <a href="/privacy/">Privacy</a>
@@ -92,7 +92,7 @@ const sharedFooter = `<footer class="site-footer site-footer--expanded" data-sit
       </section>
     </div>
     <div class="footer-bottom">
-      <p>DentalCostCalculator.site</p>
+      <p>© 2026 DentalCostCalculator.site</p>
       <p>Cost education only; not a diagnosis, dental quote or insurance guarantee.</p>
     </div>
   </div>
@@ -102,6 +102,18 @@ const htmlPaths = (await readdir(output, { recursive: true })).filter((path) => 
 for (const path of htmlPaths) {
   const target = resolve(output, path);
   let html = await readFile(target, "utf8");
+
+
+  html = html.replace(/Research and written by/gi, "Written by");
+  html = html.replace(/Evidence checked/gi, "Last updated");
+  html = html.replace(
+    /<p class="byline">Written by Farrukh Abdullah<\/p>\s*<p class="updated">Last updated ([^<]+)<\/p>/gi,
+    '<p class="article-meta"><span class="byline">Written by <a href="/authors/farrukh-abdullah/">Farrukh Abdullah</a></span><span class="updated">Last updated $1</span></p>'
+  );
+  html = html.replace(
+    /<p class="byline">Written by <a href="\/authors\/farrukh-abdullah\/"[^>]*>Farrukh Abdullah<\/a><\/p>\s*<p class="updated">Last updated ([^<]+)<\/p>/gi,
+    '<p class="article-meta"><span class="byline">Written by <a href="/authors/farrukh-abdullah/">Farrukh Abdullah</a></span><span class="updated">Last updated $1</span></p>'
+  );
 
   html = html.replace(/<link rel="icon"[^>]*>\s*/gi, "");
   html = html.replace("</head>", '  <link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg">\n</head>');

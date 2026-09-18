@@ -69,9 +69,9 @@ for (const token of [
   "/editorial-policy/",
   "/medical-disclaimer/",
   "procedure-finder-form",
-  "Published price context",
-  "Four things to check on a dental quote",
-  "How to use Dental Cost Calculator",
+  "Quick price guide",
+  "Check these 4 things on your dental quote",
+  "Questions about dental costs and our calculators",
 ]) {
   if (!homepage.includes(token)) throw new Error(`homepage: required Wave A trust/ownership token missing: ${token}`);
 }
@@ -80,6 +80,14 @@ const homepageLinks = [...homepage.matchAll(/href="(\/[^"]*\/)"/g)].map((match) 
 for (const href of new Set(homepageLinks)) {
   const target = href === "/" ? "index.html" : `${href.slice(1)}index.html`;
   await access(resolve(output, target));
+}
+
+const cleaningMeta = await readFile(resolve(output, "dental-cleaning-cost/index.html"), "utf8");
+for (const token of ["Written by", "Last updated", "/authors/farrukh-abdullah/"]) {
+  if (!cleaningMeta.includes(token)) throw new Error(`cleaning metadata: expected authority-style metadata token missing: ${token}`);
+}
+if (cleaningMeta.includes("Evidence checked") || cleaningMeta.includes("Research and written by")) {
+  throw new Error("cleaning metadata: legacy metadata wording must not reach reader copy");
 }
 
 const contact = await readFile(resolve(output, "contact/index.html"), "utf8");
