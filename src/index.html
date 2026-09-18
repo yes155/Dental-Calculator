@@ -174,9 +174,9 @@
       <div class="home-section-heading home-section-heading--split">
         <div>
           <p class="eyebrow">Dental costs by state</p>
-          <h2 id="state-cost-title">See how published dental prices vary by state</h2>
+          <h2 id="state-cost-title">How dental prices compare across the U.S.</h2>
         </div>
-        <p>Compare the same procedure across all 50 states and Washington, D.C. These are published state averages—not quotes for a specific dentist or ZIP code.</p>
+        <p>Pick one procedure and compare the same published price unit across all 50 states and Washington, D.C. The colors are standardized against the published U.S. average, so the same color means the same percentage difference for every procedure.</p>
       </div>
 
       <div class="state-cost-controls">
@@ -199,33 +199,91 @@
         </label>
       </div>
 
+      <div class="state-insight-grid" aria-label="National cost snapshot">
+        <div class="state-insight-card">
+          <span>U.S. published average</span>
+          <strong data-state-us-average>Loading…</strong>
+          <small data-state-us-unit></small>
+        </div>
+        <div class="state-insight-card">
+          <span>Lowest published state</span>
+          <strong data-state-lowest>Loading…</strong>
+          <small>Same procedure and priced unit</small>
+        </div>
+        <div class="state-insight-card">
+          <span>Highest published state</span>
+          <strong data-state-highest>Loading…</strong>
+          <small>Same procedure and priced unit</small>
+        </div>
+        <div class="state-insight-card state-insight-card--selected">
+          <span>Your selected state</span>
+          <strong data-state-rank>Select a state</strong>
+          <small data-state-rank-note>See its national position</small>
+        </div>
+      </div>
+
+      <div class="state-map-scale" aria-label="Standardized map color scale">
+        <div class="state-map-scale-heading">
+          <strong>Standardized color scale</strong>
+          <span>Difference from the published U.S. average</span>
+        </div>
+        <div class="state-map-scale-bands" aria-hidden="true">
+          <i class="scale-vlow"></i><i class="scale-low"></i><i class="scale-slight-low"></i><i class="scale-mid"></i><i class="scale-slight-high"></i><i class="scale-high"></i><i class="scale-vhigh"></i>
+        </div>
+        <div class="state-map-scale-labels">
+          <span>20%+ below</span>
+          <span>10–20% below</span>
+          <span>5–10% below</span>
+          <span>Within 5%</span>
+          <span>5–10% above</span>
+          <span>10–20% above</span>
+          <span>20%+ above</span>
+        </div>
+      </div>
+
       <div class="state-cost-layout">
         <div class="state-map-panel">
           <div class="state-map-heading">
             <div>
               <h3>U.S. state cost map</h3>
-              <p>Choose a state on the map or use the selector above.</p>
-            </div>
-            <div class="state-map-legend" aria-label="Map color scale">
-              <span>Lower published average</span>
-              <i aria-hidden="true"></i>
-              <span>Higher published average</span>
+              <p>Choose a state to see the published average, rank and closest state comparisons.</p>
             </div>
           </div>
           <div class="state-tile-scroll">
             <div class="state-tile-map" data-state-map aria-label="Interactive U.S. state cost tile map"></div>
           </div>
-          <p class="state-map-note">This is a tile map for comparison; tile positions are approximate and do not show geographic boundaries.</p>
+          <p class="state-map-note">Tile positions are approximate. Colors show percentage difference from the published U.S. average—not geographic boundaries or a prediction for a specific dentist.</p>
         </div>
 
         <aside class="state-cost-summary" aria-live="polite">
           <p class="eyebrow" data-state-summary-label>U.S. published average</p>
           <strong class="state-summary-price" data-state-summary-price>Loading…</strong>
           <p data-state-summary-unit></p>
+          <p class="state-summary-narrative" data-state-summary-narrative>Choose a state to see how it compares with the U.S. published average.</p>
+
           <dl>
-            <div><dt>Compared with U.S. average</dt><dd data-state-summary-delta>—</dd></div>
+            <div><dt>Dollar difference</dt><dd data-state-summary-dollar>—</dd></div>
+            <div><dt>National position</dt><dd data-state-summary-rank>—</dd></div>
             <div><dt>Source study</dt><dd data-state-summary-study>—</dd></div>
           </dl>
+
+          <div class="state-range" aria-label="Selected state position within the published state range">
+            <div class="state-range-track" data-state-range-track>
+              <span class="state-range-average" data-state-range-average title="U.S. published average"></span>
+              <span class="state-range-selected" data-state-range-selected title="Selected state" hidden></span>
+            </div>
+            <div class="state-range-labels">
+              <span data-state-range-min>—</span>
+              <span>Published state range</span>
+              <span data-state-range-max>—</span>
+            </div>
+          </div>
+
+          <div class="state-similar">
+            <strong>Closest published state averages</strong>
+            <div data-state-similar><span>Choose a state to compare.</span></div>
+          </div>
+
           <p class="state-scope-note" data-state-scope></p>
           <div class="state-summary-links">
             <a data-state-guide href="/dental-implant-cost-calculator/">Open procedure guide →</a>
@@ -235,7 +293,7 @@
       </div>
 
       <details class="state-comparison-details">
-        <summary>Compare all states in a table</summary>
+        <summary>Compare all 51 jurisdictions in a table</summary>
         <div class="state-table-toolbar" aria-label="Sort comparison table">
           <button type="button" data-state-sort="az" aria-pressed="true">A–Z</button>
           <button type="button" data-state-sort="low" aria-pressed="false">Lower to higher</button>
@@ -244,13 +302,19 @@
         <div class="state-table-wrap">
           <table class="state-comparison-table">
             <caption data-state-table-caption>Published state averages</caption>
-            <thead><tr><th scope="col">State</th><th scope="col">Published average</th><th scope="col">Vs. U.S. published average</th></tr></thead>
+            <thead><tr><th scope="col">Rank</th><th scope="col">State</th><th scope="col">Published average</th><th scope="col">Vs. U.S. published average</th></tr></thead>
             <tbody data-state-table-body></tbody>
           </table>
         </div>
       </details>
 
-      <p class="state-cost-source-line">Source values are transcribed from named CareCredit/Synchrony procedure pages and keep each procedure’s original scope. We do not mix them with Medicaid reimbursement, insurer allowed amounts or clinic-specific prices.</p>
+      <div class="state-info-gain" aria-label="How this comparison is built">
+        <div><strong>Same scope</strong><span>One named procedure and priced unit is used across every state.</span></div>
+        <div><strong>51 jurisdictions</strong><span>All 50 states plus Washington, D.C. are included before a procedure can appear here.</span></div>
+        <div><strong>No blended prices</strong><span>We do not mix these averages with Medicaid reimbursement, insurer allowed amounts or clinic-specific fees.</span></div>
+      </div>
+
+      <p class="state-cost-source-line">Source values are transcribed from named CareCredit/Synchrony procedure pages. State ranking, dollar difference, percentage difference and closest-state comparisons are derived from those published values; they are not additional price estimates.</p>
       <p class="state-cost-error" data-state-error hidden>State comparison data is temporarily unavailable. The procedure guides and calculators still work normally.</p>
     </section>
 

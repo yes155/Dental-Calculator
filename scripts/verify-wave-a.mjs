@@ -66,6 +66,11 @@ for (const token of ["Universal interaction + calculator density contract", "Uni
   if (!siteCss.includes(token)) throw new Error(`site css: calculator density contract token missing: ${token}`);
 }
 
+const stateScript = await readFile(resolve(output, "assets/state-costs.mjs"), "utf8");
+for (const token of ["STANDARD_BANDS", "rankOf", "renderSimilar", "data-state-range-selected"]) {
+  if (!stateScript.includes(token)) throw new Error(`state costs: information-gain/standardized-scale token missing: ${token}`);
+}
+
 const chromeScript = await readFile(resolve(output, "assets/site-chrome.mjs"), "utf8");
 for (const token of ["pointerdown", "Escape", "toggle"]) {
   if (!chromeScript.includes(token)) throw new Error(`site chrome: dropdown behavior token missing: ${token}`);
@@ -95,8 +100,11 @@ for (const token of [
   "Trying to understand what insurance changes?",
   "Questions about dental costs and our calculators",
   "data-state-costs",
-  "See how published dental prices vary by state",
-  "Compare all states in a table",
+  "How dental prices compare across the U.S.",
+  "Compare all 51 jurisdictions in a table",
+  "Standardized color scale",
+  "Closest published state averages",
+  "Same scope",
 ]) {
   if (!homepage.includes(token)) throw new Error(`homepage: required Wave A trust/ownership token missing: ${token}`);
 }
