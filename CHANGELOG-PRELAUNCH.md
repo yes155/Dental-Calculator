@@ -249,3 +249,11 @@
 - Preview mode intentionally skips production social-image metadata.
 - Prelaunch QA run #464 passed at `4a96515e34ea3a2d9a217f342c0dbe043ed25101`.
 - Recorded rollback target as current `main` at `3e9db6a6458659c4db41b80b16a97558957b953b`; live rollback verification remains pending until the production-domain candidate exists.
+
+## 2026-09-19
+
+### Visual-refresh trust regression repair
+- Restored the homepage author and reviewer cards after the calculator-first redesign accidentally removed the local people media and explicit role boundaries.
+- Restored the homepage cost-education, non-diagnosis and non-guaranteed-coverage safeguards without adding page-specific review claims.
+- Updated the Wave A homepage assertion to the approved `Know what a dental procedure should cost` H1 while retaining the single-H1 guard.
+- Revalidated the complete upgrade branch: 213/213 tests passed, all cluster build gates passed, and the state-cost gate confirmed 51 jurisdictions across 6 procedures.

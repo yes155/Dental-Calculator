@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 const root = resolve(new URL('..', import.meta.url).pathname);
 
 const pages = [
-  ['index.html', 'Dental cost guides and quote-based calculators'],
+  ['index.html', 'Know what a dental procedure should cost'],
   ['contact/index.html', 'Contact Dental Calculator'],
   ['privacy/index.html', 'Privacy Policy'],
   ['terms/index.html', 'Terms of Use'],
@@ -16,7 +16,7 @@ for (const [path, h1] of pages) {
   test(`${path} is preview-safe and publication-clean`, async () => {
     const html = await readFile(resolve(root, 'src', path), 'utf8');
     assert.match(html, /<meta name="robots" content="noindex,nofollow">/);
-    assert.ok(html.includes(`<h1>${h1}</h1>`));
+    assert.match(html, new RegExp(`<h1(?:\\s+[^>]*)?>${h1}</h1>`));
     assert.equal((html.match(/<h1\b/g) || []).length, 1);
     assert.doesNotMatch(html, /\[SOURCE NEEDED BEFORE PUBLICATION\]|TODO|PLACEHOLDER|EDITOR NOTE/);
   });
