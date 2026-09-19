@@ -2545,3 +2545,56 @@ a:hover { text-decoration-thickness: .14em; }
   .state-map-scale-labels span:nth-child(4) { grid-column: 2; }
   .state-map-scale-labels span:nth-child(7) { grid-column: 3; }
 }
+
+
+/* Homepage whitespace correction — keep modules at their content height. */
+@media (min-width: 901px) {
+  .home-hero--image {
+    min-height: clamp(26rem, 34vw, 29rem);
+  }
+}
+
+.home-section--popular {
+  padding-bottom: 1.5rem;
+}
+
+.home-state-costs {
+  padding-top: 2rem;
+  padding-bottom: 1.5rem;
+}
+
+.home-section--browser {
+  padding-top: 2rem;
+}
+
+.state-cost-layout,
+.cost-browser {
+  align-items: start;
+}
+
+.state-map-panel,
+.cost-browser-panels {
+  min-height: 0;
+  align-self: start;
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .home-hero--image {
+    min-height: 29rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-hero--image {
+    min-height: 31rem;
+  }
+
+  .home-section--popular {
+    padding-bottom: 1.25rem;
+  }
+
+  .home-state-costs,
+  .home-section--browser {
+    padding-top: 1.75rem;
+  }
+}

@@ -62,7 +62,7 @@ for (const path of waveARoutes) {
 }
 
 const siteCss = await readFile(resolve(output, "assets/site.css"), "utf8");
-for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
+for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
   if (!siteCss.includes(token)) throw new Error(`site css: calculator density contract token missing: ${token}`);
 }
 

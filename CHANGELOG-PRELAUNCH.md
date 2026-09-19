@@ -257,3 +257,9 @@
 - Restored the homepage cost-education, non-diagnosis and non-guaranteed-coverage safeguards without adding page-specific review claims.
 - Updated the Wave A homepage assertion to the approved `Know what a dental procedure should cost` H1 while retaining the single-H1 guard.
 - Revalidated the complete upgrade branch: 213/213 tests passed, all cluster build gates passed, and the state-cost gate confirmed 51 jurisdictions across 6 procedures.
+
+### Homepage whitespace correction
+- Reduced the forced desktop hero height so the supplied illustration no longer leaves an oversized empty lower band while keeping the headline and both calls to action above the fold.
+- Prevented the state map and dental-care browser panels from stretching to match taller neighboring columns; both now stop at their own content height.
+- Replaced doubled adjacent-section padding with a compact, consistent transition between popular calculators, state comparisons and the dental-care browser.
+- Added the whitespace-correction contract to the Wave A build gate and revalidated the complete branch: 213/213 tests, 131 build outputs, all cluster gates and the 51-jurisdiction state-data gate passed.
