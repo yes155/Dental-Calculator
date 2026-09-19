@@ -10,12 +10,18 @@ await mkdir(output, { recursive: true });
 await cp(source, output, { recursive: true });
 
 const sharedHeader = `<header class="site-header site-header--nav" data-site-chrome="shared-v1">
-  <div class="site-header-inner">
-    <a class="site-brand site-brand--with-icon" href="/">
-      <img class="site-brand-mark" src="/assets/brand/favicon.svg" alt="" width="34" height="34">
-      <span>Dental Cost Calculator</span>
-    </a>
-    <nav class="site-nav" aria-label="Primary">
+  <div class="site-brand-bar">
+    <div class="site-header-inner site-header-inner--brand">
+      <a class="site-brand site-brand--with-icon" href="/">
+        <img class="site-brand-mark" src="/assets/brand/favicon.svg" alt="" width="34" height="34">
+        <span>Dental Cost Calculator</span>
+      </a>
+      <span class="site-utility">Independent U.S. dental cost education</span>
+    </div>
+  </div>
+  <div class="site-nav-bar">
+    <div class="site-header-inner site-header-inner--nav">
+      <nav class="site-nav" aria-label="Primary">
       <a href="/#common-costs">Cost guides</a>
       <details class="nav-dropdown">
         <summary>Calculators</summary>
@@ -48,11 +54,13 @@ const sharedHeader = `<header class="site-header site-header--nav" data-site-chr
       </details>
       <a href="/about/">About</a>
       <a href="/contact/">Contact</a>
-    </nav>
+      </nav>
+    </div>
   </div>
 </header>`;
 
 const sharedFooter = `<footer class="site-footer site-footer--expanded" data-site-chrome="shared-v1">
+  <div class="footer-motto">Clear dental costs. Better-informed questions.</div>
   <div class="site-footer-inner">
     <div class="footer-brand-block">
       <a class="footer-brand" href="/"><img src="/assets/brand/favicon.svg" alt="" width="38" height="38"><span>Dental Cost Calculator</span></a>
@@ -121,7 +129,7 @@ for (const path of htmlPaths) {
   );
 
   html = html.replace(/<link rel="icon"[^>]*>\s*/gi, "");
-  html = html.replace("</head>", '  <link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg">\n  <script type="module" src="/assets/site-chrome.mjs"></script>\n</head>');
+  html = html.replace("</head>", '  <link rel="preconnect" href="https://fonts.googleapis.com">\n  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">\n  <link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg">\n  <script type="module" src="/assets/site-chrome.mjs"></script>\n</head>');
 
   const headerPattern = /<header class="site-header[^"]*"[^>]*>[\s\S]*?<\/header>/i;
   if (headerPattern.test(html)) html = html.replace(headerPattern, sharedHeader);

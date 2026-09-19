@@ -62,7 +62,7 @@ for (const path of waveARoutes) {
 }
 
 const siteCss = await readFile(resolve(output, "assets/site.css"), "utf8");
-for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
+for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", "Institutional editorial system", "--brand-purple", ".footer-motto", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
   if (!siteCss.includes(token)) throw new Error(`site css: calculator density contract token missing: ${token}`);
 }
 
@@ -83,6 +83,10 @@ for (const token of [
   "/cost-data-methodology/",
   "/calculator-methodology/",
   "<details class=\"nav-dropdown\">",
+  "site-brand-bar",
+  "site-nav-bar",
+  "Clear dental costs. Better-informed questions.",
+  "Roboto+Condensed",
   "Know what a dental procedure should cost",
   "These are estimates based on your inputs and stated assumptions — not a dentist's fee and not a guarantee of coverage.",
   "/editorial-policy/",

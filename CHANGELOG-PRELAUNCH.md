@@ -263,3 +263,10 @@
 - Prevented the state map and dental-care browser panels from stretching to match taller neighboring columns; both now stop at their own content height.
 - Replaced doubled adjacent-section padding with a compact, consistent transition between popular calculators, state comparisons and the dental-care browser.
 - Added the whitespace-correction contract to the Wave A build gate and revalidated the complete branch: 213/213 tests, 131 build outputs, all cluster gates and the 51-jurisdiction state-data gate passed.
+
+### Institutional editorial redesign
+- Replaced the homepage hero illustration with the supplied four-person black-and-white collage, preserving its full composition and yellow statement band in a 2048-pixel WebP.
+- Added a two-level purple-and-white masthead, condensed editorial typography, green navigation and links, purple section headings, thin gray rules and a yellow footer statement band.
+- Flattened homepage modules, editorial pages, procedure pages and calculator surfaces while retaining clear interaction boundaries, result emphasis and accessible focus behavior.
+- Added a mobile hero treatment that places the message above the full uncropped image rather than hiding people or the embedded slogan.
+- Kept the redesign independent of the visual reference's institutional branding and retained the site's cost-education, evidence-scope and insurance safeguards.
