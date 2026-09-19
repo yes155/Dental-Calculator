@@ -269,4 +269,5 @@
 - Added a two-level purple-and-white masthead, condensed editorial typography, green navigation and links, purple section headings, thin gray rules and a yellow footer statement band.
 - Flattened homepage modules, editorial pages, procedure pages and calculator surfaces while retaining clear interaction boundaries, result emphasis and accessible focus behavior.
 - Added a mobile hero treatment that places the message above the full uncropped image rather than hiding people or the embedded slogan.
+- Added a desktop-only white edge fade behind the hero copy so every line remains readable across the image's diagonal portrait boundary.
 - Kept the redesign independent of the visual reference's institutional branding and retained the site's cost-education, evidence-scope and insurance safeguards.

@@ -2756,7 +2756,22 @@ a:hover { color: var(--brand-purple); }
   box-shadow: none;
 }
 
-.home-hero--image::after { display: none; }
+.home-hero--image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    #fff 0%,
+    rgba(255,255,255,.99) 19%,
+    rgba(255,255,255,.93) 27%,
+    rgba(255,255,255,.45) 34%,
+    rgba(255,255,255,0) 42%
+  );
+}
 .home-hero-image {
   position: absolute;
   inset: 0;
@@ -3047,6 +3062,7 @@ th, td { border-color: var(--line); }
     aspect-ratio: auto;
     overflow: visible;
   }
+  .home-hero--image::after { display: none; }
   .home-hero-image {
     position: relative;
     order: 2;
