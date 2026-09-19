@@ -52,17 +52,20 @@ test('every approved page has basic preview metadata and publication-clean copy'
   }
 });
 
-test('approved people images stay local to the dental site', async () => {
+test('approved profile images stay local while the homepage trust strip stays condensed', async () => {
   await assert.doesNotReject(access(resolve(src, 'assets/people/farrukh-abdullah.webp')), 'Farrukh author photo asset is missing');
   await assert.doesNotReject(access(resolve(src, 'assets/people/juliana-maia-teixeira.webp')), 'Reviewer photo asset is missing');
 
   const homepage = await readFile(resolve(src, 'index.html'), 'utf8');
   const about = await readFile(routeToFile('/about/'), 'utf8');
   const author = await readFile(routeToFile('/authors/farrukh-abdullah/'), 'utf8');
+  const reviewer = await readFile(routeToFile('/reviewers/juliana-maia-teixeira/'), 'utf8');
 
-  for (const [label, html] of Object.entries({ homepage, about, author })) {
+  for (const [label, html] of Object.entries({ about, author })) {
     assert.match(html, /src="\/assets\/people\/farrukh-abdullah\.webp"/i, `${label}: Farrukh author photo must use the local asset`);
   }
+  assert.match(reviewer, /src="\/assets\/people\/juliana-maia-teixeira\.webp"/i, 'reviewer profile: reviewer photo must use the local asset');
+  assert.doesNotMatch(homepage, /class="person-card|\/assets\/people\//i, 'homepage: trust content must remain a compact policy strip without full profile cards');
 });
 
 test('all root-relative internal page links resolve to an implemented approved route or asset', async () => {

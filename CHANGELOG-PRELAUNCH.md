@@ -271,3 +271,11 @@
 - Added a mobile hero treatment that places the message above the full uncropped image rather than hiding people or the embedded slogan.
 - Added a desktop-only white edge fade behind the hero copy so every line remains readable across the image's diagonal portrait boundary.
 - Kept the redesign independent of the visual reference's institutional branding and retained the site's cost-education, evidence-scope and insurance safeguards.
+
+### Homepage router-first restructuring
+- Rebuilt the homepage as a site map and task router rather than a long-form landing page: hero, four primary doorways, category browser, scoped price examples, state-data teaser, cost-driver explainer, trust strip, compact FAQs and an actionable closing band.
+- Moved the dental-care category browser ahead of price and state examples so visitors can reach the correct procedure family before encountering deeper content.
+- Reduced the homepage to three scoped price examples and a static single-tooth implant state snapshot; the complete 51-jurisdiction comparison remains available in a collapsed on-page tool because the frozen registry has no separate state-data route.
+- Removed full author/reviewer cards from the homepage while preserving local profile media on the dedicated About, author and reviewer pages and keeping the exact-version review boundary visible.
+- Cropped the emotional yellow slogan from the supplied hero asset without changing the four portraits, and replaced it with a factual CTA linking to the cost-guide browser.
+- Updated homepage architecture, trust and media regression tests; `npm run qa` passes all 213 tests and every build/data gate locally.

@@ -60,7 +60,10 @@ const sharedHeader = `<header class="site-header site-header--nav" data-site-chr
 </header>`;
 
 const sharedFooter = `<footer class="site-footer site-footer--expanded" data-site-chrome="shared-v1">
-  <div class="footer-motto">Clear dental costs. Better-informed questions.</div>
+  <div class="footer-motto">
+    <span>Compare a published benchmark with the scope of your written quote.</span>
+    <a href="/#common-costs">Browse dental cost guides</a>
+  </div>
   <div class="site-footer-inner">
     <div class="footer-brand-block">
       <a class="footer-brand" href="/"><img src="/assets/brand/favicon.svg" alt="" width="38" height="38"><span>Dental Cost Calculator</span></a>

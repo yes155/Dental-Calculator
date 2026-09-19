@@ -1,6 +1,6 @@
 # PROJECT STATE — Dental Calculator
 
-Updated 2026-09-18.
+Updated 2026-09-19.
 
 ## Project identity
 - Site name: Dental Calculator (working name)
@@ -14,14 +14,14 @@ Updated 2026-09-18.
 ## Repository / deployment
 - GitHub repo: `yes155/Dental-Calculator`
 - Production branch: `main`
-- Working branch: `chatgpt-work`
+- Working branch: `visual-refresh-2026-09-18`
 - Framework: dependency-free Node.js static build
 - Source: `src/`
 - Build: `npm run build`
 - QA: `npm run qa`
 - Output: `dist/`
 - Cloudflare project: `dental-calculator`
-- Branch preview: `https://chatgpt-work-dental-calculator.f-abdullah79.workers.dev`
+- Branch preview: `https://visual-refresh-2026-09-18-dental-calculator.f-abdullah79.workers.dev`
 - Preview policy: implemented pages remain `noindex,nofollow`; preview `robots.txt` blocks crawling; live `workers.dev` response carries HTTP `X-Robots-Tag: noindex`.
 
 ## Architecture
@@ -83,7 +83,7 @@ Common controls:
 
 ## Trust / people
 - Author shown: Farrukh Abdullah, researcher and writer only.
-- Farrukh author photo: local asset `/assets/people/farrukh-abdullah.webp`, created from user-supplied photo and used on homepage, About, and author profile.
+- Farrukh author photo: local asset `/assets/people/farrukh-abdullah.webp`, created from user-supplied photo and used on About and the author profile. The homepage now uses a compact policy-based trust strip without full bios or profile photos.
 - No dental qualification claimed for Farrukh.
 - Clinical/scientific reviewer: Juliana Maia Teixeira appears only in approved trust/profile contexts.
 - Article-level reviewer credit is prohibited unless that exact page version has documented review.
@@ -114,6 +114,7 @@ Latest validated CI: **Prelaunch QA run #464 — SUCCESS** at `4a96515e34ea3a2d9
 
 ## Media / design / accessibility
 - Representative calculator visual pattern: established through CALC-001 review.
+- Homepage information architecture is router-first: four task doorways and the procedure-category browser precede compact price/state examples; the complete state comparison is collapsed by default.
 - Farrukh author photo is local and verified live on the Cloudflare preview.
 - Final sitewide social card is approved, local, 1200×630, and wired only into production metadata.
 - Source-level accessibility review confirmed skip links, visible focus, labelled native controls, fieldsets/legends, error focus/`aria-invalid`, live results, responsive fallbacks, 16px mobile controls and reduced-motion handling.

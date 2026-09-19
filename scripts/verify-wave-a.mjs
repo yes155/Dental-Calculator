@@ -85,7 +85,8 @@ for (const token of [
   "<details class=\"nav-dropdown\">",
   "site-brand-bar",
   "site-nav-bar",
-  "Clear dental costs. Better-informed questions.",
+  "Compare a published benchmark with the scope of your written quote.",
+  "Browse dental cost guides",
   "Roboto+Condensed",
   "Know what a dental procedure should cost",
   "These are estimates based on your inputs and stated assumptions — not a dentist's fee and not a guarantee of coverage.",
@@ -93,18 +94,19 @@ for (const token of [
   "/medical-disclaimer/",
   "home-calculator-entry",
   "procedure-finder-form",
-  "Start with your procedure",
+  "Find the right dental cost resource",
+  "Open the tool for your procedure",
   "Open calculator",
-  "Popular dental costs",
-  "Check your cleaning quote →",
+  "Three price benchmarks, with scope attached",
+  "Open the cleaning cost guide →",
   "data-cost-browser",
   "Choose a type of dental care",
   "What changes what you may pay",
-  "home-support-strip",
-  "Trying to understand what insurance changes?",
-  "Questions about dental costs and our calculators",
+  "Visible sources, authorship and review boundaries",
+  "What these prices and calculators can—and cannot—tell you",
   "data-state-costs",
-  "How dental prices compare across the U.S.",
+  "A scoped example of geographic price variation",
+  "Open the full state comparison",
   "Compare all 51 jurisdictions in a table",
   "Standardized color scale",
   "Closest published state averages",
@@ -114,10 +116,12 @@ for (const token of [
 }
 
 const heroIndex = homepage.indexOf("home-hero--image");
-const calculatorIndex = homepage.indexOf("home-calculator-entry");
-const popularIndex = homepage.indexOf("Popular dental costs");
-if (!(heroIndex >= 0 && calculatorIndex > heroIndex && popularIndex > calculatorIndex)) {
-  throw new Error("homepage: expected order is hero → calculator entry → popular dental costs");
+const doorwayIndex = homepage.indexOf("Find the right dental cost resource");
+const categoryIndex = homepage.indexOf("Choose a type of dental care");
+const priceIndex = homepage.indexOf("Three price benchmarks, with scope attached");
+const stateIndex = homepage.indexOf("A scoped example of geographic price variation");
+if (!(heroIndex >= 0 && doorwayIndex > heroIndex && categoryIndex > doorwayIndex && priceIndex > categoryIndex && stateIndex > priceIndex)) {
+  throw new Error("homepage: expected order is hero → doorways → category browser → price teaser → state teaser");
 }
 
 const homepageLinks = [...homepage.matchAll(/href="(\/[^"]*\/)"/g)].map((match) => match[1]);
