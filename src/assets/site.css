@@ -2759,7 +2759,7 @@ a:hover { color: var(--brand-purple); }
 .home-hero--image::after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: 0 0 12% 0;
   z-index: 1;
   display: block;
   pointer-events: none;
