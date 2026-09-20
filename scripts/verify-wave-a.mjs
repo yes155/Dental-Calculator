@@ -62,7 +62,7 @@ for (const path of waveARoutes) {
 }
 
 const siteCss = await readFile(resolve(output, "assets/site.css"), "utf8");
-for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", "Institutional editorial system", "Homepage semantic color and responsive polish contract", "Cost-guide vs quote-tool differentiation contract", "--brand-purple", ".footer-motto", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
+for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", "Institutional editorial system", "Homepage semantic color and responsive polish contract", "Unified one-page-per-procedure architecture", "--brand-purple", ".footer-motto", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
   if (!siteCss.includes(token)) throw new Error(`site css: calculator density contract token missing: ${token}`);
 }
 
@@ -82,11 +82,11 @@ for (const token of [
   "/assets/media/home-dental-cost-hero.webp",
   "/cost-data-methodology/",
   "/calculator-methodology/",
-  "<details class=\"nav-dropdown nav-resource nav-resource--tool\">",
+  "<details class=\"nav-dropdown nav-resource nav-resource--procedures\">",
   "site-brand-bar",
   "site-nav-bar",
-  "Compare a published benchmark with the scope of your written quote.",
-  "Browse dental cost guides",
+  "One procedure page brings the cost evidence and quote-check tools together.",
+  "Browse dental procedures",
   "Roboto+Condensed",
   "Know what a dental procedure should cost",
   "These are estimates based on your inputs and stated assumptions — not a dentist's fee and not a guarantee of coverage.",
@@ -95,6 +95,10 @@ for (const token of [
   "home-calculator-entry",
   "procedure-finder-form",
   "Find the right dental cost resource",
+  "Open the page for your dental procedure",
+  "Open procedure page",
+  "Dental procedure pages",
+  "Each link opens the single page for that procedure",
   "Published price examples",
   "Three example prices from published sources",
   "Read the cleaning cost guide →",
@@ -102,7 +106,7 @@ for (const token of [
   "Choose a type of dental care",
   "What can change the price",
   "Visible sources, authorship and review boundaries",
-  "What these prices and calculators can—and cannot—tell you",
+  "What these dental cost pages can—and cannot—tell you",
   "data-state-costs",
   "How prices can change by state",
   "Open the full state comparison",
@@ -110,25 +114,19 @@ for (const token of [
   "Standardized color scale",
   "Closest published state averages",
   "Same procedure",
-  "doorway-expansion",
   "doorway-icon",
-  "Open the selector ↓",
   "finder-help",
   "cost-tab-copy",
   "price-teaser-icon",
   "faq-preview",
-  "Published cost guides",
-  "Quote check calculators",
-  "Check your written estimate",
-  "Open quote tool",
 ]) {
   if (!homepage.includes(token)) throw new Error(`homepage: required Wave A trust/ownership token missing: ${token}`);
 }
 
-const calculatorDoorwayIndex = homepage.indexOf("doorway-card--calculator");
-const calculatorFinderIndex = homepage.indexOf('id="calculator-finder"');
-if (!(calculatorDoorwayIndex >= 0 && calculatorFinderIndex > calculatorDoorwayIndex)) {
-  throw new Error("homepage: quote calculator doorway must control the integrated selector below it");
+const procedureDoorwayIndex = homepage.indexOf("doorway-card--procedure");
+const procedureFinderIndex = homepage.indexOf('id="procedure-finder"');
+if (!(procedureDoorwayIndex >= 0 && procedureFinderIndex > procedureDoorwayIndex)) {
+  throw new Error("homepage: procedure doorway must lead into the unified procedure finder");
 }
 const heroIndex = homepage.indexOf("home-hero--image");
 const doorwayIndex = homepage.indexOf("Find the right dental cost resource");
