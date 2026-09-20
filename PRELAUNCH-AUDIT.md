@@ -94,3 +94,13 @@ Remaining release blockers are now limited to:
 2. final-domain canonical/robots/sitemap/schema/security/performance verification;
 3. final candidate freeze + live rollback verification;
 4. final hard-blocker audit before any merge to `main`.
+
+
+## Entity-mapping differential audit — 2026-09-20
+
+| ID | Category | Severity | Scope | Evidence | Fix | Verification | Status |
+|---|---|---|---|---|---|---|---|
+| E-ENT-001 | Entity architecture | HIGH | Homepage + 24 DEN pages | Original semantic auditor requires central/secondary entities to be grounded to global entity nodes; the Dental port had reduced this to generic ontology/EAV language. | Added `data/entity-map.csv` with explicit mapping type and about/mentions relationship. | Entity regression tests require homepage + every approved DEN page and reject mappings to deferred/unapproved routes. | PASS |
+| E-ENT-002 | Schema/entity identity | HIGH | Production JSON-LD | External identities were not previously represented in page schema. | Production generator now emits Thing nodes under `about`/`mentions`, with verified Wikidata/Wikipedia `sameAs` identities where available. | Helper tests verify sameAs is on Thing nodes rather than WebPage; production generator validates generated identities against the registry. | PASS |
+| E-ENT-003 | Cannibalization guard | HARD | DEN-004 / DEN-013 | Both pages map to Inlays and onlays Q1389317 but the existing architecture audit found distinct information gain. | Preserved both frozen URLs and encoded FAMILY-SUBTYPE mappings rather than merging them. | Regression test locks both distinct owners while requiring the shared QID. | PASS |
+| E-ENT-004 | YMYL evidence boundary | HARD | Sitewide | Knowledge-base identity sources must not become price/clinical evidence. | Added explicit contract: Wikipedia/Wikidata are identity/disambiguation only; source register remains claim authority. | Documentation + unchanged evidence/calculator source paths. | PASS |

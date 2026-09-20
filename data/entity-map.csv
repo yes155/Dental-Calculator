@@ -1,0 +1,26 @@
+page_id,url,relation,mapping_type,entity_name,wikidata_qid,wikipedia_url,domain_ontology_id,notes
+HOM-001,/,about,EXACT,Dentistry,Q12128,https://en.wikipedia.org/wiki/Dentistry,,Central site topic
+DEN-001,/dental-implant-cost-calculator/,about,EXACT,Dental implant,Q143680,https://en.wikipedia.org/wiki/Dental_implant,MeSH:D003757,Exact procedure entity
+DEN-002,/dental-cleaning-cost/,about,EXACT,Teeth cleaning,Q17084824,https://en.wikipedia.org/wiki/Teeth_cleaning,,Routine cleaning entity
+DEN-003,/full-mouth-dental-implants-cost/,about,BROADER-NODE,Dental implant,Q143680,https://en.wikipedia.org/wiki/Dental_implant,MeSH:D003757,Full-mouth treatment is a scoped implant configuration
+DEN-004,/dental-inlay-cost/,about,FAMILY-SUBTYPE,Inlays and onlays,Q1389317,https://en.wikipedia.org/wiki/Inlays_and_onlays,,Inlay page remains a distinct canonical owner
+DEN-005,/root-canal-cost/,about,EXACT,Root canal treatment,Q905815,https://en.wikipedia.org/wiki/Root_canal_treatment,MeSH:D012390,Exact treatment entity
+DEN-006,/deep-teeth-cleaning-cost/,about,EXACT,Scaling and root planing,Q15139949,https://en.wikipedia.org/wiki/Scaling_and_root_planing,MeSH:D012534,Deep cleaning page is SRP cost scope
+DEN-007,/dental-bone-graft-cost/,about,BROADER-NODE,Bone grafting,Q3814234,https://en.wikipedia.org/wiki/Bone_grafting,,Dental graft is a scoped application of the broader procedure
+DEN-008,/tooth-extraction-cost/,about,EXACT,Dental extraction,Q849893,https://en.wikipedia.org/wiki/Dental_extraction,MeSH:D014081,Exact procedure entity
+DEN-010,/dental-filling-cost/,about,FAMILY-SUBTYPE,Dental restoration,Q907359,https://en.wikipedia.org/wiki/Dental_restoration,,Filling is a restoration subtype
+DEN-011,/dental-x-ray-cost/,about,EXACT,Dental radiography,Q5259433,https://en.wikipedia.org/wiki/Dental_radiography,MeSH:D011861,Exact diagnostic entity
+DEN-012,/all-on-4-dental-implants-cost/,about,EXACT,All-on-4,Q4728369,https://en.wikipedia.org/wiki/All-on-4,,Named implant configuration
+DEN-013,/dental-onlay-cost/,about,FAMILY-SUBTYPE,Inlays and onlays,Q1389317,https://en.wikipedia.org/wiki/Inlays_and_onlays,,Onlay page remains a distinct canonical owner
+DEN-017,/invisalign-cost-calculator/,about,EXACT-BRAND,Invisalign,Q23766506,,,Brand entity has a verified Wikidata node
+DEN-018,/wisdom-teeth-removal-cost/,about,COMPOSITE,Dental extraction|Wisdom tooth,Q849893|Q202517,https://en.wikipedia.org/wiki/Dental_extraction|https://en.wikipedia.org/wiki/Wisdom_tooth,MeSH:D014081|,Procedure plus anatomical target
+DEN-019,/dental-veneers-cost/,about,EXACT,Dental veneer,Q1686140,https://en.wikipedia.org/wiki/Veneer_(dentistry),,Exact restoration entity
+DEN-020,/braces-cost/,about,EXACT,Dental braces,Q143977,https://en.wikipedia.org/wiki/Dental_braces,,Exact orthodontic appliance entity
+DEN-022,/dental-crown-cost/,about,EXACT,Dental crown,Q143720,https://en.wikipedia.org/wiki/Crown_(dental_restoration),MeSH:D003442,Exact restoration entity
+DEN-023,/dental-bonding-cost/,about,EXACT-NO-QID,Dental bonding,,https://en.wikipedia.org/wiki/Dental_bonding,MeSH:D001840,Grounded by Wikipedia and MeSH without inventing a QID
+DEN-024,/dental-bridge-cost/,about,EXACT,Dental bridge,Q996044,https://en.wikipedia.org/wiki/Bridge_(dentistry),,Exact prosthetic entity
+DEN-025,/dentist-visit-cost/,mentions,BROADER-NODE,Dentist,Q27349,https://en.wikipedia.org/wiki/Dentist,,Visit task mentions the practitioner entity and is not identical to it
+DEN-027,/dental-retainer-cost/,about,EXACT,Orthodontic retainer,Q1275667,https://en.wikipedia.org/wiki/Retainer_(orthodontics),MeSH:D018704,Exact orthodontic appliance entity
+DEN-029,/teeth-whitening-cost-at-dentist/,about,EXACT,Tooth bleaching,Q143458,https://en.wikipedia.org/wiki/Tooth_bleaching,,Exact cosmetic procedure entity
+DEN-030,/dentures-cost/,about,EXACT,Dentures,Q143567,https://en.wikipedia.org/wiki/Dentures,MeSH:D003778,Canonical Wikidata item rather than a redirect item
+DEN-032,/periodontal-maintenance-cost/,mentions,BROADER-NODE,Periodontology,Q938196,https://en.wikipedia.org/wiki/Periodontology,MeSH:D010517,Maintenance service is narrower than the field entity

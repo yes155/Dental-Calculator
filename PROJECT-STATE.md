@@ -30,6 +30,14 @@ Updated 2026-09-20.
 - 39 approved build routes + 5 deferred non-build candidates
 - No new keyword-variant or tool URLs without architecture review
 
+## Entity mapping / external grounding
+- Canonical entity registry: `data/entity-map.csv`.
+- Coverage: homepage central entity + all 24 approved DEN procedure pages; GUI/trust pages are not forced into artificial mappings.
+- Production JSON-LD adds entity grounding through `about` or `mentions` Thing nodes with Wikidata/Wikipedia `sameAs` links where verified.
+- Wikipedia/Wikidata are identity/disambiguation sources only; dental price, insurance and clinical claims still use the evidence/source-register hierarchy.
+- Shared global nodes do not override URL ownership. DEN-004 inlay and DEN-013 onlay remain separate frozen owners although both map to Inlays and onlays (Q1389317).
+- Deferred routes receive no production entity mapping and remain excluded from build/indexation.
+
 ## Evidence authority
 Primary evidence controls currently in repo:
 - DEN-008: `data/source-register.csv`

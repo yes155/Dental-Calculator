@@ -1,9 +1,11 @@
 import { access, readFile, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { attachEntityRelationship, buildEntityThings, parseEntityMap } from "./entity-map.mjs";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
 const output = resolve(root, "dist");
 const registryPath = resolve(root, "data", "page-registry.csv");
+const entityMapPath = resolve(root, "data", "entity-map.csv");
 
 const productionBranch = (process.env.PRODUCTION_BRANCH || "main").trim();
 const workersBranch = (process.env.WORKERS_CI_BRANCH || "").trim();
@@ -101,7 +103,7 @@ function normalizeOrigin(raw) {
   return url.origin;
 }
 
-function schemaForRoute(route, origin, canonical, title, description, h1) {
+function schemaForRoute(route, origin, canonical, title, description, h1, entityMapping) {
   const websiteId = `${origin}/#website`;
   const webpageId = `${canonical}#webpage`;
   const page = {
@@ -114,6 +116,7 @@ function schemaForRoute(route, origin, canonical, title, description, h1) {
   };
 
   const graph = [];
+  if (route !== "/" && entityMapping) attachEntityRelationship(page, entityMapping);
   if (route !== "/") {
     const breadcrumbId = `${canonical}#breadcrumb`;
     page.breadcrumb = { "@id": breadcrumbId };
@@ -137,13 +140,15 @@ function schemaForRoute(route, origin, canonical, title, description, h1) {
     });
   }
   if (route === "/") {
-    graph.push({
+    const website = {
       "@type": "WebSite",
       "@id": websiteId,
       url: `${origin}/`,
       name: "Dental Cost Calculator",
       description: "Evidence-led U.S. dental cost education and quote-based calculators.",
-    });
+    };
+    if (entityMapping) attachEntityRelationship(website, entityMapping);
+    graph.push(website);
   }
 
   if (route === "/authors/farrukh-abdullah/") {
@@ -197,6 +202,12 @@ function parseGeneratedSchema(html, route) {
 
 const registry = await readFile(registryPath, "utf8");
 const approvedRoutes = parseRegistry(registry);
+const entityMapCsv = await readFile(entityMapPath, "utf8");
+const entityMappings = parseEntityMap(entityMapCsv);
+const entityByRoute = new Map(entityMappings.map((row) => [row.url, row]));
+for (const mapping of entityMappings) {
+  if (!approvedRoutes.includes(mapping.url)) throw new Error(`${mapping.page_id}: entity mapping targets a non-approved route ${mapping.url}`);
+}
 
 if (approvedRoutes.length !== 39) {
   throw new Error(`Expected 39 approved registry routes; found ${approvedRoutes.length}`);
@@ -232,7 +243,8 @@ for (const route of approvedRoutes) {
   if (!production) continue;
 
   const canonical = canonicalUrl(origin, route);
-  const schema = schemaForRoute(route, origin, canonical, title, description, h1);
+  const entityMapping = entityByRoute.get(route);
+  const schema = schemaForRoute(route, origin, canonical, title, description, h1, entityMapping);
   const metadata = [
     `  <link rel="canonical" href="${escapeAttr(canonical)}">`,
     `  <meta property="og:type" content="website">`,
@@ -269,8 +281,24 @@ for (const route of approvedRoutes) {
   if (!pageNode || pageNode["@type"] !== expectedPageType || pageNode.url !== canonical || pageNode.isPartOf?.["@id"] !== `${origin}/#website`) {
     throw new Error(`${route}: generated page schema does not match canonical/site identity`);
   }
-  if (route === "/" && !graph.some((node) => node?.["@type"] === "WebSite" && node?.["@id"] === `${origin}/#website` && node?.url === `${origin}/`)) {
+  const websiteNode = graph.find((node) => node?.["@type"] === "WebSite" && node?.["@id"] === `${origin}/#website`);
+  if (route === "/" && (!websiteNode || websiteNode.url !== `${origin}/`)) {
     throw new Error("homepage: WebSite schema missing or inconsistent");
+  }
+  if (entityMapping) {
+    const relationshipNode = route === "/" ? websiteNode : pageNode;
+    const actualRelationship = relationshipNode?.[entityMapping.relation];
+    const actualThings = Array.isArray(actualRelationship) ? actualRelationship : actualRelationship ? [actualRelationship] : [];
+    const expectedThings = buildEntityThings(entityMapping);
+    if (actualThings.length !== expectedThings.length) {
+      throw new Error(`${route}: entity relationship count does not match data/entity-map.csv`);
+    }
+    for (let i = 0; i < expectedThings.length; i += 1) {
+      if (actualThings[i]?.name !== expectedThings[i].name || JSON.stringify(actualThings[i]?.sameAs || []) !== JSON.stringify(expectedThings[i].sameAs || [])) {
+        throw new Error(`${route}: generated entity grounding does not match data/entity-map.csv`);
+      }
+    }
+    if (relationshipNode?.sameAs) throw new Error(`${route}: sameAs must stay on Thing nodes rather than the page/site node`);
   }
   if (route !== "/") {
     const breadcrumbId = `${canonical}#breadcrumb`;
