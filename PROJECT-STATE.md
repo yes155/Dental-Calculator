@@ -126,6 +126,8 @@ Latest validated CI: **Prelaunch QA run #464 — SUCCESS** at `4a96515e34ea3a2d9
 - A back-to-top control appears after substantial scrolling on long pages.
 - A custom noindex 404 recovery page is included and linked to common procedure destinations.
 - Print CSS removes navigation and interactive chrome so procedure guidance prints as a clean reference document.
+- Static full-site search is available from the shared header without creating a new indexable route. The build generates `/assets/data/site-search.json` from the 38 approved non-home registry pages, grouped as Dental procedures, Paying for care, and Trust & methodology.
+- Search queries run entirely in the browser against the local index; no third-party search service or query tracking is introduced.
 
 ## Current milestone
 - M1 Baseline: PASS
