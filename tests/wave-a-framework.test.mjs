@@ -6,8 +6,8 @@ import { resolve } from 'node:path';
 const root = resolve(new URL('..', import.meta.url).pathname);
 
 const pages = [
-  ['index.html', 'Know what a dental procedure should cost'],
-  ['contact/index.html', 'Contact Dental Calculator'],
+  ['index.html', 'Understand what a dental procedure may cost'],
+  ['contact/index.html', 'Contact Dental Cost Calculator'],
   ['privacy/index.html', 'Privacy Policy'],
   ['terms/index.html', 'Terms of Use'],
 ];
