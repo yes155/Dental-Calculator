@@ -245,7 +245,7 @@ const pageChecks = [
   },
   {
     path: "deep-teeth-cleaning-cost/index.html",
-    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Deep teeth cleaning cost by quadrant</h1>','data-calculator-id="CALC-006"','data-calculator="calc006"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/deep-cleaning-calculator-ui.mjs','$180–$295','per quadrant','$235–$303','Orlando, Florida','not a default full-mouth total','Published prices stay separate'],
+    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Deep teeth cleaning cost by quadrant</h1>','data-calculator-id="CALC-006"','data-calculator="calc006"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/deep-cleaning-calculator-ui.mjs','$180–$295','per quadrant','$235–$303','Orlando, Florida','do not automatically multiply either observation by four','Published prices stay separate'],
     headings: ["Deep cleaning cost calculator","How much does deep teeth cleaning cost?","What does “per quadrant” mean in a deep cleaning quote?","What can be included or charged separately?","What changes a scaling and root planing quote?","Routine cleaning, deep cleaning, debridement and maintenance are not the same","How insurance can affect the patient amount","Related dental cost guides"],
   },
   {
@@ -268,10 +268,14 @@ for (const check of pageChecks) {
   if (check.headings) {
     let cursor = -1;
     for (const heading of check.headings) {
-      const token = `<h2${calculatorHeadings.has(heading) ? ' id="calculator-heading"' : ""}>${heading}</h2>`;
-      const index = html.indexOf(token, cursor + 1);
-      if (index === -1) throw new Error(`${check.path}: frozen H2 missing or out of order: ${heading}`);
-      cursor = index;
+      const escapedHeading = heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const headingPattern = new RegExp(`<h2\\b([^>]*)>${escapedHeading}</h2>`, "i");
+      const match = headingPattern.exec(html.slice(cursor + 1));
+      if (!match) throw new Error(`${check.path}: frozen H2 missing or out of order: ${heading}`);
+      if (calculatorHeadings.has(heading) && !/\\bid="calculator-heading"/i.test(match[1])) {
+        throw new Error(`${check.path}: calculator H2 is missing id="calculator-heading": ${heading}`);
+      }
+      cursor += 1 + match.index;
     }
   }
 
