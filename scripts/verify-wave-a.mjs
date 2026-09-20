@@ -62,7 +62,7 @@ for (const path of waveARoutes) {
 }
 
 const siteCss = await readFile(resolve(output, "assets/site.css"), "utf8");
-for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", "Institutional editorial system", "Homepage semantic color and responsive polish contract", "Unified one-page-per-procedure architecture", "Homepage hero credibility strip", "--brand-purple", ".footer-motto", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
+for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", "Institutional editorial system", "Homepage semantic color and responsive polish contract", "Unified one-page-per-procedure architecture", "Homepage hero credibility strip", "Procedure finder vertical-balance refinement", "--brand-purple", ".footer-motto", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
   if (!siteCss.includes(token)) throw new Error(`site css: calculator density contract token missing: ${token}`);
 }
 
@@ -100,7 +100,8 @@ for (const token of [
   "home-calculator-entry",
   "procedure-finder-form",
   "Find the right dental cost resource",
-  "Open the page for your dental procedure",
+  "Open a dental procedure page",
+  "Each procedure has one page, with a quote calculator included where available.",
   "Open procedure page",
   "Dental procedure pages",
   "Each link opens the single page for that procedure",
