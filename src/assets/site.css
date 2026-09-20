@@ -3457,3 +3457,346 @@ th, td { border-color: var(--line); }
     width: 100%;
   }
 }
+
+/* Homepage semantic color and responsive polish contract */
+.home-main--editorial {
+  --home-purple: #57068c;
+  --home-purple-deep: #3c005f;
+  --home-green: #146b42;
+  --home-teal: #087b75;
+  --home-teal-deep: #055d59;
+  --home-lilac: #f7f1fb;
+  --home-green-soft: #f1f8f4;
+  --home-teal-soft: #edf8f7;
+}
+.site-header--nav { background: var(--brand-purple); }
+
+.home-main--editorial .home-section-heading h2,
+.home-main--editorial .home-trust-strip h2 {
+  color: var(--home-purple);
+}
+.home-main--editorial .eyebrow { color: #625d66; }
+
+.home-main--editorial .primary-cta,
+.home-main--editorial .procedure-finder-form--inline button,
+.state-tool-disclosure > summary {
+  color: #fff;
+  background: var(--home-purple);
+  border-color: var(--home-purple);
+}
+.home-main--editorial .primary-cta:hover,
+.home-main--editorial .procedure-finder-form--inline button:hover,
+.state-tool-disclosure > summary:hover {
+  background: var(--home-purple-deep);
+  border-color: var(--home-purple-deep);
+}
+.home-main--editorial .secondary-cta {
+  color: var(--home-green);
+  background: rgba(255,255,255,.96);
+  border-color: var(--home-green);
+}
+.home-main--editorial .doorway-card a,
+.home-main--editorial .finder-help a,
+.home-main--editorial .browser-link-grid a,
+.home-main--editorial .price-teaser-card a,
+.home-main--editorial .section-text-link a,
+.home-main--editorial .state-summary-links a,
+.home-main--editorial .faq-method-links a,
+.home-main--editorial .home-trust-strip .text-button {
+  color: var(--home-green);
+}
+.home-main--editorial .home-trust-strip .text-button {
+  border-color: var(--home-green);
+}
+.home-main--editorial .home-trust-strip .text-button:hover {
+  color: #fff;
+  background: var(--home-green);
+}
+.home-main--editorial .home-section + .home-section {
+  border-top-color: #e2dbe6;
+}
+
+/* Major start-here chapter and its functional calculator expansion. */
+.home-doorways {
+  position: relative;
+  margin-top: 0;
+  padding-inline: clamp(1rem, 2.5vw, 2rem);
+  background: linear-gradient(180deg, #fbf8fd 0%, #fff 100%);
+  border-top: 5px solid var(--home-purple);
+}
+.doorway-grid { gap: 1rem; }
+.doorway-card {
+  min-height: 15.5rem;
+  padding: 1.25rem;
+  background: #fff;
+  border: 1px solid #ded5e4;
+  border-radius: .8rem;
+  box-shadow: 0 .55rem 1.4rem rgba(87,6,140,.08);
+}
+.doorway-card:nth-child(2) { background: var(--home-lilac); }
+.doorway-card:nth-child(3) { background: var(--home-teal-soft); }
+.doorway-card:nth-child(4) { background: var(--home-green-soft); }
+.doorway-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+  margin-bottom: .9rem;
+}
+.doorway-icon {
+  width: 2.35rem;
+  height: 2.35rem;
+  color: var(--home-green);
+}
+.doorway-number {
+  margin: 0;
+  color: #777078;
+}
+.doorway-card h3 {
+  color: var(--home-purple);
+  font-size: 1.2rem;
+}
+.home-doorways .doorway-expansion {
+  width: 100%;
+  margin: 1rem 0 0;
+  padding: 1.25rem;
+  background: #fcf9fe;
+  border: 1px solid #d8c8e2;
+  border-top: 4px solid var(--home-purple);
+  border-radius: .75rem;
+  box-shadow: none;
+}
+.home-doorways .doorway-expansion h3 { color: var(--home-purple); }
+.finder-help {
+  margin-top: .65rem !important;
+  font-size: .86rem !important;
+}
+.procedure-finder-form--inline.has-selection select {
+  border-color: var(--home-teal);
+  box-shadow: 0 0 0 3px rgba(8,123,117,.13);
+}
+
+/* Information-rich category rail; selected state is not conveyed by color alone. */
+.cost-browser {
+  grid-template-columns: 19rem minmax(0,1fr);
+  gap: 1.35rem;
+}
+.cost-browser-tabs button {
+  position: relative;
+  min-height: 4.35rem;
+  padding: .7rem .85rem;
+}
+.cost-tab-copy {
+  min-width: 0;
+  display: grid;
+  gap: .12rem;
+}
+.cost-tab-copy strong { font-size: .94rem; }
+.cost-tab-copy small {
+  color: var(--muted);
+  font-size: .74rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.cost-browser-tabs button[aria-selected="true"] {
+  color: #fff;
+  background: var(--home-purple);
+  border-color: var(--home-purple);
+}
+.cost-browser-tabs button[aria-selected="true"] svg { color: #fff; }
+.cost-browser-tabs button[aria-selected="true"] .cost-tab-copy small { color: #f2e9f7; }
+.cost-browser-tabs button[aria-selected="true"]::after {
+  content: "✓";
+  margin-left: auto;
+  font-weight: 900;
+}
+
+/* Published price cards: line icons + soft elevation break the wireframe rhythm. */
+.price-teaser-grid { gap: 1.1rem; }
+.price-teaser-card {
+  position: relative;
+  padding: 1.35rem;
+  border: 1px solid #ddd5e1;
+  border-radius: .85rem;
+  box-shadow: 0 .6rem 1.45rem rgba(60,0,95,.075);
+}
+.price-teaser-card:nth-child(1) { background: #fbf8fd; }
+.price-teaser-card:nth-child(2) { background: #f5faf7; }
+.price-teaser-card:nth-child(3) { background: #f1f8f7; }
+.price-teaser-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-bottom: .65rem;
+  color: var(--home-green);
+}
+.price-teaser-card > span {
+  color: #605a63;
+  text-transform: none;
+  letter-spacing: .01em;
+}
+.price-teaser-card > strong { color: var(--home-purple); }
+
+/* Teal is reserved for user-specific selection/result state. */
+.state-insight-card--selected {
+  background: #fff;
+  border-color: #c8dadd;
+}
+[data-state-costs].has-selection .state-insight-card--selected {
+  background: var(--home-teal-soft);
+  border: 2px solid var(--home-teal);
+}
+[data-state-costs].has-selection .state-insight-card--selected > span::before {
+  content: "✓ ";
+  color: var(--home-teal-deep);
+}
+[data-state-costs].has-selection .state-cost-summary {
+  border-color: var(--home-teal);
+  box-shadow: inset 4px 0 0 var(--home-teal);
+}
+.state-range-selected {
+  background: var(--home-teal);
+  border-color: #fff;
+  box-shadow: 0 0 0 2px var(--home-teal-deep);
+}
+.state-comparison-table tbody tr.is-selected {
+  background: var(--home-teal-soft);
+  box-shadow: inset 4px 0 0 var(--home-teal);
+}
+
+/* Intentional dark signature, visually echoed by the dark footer. */
+.home-cost-flow {
+  border-top: 4px solid var(--home-teal);
+  border-bottom: 4px solid var(--home-teal);
+  background: linear-gradient(135deg, #17323a 0%, #132a31 100%);
+}
+.home-cost-flow .home-section-heading h2 { color: #fff; }
+.home-cost-flow .eyebrow { color: #9fe4dc; }
+.cost-flow-step svg { color: #9fe4dc; }
+.cost-flow-result {
+  color: #fff;
+  background: var(--home-teal);
+  border: 1px solid #51b4ad;
+}
+.cost-flow-result strong,
+.cost-flow-result span { color: #fff !important; }
+
+/* FAQ previews improve scanability before expansion. */
+.faq-stack summary {
+  display: grid;
+  gap: .2rem;
+  padding-right: 2.5rem;
+}
+.faq-stack summary > span { color: var(--home-purple); }
+.faq-preview {
+  display: block;
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+/* Explicit mobile behavior for the five complex homepage modules. */
+@media (max-width: 700px) {
+  /* Hero: copy first, collage becomes a separate image below it. */
+  .home-hero--image {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: visible;
+    background: #fff;
+  }
+  .home-hero--image::after { display: none; }
+  .home-hero-overlay {
+    position: relative;
+    order: 1;
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+    padding: 1.5rem 1rem 1.25rem;
+    background: #fff;
+  }
+  .home-hero-image {
+    position: relative;
+    order: 2;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* Doorways: stack vertically in reading order. */
+  .doorway-grid { grid-template-columns: 1fr; }
+  .doorway-card { min-height: 0; }
+  .home-doorways .doorway-expansion { margin-top: .8rem; }
+
+  /* Sidebar becomes a horizontally scrollable tab rail. */
+  .cost-browser { grid-template-columns: 1fr; }
+  .cost-browser-tabs {
+    display: flex;
+    overflow-x: auto;
+    gap: .5rem;
+    padding-bottom: .35rem;
+    scroll-snap-type: x proximity;
+  }
+  .cost-browser-tabs button {
+    flex: 0 0 auto;
+    min-width: 9rem;
+    min-height: 3rem;
+    scroll-snap-align: start;
+  }
+  .cost-tab-copy small { display: none; }
+  .cost-browser-tabs button[aria-selected="true"]::after { margin-left: .2rem; }
+
+  /* State comparison: U.S. average first, then lower and higher lists. */
+  .state-preview-grid { grid-template-columns: 1fr; }
+  .state-preview-center { order: -1; border-left: 0; }
+  .state-preview-column + .state-preview-center,
+  .state-preview-center + .state-preview-column { border-left: 0; }
+  .state-insight-grid { grid-template-columns: 1fr; }
+
+  /* Five-step price driver becomes a vertical reading path. */
+  .cost-flow-track {
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+    gap: .5rem;
+  }
+  .cost-flow-step,
+  .cost-flow-result {
+    display: grid;
+    grid-template-columns: 2.6rem minmax(0,1fr);
+    grid-template-areas: "icon title" "icon text";
+    gap: .15rem .8rem;
+    align-items: center;
+    text-align: left;
+    padding: .7rem 0;
+  }
+  .cost-flow-step svg {
+    grid-area: icon;
+    margin: 0;
+  }
+  .cost-flow-step strong,
+  .cost-flow-result strong { grid-area: title; }
+  .cost-flow-step span,
+  .cost-flow-result span {
+    grid-area: text;
+    max-width: none;
+    margin: 0;
+  }
+  .cost-flow-arrow {
+    justify-self: start;
+    margin-left: .7rem;
+    transform: rotate(90deg);
+  }
+  .cost-flow-result {
+    grid-template-columns: 1fr;
+    grid-template-areas: "title" "text";
+    padding: .8rem 1rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .doorway-card,
+  .price-teaser-card,
+  .browser-link-grid a,
+  .state-tile { transition: none !important; }
+}
