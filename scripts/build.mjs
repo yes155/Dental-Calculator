@@ -272,7 +272,7 @@ for (const check of pageChecks) {
       const headingPattern = new RegExp(`<h2\\b([^>]*)>${escapedHeading}</h2>`, "i");
       const match = headingPattern.exec(html.slice(cursor + 1));
       if (!match) throw new Error(`${check.path}: frozen H2 missing or out of order: ${heading}`);
-      if (calculatorHeadings.has(heading) && !/\\bid="calculator-heading"/i.test(match[1])) {
+      if (calculatorHeadings.has(heading) && !/\bid="calculator-heading"/i.test(match[1])) {
         throw new Error(`${check.path}: calculator H2 is missing id="calculator-heading": ${heading}`);
       }
       cursor += 1 + match.index;
