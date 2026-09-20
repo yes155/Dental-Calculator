@@ -7,7 +7,7 @@ Updated 2026-09-20.
 - Primary market: United States
 - Primary audience: people researching dental procedure costs and written quote/out-of-pocket estimates
 - Risk class: Health/YMYL-adjacent + financial estimation
-- Production domain: `dentalcostcalculator.site` — finalized, not yet attached/verified on Cloudflare
+- Production domain: `dentalcostcalculator.site` — attached to the Cloudflare production project
 - Production origin: `https://dentalcostcalculator.site`
 - Production release: blocked until remaining hard gates pass
 
@@ -134,18 +134,18 @@ Latest validated CI: **Prelaunch QA run #464 — SUCCESS** at `4a96515e34ea3a2d9
 - M2 Architecture/Evidence: PASS for implemented source-controlled routes
 - M3 Content/Tools: PASS for the 39 approved implemented routes and automated-tested calculators
 - M4 Design/Media: PASS — representative rendered/accessibility QA and final social image are complete
-- M5 Final Candidate: IN PROGRESS — production hostname and social image are finalized; blocked on Cloudflare domain attachment, final-domain checks and rollback verification
+- M5 Final Candidate: IN PROGRESS — the production hostname is attached; the current visual-refresh branch still requires fresh production-domain validation before release
 - M6 Production: BLOCKED
 
 ## Next logical work
-1. Attach `dentalcostcalculator.site` to the Cloudflare production project and set `SITE_ORIGIN=https://dentalcostcalculator.site` on the production build trigger.
-2. Run final-domain canonical/robots/sitemap/schema/security/performance checks.
-3. Freeze the final candidate SHA after this documentation sync passes CI; rollback target is recorded in `LAUNCH-REPORT.md`.
-4. Verify rollback procedure against the production-domain candidate.
-5. Run the final hard-blocker audit before any merge to `main`.
+1. Confirm the production build trigger still uses `SITE_ORIGIN=https://dentalcostcalculator.site`.
+2. Deploy the current `visual-refresh-2026-09-18` candidate through the production build path and run fresh final-domain canonical/robots/sitemap/schema/security/performance checks.
+3. Verify the new shared header/search/mobile-menu/breadcrumb/back-to-top/404 behavior on the production hostname.
+4. Freeze the validated candidate SHA and record the rollback target for this release.
+5. Run the final hard-blocker audit before merging the validated candidate to `main`.
 
 ## Known hard-gate exceptions
-- Production domain is finalized but Cloudflare custom-domain attachment / production `SITE_ORIGIN` deployment setting are not yet verified.
-- Final-domain SEO/security/performance checks incomplete.
-- Rollback target/procedure are documented; live rollback verification remains open.
-- Production merge/indexation blocked.
+- The custom production domain is attached. The production `SITE_ORIGIN` value was previously verified for the prior release, but should be reconfirmed for the current deployment trigger.
+- The current visual-refresh candidate has not yet completed fresh production-domain SEO/security/performance checks.
+- The current candidate needs a release-specific rollback target recorded before merge.
+- Merge of the current candidate to `main` remains blocked until those fresh checks pass.
