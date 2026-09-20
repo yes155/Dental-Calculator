@@ -5055,3 +5055,50 @@ html {
     display: none !important;
   }
 }
+
+
+/* Desktop header row alignment fix */
+@media (min-width: 761px) {
+  .site-nav-bar {
+    padding: .42rem 0;
+  }
+
+  .site-header-inner--nav {
+    display: block;
+  }
+
+  .site-nav {
+    width: 100%;
+    min-height: 3rem;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0 1.25rem;
+  }
+
+  .site-nav .nav-resource--procedures {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+
+  .site-nav .nav-resource--procedures > summary {
+    min-height: 2.65rem;
+    margin: 0;
+    padding: .42rem .82rem;
+  }
+
+  .site-nav > a {
+    min-height: 2.65rem;
+    display: inline-flex;
+    align-items: center;
+    padding: .2rem 0;
+  }
+
+  .site-nav .site-search-toggle {
+    margin-left: auto;
+    flex: 0 0 auto;
+    align-self: center;
+  }
+}
