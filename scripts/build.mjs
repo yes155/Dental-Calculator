@@ -196,11 +196,11 @@ const pageChecks = [
   {
     path: "dental-implant-cost-calculator/index.html",
     tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Dental implant cost calculator</h1>','data-calculator-id="CALC-001"','data-calculator="calc001"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/calc001-guided-ui.mjs','/assets/calc001-charge-select.mjs','/assets/calc001-plain.css','Does your quote show one total or separate charges?','Estimated insurance payment','$2,143','$1,646–$4,157'],
-    headings: ["How much does a dental implant cost?","Dental implant cost calculator","What does a single-tooth implant quote include?","Why the implant, connector and crown can be separate charges","What changes the price of a dental implant quote?","How insurance can change out-of-pocket cost","How mini, zirconia and immediate-load labels can affect the quote","When tooth removal or bone grafting costs extra","Related dental implant cost guides"],
+    headings: ["Dental implant cost calculator","How much does a dental implant cost?","What does a single-tooth implant quote include?","Why the implant, connector and crown can be separate charges","What changes the price of a dental implant quote?","How insurance can change out-of-pocket cost","How mini, zirconia and immediate-load labels can affect the quote","When tooth removal or bone grafting costs extra","Related dental implant cost guides"],
   },
   {
     path: "full-mouth-dental-implants-cost/index.html",
-    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Full-mouth dental implants cost</h1>','data-calculator-id="CALC-003"','data-calculator="calc003"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/arch-calculators-guided-ui.mjs','/assets/arch-calculators-guided.css','How many arches does this quote cover?','Estimated insurance payment','Broad U.S. context — reference only','$20,000–$45,000','not a per-arch price'],
+    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Full-mouth dental implants cost</h1>','data-calculator-id="CALC-003"','data-calculator="calc003"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/arch-calculators-guided-ui.mjs','/assets/arch-calculators-guided.css','How many arches does this quote cover?','Estimated insurance payment','Published prices stay separate','$20,000–$45,000','not a per-arch price'],
     headings: ["Full-mouth dental implant cost calculator","How much do full-mouth dental implants cost?","Full-arch and full-mouth quotes are not the same unit","What does a full-arch implant quote include?","Fixed and removable implant restorations can be quoted differently","What changes a full-mouth implant quote?","How insurance can affect the patient estimate","When the quote is specifically All-on-4","Related implant and replacement cost guides"],
   },
   {
@@ -230,7 +230,7 @@ const pageChecks = [
   },
   {
     path: "all-on-4-dental-implants-cost/index.html",
-    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>All-on-4 dental implant cost</h1>','data-calculator-id="CALC-003-A04"','data-calculator="calc003-a04"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/arch-calculators-guided-ui.mjs','/assets/arch-calculators-guided.css','How many arches does this quote cover?','Estimated insurance payment','U.S. price reference — reference only','$15,176','$11,640–$27,500'],
+    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>All-on-4 dental implant cost</h1>','data-calculator-id="CALC-003-A04"','data-calculator="calc003-a04"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/arch-calculators-guided-ui.mjs','/assets/arch-calculators-guided.css','How many arches does this quote cover?','Estimated insurance payment','Published prices stay separate','$15,176','$11,640–$27,500'],
     headings: ["All-on-4 cost calculator","How much do All-on-4 dental implants cost?","What does All-on-4 mean in a dental quote?","Is an All-on-4 price per arch or for a full mouth?","What may be included in an All-on-4 package?","What changes an All-on-4 quote?","How insurance can affect out-of-pocket cost","All-on-4 vs. generic full-arch implant quotes","Related dental implant cost guides"],
   },
   {
@@ -241,12 +241,12 @@ const pageChecks = [
   {
     path: "dental-cleaning-cost/index.html",
     tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Dental cleaning cost</h1>','data-calculator-id="CALC-002"','data-calculator="calc002"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/cleaning-calculator-ui.mjs','/assets/cleaning-calculator.css','$85–$160','without dental benefits','$104','$80–$109','Orlando, Florida','$203','broader bundle'],
-    headings: ["How much does a dental cleaning cost?","Dental cleaning cost calculator","What does a standard dental cleaning price include?","Are the exam and X-rays included in a cleaning quote?","What can change a dental cleaning quote?","How insurance can change what you pay","Routine cleaning, deep cleaning and periodontal maintenance are different","Related dental cost guides"],
+    headings: ["Dental cleaning cost calculator","How much does a dental cleaning cost?","What does a standard dental cleaning price include?","Are the exam and X-rays included in a cleaning quote?","What can change a dental cleaning quote?","How insurance can change what you pay","Routine cleaning, deep cleaning and periodontal maintenance are different","Related dental cost guides"],
   },
   {
     path: "deep-teeth-cleaning-cost/index.html",
-    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Deep teeth cleaning cost by quadrant</h1>','data-calculator-id="CALC-006"','data-calculator="calc006"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/deep-cleaning-calculator-ui.mjs','$180–$295','per quadrant','$235–$303','Orlando, Florida','not a default full-mouth total','Published reference — not a calculator default'],
-    headings: ["How much does deep teeth cleaning cost?","Deep cleaning cost calculator","What does “per quadrant” mean in a deep cleaning quote?","What can be included or charged separately?","What changes a scaling and root planing quote?","Routine cleaning, deep cleaning, debridement and maintenance are not the same","How insurance can affect the patient amount","Related dental cost guides"],
+    tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Deep teeth cleaning cost by quadrant</h1>','data-calculator-id="CALC-006"','data-calculator="calc006"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/deep-cleaning-calculator-ui.mjs','$180–$295','per quadrant','$235–$303','Orlando, Florida','not a default full-mouth total','Published prices stay separate'],
+    headings: ["Deep cleaning cost calculator","How much does deep teeth cleaning cost?","What does “per quadrant” mean in a deep cleaning quote?","What can be included or charged separately?","What changes a scaling and root planing quote?","Routine cleaning, deep cleaning, debridement and maintenance are not the same","How insurance can affect the patient amount","Related dental cost guides"],
   },
   {
     path: "dental-insurance-out-of-pocket-costs/index.html",
@@ -275,10 +275,14 @@ for (const check of pageChecks) {
     }
   }
 
-  if (["full-mouth-dental-implants-cost/index.html", "all-on-4-dental-implants-cost/index.html"].includes(check.path)) {
+  if (calculatorHeadings.has(check.headings?.[0])) {
+    const h1Index = html.indexOf("<h1");
     const calculatorIndex = html.indexOf('id="calculator-heading"');
-    const firstDetailIndex = html.indexOf('<h2>How much do ');
-    if (calculatorIndex === -1 || firstDetailIndex === -1 || calculatorIndex > firstDetailIndex) throw new Error(`${check.path}: calculator must appear immediately after the answer-first header and before detailed H2 content`);
+    const firstDetailHeading = check.headings[1];
+    const firstDetailIndex = html.indexOf(`<h2>${firstDetailHeading}</h2>`);
+    if (!(h1Index !== -1 && calculatorIndex > h1Index && firstDetailIndex > calculatorIndex)) {
+      throw new Error(`${check.path}: calculator must appear after the H1 and before detailed cost education`);
+    }
   }
 
   if (check.path === "dental-inlay-cost/index.html") {
@@ -311,18 +315,18 @@ for (const check of pageChecks) {
   }
 
   if (check.path === "dental-cleaning-cost/index.html") {
-    const priceIndex = html.indexOf('<h2>How much does a dental cleaning cost?</h2>');
+    const h1Index = html.indexOf("<h1>Dental cleaning cost</h1>");
     const calculatorIndex = html.indexOf('id="calculator-heading"');
-    const nextDetailIndex = html.indexOf('<h2>What does a standard dental cleaning price include?</h2>');
-    if (!(priceIndex !== -1 && calculatorIndex > priceIndex && calculatorIndex < nextDetailIndex)) throw new Error("DEN-002: calculator must immediately follow the answer-first cleaning price section");
+    const priceIndex = html.indexOf('<h2>How much does a dental cleaning cost?</h2>');
+    if (!(h1Index !== -1 && calculatorIndex > h1Index && priceIndex > calculatorIndex)) throw new Error("DEN-002: calculator must sit directly after the procedure hero and before repeated price education");
     if (html.includes("$203 standard cleaning")) throw new Error("DEN-002: CareCredit $203 bundle must not be relabeled as cleaning-only");
   }
 
   if (check.path === "deep-teeth-cleaning-cost/index.html") {
-    const priceIndex = html.indexOf('<h2>How much does deep teeth cleaning cost?</h2>');
+    const h1Index = html.indexOf("<h1>Deep teeth cleaning cost by quadrant</h1>");
     const calculatorIndex = html.indexOf('id="calculator-heading"');
-    const nextDetailIndex = html.indexOf('<h2>What does “per quadrant” mean in a deep cleaning quote?</h2>');
-    if (!(priceIndex !== -1 && calculatorIndex > priceIndex && calculatorIndex < nextDetailIndex)) throw new Error("DEN-006: calculator must immediately follow the answer-first per-quadrant price section");
+    const priceIndex = html.indexOf('<h2>How much does deep teeth cleaning cost?</h2>');
+    if (!(h1Index !== -1 && calculatorIndex > h1Index && priceIndex > calculatorIndex)) throw new Error("DEN-006: calculator must sit directly after the procedure hero and before repeated price education");
     if (html.includes("$720–$1,180") || html.includes("$940–$1,212")) throw new Error("DEN-006: published per-quadrant references must not be multiplied into a four-quadrant default");
     if (html.includes("data-default-quadrants")) throw new Error("DEN-006: calculator must not infer or default the quadrant count");
   }
