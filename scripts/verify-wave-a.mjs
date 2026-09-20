@@ -64,7 +64,7 @@ for (const path of waveARoutes) {
 }
 
 const siteCss = await readFile(resolve(output, "assets/site.css"), "utf8");
-for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", "Institutional editorial system", "Homepage semantic color and responsive polish contract", "Unified one-page-per-procedure architecture", "Homepage hero credibility strip", "Procedure finder vertical-balance refinement", "Global navigation, breadcrumbs, back-to-top, 404 and print UX", "Global static site search", "--brand-purple", ".footer-motto", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
+for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", "Institutional editorial system", "Homepage semantic color and responsive polish contract", "Unified one-page-per-procedure architecture", "Homepage hero credibility strip", "Procedure finder vertical-balance refinement", "Global navigation, breadcrumbs, back-to-top, 404 and print UX", "Global static site search", "Desktop header row alignment fix", "--brand-purple", ".footer-motto", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
   if (!siteCss.includes(token)) throw new Error(`site css: calculator density contract token missing: ${token}`);
 }
 
