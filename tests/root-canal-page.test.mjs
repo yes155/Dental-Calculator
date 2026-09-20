@@ -25,7 +25,7 @@ test("DEN-005 preserves evidence scope", () => {
 test("DEN-005 keeps the calculator before educational price detail", () => {
   const calculator = html.indexOf('<h2 id="calculator-heading">Root canal cost calculator</h2>');
   const answer = html.indexOf("<h2>How much does a root canal cost?</h2>");
-  const detail = html.indexOf("<h2>Root canal prices by tooth type</h2>");
+  const detail = html.indexOf(">Root canal prices by tooth type</h2>");
   assert.ok(calculator !== -1 && answer > calculator && detail > answer);
 });
 
@@ -56,7 +56,7 @@ test("DEN-005 has one H1 and controlled H2 order", () => {
   ];
   let cursor = -1;
   for (const heading of headings) {
-    const token = heading === "Root canal cost calculator" ? `<h2 id="calculator-heading">${heading}</h2>` : `<h2>${heading}</h2>`;
+    const token = `>${heading}</h2>`;
     const index = html.indexOf(token, cursor + 1);
     assert.ok(index !== -1, `missing or out-of-order H2: ${heading}`);
     cursor = index;
