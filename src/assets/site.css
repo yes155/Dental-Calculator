@@ -3928,3 +3928,235 @@ th, td { border-color: var(--line); }
   }
   .resource-kind { font-size: .64rem; }
 }
+
+
+/* High-contrast guide vs quote-tool visual split */
+/*
+  Guides = green editorial/reference surfaces.
+  Quote tools = purple interactive/utility surfaces.
+  This block intentionally overrides the softer differentiation above.
+*/
+
+/* Primary navigation: make the two intents read as separate products. */
+.site-nav .nav-resource--guide {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.65rem;
+  padding: .42rem .82rem;
+  color: #0d5c36;
+  background: #edf8f1;
+  border: 1px solid #9bc9ab;
+  border-bottom-width: 1px;
+  border-radius: .45rem;
+}
+.site-nav .nav-resource--guide:hover,
+.site-nav .nav-resource--guide:focus-visible {
+  color: #083f26;
+  background: #dff2e6;
+  border-color: #4f9e70;
+}
+.site-nav .nav-resource--tool {
+  border-radius: .45rem;
+}
+.site-nav .nav-resource--tool > summary {
+  display: flex;
+  align-items: center;
+  min-height: 2.65rem;
+  padding: .42rem .82rem;
+  color: #fff;
+  background: var(--brand-purple);
+  border: 1px solid var(--brand-purple);
+  border-bottom-width: 1px;
+  border-radius: .45rem;
+}
+.site-nav .nav-resource--tool > summary small {
+  color: #efe2f7;
+  opacity: 1;
+}
+.site-nav .nav-resource--tool[open] > summary,
+.site-nav .nav-resource--tool > summary:hover,
+.site-nav .nav-resource--tool > summary:focus-visible {
+  background: var(--brand-purple-dark);
+  border-color: var(--brand-purple-dark);
+}
+
+/* Start-here cards: editorial guide vs interactive tool. */
+.doorway-card--guide {
+  position: relative;
+  background: #f3fbf6 !important;
+  border: 1px solid #9bc9ab !important;
+  border-left: 5px solid #218653 !important;
+}
+.doorway-card--guide .doorway-icon,
+.doorway-card--guide h3,
+.doorway-card--guide a {
+  color: #12683e;
+}
+.doorway-card--guide .resource-kind--guide {
+  color: #fff;
+  background: #218653;
+  border-color: #218653;
+}
+.doorway-card--calculator {
+  position: relative;
+  color: #fff;
+  background: linear-gradient(145deg,#57068c 0%,#3c005f 100%) !important;
+  border: 2px solid #3c005f !important;
+  box-shadow: 0 .85rem 1.7rem rgba(87,6,140,.18);
+}
+.doorway-card--calculator h3,
+.doorway-card--calculator p,
+.doorway-card--calculator a,
+.doorway-card--calculator .doorway-icon,
+.doorway-card--calculator .doorway-number {
+  color: #fff !important;
+}
+.doorway-card--calculator .resource-kind--tool {
+  color: #3c005f;
+  background: var(--brand-yellow);
+  border-color: var(--brand-yellow);
+}
+.doorway-card--calculator a {
+  text-decoration-color: rgba(255,255,255,.55);
+}
+
+/* The quote selector should look like an app, not another article card. */
+#calculator-finder.home-calculator-entry {
+  color: #fff;
+  background: linear-gradient(135deg,#57068c 0%,#43006d 100%) !important;
+  border: 0 !important;
+  border-radius: .7rem;
+  box-shadow: 0 1rem 2.25rem rgba(60,0,95,.22);
+}
+#calculator-finder::before {
+  color: #3c005f !important;
+  background: var(--brand-yellow) !important;
+}
+#calculator-finder .eyebrow,
+#calculator-finder h3,
+#calculator-finder p {
+  color: #fff !important;
+}
+#calculator-finder .finder-help,
+#calculator-finder .finder-help a {
+  color: #f3e7fa !important;
+}
+#calculator-finder .finder-help a {
+  text-decoration-color: rgba(255,255,255,.7);
+}
+#calculator-finder select {
+  min-height: 3rem;
+  color: #29252d;
+  background: #fff;
+  border: 2px solid #fff;
+  border-radius: .35rem;
+}
+#calculator-finder button {
+  min-height: 3rem;
+  color: #3c005f;
+  background: var(--brand-yellow);
+  border: 2px solid var(--brand-yellow);
+  border-radius: .35rem;
+  font-weight: 850;
+}
+#calculator-finder button:hover,
+#calculator-finder button:focus-visible {
+  background: #ffd43b;
+  border-color: #ffd43b;
+}
+
+/* Cost-guide browser becomes a clearly separate editorial/reference zone. */
+#common-costs.home-section--browser {
+  margin-top: 2.25rem;
+  padding: 2rem;
+  background: #f3faf6;
+  border: 1px solid #b9d8c4;
+  border-top: 6px solid #218653;
+  border-radius: .65rem;
+}
+#common-costs .eyebrow,
+#common-costs h2,
+#common-costs h3 {
+  color: #12683e !important;
+}
+#common-costs .cost-browser-tabs {
+  background: #eaf5ee;
+  border: 1px solid #c3ddcc;
+  border-radius: .45rem;
+  overflow: hidden;
+}
+#common-costs [data-cost-tab] {
+  color: #22543a;
+  background: transparent;
+  border-color: #cfe2d5;
+}
+#common-costs [data-cost-tab][aria-selected="true"] {
+  color: #fff !important;
+  background: #218653 !important;
+  border-color: #218653 !important;
+}
+#common-costs [data-cost-tab][aria-selected="true"] small,
+#common-costs [data-cost-tab][aria-selected="true"] svg {
+  color: #fff !important;
+}
+#common-costs .cost-browser-panels {
+  background: #fff !important;
+  border: 1px solid #c3ddcc;
+  border-radius: .45rem;
+}
+#common-costs .browser-link-grid a {
+  color: #12683e;
+  background: #fbfefc;
+  border-color: #cfe2d5;
+}
+#common-costs .browser-link-grid a:hover,
+#common-costs .browser-link-grid a:focus-visible {
+  background: #eaf5ee;
+  border-color: #78b08d;
+}
+
+/* Published examples belong to the guide/reference family, not the tool family. */
+.home-section--price-teaser {
+  border-top: 1px solid #b9d8c4;
+}
+.home-section--price-teaser .eyebrow {
+  color: #12683e;
+}
+.home-section--price-teaser .price-teaser-card {
+  background: #fbfefc;
+  border-color: #c3ddcc;
+  border-top: 4px solid #218653;
+}
+.home-section--price-teaser .price-teaser-card > span,
+.home-section--price-teaser .price-teaser-card a {
+  color: #12683e;
+}
+
+/* Calculator-led procedure areas should keep the stronger utility treatment. */
+.calculator-landing .procedure-calculator-first {
+  padding-top: 1.5rem;
+  border: 2px solid #d2b8e3;
+  border-top: 6px solid var(--brand-purple);
+  border-radius: .55rem;
+  background: #faf5fd;
+  box-shadow: 0 .6rem 1.5rem rgba(87,6,140,.09);
+}
+.calculator-landing .procedure-calculator-first::before {
+  color: #3c005f;
+  background: var(--brand-yellow);
+}
+
+@media (max-width: 760px) {
+  .site-nav .nav-resource--guide,
+  .site-nav .nav-resource--tool > summary {
+    min-height: 2.35rem;
+    padding: .35rem .6rem;
+  }
+  #common-costs.home-section--browser {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+  }
+  #calculator-finder.home-calculator-entry {
+    border-radius: .5rem;
+  }
+}
