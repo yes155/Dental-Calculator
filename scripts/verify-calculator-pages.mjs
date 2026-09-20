@@ -5,7 +5,7 @@ const output=resolve(root,"dist");
 const routes=["/dental-cleaning-cost/","/deep-teeth-cleaning-cost/","/dental-filling-cost/","/root-canal-cost/","/dental-crown-cost/","/dental-implant-cost-calculator/","/all-on-4-dental-implants-cost/","/full-mouth-dental-implants-cost/","/braces-cost/","/invisalign-cost-calculator/","/dental-bridge-cost/","/dentures-cost/","/dental-veneers-cost/","/tooth-extraction-cost/","/wisdom-teeth-removal-cost/"];
 for(const route of routes){
  const html=await readFile(resolve(output,route.slice(1),"index.html"),"utf8");
- for(const token of ["calculator-landing","procedure-calculator-first",'id="quote-calculator"',"calculator-principles","sources-disclosure","procedure-cta-band",'href="#quote-calculator"',"Written by","Last updated"]){
+ for(const token of ["calculator-landing","procedure-calculator-first",'id="quote-calculator"',"calculator-principles","sources-disclosure","procedure-cta-band","procedure-cta-actions",'href="#quote-calculator"','href="/#common-costs"',"Written by","Last updated"]){
    if(!html.includes(token))throw new Error(`${route}: calculator landing token missing: ${token}`);
  }
  const h1=html.indexOf("<h1");
@@ -29,3 +29,16 @@ for(const token of ["$85–$160","$104","$80–$109"]){
   if(count!==1)throw new Error("cleaning page: "+token+" must appear exactly once; found "+count);
 }
 if(cleaning.includes("deep cleaning, periodontal maintenance and broader exam/cleaning/X-ray packages are separate services."))throw new Error("cleaning page: old expanded hero explanation returned");
+
+for(const route of routes){
+ const html=await readFile(resolve(output,route.slice(1),"index.html"),"utf8");
+ const ctaCount=(html.match(/class="procedure-cta-band"/g)||[]).length;
+ if(ctaCount!==1)throw new Error(`${route}: calculator page must render one merged CTA band; found ${ctaCount}`);
+ if(html.includes('class="footer-motto"'))throw new Error(`${route}: duplicate footer CTA band must be suppressed on calculator pages`);
+ const sourceMatch=html.match(/<details class="sources-disclosure">[\s\S]*?<div class="sources-disclosure-body">([\s\S]*?)<\/div><\/details>/i);
+ if(!sourceMatch||!/<strong>Sources:<\/strong>/.test(sourceMatch[1]))throw new Error(`${route}: source disclosure must contain named sourcing details`);
+}
+const fillingPriceCopy=await readFile(resolve(output,"dental-filling-cost/index.html"),"utf8");
+if(fillingPriceCopy.includes("silver amalgam <strong>$108–$256</strong>, composite resin"))throw new Error("dental filling: full material price list must not repeat in prose above the table");
+const crownPriceCopy=await readFile(resolve(output,"dental-crown-cost/index.html"),"utf8");
+if(crownPriceCopy.includes("Published prices vary substantially by crown material:"))throw new Error("dental crown: full material price list must not repeat in prose above the table");

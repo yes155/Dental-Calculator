@@ -138,7 +138,12 @@ for (const path of htmlPaths) {
   if (headerPattern.test(html)) html = html.replace(headerPattern, sharedHeader);
 
   const footerPattern = /<footer class="site-footer[^"]*"[^>]*>[\s\S]*?<\/footer>/i;
-  if (footerPattern.test(html)) html = html.replace(footerPattern, sharedFooter);
+  if (footerPattern.test(html)) {
+    const footerMarkup = html.includes('procedure-cta-band')
+      ? sharedFooter.replace(/<div class="footer-motto">[\s\S]*?<\/div>\s*/, "")
+      : sharedFooter;
+    html = html.replace(footerPattern, footerMarkup);
+  }
 
   html = html
     .replace(/<nav[^>]*class="[^"]*breadcrumbs?[^"]*"[^>]*>[\s\S]*?<\/nav>/gi, "")
