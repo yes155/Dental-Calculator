@@ -280,6 +280,8 @@ for (const row of registryRows) {
   const headings = [...html.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/gi)]
     .map((match) => decodeHtmlText(match[1]))
     .filter(Boolean);
+  const mainMatch = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i);
+  const mainText = decodeHtmlText(mainMatch?.[1] || "").slice(0, 12000);
   const title = decodeHtmlText(h1?.[1] || row.url);
   const summary = decodeHtmlText(description?.[1] || "");
   const group = row.pageId.startsWith("DEN-")
@@ -293,6 +295,7 @@ for (const row of registryRows) {
     row.cluster,
     row.url.replace(/[\/-]+/g, " "),
     headings.join(" "),
+    mainText,
   ].filter(Boolean).join(" ").toLowerCase();
 
   searchIndex.push({
