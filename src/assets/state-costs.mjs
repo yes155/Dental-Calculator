@@ -110,7 +110,9 @@ if (root) {
       button.dataset.band = band.label;
       button.setAttribute("aria-label", `${row.name}: ${money.format(row[key])}, ${pctText(row[key], meta.national_average)}, position ${position} of 51 from lower to higher`);
       button.title = `${row.name}: ${money.format(row[key])} · ${pctText(row[key], meta.national_average)}`;
-      if (stateSelect.value === row.abbr) button.classList.add("is-selected");
+      const isSelected = stateSelect.value === row.abbr;
+      if (isSelected) button.classList.add("is-selected");
+      button.setAttribute("aria-pressed", String(isSelected));
       button.addEventListener("click", () => {
         stateSelect.value = row.abbr;
         update();
@@ -180,6 +182,7 @@ if (root) {
     const key = procedureSelect.value;
     const meta = getProcedure();
     const selected = getState();
+    root.classList.toggle("has-selection", Boolean(selected));
 
     label.textContent = selected ? `${selected.name} published average` : "U.S. published average";
     price.textContent = money.format(selected ? selected[key] : meta.national_average);
