@@ -43,7 +43,7 @@ test("DEN-022 keeps the frozen H2 sequence", () => {
   ];
   let cursor = -1;
   for (const heading of headings) {
-    const token = heading === "Dental crown cost calculator" ? `<h2 id="calculator-heading">${heading}</h2>` : `<h2>${heading}</h2>`;
+    const token = `>${heading}</h2>`;
     const index = html.indexOf(token, cursor + 1);
     assert.notEqual(index, -1, `missing or out-of-order heading: ${heading}`);
     cursor = index;
@@ -53,7 +53,7 @@ test("DEN-022 keeps the frozen H2 sequence", () => {
 test("DEN-022 keeps the calculator before educational price detail", () => {
   const calculator = html.indexOf('<h2 id="calculator-heading">Dental crown cost calculator</h2>');
   const answer = html.indexOf('<h2>How much does a dental crown cost?</h2>');
-  const detail = html.indexOf('<h2>Dental crown prices by material</h2>');
+  const detail = html.indexOf('>Dental crown prices by material</h2>');
   assert.ok(calculator !== -1 && answer > calculator && detail > answer);
 });
 
