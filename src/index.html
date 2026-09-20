@@ -78,36 +78,37 @@
       </div>
       <div class="doorway-grid">
         <article class="doorway-card">
-          <span class="doorway-number">01</span>
+          <div class="doorway-card-top"><svg class="doorway-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#scope"></use></svg><span class="doorway-number">01</span></div>
           <h3>Cost guides</h3>
           <p>See published prices, what they cover and what may cost extra for specific procedures.</p>
           <a href="#common-costs">Browse cost guides →</a>
         </article>
-        <article class="doorway-card">
-          <span class="doorway-number">02</span>
+        <article class="doorway-card doorway-card--calculator">
+          <div class="doorway-card-top"><svg class="doorway-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#included"></use></svg><span class="doorway-number">02</span></div>
           <h3>Quote calculators</h3>
-          <p>Enter the amounts from your written estimate and keep the calculator separate from general published prices.</p>
-          <a href="#calculator-finder">Choose a calculator →</a>
+          <p>Enter the amounts from your written estimate. The selector directly below is the functional version of this path.</p>
+          <a href="#calculator-finder" aria-controls="calculator-finder">Open the selector ↓</a>
         </article>
         <article class="doorway-card">
-          <span class="doorway-number">03</span>
+          <div class="doorway-card-top"><svg class="doorway-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#location"></use></svg><span class="doorway-number">03</span></div>
           <h3>Prices by state</h3>
           <p>Compare published averages for the same dental procedure across all 50 states and Washington, D.C.</p>
           <a href="#state-cost-data">Review state data →</a>
         </article>
         <article class="doorway-card">
-          <span class="doorway-number">04</span>
+          <div class="doorway-card-top"><svg class="doorway-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#preventive"></use></svg><span class="doorway-number">04</span></div>
           <h3>How prices are verified</h3>
           <p>See how prices are sourced, dated and kept separate from insurer or clinic-specific figures.</p>
           <a href="/cost-data-methodology/">Read the methodology →</a>
         </article>
       </div>
 
-      <div id="calculator-finder" class="home-finder-strip home-calculator-entry">
+      <div id="calculator-finder" class="home-finder-strip home-calculator-entry doorway-expansion">
         <div>
-          <p class="eyebrow">Dental cost calculators</p>
+          <p class="eyebrow">Quote calculator selector</p>
           <h3 id="procedure-finder-title">Open the tool for your procedure</h3>
           <p>Choose the procedure named on your written estimate.</p>
+          <p class="finder-help">Not sure what the procedure is? <a href="#common-costs">Browse cost guides by category →</a></p>
         </div>
         <form id="procedure-finder-form" class="procedure-finder-form procedure-finder-form--inline" aria-labelledby="procedure-finder-title">
           <label class="sr-only" for="procedure-finder-select">Dental procedure</label>
@@ -160,22 +161,22 @@
       <div class="cost-browser" data-cost-browser>
         <div class="cost-browser-tabs" role="tablist" aria-label="Dental cost categories">
           <button type="button" role="tab" aria-selected="true" aria-controls="cost-panel-preventive" id="cost-tab-preventive" data-cost-tab="preventive">
-            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#preventive"></use></svg><span>Preventive</span>
+            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#preventive"></use></svg><span class="cost-tab-copy"><strong>Preventive</strong><small>Cleanings, visits &amp; X-rays</small></span>
           </button>
           <button type="button" role="tab" aria-selected="false" aria-controls="cost-panel-restorative" id="cost-tab-restorative" data-cost-tab="restorative">
-            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#restorative"></use></svg><span>Restorative</span>
+            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#restorative"></use></svg><span class="cost-tab-copy"><strong>Restorative</strong><small>Fillings, root canals &amp; crowns</small></span>
           </button>
           <button type="button" role="tab" aria-selected="false" aria-controls="cost-panel-implants" id="cost-tab-implants" data-cost-tab="implants">
-            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#implant"></use></svg><span>Implants</span>
+            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#implant"></use></svg><span class="cost-tab-copy"><strong>Implants</strong><small>Implants, grafts &amp; full-arch</small></span>
           </button>
           <button type="button" role="tab" aria-selected="false" aria-controls="cost-panel-orthodontics" id="cost-tab-orthodontics" data-cost-tab="orthodontics">
-            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#orthodontic"></use></svg><span>Orthodontics</span>
+            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#orthodontic"></use></svg><span class="cost-tab-copy"><strong>Orthodontics</strong><small>Braces, aligners &amp; retainers</small></span>
           </button>
           <button type="button" role="tab" aria-selected="false" aria-controls="cost-panel-cosmetic" id="cost-tab-cosmetic" data-cost-tab="cosmetic">
-            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#cosmetic"></use></svg><span>Cosmetic</span>
+            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#cosmetic"></use></svg><span class="cost-tab-copy"><strong>Cosmetic</strong><small>Veneers, whitening &amp; bonding</small></span>
           </button>
           <button type="button" role="tab" aria-selected="false" aria-controls="cost-panel-replacement" id="cost-tab-replacement" data-cost-tab="replacement">
-            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#replacement"></use></svg><span>Replacement</span>
+            <svg aria-hidden="true"><use href="/assets/media/home-icons.svg#replacement"></use></svg><span class="cost-tab-copy"><strong>Replacement</strong><small>Bridges, dentures &amp; extractions</small></span>
           </button>
         </div>
 
@@ -252,18 +253,21 @@
       </div>
       <div class="price-teaser-grid">
         <article class="price-teaser-card">
+          <svg class="price-teaser-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#cleaning"></use></svg>
           <span>Standard cleaning</span>
           <strong>$85–$160</strong>
           <p>Delta Dental’s published U.S. range without dental benefits; exams, X-rays and fluoride may be separate.</p>
           <a href="/dental-cleaning-cost/">Open the cleaning cost guide →</a>
         </article>
         <article class="price-teaser-card">
+          <svg class="price-teaser-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#preventive"></use></svg>
           <span>Deep cleaning</span>
           <strong>$180–$295</strong>
           <p>Delta Dental’s published range for one quadrant without dental benefits.</p>
           <a href="/deep-teeth-cleaning-cost/">Open the deep-cleaning guide →</a>
         </article>
         <article class="price-teaser-card">
+          <svg class="price-teaser-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#implant"></use></svg>
           <span>Single-tooth implant root</span>
           <strong>$2,143 average</strong>
           <p>CareCredit’s published U.S. average for the implant root; the crown is excluded.</p>
@@ -403,15 +407,15 @@
       </div>
       <div class="faq-stack">
         <details>
-          <summary>Are calculator results dental quotes?</summary>
+          <summary><span>Are calculator results dental quotes?</span><small class="faq-preview">They organize your written estimate; they are not provider fees.</small></summary>
           <p>No. Results organize amounts from a written estimate and apply the stated calculator logic. They are not a dentist’s fee, diagnosis or treatment recommendation.</p>
         </details>
         <details>
-          <summary>Do the calculators predict insurance payment?</summary>
+          <summary><span>Do the calculators predict insurance payment?</span><small class="faq-preview">Insurance is not guessed; only information you enter is used.</small></summary>
           <p>No. Where insurance is supported, the tool uses only a same-quote payment estimate you enter. It does not invent a coverage percentage or guarantee benefits.</p>
         </details>
         <details>
-          <summary>Why can two published prices differ?</summary>
+          <summary><span>Why can two published prices differ?</span><small class="faq-preview">Procedure, location, included services and source definitions can differ.</small></summary>
           <p>Sources may cover different procedures, locations, materials or service packages. The guides keep those differences clear instead of mixing unlike prices together.</p>
         </details>
       </div>
@@ -449,6 +453,9 @@
       }
       window.location.assign(select.value);
     });
+    const syncFinderSelection = () => form.classList.toggle("has-selection", Boolean(select.value));
+    select.addEventListener("change", syncFinderSelection);
+    syncFinderSelection();
 
     const browser = document.querySelector("[data-cost-browser]");
     if (browser) {
