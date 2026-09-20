@@ -21,7 +21,7 @@ const expectedH2s = [
   "What can change a dentist-visit quote?",
   "How insurance can affect what you pay for a dental visit",
   "Dentist visit cost versus cleaning and X-ray cost",
-  "Related dental cost guides",
+  "Related dental procedure pages",
 ];
 
 test("DEN-025 keeps the frozen structure and no calculator", () => {
