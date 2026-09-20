@@ -4222,3 +4222,146 @@ th, td { border-color: var(--line); }
 .calculator-landing .calculator-education h2 {
   color: #12683e;
 }
+
+
+/* Unified one-page-per-procedure architecture */
+/* Homepage and site chrome no longer present guides and calculators as separate destinations. */
+.site-nav .nav-resource--procedures > summary {
+  display: flex;
+  align-items: center;
+  min-height: 2.65rem;
+  padding: .42rem .82rem;
+  color: #fff;
+  background: var(--brand-purple);
+  border: 1px solid var(--brand-purple);
+  border-radius: .45rem;
+}
+.site-nav .nav-resource--procedures > summary small {
+  display: block;
+  margin-left: .45rem;
+  color: #efe2f7;
+  font-size: .65rem;
+  font-weight: 600;
+  line-height: 1.05;
+}
+.site-nav .nav-resource--procedures[open] > summary,
+.site-nav .nav-resource--procedures > summary:hover,
+.site-nav .nav-resource--procedures > summary:focus-visible {
+  background: var(--brand-purple-dark);
+  border-color: var(--brand-purple-dark);
+}
+.site-nav .nav-resource--procedures .nav-dropdown-note {
+  color: #4c3b57;
+  background: #faf5fd;
+  border-left-color: var(--brand-purple);
+}
+.doorway-card--procedure {
+  border-top-color: var(--brand-purple);
+  background: #faf8fb;
+}
+.doorway-card--procedure .resource-kind {
+  color: #fff;
+  background: var(--brand-purple);
+  border-color: var(--brand-purple);
+}
+#procedure-finder.home-calculator-entry {
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--brand-purple);
+  border-radius: .55rem;
+  box-shadow: 0 .6rem 1.4rem rgba(41,37,45,.08);
+}
+#procedure-finder .eyebrow,
+#procedure-finder h3 {
+  color: var(--brand-purple) !important;
+}
+#procedure-finder p,
+#procedure-finder .finder-help,
+#procedure-finder .finder-help a {
+  color: var(--muted) !important;
+}
+#common-costs.home-section--browser {
+  margin-top: 2.25rem;
+  padding: 2rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--brand-purple);
+  border-radius: .55rem;
+}
+#common-costs .eyebrow,
+#common-costs h2 {
+  color: var(--brand-purple) !important;
+}
+#common-costs .cost-browser-tabs {
+  background: #f7f5f8;
+  border-color: var(--line);
+}
+#common-costs [data-cost-tab][aria-selected="true"] {
+  color: #fff !important;
+  background: var(--brand-purple) !important;
+  border-color: var(--brand-purple) !important;
+}
+#common-costs [data-cost-tab][aria-selected="true"] small,
+#common-costs [data-cost-tab][aria-selected="true"] svg {
+  color: #fff !important;
+}
+#common-costs .cost-browser-panels {
+  background: #fff !important;
+  border-color: var(--line);
+}
+#common-costs .browser-link-grid a {
+  color: var(--accent-dark);
+  background: #fff;
+  border-color: var(--line);
+}
+#common-costs .browser-link-grid a:hover,
+#common-costs .browser-link-grid a:focus-visible {
+  background: var(--soft);
+  border-color: #bdb7c1;
+}
+.footer-grid--unified {
+  grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
+}
+.footer-procedure-list {
+  columns: 2;
+  column-gap: 1.4rem;
+}
+.footer-procedure-list a {
+  display: block;
+  break-inside: avoid;
+  margin-bottom: .35rem;
+}
+@media (max-width: 900px) {
+  .footer-grid--unified {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .footer-procedure-section {
+    grid-column: 1 / -1;
+  }
+  .footer-procedure-list {
+    columns: 3;
+  }
+}
+@media (max-width: 640px) {
+  .site-nav .nav-resource--procedures > summary {
+    min-height: 2.35rem;
+    padding: .35rem .6rem;
+  }
+  .site-nav .nav-resource--procedures > summary small {
+    display: none;
+  }
+  #common-costs.home-section--browser {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+  }
+  .footer-grid--unified {
+    grid-template-columns: 1fr;
+  }
+  .footer-procedure-section {
+    grid-column: auto;
+  }
+  .footer-procedure-list {
+    columns: 1;
+  }
+}
