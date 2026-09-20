@@ -82,7 +82,7 @@ for (const token of [
   "/assets/media/home-dental-cost-hero.webp",
   "/cost-data-methodology/",
   "/calculator-methodology/",
-  "<details class=\"nav-dropdown\">",
+  "<details class=\"nav-dropdown nav-resource nav-resource--tool\">",
   "site-brand-bar",
   "site-nav-bar",
   "Compare a published benchmark with the scope of your written quote.",
