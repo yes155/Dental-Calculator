@@ -3285,3 +3285,86 @@ th, td { border-color: var(--line); }
   .footer-motto { align-items: stretch; flex-direction: column; gap: .65rem; }
   .footer-motto a { justify-content: center; }
 }
+
+
+/* Readability + plain-language visual correction */
+.home-cost-flow .eyebrow {
+  color: #9fe4dc !important;
+}
+.home-cost-flow h2,
+.home-cost-flow .home-section-heading h2 {
+  color: #ffffff !important;
+}
+.home-cost-flow .cost-flow-step strong {
+  color: #ffffff !important;
+}
+.home-cost-flow .cost-flow-step span {
+  color: #e8f5f2 !important;
+}
+.home-cost-flow .cost-flow-arrow {
+  color: #8fe0d9 !important;
+}
+.home-cost-flow .cost-flow-step svg {
+  color: #8fe0d9 !important;
+}
+.home-cost-flow .cost-flow-result {
+  color: #14302b !important;
+  background: #9fe4dc !important;
+}
+.home-cost-flow .cost-flow-result strong,
+.home-cost-flow .cost-flow-result span {
+  color: #14302b !important;
+}
+
+/* Keep hero copy high and inside the clear left side of the image. */
+@media (min-width: 641px) {
+  .home-hero--image::after {
+    background: linear-gradient(
+      90deg,
+      #fff 0%,
+      rgba(255,255,255,.995) 22%,
+      rgba(255,255,255,.96) 34%,
+      rgba(255,255,255,.72) 43%,
+      rgba(255,255,255,.20) 52%,
+      rgba(255,255,255,0) 61%
+    );
+  }
+  .home-hero-overlay {
+    inset: 0 auto auto 0;
+    width: 42%;
+    min-height: 0;
+    justify-content: flex-start;
+    padding-top: clamp(1.5rem, 3.2vw, 2.75rem);
+    padding-right: clamp(1rem, 2vw, 1.75rem);
+    padding-bottom: 1.25rem;
+  }
+  .home-hero-overlay h1 {
+    max-width: 14ch;
+    margin-bottom: .65rem;
+  }
+  .home-hero-lead {
+    max-width: 31rem;
+  }
+  .home-hero-disclaimer {
+    max-width: 30rem;
+    margin-top: .5rem;
+  }
+  .home-hero-actions {
+    margin-top: .75rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .home-hero-overlay {
+    width: 47%;
+    padding-top: 1.35rem;
+  }
+  .home-hero-overlay h1 {
+    max-width: 13ch;
+    font-size: clamp(1.85rem, 4.2vw, 2.55rem);
+  }
+  .home-hero-lead {
+    font-size: .82rem;
+    line-height: 1.38;
+  }
+}

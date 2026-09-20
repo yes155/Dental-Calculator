@@ -97,20 +97,21 @@ for (const token of [
   "Find the right dental cost resource",
   "Open the tool for your procedure",
   "Open calculator",
-  "Three price benchmarks, with scope attached",
+  "Published price examples",
+  "Three example prices from published sources",
   "Open the cleaning cost guide →",
   "data-cost-browser",
   "Choose a type of dental care",
-  "What changes what you may pay",
+  "What can change the price",
   "Visible sources, authorship and review boundaries",
   "What these prices and calculators can—and cannot—tell you",
   "data-state-costs",
-  "A scoped example of geographic price variation",
+  "How prices can change by state",
   "Open the full state comparison",
   "Compare all 51 jurisdictions in a table",
   "Standardized color scale",
   "Closest published state averages",
-  "Same scope",
+  "Same procedure",
 ]) {
   if (!homepage.includes(token)) throw new Error(`homepage: required Wave A trust/ownership token missing: ${token}`);
 }
@@ -118,8 +119,8 @@ for (const token of [
 const heroIndex = homepage.indexOf("home-hero--image");
 const doorwayIndex = homepage.indexOf("Find the right dental cost resource");
 const categoryIndex = homepage.indexOf("Choose a type of dental care");
-const priceIndex = homepage.indexOf("Three price benchmarks, with scope attached");
-const stateIndex = homepage.indexOf("A scoped example of geographic price variation");
+const priceIndex = homepage.indexOf("Three example prices from published sources");
+const stateIndex = homepage.indexOf("How prices can change by state");
 if (!(heroIndex >= 0 && doorwayIndex > heroIndex && categoryIndex > doorwayIndex && priceIndex > categoryIndex && stateIndex > priceIndex)) {
   throw new Error("homepage: expected order is hero → doorways → category browser → price teaser → state teaser");
 }
