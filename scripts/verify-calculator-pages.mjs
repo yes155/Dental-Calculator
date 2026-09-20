@@ -15,7 +15,17 @@ for(const route of routes){
  if(/Evidence checked|Research and written by/.test(html))throw new Error(`${route}: legacy metadata wording reached built HTML`);
 }
 const cleaning=await readFile(resolve(output,"dental-cleaning-cost/index.html"),"utf8");
-for(const token of ["Main benchmark used on this page","The price guide above shows the main published references used on this page.","Sources and update notes"]){
+for(const token of ["Primary published benchmark","The price guide above shows the published references used on this page.","<summary>Sources</summary>","class=\"faq-question\""]){
  if(!cleaning.includes(token))throw new Error(`cleaning page: redesign token missing: ${token}`);
 }
 console.log(`Calculator landing-page gate passed: ${routes.length} calculator routes.`);
+
+const cleaningHeroEnd=cleaning.indexOf("</header>",cleaning.indexOf('<header class="procedure-hero">'))+9;
+const cleaningCalc=cleaning.indexOf('<section id="quote-calculator"');
+const cleaningGuide=cleaning.indexOf('<section class="cost-snapshot"');
+if(!(cleaningCalc>=cleaningHeroEnd&&cleaningCalc<cleaningGuide))throw new Error("cleaning calculator must be directly after hero and before Quick Price Guide");
+for(const token of ["$85–$160","$104","$80–$109"]){
+  const count=cleaning.split(token).length-1;
+  if(count!==1)throw new Error("cleaning page: "+token+" must appear exactly once; found "+count);
+}
+if(cleaning.includes("deep cleaning, periodontal maintenance and broader exam/cleaning/X-ray packages are separate services."))throw new Error("cleaning page: old expanded hero explanation returned");
