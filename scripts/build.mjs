@@ -201,7 +201,7 @@ const pageChecks = [
   {
     path: "full-mouth-dental-implants-cost/index.html",
     tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>Full-mouth dental implants cost</h1>','data-calculator-id="CALC-003"','data-calculator="calc003"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/arch-calculators-guided-ui.mjs','/assets/arch-calculators-guided.css','How many arches does this quote cover?','Estimated insurance payment','Published prices stay separate','$20,000–$45,000','not a per-arch price'],
-    headings: ["Full-mouth dental implant cost calculator","How much do full-mouth dental implants cost?","Full-arch and full-mouth quotes are not the same unit","What does a full-arch implant quote include?","Fixed and removable implant restorations can be quoted differently","What changes a full-mouth implant quote?","How insurance can affect the patient estimate","When the quote is specifically All-on-4","Related implant and replacement cost guides"],
+    headings: ["Full-mouth dental implants cost calculator","How much do full-mouth dental implants cost?","Full-arch and full-mouth quotes are not the same unit","What does a full-arch implant quote include?","Fixed and removable implant restorations can be quoted differently","What changes a full-mouth implant quote?","How insurance can affect the patient estimate","When the quote is specifically All-on-4","Related implant and replacement cost guides"],
   },
   {
     path: "dental-bone-graft-cost/index.html",
@@ -231,7 +231,7 @@ const pageChecks = [
   {
     path: "all-on-4-dental-implants-cost/index.html",
     tokens: ['<meta name="robots" content="noindex,nofollow">','<h1>All-on-4 dental implant cost</h1>','data-calculator-id="CALC-003-A04"','data-calculator="calc003-a04"','id="calculator"','aria-live="polite"','data-step-indicator="1"','data-step-indicator="2"','data-step-indicator="3"','/assets/arch-calculators-guided-ui.mjs','/assets/arch-calculators-guided.css','How many arches does this quote cover?','Estimated insurance payment','Published prices stay separate','$15,176','$11,640–$27,500'],
-    headings: ["All-on-4 cost calculator","How much do All-on-4 dental implants cost?","What does All-on-4 mean in a dental quote?","Is an All-on-4 price per arch or for a full mouth?","What may be included in an All-on-4 package?","What changes an All-on-4 quote?","How insurance can affect out-of-pocket cost","All-on-4 vs. generic full-arch implant quotes","Related dental implant cost guides"],
+    headings: ["All-on-4 dental implants cost calculator","How much do All-on-4 dental implants cost?","What does All-on-4 mean in a dental quote?","Is an All-on-4 price per arch or for a full mouth?","What may be included in an All-on-4 package?","What changes an All-on-4 quote?","How insurance can affect out-of-pocket cost","All-on-4 vs. generic full-arch implant quotes","Related dental implant cost guides"],
   },
   {
     path: "dental-x-ray-cost/index.html",
@@ -255,7 +255,7 @@ const pageChecks = [
   },
 ];
 
-const calculatorHeadings = new Set(["Dental implant cost calculator","Full-mouth dental implant cost calculator","All-on-4 cost calculator","Dental cleaning cost calculator","Deep cleaning cost calculator"]);
+const calculatorHeadings = new Set(["Dental implant cost calculator","Full-mouth dental implants cost calculator","All-on-4 dental implants cost calculator","Dental cleaning cost calculator","Deep cleaning cost calculator"]);
 
 for (const check of pageChecks) {
   const html = await readFile(resolve(output, check.path), "utf8");
