@@ -128,6 +128,10 @@ Latest validated CI: **Prelaunch QA run #464 — SUCCESS** at `4a96515e34ea3a2d9
 - Print CSS removes navigation and interactive chrome so procedure guidance prints as a clean reference document.
 - Static full-site search is available from the shared header without creating a new indexable route. The build generates `/assets/data/site-search.json` from the 38 approved non-home registry pages, grouped as Dental procedures, Paying for care, and Trust & methodology.
 - Search queries run entirely in the browser against the local index; no third-party search service or query tracking is introduced.
+- Semantic SEO / keyword-mapping audit completed against the approved topical map and current source. Keyword ownership remains frozen; no new modifier URLs were added.
+- Semantic correction batch implemented: evidence-aligned homepage predicate, explicit uninsured-intent responses on canonical owners, dental-plate synonym coverage on dentures, contextual methodology/insurance links, unified related-page wording, canonical site name “Dental Cost Calculator”, and production BreadcrumbList schema.
+- Site owner confirmed the current page set has been reviewed by Juliana Maia Teixeira in her Clinical & Scientific Reviewer role; the homepage uses a concise review signal while hidden page-level reviewedBy schema remains intentionally blocked unless visible page-level credit is implemented.
+- Inlay/onlay distinct-information-gain review and proposal-era workbook metadata sync remain open architecture/evidence follow-ups.
 
 ## Current milestone
 - M1 Baseline: PASS
