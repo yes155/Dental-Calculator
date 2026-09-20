@@ -157,6 +157,41 @@ for (const token of ["site-breadcrumbs", "breadcrumb-home", 'aria-current="page"
   if (!representativeProcedure.includes(token)) throw new Error(`site chrome: representative procedure missing global UX token: ${token}`);
 }
 
+for (const token of [
+  "<strong>Without insurance or dental benefits:</strong>",
+  'href="/cost-data-methodology/"',
+  'href="/calculator-methodology/"',
+  'href="/dental-insurance-out-of-pocket-costs/"',
+]) {
+  if (!representativeProcedure.includes(token)) throw new Error(`semantic audit: cleaning page missing required query/methodology token: ${token}`);
+}
+
+const rootCanalSemantic = await readFile(resolve(output, "root-canal-cost/index.html"), "utf8");
+for (const token of [
+  "<strong>Without insurance:</strong>",
+  'href="/cost-data-methodology/"',
+  'href="/calculator-methodology/"',
+  'href="/dental-insurance-out-of-pocket-costs/"',
+]) {
+  if (!rootCanalSemantic.includes(token)) throw new Error(`semantic audit: root-canal page missing required token: ${token}`);
+}
+
+const denturesSemantic = await readFile(resolve(output, "dentures-cost/index.html"), "utf8");
+for (const token of ["<strong>Dental plate</strong>", "Related replacement pages"]) {
+  if (!denturesSemantic.includes(token)) throw new Error(`semantic audit: dentures page missing mapped terminology token: ${token}`);
+}
+
+const bracesSemantic = await readFile(resolve(output, "braces-cost/index.html"), "utf8");
+if (!bracesSemantic.includes("Related orthodontic pages")) throw new Error("semantic audit: braces related-page wording regressed");
+
+const veneersSemantic = await readFile(resolve(output, "dental-veneers-cost/index.html"), "utf8");
+if (!veneersSemantic.includes("Related cosmetic dental pages")) throw new Error("semantic audit: veneers related-page wording regressed");
+
+const aboutEntity = await readFile(resolve(output, "about/index.html"), "utf8");
+if (!aboutEntity.includes("Dental Cost Calculator") || aboutEntity.includes(">Dental Calculator<")) {
+  throw new Error("entity audit: About page site name is inconsistent");
+}
+
 const notFoundPage = await readFile(resolve(output, "404.html"), "utf8");
 for (const token of ["404 · PAGE NOT FOUND", "We couldn't find that dental cost page", "Browse dental procedures", "site-breadcrumbs", "back-to-top"]) {
   if (!notFoundPage.includes(token)) throw new Error(`404 page: required recovery token missing: ${token}`);
