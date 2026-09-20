@@ -21,7 +21,11 @@ const sharedHeader = `<header class="site-header site-header--nav" data-site-chr
   </div>
   <div class="site-nav-bar">
     <div class="site-header-inner site-header-inner--nav">
-      <nav class="site-nav" aria-label="Primary">
+      <button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="site-menu-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>Menu</span>
+      </button>
+      <nav class="site-nav" id="primary-navigation" aria-label="Primary">
       <details class="nav-dropdown nav-resource nav-resource--procedures">
         <summary><span>Procedures</span><small>Costs + calculators</small></summary>
         <div class="nav-dropdown-panel">
@@ -78,7 +82,11 @@ const sharedHeader = `<header class="site-header site-header--nav" data-site-chr
   </div>
 </header>`;
 
-const sharedFooter = `<footer class="site-footer site-footer--expanded" data-site-chrome="shared-v1">
+const sharedFooter = `<button class="back-to-top" type="button" aria-label="Back to top" hidden>
+  <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M12 5 5.5 11.5 7 13l4-4v10h2V9l4 4 1.5-1.5L12 5Z" fill="currentColor"/></svg>
+  <span>Top</span>
+</button>
+<footer class="site-footer site-footer--expanded" data-site-chrome="shared-v1">
   <div class="footer-motto">
     <span>One procedure page brings the cost evidence and quote-check tools together.</span>
     <a href="/#common-costs">Browse dental procedures</a>
@@ -187,6 +195,26 @@ for (const path of htmlPaths) {
   html = html
     .replace(/<nav[^>]*class="[^"]*breadcrumbs?[^"]*"[^>]*>[\s\S]*?<\/nav>/gi, "")
     .replace(/<div[^>]*class="[^"]*breadcrumbs?[^"]*"[^>]*>[\s\S]*?<\/div>/gi, "");
+
+  if (path !== "index.html") {
+    const h1Match = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
+    const currentLabel = h1Match
+      ? h1Match[1].replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim()
+      : "Current page";
+    const breadcrumbs = `<nav class="site-breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    <li>
+      <a href="/" class="breadcrumb-home">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="15" height="15"><path d="M3 10.8 12 3l9 7.8v9.7a.5.5 0 0 1-.5.5H15v-6H9v6H3.5a.5.5 0 0 1-.5-.5v-9.7Z" fill="currentColor"/></svg>
+        <span>Home</span>
+      </a>
+    </li>
+    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+    <li aria-current="page">${currentLabel}</li>
+  </ol>
+</nav>`;
+    html = html.replace(sharedHeader, `${sharedHeader}\n${breadcrumbs}`);
+  }
 
   await writeFile(target, html);
 }
