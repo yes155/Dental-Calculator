@@ -1,6 +1,6 @@
 # PROJECT STATE — Dental Calculator
 
-Updated 2026-09-19.
+Updated 2026-09-20.
 
 ## Project identity
 - Site name: Dental Calculator (working name)
@@ -114,13 +114,18 @@ Latest validated CI: **Prelaunch QA run #464 — SUCCESS** at `4a96515e34ea3a2d9
 
 ## Media / design / accessibility
 - Representative calculator visual pattern: established through CALC-001 review.
-- Homepage information architecture is router-first: four task doorways and the procedure-category browser precede compact price/state examples; the complete state comparison is collapsed by default.
+- Homepage information architecture now reflects one canonical page per dental procedure; the procedure browser precedes compact price/state examples and the complete state comparison remains collapsed by default.
 - Farrukh author photo is local and verified live on the Cloudflare preview.
 - Final sitewide social card is approved, local, 1200×630, and wired only into production metadata.
 - Source-level accessibility review confirmed skip links, visible focus, labelled native controls, fieldsets/legends, error focus/`aria-invalid`, live results, responsive fallbacks, 16px mobile controls and reduced-motion handling.
 - Manual live-browser QA passed for the representative cleaning calculator at 320px, 390px and 768px with no reported overflow/clipping/control breakage.
 - Manual keyboard QA passed on the representative cleaning calculator, including intentional validation-error handling and completion through the result state with visible/logical focus.
 - Live people-media requests were verified without the prior cross-project image failure.
+- Sticky shared header and accessible mobile menu are implemented through shared site chrome.
+- Inner pages receive generated breadcrumbs with a Home icon and current-page label; the homepage intentionally omits a redundant breadcrumb.
+- A back-to-top control appears after substantial scrolling on long pages.
+- A custom noindex 404 recovery page is included and linked to common procedure destinations.
+- Print CSS removes navigation and interactive chrome so procedure guidance prints as a clean reference document.
 
 ## Current milestone
 - M1 Baseline: PASS
