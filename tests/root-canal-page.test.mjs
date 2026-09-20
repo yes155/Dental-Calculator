@@ -22,11 +22,11 @@ test("DEN-005 preserves evidence scope", () => {
   assert.ok(!html.includes("endodontist premium"), "must not invent a specialist premium");
 });
 
-test("DEN-005 calculator appears immediately after direct answer section", () => {
-  const answer = html.indexOf("<h2>How much does a root canal cost?</h2>");
+test("DEN-005 keeps the calculator before educational price detail", () => {
   const calculator = html.indexOf('<h2 id="calculator-heading">Root canal cost calculator</h2>');
+  const answer = html.indexOf("<h2>How much does a root canal cost?</h2>");
   const detail = html.indexOf("<h2>Root canal prices by tooth type</h2>");
-  assert.ok(answer !== -1 && calculator > answer && calculator < detail);
+  assert.ok(calculator !== -1 && answer > calculator && detail > answer);
 });
 
 test("DEN-005 keeps retreatment benchmark unsupported", () => {
@@ -38,21 +38,21 @@ test("DEN-005 does not leak internal page or calculator IDs into reader copy", (
   assert.ok(!html.includes("Use CALC-005"));
   assert.ok(!html.includes("CALC-005 can total"));
   assert.ok(!html.includes("DEN-005 owns"));
-  assert.match(html, /Published price reference — not used in your result/);
+  assert.match(html, /Published prices stay separate/);
 });
 
 test("DEN-005 has one H1 and controlled H2 order", () => {
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   const headings = [
-    "How much does a root canal cost?",
     "Root canal cost calculator",
+    "How much does a root canal cost?",
     "Root canal prices by tooth type",
     "Is the crown or final filling included in a root canal quote?",
     "What can change a root canal quote?",
     "What if the quote says retreatment?",
     "How insurance can affect the patient amount",
     "Root canal cost versus crown cost",
-    "Related dental cost guides",
+    "Related dental procedure pages",
   ];
   let cursor = -1;
   for (const heading of headings) {
