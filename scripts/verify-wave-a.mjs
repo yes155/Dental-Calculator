@@ -43,6 +43,7 @@ const requiredAssets = [
   "assets/media/home-icons.svg",
   "assets/state-costs.mjs",
   "assets/data/state-dental-costs.json",
+  "404.html",
 ];
 
 for (const path of [...waveARoutes, ...requiredAssets]) {
@@ -62,7 +63,7 @@ for (const path of waveARoutes) {
 }
 
 const siteCss = await readFile(resolve(output, "assets/site.css"), "utf8");
-for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", "Institutional editorial system", "Homepage semantic color and responsive polish contract", "Unified one-page-per-procedure architecture", "Homepage hero credibility strip", "Procedure finder vertical-balance refinement", "--brand-purple", ".footer-motto", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
+for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", "Institutional editorial system", "Homepage semantic color and responsive polish contract", "Unified one-page-per-procedure architecture", "Homepage hero credibility strip", "Procedure finder vertical-balance refinement", "Global navigation, breadcrumbs, back-to-top, 404 and print UX", "--brand-purple", ".footer-motto", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
   if (!siteCss.includes(token)) throw new Error(`site css: calculator density contract token missing: ${token}`);
 }
 
@@ -72,7 +73,7 @@ for (const token of ["STANDARD_BANDS", "rankOf", "renderSimilar", "data-state-ra
 }
 
 const chromeScript = await readFile(resolve(output, "assets/site-chrome.mjs"), "utf8");
-for (const token of ["pointerdown", "Escape", "toggle"]) {
+for (const token of ["pointerdown", "Escape", "toggle", "site-menu-toggle", "backToTop", "scrollTo"]) {
   if (!chromeScript.includes(token)) throw new Error(`site chrome: dropdown behavior token missing: ${token}`);
 }
 
@@ -85,6 +86,8 @@ for (const token of [
   "<details class=\"nav-dropdown nav-resource nav-resource--procedures\">",
   "site-brand-bar",
   "site-nav-bar",
+  "site-menu-toggle",
+  "back-to-top",
   "One procedure page brings the cost evidence and quote-check tools together.",
   "Browse dental procedures",
   "Roboto+Condensed",
@@ -127,6 +130,19 @@ for (const token of [
   "faq-preview",
 ]) {
   if (!homepage.includes(token)) throw new Error(`homepage: required Wave A trust/ownership token missing: ${token}`);
+}
+
+const representativeProcedure = await readFile(resolve(output, "dental-cleaning-cost/index.html"), "utf8");
+for (const token of ["site-breadcrumbs", "breadcrumb-home", 'aria-current="page"', "site-menu-toggle", "back-to-top"]) {
+  if (!representativeProcedure.includes(token)) throw new Error(`site chrome: representative procedure missing global UX token: ${token}`);
+}
+
+const notFoundPage = await readFile(resolve(output, "404.html"), "utf8");
+for (const token of ["404 · PAGE NOT FOUND", "We couldn't find that dental cost page", "Browse dental procedures", "site-breadcrumbs", "back-to-top"]) {
+  if (!notFoundPage.includes(token)) throw new Error(`404 page: required recovery token missing: ${token}`);
+}
+if (!notFoundPage.includes('<meta name="robots" content="noindex,nofollow">')) {
+  throw new Error("404 page: must remain noindex,nofollow");
 }
 
 const procedureDoorwayIndex = homepage.indexOf("doorway-card--procedure");
