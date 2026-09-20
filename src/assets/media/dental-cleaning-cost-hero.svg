@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">Dental cleaning editorial illustration</title>
+<desc id="desc">A polished tooth with a dental mirror and scaler in a clean clinical setting.</desc>
+<defs>
+  <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4fbfb"/><stop offset="1" stop-color="#dcefed"/></linearGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8fbfc"/><stop offset=".45" stop-color="#9db1b6"/><stop offset=".75" stop-color="#eef5f6"/><stop offset="1" stop-color="#7d9298"/></linearGradient>
+  <linearGradient id="white" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#eaf5f5"/></linearGradient>
+  <filter id="shadow2" x="-25%" y="-25%" width="150%" height="150%"><feDropShadow dx="0" dy="22" stdDeviation="26" flood-color="#17323a" flood-opacity=".14"/></filter>
+</defs>
+<rect width="1600" height="900" rx="54" fill="url(#bg2)"/>
+<path d="M0 690C300 610 430 790 740 710s465-125 860-20V900H0z" fill="#cfe7e4" opacity=".6"/>
+<g transform="translate(515 85)" filter="url(#shadow2)">
+  <path d="M290 60c-102 0-174 66-174 159 0 72 34 130 63 180 27 45 39 98 49 166 11 80 42 151 98 151 46 0 61-66 80-122 14-37 35-55 67-55 33 0 54 18 68 55 19 56 34 122 80 122 56 0 87-71 98-151 10-68 22-121 49-166 29-50 63-108 63-180 0-93-72-159-174-159-61 0-98 19-133 39-35-20-73-39-134-39z" fill="url(#white)" stroke="#0d7771" stroke-width="12"/>
+  <path d="M431 132c-65 17-119 60-145 116" fill="none" stroke="#9edbd5" stroke-width="18" stroke-linecap="round"/>
+  <path d="M552 123l20-48M617 160l43-31M641 232h54" fill="none" stroke="#ffbf47" stroke-width="12" stroke-linecap="round"/>
+</g>
+<g transform="translate(100 455) rotate(-11 280 90)" filter="url(#shadow2)">
+  <rect x="0" y="73" width="480" height="34" rx="17" fill="url(#metal)" stroke="#70858b" stroke-width="4"/>
+  <circle cx="520" cy="90" r="82" fill="#f7fbfc" stroke="#70858b" stroke-width="13"/>
+  <circle cx="520" cy="90" r="61" fill="#d8ecef"/>
+</g>
+<g transform="translate(1060 518) rotate(18 250 35)" filter="url(#shadow2)">
+  <rect x="0" y="18" width="380" height="30" rx="15" fill="url(#metal)" stroke="#70858b" stroke-width="4"/>
+  <path d="M375 33c75 0 93-52 120-81" fill="none" stroke="#70858b" stroke-width="14" stroke-linecap="round"/>
+  <path d="M494-48l33-35" fill="none" stroke="#70858b" stroke-width="8" stroke-linecap="round"/>
+</g>
+<g opacity=".55" fill="#fff">
+  <circle cx="170" cy="170" r="120"/><circle cx="1425" cy="150" r="155"/>
+</g>
+</svg>

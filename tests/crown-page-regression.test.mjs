@@ -31,30 +31,30 @@ test("DEN-022 keeps required crown evidence and calculator markers", () => {
 
 test("DEN-022 keeps the frozen H2 sequence", () => {
   const headings = [
-    "How much does a dental crown cost?",
     "Dental crown cost calculator",
+    "How much does a dental crown cost?",
     "Dental crown prices by material",
     "What may be separate in a crown quote?",
     "What changes a dental crown quote?",
     "Crown repair and recementing are different price categories",
     "How insurance can affect the patient amount",
     "Crown cost after a root canal or dental implant",
-    "Related dental cost guides",
+    "Related dental procedure pages",
   ];
   let cursor = -1;
   for (const heading of headings) {
-    const token = heading === "Dental crown cost calculator" ? `<h2 id="calculator-heading">${heading}</h2>` : `<h2>${heading}</h2>`;
+    const token = `>${heading}</h2>`;
     const index = html.indexOf(token, cursor + 1);
     assert.notEqual(index, -1, `missing or out-of-order heading: ${heading}`);
     cursor = index;
   }
 });
 
-test("DEN-022 keeps calculator immediately after the direct price answer", () => {
-  const answer = html.indexOf('<h2>How much does a dental crown cost?</h2>');
+test("DEN-022 keeps the calculator before educational price detail", () => {
   const calculator = html.indexOf('<h2 id="calculator-heading">Dental crown cost calculator</h2>');
-  const detail = html.indexOf('<h2>Dental crown prices by material</h2>');
-  assert.ok(answer !== -1 && calculator > answer && calculator < detail);
+  const answer = html.indexOf('<h2>How much does a dental crown cost?</h2>');
+  const detail = html.indexOf('>Dental crown prices by material</h2>');
+  assert.ok(calculator !== -1 && answer > calculator && detail > answer);
 });
 
 test("DEN-022 does not collapse or relabel crown price categories", () => {

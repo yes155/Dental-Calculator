@@ -50,6 +50,14 @@ function extractTitle(html, route) {
   return match[1].trim();
 }
 
+function extractH1(html, route) {
+  const match = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
+  if (!match) throw new Error(`${route}: missing H1 for breadcrumb schema`);
+  const text = match[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  if (!text) throw new Error(`${route}: empty H1 for breadcrumb schema`);
+  return text;
+}
+
 function extractDescriptionTag(html, route) {
   const tag = html.match(/<meta\b[^>]*\bname=["']description["'][^>]*>/i)?.[0];
   if (!tag) throw new Error(`${route}: missing meta description`);
@@ -93,7 +101,7 @@ function normalizeOrigin(raw) {
   return url.origin;
 }
 
-function schemaForRoute(route, origin, canonical, title, description) {
+function schemaForRoute(route, origin, canonical, title, description, h1) {
   const websiteId = `${origin}/#website`;
   const webpageId = `${canonical}#webpage`;
   const page = {
@@ -106,12 +114,34 @@ function schemaForRoute(route, origin, canonical, title, description) {
   };
 
   const graph = [];
+  if (route !== "/") {
+    const breadcrumbId = `${canonical}#breadcrumb`;
+    page.breadcrumb = { "@id": breadcrumbId };
+    graph.push({
+      "@type": "BreadcrumbList",
+      "@id": breadcrumbId,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: `${origin}/`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: h1,
+          item: canonical,
+        },
+      ],
+    });
+  }
   if (route === "/") {
     graph.push({
       "@type": "WebSite",
       "@id": websiteId,
       url: `${origin}/`,
-      name: "Dental Calculator",
+      name: "Dental Cost Calculator",
       description: "Evidence-led U.S. dental cost education and quote-based calculators.",
     });
   }
@@ -124,7 +154,7 @@ function schemaForRoute(route, origin, canonical, title, description) {
       "@id": personId,
       name: "Farrukh Abdullah",
       jobTitle: "Researcher & Writer",
-      description: "Editorial researcher and writer for Dental Calculator.",
+      description: "Editorial researcher and writer for Dental Cost Calculator.",
       url: canonical,
       sameAs: ["https://www.linkedin.com/in/farrukh-abdullah-5a218424/"],
     });
@@ -187,7 +217,8 @@ for (const route of approvedRoutes) {
   let html = await readFile(path, "utf8");
 
   const sourceTitle = extractTitle(html, route);
-  const title = production ? sourceTitle.replace(oldPreviewBrandPattern, "Dental Calculator") : sourceTitle;
+  const h1 = extractH1(html, route);
+  const title = production ? sourceTitle.replace(oldPreviewBrandPattern, "Dental Cost Calculator") : sourceTitle;
   const { tag: descriptionTag, content: description } = extractDescriptionTag(html, route);
 
   if (canonicalTagPattern.test(html) || socialTagPattern.test(html) || jsonLdPattern.test(html)) {
@@ -201,12 +232,12 @@ for (const route of approvedRoutes) {
   if (!production) continue;
 
   const canonical = canonicalUrl(origin, route);
-  const schema = schemaForRoute(route, origin, canonical, title, description);
+  const schema = schemaForRoute(route, origin, canonical, title, description, h1);
   const metadata = [
     `  <link rel="canonical" href="${escapeAttr(canonical)}">`,
     `  <meta property="og:type" content="website">`,
     `  <meta property="og:locale" content="en_US">`,
-    `  <meta property="og:site_name" content="Dental Calculator">`,
+    `  <meta property="og:site_name" content="Dental Cost Calculator">`,
     `  <meta property="og:title" content="${escapeAttr(title)}">`,
     `  <meta property="og:description" content="${escapeAttr(description)}">`,
     `  <meta property="og:url" content="${escapeAttr(canonical)}">`,
@@ -216,7 +247,7 @@ for (const route of approvedRoutes) {
     jsonLdTag(schema),
   ].join("\n");
 
-  html = html.replace(oldPreviewBrandPattern, "Dental Calculator");
+  html = html.replace(oldPreviewBrandPattern, "Dental Cost Calculator");
   html = html.replace(robotsTagPattern, '<meta name="robots" content="index,follow,max-image-preview:large">');
   html = html.replace(descriptionTag, `${descriptionTag}\n${metadata}`);
   html = html.replace(previewBannerPattern, "\n");
@@ -240,6 +271,24 @@ for (const route of approvedRoutes) {
   }
   if (route === "/" && !graph.some((node) => node?.["@type"] === "WebSite" && node?.["@id"] === `${origin}/#website` && node?.url === `${origin}/`)) {
     throw new Error("homepage: WebSite schema missing or inconsistent");
+  }
+  if (route !== "/") {
+    const breadcrumbId = `${canonical}#breadcrumb`;
+    const breadcrumb = graph.find((node) => node?.["@type"] === "BreadcrumbList" && node?.["@id"] === breadcrumbId);
+    const items = breadcrumb?.itemListElement;
+    if (
+      pageNode.breadcrumb?.["@id"] !== breadcrumbId ||
+      !Array.isArray(items) ||
+      items.length !== 2 ||
+      items[0]?.position !== 1 ||
+      items[0]?.name !== "Home" ||
+      items[0]?.item !== `${origin}/` ||
+      items[1]?.position !== 2 ||
+      items[1]?.name !== h1 ||
+      items[1]?.item !== canonical
+    ) {
+      throw new Error(`${route}: BreadcrumbList schema does not match visible breadcrumb hierarchy`);
+    }
   }
   if (route === "/authors/farrukh-abdullah/" && !graph.some((node) => node?.["@type"] === "Person" && node?.name === "Farrukh Abdullah" && node?.jobTitle === "Researcher & Writer")) {
     throw new Error("author profile: truthful Person schema missing");

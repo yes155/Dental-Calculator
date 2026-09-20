@@ -6,8 +6,8 @@ import { resolve } from 'node:path';
 const root = resolve(new URL('..', import.meta.url).pathname);
 
 const pages = [
-  ['index.html', 'Dental cost guides and quote-based calculators'],
-  ['contact/index.html', 'Contact Dental Calculator'],
+  ['index.html', 'Understand what a dental procedure may cost'],
+  ['contact/index.html', 'Contact Dental Cost Calculator'],
   ['privacy/index.html', 'Privacy Policy'],
   ['terms/index.html', 'Terms of Use'],
 ];
@@ -16,7 +16,7 @@ for (const [path, h1] of pages) {
   test(`${path} is preview-safe and publication-clean`, async () => {
     const html = await readFile(resolve(root, 'src', path), 'utf8');
     assert.match(html, /<meta name="robots" content="noindex,nofollow">/);
-    assert.ok(html.includes(`<h1>${h1}</h1>`));
+    assert.match(html, new RegExp(`<h1(?:\\s+[^>]*)?>${h1}</h1>`));
     assert.equal((html.match(/<h1\b/g) || []).length, 1);
     assert.doesNotMatch(html, /\[SOURCE NEEDED BEFORE PUBLICATION\]|TODO|PLACEHOLDER|EDITOR NOTE/);
   });
@@ -34,11 +34,12 @@ test('homepage internal page links resolve to source routes', async () => {
 
 test('homepage preserves YMYL and reviewer boundaries', async () => {
   const html = await readFile(resolve(root, 'src/index.html'), 'utf8');
-  assert.match(html, /Researcher &amp; Writer/);
-  assert.match(html, /Clinical &amp; Scientific Reviewer/);
-  assert.match(html, /only after that exact page version has been reviewed/);
-  assert.match(html, /does not diagnose dental conditions/);
-  assert.match(html, /do not create a dentist’s fee or guarantee coverage/);
+  assert.match(html, /clinical reviewer credit appears only when that exact page version has been reviewed/);
+  assert.match(html, /not a dentist's fee and not a guarantee of coverage/);
+  assert.match(html, /not a dentist’s fee, diagnosis or treatment recommendation/);
+  assert.match(html, /does not invent a coverage percentage or guarantee benefits/);
+  assert.doesNotMatch(html, /Reviewed by Juliana Maia Teixeira/i);
+  assert.doesNotMatch(html, /class="person-card|\/assets\/people\//i);
 });
 
 test('privacy and terms preserve calculator and insurance limits', async () => {

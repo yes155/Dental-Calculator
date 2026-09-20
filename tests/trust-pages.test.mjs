@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
 const pages = [
-  ['about','About Dental Calculator'],
+  ['about','About Dental Cost Calculator'],
   ['editorial-policy','Editorial Policy'],
   ['authors/farrukh-abdullah','Farrukh Abdullah'],
   ['reviewers/juliana-maia-teixeira','Juliana Maia Teixeira'],

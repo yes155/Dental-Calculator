@@ -1,27 +1,27 @@
 # PROJECT STATE — Dental Calculator
 
-Updated 2026-09-18.
+Updated 2026-09-20.
 
 ## Project identity
-- Site name: Dental Calculator (working name)
+- Site name: Dental Cost Calculator
 - Primary market: United States
 - Primary audience: people researching dental procedure costs and written quote/out-of-pocket estimates
 - Risk class: Health/YMYL-adjacent + financial estimation
-- Production domain: `dentalcostcalculator.site` — finalized, not yet attached/verified on Cloudflare
+- Production domain: `dentalcostcalculator.site` — attached to the Cloudflare production project
 - Production origin: `https://dentalcostcalculator.site`
 - Production release: blocked until remaining hard gates pass
 
 ## Repository / deployment
 - GitHub repo: `yes155/Dental-Calculator`
 - Production branch: `main`
-- Working branch: `chatgpt-work`
+- Working branch: `visual-refresh-2026-09-18`
 - Framework: dependency-free Node.js static build
 - Source: `src/`
 - Build: `npm run build`
 - QA: `npm run qa`
 - Output: `dist/`
 - Cloudflare project: `dental-calculator`
-- Branch preview: `https://chatgpt-work-dental-calculator.f-abdullah79.workers.dev`
+- Branch preview: `https://visual-refresh-2026-09-18-dental-calculator.f-abdullah79.workers.dev`
 - Preview policy: implemented pages remain `noindex,nofollow`; preview `robots.txt` blocks crawling; live `workers.dev` response carries HTTP `X-Robots-Tag: noindex`.
 
 ## Architecture
@@ -77,16 +77,16 @@ Common controls:
 - Final production origin is `https://dentalcostcalculator.site`.
 - Production artifact generation requires a valid HTTPS `SITE_ORIGIN`; CI now tests the exact finalized production origin.
 - Production artifacts generate self-canonicals, registry-driven `robots.txt`, registry-driven `sitemap.xml`, OG/X text metadata and production index directives.
-- Production-only JSON-LD is centralized and deliberately limited to truthful `WebSite`, `WebPage`, `ProfilePage` and `Person` usage.
+- Production-only JSON-LD is centralized and deliberately limited to truthful `WebSite`, `WebPage`, `ProfilePage`, `Person` and visible-hierarchy `BreadcrumbList` usage.
 - Build guards block unsupported `MedicalWebPage`, `FAQPage`, `Organization`, `reviewedBy` and accidental reviewer attribution.
 - Final sitewide social image is local at `/assets/social/dentalcostcalculator-og.png` (1200×630 PNG). Production build validates PNG signature/dimensions and adds `og:image`, `og:image:secure_url`, image dimensions/alt text, and X `summary_large_image` metadata across all approved routes; preview mode skips this metadata.
 
 ## Trust / people
 - Author shown: Farrukh Abdullah, researcher and writer only.
-- Farrukh author photo: local asset `/assets/people/farrukh-abdullah.webp`, created from user-supplied photo and used on homepage, About, and author profile.
+- Farrukh author photo: local asset `/assets/people/farrukh-abdullah.webp`, created from user-supplied photo and used on About and the author profile. The homepage now uses a compact policy-based trust strip without full bios or profile photos.
 - No dental qualification claimed for Farrukh.
-- Clinical/scientific reviewer: Juliana Maia Teixeira appears only in approved trust/profile contexts.
-- Article-level reviewer credit is prohibited unless that exact page version has documented review.
+- Clinical/scientific reviewer: Juliana Maia Teixeira. The site owner confirmed the current page set has been reviewed in that role.
+- Page-level reviewer credit must remain tied to documented exact-version review records; hidden `reviewedBy` schema remains blocked unless visible page-level credit is implemented.
 - Regression guard blocks sibling-project domains such as `skinkpedia.online`, `myaxolotl.us`, and `bettafish.website` from approved dental pages.
 
 ## Automated QA
@@ -114,30 +114,54 @@ Latest validated CI: **Prelaunch QA run #464 — SUCCESS** at `4a96515e34ea3a2d9
 
 ## Media / design / accessibility
 - Representative calculator visual pattern: established through CALC-001 review.
+- Homepage information architecture now reflects one canonical page per dental procedure; the procedure browser precedes compact price/state examples and the complete state comparison remains collapsed by default.
 - Farrukh author photo is local and verified live on the Cloudflare preview.
 - Final sitewide social card is approved, local, 1200×630, and wired only into production metadata.
 - Source-level accessibility review confirmed skip links, visible focus, labelled native controls, fieldsets/legends, error focus/`aria-invalid`, live results, responsive fallbacks, 16px mobile controls and reduced-motion handling.
 - Manual live-browser QA passed for the representative cleaning calculator at 320px, 390px and 768px with no reported overflow/clipping/control breakage.
 - Manual keyboard QA passed on the representative cleaning calculator, including intentional validation-error handling and completion through the result state with visible/logical focus.
 - Live people-media requests were verified without the prior cross-project image failure.
+- Sticky shared header and accessible mobile menu are implemented through shared site chrome.
+- Inner pages receive generated breadcrumbs with a Home icon and current-page label; the homepage intentionally omits a redundant breadcrumb.
+- A back-to-top control appears after substantial scrolling on long pages.
+- A custom noindex 404 recovery page is included and linked to common procedure destinations.
+- Print CSS removes navigation and interactive chrome so procedure guidance prints as a clean reference document.
+- Static full-site search is available from the shared header without creating a new indexable route. The build generates `/assets/data/site-search.json` from the 38 approved non-home registry pages, grouped as Dental procedures, Paying for care, and Trust & methodology.
+- Search queries run entirely in the browser against the local index; no third-party search service or query tracking is introduced.
+- Semantic SEO / keyword-mapping audit completed against the approved topical map and current source. Keyword ownership remains frozen; no new modifier URLs were added.
+- Semantic correction batch implemented: evidence-aligned homepage predicate, explicit uninsured-intent responses on canonical owners, dental-plate synonym coverage on dentures, contextual methodology/insurance links, unified related-page wording, canonical site name “Dental Cost Calculator”, and production BreadcrumbList schema.
+- Site owner confirmed the current page set has been reviewed by Juliana Maia Teixeira in her Clinical & Scientific Reviewer role; the homepage uses a concise review signal while hidden page-level reviewedBy schema remains intentionally blocked unless visible page-level credit is implemented.
+- Inlay/onlay distinct-information-gain review is PASS: the URLs remain separate because their terminology/coding/quote scope is distinct even though the current national ceramic price benchmark is combined.
+- `Dental_Topical_Map_and_Page_Registry.xlsx` in the Library is synchronized to the frozen repo registry: 39 approved build routes, 5 deferred routes, 12 trust/methodology pages and TRU-012 are reflected without changing validated keyword assignments.
 
 ## Current milestone
 - M1 Baseline: PASS
 - M2 Architecture/Evidence: PASS for implemented source-controlled routes
 - M3 Content/Tools: PASS for the 39 approved implemented routes and automated-tested calculators
 - M4 Design/Media: PASS — representative rendered/accessibility QA and final social image are complete
-- M5 Final Candidate: IN PROGRESS — production hostname and social image are finalized; blocked on Cloudflare domain attachment, final-domain checks and rollback verification
+- M5 Final Candidate: IN PROGRESS — semantic SEO/keyword mapping corrections and architecture follow-ups are closed; final production-domain validation remains before release
 - M6 Production: BLOCKED
 
 ## Next logical work
-1. Attach `dentalcostcalculator.site` to the Cloudflare production project and set `SITE_ORIGIN=https://dentalcostcalculator.site` on the production build trigger.
-2. Run final-domain canonical/robots/sitemap/schema/security/performance checks.
-3. Freeze the final candidate SHA after this documentation sync passes CI; rollback target is recorded in `LAUNCH-REPORT.md`.
-4. Verify rollback procedure against the production-domain candidate.
-5. Run the final hard-blocker audit before any merge to `main`.
+1. Confirm the production build trigger still uses `SITE_ORIGIN=https://dentalcostcalculator.site`.
+2. Deploy the current `visual-refresh-2026-09-18` candidate through the production build path and run fresh final-domain canonical/robots/sitemap/schema/security/performance checks.
+3. Verify the new shared header/search/mobile-menu/breadcrumb/back-to-top/404 behavior on the production hostname.
+4. Freeze the validated candidate SHA and record the rollback target for this release.
+5. Run the final hard-blocker audit before merging the validated candidate to `main`.
 
 ## Known hard-gate exceptions
-- Production domain is finalized but Cloudflare custom-domain attachment / production `SITE_ORIGIN` deployment setting are not yet verified.
-- Final-domain SEO/security/performance checks incomplete.
-- Rollback target/procedure are documented; live rollback verification remains open.
-- Production merge/indexation blocked.
+- The custom production domain is attached. The production `SITE_ORIGIN` value was previously verified for the prior release, but should be reconfirmed for the current deployment trigger.
+- The current visual-refresh candidate has not yet completed fresh production-domain SEO/security/performance checks.
+- The current candidate needs a release-specific rollback target recorded before merge.
+- Merge of the current candidate to `main` remains blocked until those fresh checks pass.
+
+
+## Current preview candidate
+- Cloudflare preview build: SUCCESS on 2026-09-20
+- Worker Version ID: `a70256e7-273d-41fd-9b8c-f252adc67e6f`
+- Version preview: `https://a70256e7-dental-calculator.f-abdullah79.workers.dev`
+- Branch preview alias: `https://visual-refresh-2026-09-18-dental-calculator.f-abdullah79.workers.dev`
+- Build output: 133 entries in `dist/`; Cloudflare read 134 asset files for upload/deployment.
+- All build gates passed: Wave A, orthodontics, cosmetic, prosthetics, final procedures, state-cost data, and 15 calculator landing pages.
+- Preview SEO mode remained active: all 39 approved routes are `noindex` and preview robots blocks crawling.
+- This was a version upload only; production traffic was not switched by this build.

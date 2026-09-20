@@ -36,6 +36,15 @@ const requiredAssets = [
   "assets/site.css",
   "assets/trust.css",
   "assets/people/juliana-maia-teixeira.webp",
+  "assets/media/home-dental-cost-hero.webp",
+  "assets/brand/favicon.svg",
+  "assets/media/dental-cleaning-cost-hero.svg",
+  "assets/site-chrome.mjs",
+  "assets/media/home-icons.svg",
+  "assets/state-costs.mjs",
+  "assets/data/state-dental-costs.json",
+  "assets/data/site-search.json",
+  "404.html",
 ];
 
 for (const path of [...waveARoutes, ...requiredAssets]) {
@@ -54,22 +63,169 @@ for (const path of waveARoutes) {
   if (forbiddenReaderMarkers.test(html)) throw new Error(`${path}: unresolved internal publication marker reached reader copy`);
 }
 
+const siteCss = await readFile(resolve(output, "assets/site.css"), "utf8");
+for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", "Institutional editorial system", "Homepage semantic color and responsive polish contract", "Unified one-page-per-procedure architecture", "Homepage hero credibility strip", "Procedure finder vertical-balance refinement", "Global navigation, breadcrumbs, back-to-top, 404 and print UX", "Global static site search", "Desktop header row alignment fix", "--brand-purple", ".footer-motto", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
+  if (!siteCss.includes(token)) throw new Error(`site css: calculator density contract token missing: ${token}`);
+}
+
+const stateScript = await readFile(resolve(output, "assets/state-costs.mjs"), "utf8");
+for (const token of ["STANDARD_BANDS", "rankOf", "renderSimilar", "data-state-range-selected", "has-selection", "aria-pressed"]) {
+  if (!stateScript.includes(token)) throw new Error(`state costs: information-gain/standardized-scale token missing: ${token}`);
+}
+
+const chromeScript = await readFile(resolve(output, "assets/site-chrome.mjs"), "utf8");
+for (const token of ["pointerdown", "Escape", "toggle", "site-menu-toggle", "backToTop", "scrollTo", "site-search-toggle", "loadSearchIndex", "runSiteSearch"]) {
+  if (!chromeScript.includes(token)) throw new Error(`site chrome: dropdown behavior token missing: ${token}`);
+}
+
 const homepage = await readFile(resolve(output, "index.html"), "utf8");
 for (const token of [
-  "Dental cost guides and quote-based calculators",
+  "home-hero--image",
+  "/assets/media/home-dental-cost-hero.webp",
   "/cost-data-methodology/",
   "/calculator-methodology/",
-  "/authors/farrukh-abdullah/",
-  "/reviewers/juliana-maia-teixeira/",
-  "Article-level reviewer credit is used only after that exact page version has been reviewed.",
+  "<details class=\"nav-dropdown nav-resource nav-resource--procedures\">",
+  "site-brand-bar",
+  "site-nav-bar",
+  "site-menu-toggle",
+  "back-to-top",
+  "site-search-toggle",
+  "site-search-dialog",
+  "Find dental cost information",
+  "One procedure page brings the cost evidence and quote-check tools together.",
+  "Browse dental procedures",
+  "Roboto+Condensed",
+  "Understand what a dental procedure may cost",
+  "Clinically &amp; scientifically reviewed",
+  "Named price sources",
+  "50 states + D.C.",
+  "24 procedure pages",
+  "home-hero-trust",
+  "These are estimates based on your inputs and stated assumptions — not a dentist's fee and not a guarantee of coverage.",
+  "/editorial-policy/",
+  "/medical-disclaimer/",
+  "home-calculator-entry",
+  "procedure-finder-form",
+  "Find the right dental cost resource",
+  "Open a dental procedure page",
+  "Each procedure has one page, with a quote calculator included where available.",
+  "Open procedure page",
+  "Dental procedure pages",
+  "Each link opens the single page for that procedure",
+  "Published price examples",
+  "Three example prices from published sources",
+  "Open the dental cleaning page →",
+  "data-cost-browser",
+  "Choose a type of dental care",
+  "What can change the price",
+  "Visible sources, authorship and review boundaries",
+  "What these dental cost pages can—and cannot—tell you",
+  "data-state-costs",
+  "How prices can change by state",
+  "Open the full state comparison",
+  "Compare all 51 jurisdictions in a table",
+  "Standardized color scale",
+  "Closest published state averages",
+  "Same procedure",
+  "doorway-icon",
+  "finder-help",
+  "cost-tab-copy",
+  "price-teaser-icon",
+  "faq-preview",
 ]) {
   if (!homepage.includes(token)) throw new Error(`homepage: required Wave A trust/ownership token missing: ${token}`);
+}
+
+const searchIndexPayload = JSON.parse(await readFile(resolve(output, "assets/data/site-search.json"), "utf8"));
+if (!Array.isArray(searchIndexPayload.items) || searchIndexPayload.items.length !== 38) {
+  throw new Error(`site search: expected 38 approved non-home pages; found ${searchIndexPayload.items?.length ?? "invalid"}`);
+}
+const searchUrls = new Set(searchIndexPayload.items.map((item) => item.url));
+for (const url of ["/dental-cleaning-cost/", "/dental-implant-cost-calculator/", "/dental-insurance-out-of-pocket-costs/", "/cost-data-methodology/"]) {
+  if (!searchUrls.has(url)) throw new Error(`site search: required indexed URL missing: ${url}`);
+}
+const searchGroups = new Set(searchIndexPayload.items.map((item) => item.group));
+for (const group of ["Dental procedures", "Paying for care", "Trust & methodology"]) {
+  if (!searchGroups.has(group)) throw new Error(`site search: result group missing: ${group}`);
+}
+if (searchUrls.size !== searchIndexPayload.items.length) {
+  throw new Error("site search: duplicate URLs found in generated index");
+}
+
+const representativeProcedure = await readFile(resolve(output, "dental-cleaning-cost/index.html"), "utf8");
+for (const token of ["site-breadcrumbs", "breadcrumb-home", 'aria-current="page"', "site-menu-toggle", "back-to-top"]) {
+  if (!representativeProcedure.includes(token)) throw new Error(`site chrome: representative procedure missing global UX token: ${token}`);
+}
+
+for (const token of [
+  "<strong>Without insurance or dental benefits:</strong>",
+  'href="/cost-data-methodology/"',
+  'href="/calculator-methodology/"',
+  'href="/dental-insurance-out-of-pocket-costs/"',
+]) {
+  if (!representativeProcedure.includes(token)) throw new Error(`semantic audit: cleaning page missing required query/methodology token: ${token}`);
+}
+
+const rootCanalSemantic = await readFile(resolve(output, "root-canal-cost/index.html"), "utf8");
+for (const token of [
+  "<strong>Without insurance:</strong>",
+  'href="/cost-data-methodology/"',
+  'href="/calculator-methodology/"',
+  'href="/dental-insurance-out-of-pocket-costs/"',
+]) {
+  if (!rootCanalSemantic.includes(token)) throw new Error(`semantic audit: root-canal page missing required token: ${token}`);
+}
+
+const denturesSemantic = await readFile(resolve(output, "dentures-cost/index.html"), "utf8");
+for (const token of ["<strong>Dental plate</strong>", "Related replacement pages"]) {
+  if (!denturesSemantic.includes(token)) throw new Error(`semantic audit: dentures page missing mapped terminology token: ${token}`);
+}
+
+const bracesSemantic = await readFile(resolve(output, "braces-cost/index.html"), "utf8");
+if (!bracesSemantic.includes("Related orthodontic pages")) throw new Error("semantic audit: braces related-page wording regressed");
+
+const veneersSemantic = await readFile(resolve(output, "dental-veneers-cost/index.html"), "utf8");
+if (!veneersSemantic.includes("Related cosmetic dental pages")) throw new Error("semantic audit: veneers related-page wording regressed");
+
+const aboutEntity = await readFile(resolve(output, "about/index.html"), "utf8");
+if (!aboutEntity.includes("Dental Cost Calculator") || aboutEntity.includes(">Dental Calculator<")) {
+  throw new Error("entity audit: About page site name is inconsistent");
+}
+
+const notFoundPage = await readFile(resolve(output, "404.html"), "utf8");
+for (const token of ["404 · PAGE NOT FOUND", "We couldn't find that dental cost page", "Browse dental procedures", "site-breadcrumbs", "back-to-top"]) {
+  if (!notFoundPage.includes(token)) throw new Error(`404 page: required recovery token missing: ${token}`);
+}
+if (!notFoundPage.includes('<meta name="robots" content="noindex,nofollow">')) {
+  throw new Error("404 page: must remain noindex,nofollow");
+}
+
+const procedureDoorwayIndex = homepage.indexOf("doorway-card--procedure");
+const procedureFinderIndex = homepage.indexOf('id="procedure-finder"');
+if (!(procedureDoorwayIndex >= 0 && procedureFinderIndex > procedureDoorwayIndex)) {
+  throw new Error("homepage: procedure doorway must lead into the unified procedure finder");
+}
+const heroIndex = homepage.indexOf("home-hero--image");
+const doorwayIndex = homepage.indexOf("Find the right dental cost resource");
+const categoryIndex = homepage.indexOf("Choose a type of dental care");
+const priceIndex = homepage.indexOf("Three example prices from published sources");
+const stateIndex = homepage.indexOf("How prices can change by state");
+if (!(heroIndex >= 0 && doorwayIndex > heroIndex && categoryIndex > doorwayIndex && priceIndex > categoryIndex && stateIndex > priceIndex)) {
+  throw new Error("homepage: expected order is hero → doorways → category browser → price teaser → state teaser");
 }
 
 const homepageLinks = [...homepage.matchAll(/href="(\/[^"]*\/)"/g)].map((match) => match[1]);
 for (const href of new Set(homepageLinks)) {
   const target = href === "/" ? "index.html" : `${href.slice(1)}index.html`;
   await access(resolve(output, target));
+}
+
+const cleaningMeta = await readFile(resolve(output, "dental-cleaning-cost/index.html"), "utf8");
+for (const token of ["Written by", "Last updated", "/authors/farrukh-abdullah/"]) {
+  if (!cleaningMeta.includes(token)) throw new Error(`cleaning metadata: expected authority-style metadata token missing: ${token}`);
+}
+if (cleaningMeta.includes("Evidence checked") || cleaningMeta.includes("Research and written by")) {
+  throw new Error("cleaning metadata: legacy metadata wording must not reach reader copy");
 }
 
 const contact = await readFile(resolve(output, "contact/index.html"), "utf8");
@@ -109,8 +265,12 @@ if (!calcMethod.includes("Blank is not zero") || !calcMethod.includes("not an ac
 }
 
 const costMethod = await readFile(resolve(output, "cost-data-methodology/index.html"), "utf8");
-if (!costMethod.includes("does not merge unrelated local fees, plan copays or differently scoped sources")) {
-  throw new Error("cost methodology: source-scope safeguard missing");
+for (const token of [
+  "does not merge unrelated local fees, plan copays or differently scoped sources",
+  "State-by-state price comparisons",
+  "does not create state-specific indexable URLs",
+]) {
+  if (!costMethod.includes(token)) throw new Error(`cost methodology: required geographic/source-scope token missing: ${token}`);
 }
 
 const trustPrefixes = [

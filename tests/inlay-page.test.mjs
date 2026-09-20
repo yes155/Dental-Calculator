@@ -21,7 +21,7 @@ const expectedH2s = [
   "What can change an inlay quote?",
   "How insurance can affect what you pay",
   "Inlay cost versus onlay and filling cost",
-  "Related dental cost guides",
+  "Related dental procedure pages",
 ];
 
 test("DEN-004 keeps the frozen page structure", () => {

@@ -249,3 +249,33 @@
 - Preview mode intentionally skips production social-image metadata.
 - Prelaunch QA run #464 passed at `4a96515e34ea3a2d9a217f342c0dbe043ed25101`.
 - Recorded rollback target as current `main` at `3e9db6a6458659c4db41b80b16a97558957b953b`; live rollback verification remains pending until the production-domain candidate exists.
+
+## 2026-09-19
+
+### Visual-refresh trust regression repair
+- Restored the homepage author and reviewer cards after the calculator-first redesign accidentally removed the local people media and explicit role boundaries.
+- Restored the homepage cost-education, non-diagnosis and non-guaranteed-coverage safeguards without adding page-specific review claims.
+- Updated the Wave A homepage assertion to the approved `Know what a dental procedure should cost` H1 while retaining the single-H1 guard.
+- Revalidated the complete upgrade branch: 213/213 tests passed, all cluster build gates passed, and the state-cost gate confirmed 51 jurisdictions across 6 procedures.
+
+### Homepage whitespace correction
+- Reduced the forced desktop hero height so the supplied illustration no longer leaves an oversized empty lower band while keeping the headline and both calls to action above the fold.
+- Prevented the state map and dental-care browser panels from stretching to match taller neighboring columns; both now stop at their own content height.
+- Replaced doubled adjacent-section padding with a compact, consistent transition between popular calculators, state comparisons and the dental-care browser.
+- Added the whitespace-correction contract to the Wave A build gate and revalidated the complete branch: 213/213 tests, 131 build outputs, all cluster gates and the 51-jurisdiction state-data gate passed.
+
+### Institutional editorial redesign
+- Replaced the homepage hero illustration with the supplied four-person black-and-white collage, preserving its full composition and yellow statement band in a 2048-pixel WebP.
+- Added a two-level purple-and-white masthead, condensed editorial typography, green navigation and links, purple section headings, thin gray rules and a yellow footer statement band.
+- Flattened homepage modules, editorial pages, procedure pages and calculator surfaces while retaining clear interaction boundaries, result emphasis and accessible focus behavior.
+- Added a mobile hero treatment that places the message above the full uncropped image rather than hiding people or the embedded slogan.
+- Added a desktop-only white edge fade behind the hero copy so every line remains readable across the image's diagonal portrait boundary.
+- Kept the redesign independent of the visual reference's institutional branding and retained the site's cost-education, evidence-scope and insurance safeguards.
+
+### Homepage router-first restructuring
+- Rebuilt the homepage as a site map and task router rather than a long-form landing page: hero, four primary doorways, category browser, scoped price examples, state-data teaser, cost-driver explainer, trust strip, compact FAQs and an actionable closing band.
+- Moved the dental-care category browser ahead of price and state examples so visitors can reach the correct procedure family before encountering deeper content.
+- Reduced the homepage to three scoped price examples and a static single-tooth implant state snapshot; the complete 51-jurisdiction comparison remains available in a collapsed on-page tool because the frozen registry has no separate state-data route.
+- Removed full author/reviewer cards from the homepage while preserving local profile media on the dedicated About, author and reviewer pages and keeping the exact-version review boundary visible.
+- Cropped the emotional yellow slogan from the supplied hero asset without changing the four portraits, and replaced it with a factual CTA linking to the cost-guide browser.
+- Updated homepage architecture, trust and media regression tests; `npm run qa` passes all 213 tests and every build/data gate locally.
