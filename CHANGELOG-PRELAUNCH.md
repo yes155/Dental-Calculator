@@ -279,3 +279,13 @@
 - Removed full author/reviewer cards from the homepage while preserving local profile media on the dedicated About, author and reviewer pages and keeping the exact-version review boundary visible.
 - Cropped the emotional yellow slogan from the supplied hero asset without changing the four portraits, and replaced it with a factual CTA linking to the cost-guide browser.
 - Updated homepage architecture, trust and media regression tests; `npm run qa` passes all 213 tests and every build/data gate locally.
+
+
+## 2026-09-20 — External entity grounding
+- Added `data/entity-map.csv` as the source of truth for external entity identity/disambiguation without changing the frozen Page Registry.
+- Mapped the site central entity and all 24 approved procedure pages to verified Wikidata/Wikipedia nodes where available; dental bonding intentionally carries no invented Wikidata QID.
+- Preserved DEN-004 inlay and DEN-013 onlay as separate canonical owners despite their shared Inlays and onlays global node.
+- Added explicit `about` vs `mentions` relationships so broader nodes such as Dentist and Periodontology are not misrepresented as identical to visit/maintenance tasks.
+- Wired production JSON-LD to emit Schema.org Thing nodes with external `sameAs` identities; WebPage/WebSite nodes themselves do not receive those entity `sameAs` values.
+- Added entity-map regression tests and `docs/DENTAL_ENTITY_MAPPING.md`.
+- No URLs, calculators, price data, clinical claims or evidence ownership changed in this batch.
