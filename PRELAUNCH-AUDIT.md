@@ -1,6 +1,6 @@
 # PRELAUNCH AUDIT — Dental Calculator
 
-Updated 2026-09-18.
+Updated 2026-09-20.
 
 Status values: PASS / FAIL / IN PROGRESS / DEFERRED / NOT TESTED
 
@@ -39,6 +39,34 @@ Latest validated CI: **Prelaunch QA run #464 — SUCCESS** at `4a96515e34ea3a2d9
 | B-002 | Cloudflare preview | HARD | `chatgpt-work` | Branch preview verified manually: homepage 200, people-media assets load, robots blocks crawling, and required security headers are present. | Preserve until production cutover. | PASS |
 | B-003 | Production hostname | HARD | Release | Real production hostname not connected/set; build refuses to invent `SITE_ORIGIN`. | Connect/finalize domain and set production build variable. | IN PROGRESS |
 | B-004 | Rollback | HARD | Release | Rollback target is current `main` at `3e9db6a6458659c4db41b80b16a97558957b953b`; procedure is documented in `LAUNCH-REPORT.md`. It has not yet been tested against the live production-domain candidate. | Verify rollback after candidate deployment and before merge. | IN PROGRESS |
+
+
+## Semantic SEO + keyword-mapping audit — 2026-09-20
+
+Audit basis: approved Dental Topical Map/Page Registry and 932-row Keyword Mapping workbook; current `visual-refresh-2026-09-18` source; dental project rules; Koray/Ehsan semantic-audit rules. Numeric diagnostic heuristics do not override the frozen architecture, evidence scope or YMYL safety boundaries.
+
+| ID | Category | Severity | Scope | Finding | Required action | Status |
+|---|---|---|---|---|---|---|
+| K-001 | Keyword mapping integrity | HARD | Keyword map | 932 research rows reconcile: 749 mapped, 101 excluded, 46 deferred-research, 35 deferred-page and 1 intentional zero-count duplicate variant. Counted mapped demand is 841,900. No duplicate normalized keyword is assigned to competing URLs; every mapped owner has one Primary keyword; page-level keyword/volume totals reconcile. | Preserve canonical ownership; do not create modifier URLs for cost/price/how-much/with-or-without-insurance variants. | PASS |
+| K-002 | Query responsiveness | HIGH | DEN-002, DEN-005, DEN-008, DEN-010, DEN-018, DEN-025 | Large mapped uninsured-intent families are consolidated correctly but several current pages do not explicitly use/answer the “without insurance” formulation. Root canal and extraction are the clearest gaps because their Primary keyword is the uninsured variant. | Add bounded answer-first uninsured wording inside the existing canonical page; do not create separate uninsured URLs. | IN PROGRESS |
+| K-003 | Synonym coverage | MEDIUM | DEN-030 | Primary mapped query is “dental plate cost,” but the current dentures page does not use “dental plate/plate.” | Add one natural clarifying synonym/quote-language sentence without changing the canonical entity or H1. | IN PROGRESS |
+| A-003 | Workbook source-of-truth drift | HIGH | Architecture resources | The approved workbook still contains proposal-era statuses and does not include later trust page TRU-012, while repo `data/page-registry.csv` is frozen and current. | Sync workbook status/registry metadata to the frozen repo architecture; do not alter validated keyword assignments during the sync. | IN PROGRESS |
+| A-004 | Inlay/onlay information gain | HIGH | DEN-004 / DEN-013 | Separate owners remain valid only if each page provides distinct user value. Current pages are semantically differentiated but both rely on the same combined national ceramic inlay/onlay evidence and each has only one mapped keyword. | Keep separate for now; require an explicit human architecture/evidence review before production. Merge only if distinct evidence/user task cannot be sustained. | IN PROGRESS |
+| G-003 | Semantic internal-link graph | HIGH | Procedure pages / methodology | The approved link plan calls for contextual bridges to Cost Data Methodology, Insurance & Out-of-Pocket Costs and, for calculator pages, Calculator Methodology. Multiple implemented procedure pages are missing one or more of these links; Calculator Methodology currently has no body links back to supported tools. | Add contextual links at the relevant price/insurance/calculator passages and add supported-tool links from Calculator Methodology. | IN PROGRESS |
+| G-004 | Architecture wording consistency | MEDIUM | Replacement / orthodontic / cosmetic related sections | Several pages still use headings such as “Related replacement cost guides,” “Related orthodontic cost guides,” and “Related cosmetic dental cost guides” after the site adopted one canonical procedure-page model. | Rename these to neutral “Related … pages” labels; no URL changes. | IN PROGRESS |
+| T-003 | Reviewer/trust claim accuracy | HARD | Homepage | Hero trust strip says “Version-specific clinical & scientific review,” but project policy prohibits implying page-level review without documented exact-version review. | Replace with a verifiable non-endorsement signal such as “Sources & review boundaries disclosed.” | FAIL |
+| T-004 | Brand/entity consistency | HIGH | Site + production metadata | Shared chrome brands the site “Dental Cost Calculator,” while About/Editorial/Reviewer surfaces and production WebSite/OG metadata still use “Dental Calculator.” | Choose one canonical site name and use it consistently across visible trust pages, WebSite schema, `og:site_name` and metadata. Current domain/header strongly support “Dental Cost Calculator.” | IN PROGRESS |
+| S-007 | Breadcrumb structured data | MEDIUM | Production schema | Visible sitewide breadcrumbs now exist, but production JSON-LD does not emit `BreadcrumbList`. | Add truthful `BreadcrumbList` for inner pages and validate against visible breadcrumb hierarchy. | IN PROGRESS |
+| G-005 | Predicate strength | MEDIUM | Homepage hero | H1 “Know what a dental procedure should cost” is stronger/normative wording than the site’s evidence model, which provides published context and user-entered quote organization rather than a definitive expected fee. | Consider a softer evidence-aligned H1 during copy correction; preserve the dental-procedure-cost entity and intent. | REVIEW |
+
+### Audit interpretation
+
+- The keyword map is **not** the problem. Canonical ownership and deduplication are strong.
+- Do **not** create new pages for uninsured, average-cost, price or “how much” modifiers.
+- The highest-value prelaunch corrections are trust-claim accuracy, brand/entity consistency, semantic internal linking and explicit uninsured-intent answers on the existing owners.
+- The generic “<=15 contextual links” heuristic is not applied to the homepage directory because the homepage intentionally functions as the procedure hub; architecture and user navigation take precedence over that numeric heuristic.
+- Deferred premium-shopping, clinical/symptom and ambiguous-service candidates remain deferred; no launch URL expansion is recommended from this audit.
+
 
 ## Hard-gate summary
 
