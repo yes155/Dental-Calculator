@@ -134,7 +134,7 @@ Latest validated CI: **Prelaunch QA run #464 — SUCCESS** at `4a96515e34ea3a2d9
 - M2 Architecture/Evidence: PASS for implemented source-controlled routes
 - M3 Content/Tools: PASS for the 39 approved implemented routes and automated-tested calculators
 - M4 Design/Media: PASS — representative rendered/accessibility QA and final social image are complete
-- M5 Final Candidate: IN PROGRESS — the production hostname is attached; the current visual-refresh branch still requires fresh production-domain validation before release
+- M5 Final Candidate: IN PROGRESS — current visual-refresh candidate has a clean Cloudflare preview build; final rendered QA and fresh production-domain validation remain before release
 - M6 Production: BLOCKED
 
 ## Next logical work
@@ -149,3 +149,14 @@ Latest validated CI: **Prelaunch QA run #464 — SUCCESS** at `4a96515e34ea3a2d9
 - The current visual-refresh candidate has not yet completed fresh production-domain SEO/security/performance checks.
 - The current candidate needs a release-specific rollback target recorded before merge.
 - Merge of the current candidate to `main` remains blocked until those fresh checks pass.
+
+
+## Current preview candidate
+- Cloudflare preview build: SUCCESS on 2026-09-20
+- Worker Version ID: `a70256e7-273d-41fd-9b8c-f252adc67e6f`
+- Version preview: `https://a70256e7-dental-calculator.f-abdullah79.workers.dev`
+- Branch preview alias: `https://visual-refresh-2026-09-18-dental-calculator.f-abdullah79.workers.dev`
+- Build output: 133 entries in `dist/`; Cloudflare read 134 asset files for upload/deployment.
+- All build gates passed: Wave A, orthodontics, cosmetic, prosthetics, final procedures, state-cost data, and 15 calculator landing pages.
+- Preview SEO mode remained active: all 39 approved routes are `noindex` and preview robots blocks crawling.
+- This was a version upload only; production traffic was not switched by this build.
