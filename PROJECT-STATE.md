@@ -3,7 +3,7 @@
 Updated 2026-09-20.
 
 ## Project identity
-- Site name: Dental Calculator (working name)
+- Site name: Dental Cost Calculator
 - Primary market: United States
 - Primary audience: people researching dental procedure costs and written quote/out-of-pocket estimates
 - Risk class: Health/YMYL-adjacent + financial estimation
@@ -77,7 +77,7 @@ Common controls:
 - Final production origin is `https://dentalcostcalculator.site`.
 - Production artifact generation requires a valid HTTPS `SITE_ORIGIN`; CI now tests the exact finalized production origin.
 - Production artifacts generate self-canonicals, registry-driven `robots.txt`, registry-driven `sitemap.xml`, OG/X text metadata and production index directives.
-- Production-only JSON-LD is centralized and deliberately limited to truthful `WebSite`, `WebPage`, `ProfilePage` and `Person` usage.
+- Production-only JSON-LD is centralized and deliberately limited to truthful `WebSite`, `WebPage`, `ProfilePage`, `Person` and visible-hierarchy `BreadcrumbList` usage.
 - Build guards block unsupported `MedicalWebPage`, `FAQPage`, `Organization`, `reviewedBy` and accidental reviewer attribution.
 - Final sitewide social image is local at `/assets/social/dentalcostcalculator-og.png` (1200×630 PNG). Production build validates PNG signature/dimensions and adds `og:image`, `og:image:secure_url`, image dimensions/alt text, and X `summary_large_image` metadata across all approved routes; preview mode skips this metadata.
 
@@ -85,8 +85,8 @@ Common controls:
 - Author shown: Farrukh Abdullah, researcher and writer only.
 - Farrukh author photo: local asset `/assets/people/farrukh-abdullah.webp`, created from user-supplied photo and used on About and the author profile. The homepage now uses a compact policy-based trust strip without full bios or profile photos.
 - No dental qualification claimed for Farrukh.
-- Clinical/scientific reviewer: Juliana Maia Teixeira appears only in approved trust/profile contexts.
-- Article-level reviewer credit is prohibited unless that exact page version has documented review.
+- Clinical/scientific reviewer: Juliana Maia Teixeira. The site owner confirmed the current page set has been reviewed in that role.
+- Page-level reviewer credit must remain tied to documented exact-version review records; hidden `reviewedBy` schema remains blocked unless visible page-level credit is implemented.
 - Regression guard blocks sibling-project domains such as `skinkpedia.online`, `myaxolotl.us`, and `bettafish.website` from approved dental pages.
 
 ## Automated QA
@@ -131,14 +131,15 @@ Latest validated CI: **Prelaunch QA run #464 — SUCCESS** at `4a96515e34ea3a2d9
 - Semantic SEO / keyword-mapping audit completed against the approved topical map and current source. Keyword ownership remains frozen; no new modifier URLs were added.
 - Semantic correction batch implemented: evidence-aligned homepage predicate, explicit uninsured-intent responses on canonical owners, dental-plate synonym coverage on dentures, contextual methodology/insurance links, unified related-page wording, canonical site name “Dental Cost Calculator”, and production BreadcrumbList schema.
 - Site owner confirmed the current page set has been reviewed by Juliana Maia Teixeira in her Clinical & Scientific Reviewer role; the homepage uses a concise review signal while hidden page-level reviewedBy schema remains intentionally blocked unless visible page-level credit is implemented.
-- Inlay/onlay distinct-information-gain review and proposal-era workbook metadata sync remain open architecture/evidence follow-ups.
+- Inlay/onlay distinct-information-gain review is PASS: the URLs remain separate because their terminology/coding/quote scope is distinct even though the current national ceramic price benchmark is combined.
+- `Dental_Topical_Map_and_Page_Registry.xlsx` in the Library is synchronized to the frozen repo registry: 39 approved build routes, 5 deferred routes, 12 trust/methodology pages and TRU-012 are reflected without changing validated keyword assignments.
 
 ## Current milestone
 - M1 Baseline: PASS
 - M2 Architecture/Evidence: PASS for implemented source-controlled routes
 - M3 Content/Tools: PASS for the 39 approved implemented routes and automated-tested calculators
 - M4 Design/Media: PASS — representative rendered/accessibility QA and final social image are complete
-- M5 Final Candidate: IN PROGRESS — current visual-refresh candidate has a clean Cloudflare preview build; final rendered QA and fresh production-domain validation remain before release
+- M5 Final Candidate: IN PROGRESS — semantic SEO/keyword mapping corrections and architecture follow-ups are closed; final production-domain validation remains before release
 - M6 Production: BLOCKED
 
 ## Next logical work
