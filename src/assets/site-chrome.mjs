@@ -247,8 +247,10 @@ async function runSiteSearch() {
 if (searchToggle && searchDialog && searchInput) {
   searchToggle.addEventListener("click", async () => {
     closeMobileMenu();
-    if (typeof searchDialog.showModal === "function") searchDialog.showModal();
-    else searchDialog.setAttribute("open", "");
+    if (!searchDialog.open) {
+      if (typeof searchDialog.showModal === "function") searchDialog.showModal();
+      else searchDialog.setAttribute("open", "");
+    }
     searchInput.focus();
 
     try {
