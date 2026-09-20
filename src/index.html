@@ -62,8 +62,8 @@
         <p class="home-hero-lead">Compare published U.S. prices, check what a written quote includes, and use quote-based calculators with visible assumptions.</p>
         <p class="home-hero-disclaimer"><em>These are estimates based on your inputs and stated assumptions — not a dentist's fee and not a guarantee of coverage.</em></p>
         <div class="home-hero-actions">
-          <a class="primary-cta" href="#calculator-finder">Browse calculators</a>
-          <a class="secondary-cta" href="#common-costs">Browse cost guides</a>
+          <a class="primary-cta home-tool-cta" href="#calculator-finder">Check a written quote</a>
+          <a class="secondary-cta home-guide-cta" href="#common-costs">Browse cost guides</a>
         </div>
       </div>
     </section>
@@ -79,14 +79,16 @@
       <div class="doorway-grid">
         <article class="doorway-card">
           <div class="doorway-card-top"><svg class="doorway-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#scope"></use></svg><span class="doorway-number">01</span></div>
-          <h3>Cost guides</h3>
-          <p>See published prices, what they cover and what may cost extra for specific procedures.</p>
+          <span class="resource-kind resource-kind--guide">Read</span>
+          <h3>Published cost guides</h3>
+          <p>Read sourced price benchmarks, what they include and what may cost extra.</p>
           <a href="#common-costs">Browse cost guides →</a>
         </article>
         <article class="doorway-card doorway-card--calculator">
           <div class="doorway-card-top"><svg class="doorway-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#included"></use></svg><span class="doorway-number">02</span></div>
-          <h3>Quote calculators</h3>
-          <p>Enter the amounts from your written estimate. The selector directly below is the functional version of this path.</p>
+          <span class="resource-kind resource-kind--tool">Use a tool</span>
+          <h3>Quote check calculators</h3>
+          <p>Use amounts from your own written estimate. Published prices never prefill the result.</p>
           <a href="#calculator-finder" aria-controls="calculator-finder">Open the selector ↓</a>
         </article>
         <article class="doorway-card">
@@ -105,9 +107,9 @@
 
       <div id="calculator-finder" class="home-finder-strip home-calculator-entry doorway-expansion">
         <div>
-          <p class="eyebrow">Quote calculator selector</p>
-          <h3 id="procedure-finder-title">Open the tool for your procedure</h3>
-          <p>Choose the procedure named on your written estimate.</p>
+          <p class="eyebrow tool-eyebrow">Quote check tool</p>
+          <h3 id="procedure-finder-title">Check your written estimate</h3>
+          <p>Choose the procedure named on your written estimate. This tool uses your numbers, not published benchmark prices.</p>
           <p class="finder-help">Not sure what the procedure is? <a href="#common-costs">Browse cost guides by category →</a></p>
         </div>
         <form id="procedure-finder-form" class="procedure-finder-form procedure-finder-form--inline" aria-labelledby="procedure-finder-title">
@@ -144,7 +146,7 @@
               <option value="/teeth-whitening-cost-at-dentist/">Teeth whitening</option>
             </optgroup>
           </select>
-          <button type="submit">Open calculator</button>
+          <button type="submit">Open quote tool</button>
         </form>
       </div>
     </section>
@@ -152,10 +154,10 @@
     <section id="common-costs" class="home-section home-section--browser home-section--primary-router">
       <div class="home-section-heading home-section-heading--split">
         <div>
-          <p class="eyebrow">Browse dental costs</p>
+          <p class="eyebrow guide-eyebrow">Published cost guides</p>
           <h2>Choose a type of dental care</h2>
         </div>
-        <p>Pick a category to see only the procedures in that group.</p>
+        <p>Pick a category to read published cost guidance. Quote tools are separate and use only your own estimate.</p>
       </div>
 
       <div class="cost-browser" data-cost-browser>
@@ -257,24 +259,24 @@
           <span>Standard cleaning</span>
           <strong>$85–$160</strong>
           <p>Delta Dental’s published U.S. range without dental benefits; exams, X-rays and fluoride may be separate.</p>
-          <a href="/dental-cleaning-cost/">Open the cleaning cost guide →</a>
+          <a href="/dental-cleaning-cost/">Read the cleaning cost guide →</a>
         </article>
         <article class="price-teaser-card">
           <svg class="price-teaser-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#preventive"></use></svg>
           <span>Deep cleaning</span>
           <strong>$180–$295</strong>
           <p>Delta Dental’s published range for one quadrant without dental benefits.</p>
-          <a href="/deep-teeth-cleaning-cost/">Open the deep-cleaning guide →</a>
+          <a href="/deep-teeth-cleaning-cost/">Read the deep-cleaning cost guide →</a>
         </article>
         <article class="price-teaser-card">
           <svg class="price-teaser-icon" aria-hidden="true"><use href="/assets/media/home-icons.svg#implant"></use></svg>
           <span>Single-tooth implant root</span>
           <strong>$2,143 average</strong>
           <p>CareCredit’s published U.S. average for the implant root; the crown is excluded.</p>
-          <a href="/dental-implant-cost-calculator/">Open the implant cost guide →</a>
+          <a href="/dental-implant-cost-calculator/">Read the implant cost guide →</a>
         </article>
       </div>
-      <p class="section-text-link"><a href="#common-costs">See all dental cost guides →</a></p>
+      <p class="section-text-link"><a href="#common-costs">Browse all cost guides →</a></p>
     </section>
 
     <section id="state-cost-data" class="home-section home-state-teaser" aria-labelledby="state-cost-title">

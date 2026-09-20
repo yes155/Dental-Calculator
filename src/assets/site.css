@@ -3800,3 +3800,131 @@ th, td { border-color: var(--line); }
   .browser-link-grid a,
   .state-tile { transition: none !important; }
 }
+
+/* Cost-guide vs quote-tool differentiation contract */
+.nav-resource {
+  position: relative;
+}
+.nav-resource--guide {
+  border-bottom: 3px solid #2f8a59;
+}
+.nav-resource--guide small,
+.nav-resource--tool small {
+  display: block;
+  margin-left: .45rem;
+  opacity: .78;
+  font-size: .65rem;
+  font-weight: 600;
+  line-height: 1.05;
+}
+.nav-resource--tool > summary {
+  border-bottom: 3px solid #b99ad1;
+}
+.nav-dropdown-note {
+  grid-column: 1 / -1;
+  margin: 0 0 .2rem;
+  padding: .65rem .75rem;
+  color: #4c3b57;
+  background: #faf5fd;
+  border-left: 3px solid var(--brand-purple);
+  font-size: .78rem;
+  line-height: 1.35;
+}
+.resource-kind {
+  display: inline-flex;
+  width: fit-content;
+  margin: 0 0 .45rem;
+  padding: .22rem .5rem;
+  border-radius: 999px;
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.resource-kind--guide {
+  color: #0e5531;
+  background: #e9f6ee;
+  border: 1px solid #a9d5bb;
+}
+.resource-kind--tool {
+  color: #4a086f;
+  background: #f3e9f9;
+  border: 1px solid #d3b9e4;
+}
+.doorway-card:not(.doorway-card--calculator) .resource-kind--guide + h3 {
+  color: #146b42;
+}
+.doorway-card--calculator {
+  border: 2px solid #d1b7df;
+  background: #fbf7fd !important;
+}
+.doorway-card--calculator .doorway-icon,
+.doorway-card--calculator h3 {
+  color: var(--home-purple);
+}
+.home-doorways .doorway-expansion {
+  position: relative;
+  background: linear-gradient(180deg,#fcf8fe,#fff);
+}
+.home-doorways .doorway-expansion::before {
+  content: "QUOTE TOOL";
+  position: absolute;
+  top: -.72rem;
+  left: 1rem;
+  padding: .2rem .48rem;
+  color: #fff;
+  background: var(--home-purple);
+  border-radius: 999px;
+  font-size: .62rem;
+  font-weight: 850;
+  letter-spacing: .06em;
+}
+.tool-eyebrow { color: var(--home-purple) !important; }
+.guide-eyebrow { color: var(--home-green) !important; }
+.home-tool-cta {
+  background: var(--home-purple) !important;
+  border-color: var(--home-purple) !important;
+}
+.home-guide-cta {
+  color: var(--home-green) !important;
+  border-color: var(--home-green) !important;
+}
+#common-costs {
+  border-top: 4px solid #2f8a59;
+}
+#common-costs .cost-browser-panels {
+  background: linear-gradient(180deg,#fbfefc,#fff);
+}
+#calculator-finder {
+  border-top-color: var(--home-purple) !important;
+}
+
+/* Same-page distinction: tool area looks interactive; guide area stays editorial. */
+.calculator-landing .procedure-calculator-first {
+  position: relative;
+  border-top: 4px solid var(--brand-purple);
+  background: linear-gradient(180deg,#fbf7fd 0%,#fff 100%);
+}
+.calculator-landing .procedure-calculator-first::before {
+  content: "QUOTE TOOL";
+  position: absolute;
+  top: -.7rem;
+  left: 0;
+  padding: .2rem .5rem;
+  color: #fff;
+  background: var(--brand-purple);
+  border-radius: 999px;
+  font-size: .62rem;
+  font-weight: 850;
+  letter-spacing: .06em;
+}
+.calculator-landing .calculator-education {
+  border-top: 1px solid #dfe8e2;
+}
+@media (max-width: 760px) {
+  .nav-resource--guide small,
+  .nav-resource--tool small {
+    display: none;
+  }
+  .resource-kind { font-size: .64rem; }
+}

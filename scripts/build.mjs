@@ -22,10 +22,11 @@ const sharedHeader = `<header class="site-header site-header--nav" data-site-chr
   <div class="site-nav-bar">
     <div class="site-header-inner site-header-inner--nav">
       <nav class="site-nav" aria-label="Primary">
-      <a href="/#common-costs">Cost guides</a>
-      <details class="nav-dropdown">
-        <summary>Calculators</summary>
+      <a class="nav-resource nav-resource--guide" href="/#common-costs"><span>Cost guides</span><small>Published prices</small></a>
+      <details class="nav-dropdown nav-resource nav-resource--tool">
+        <summary><span>Quote tools</span><small>Use your estimate</small></summary>
         <div class="nav-dropdown-panel">
+          <p class="nav-dropdown-note">Quote tools use the amounts from your written estimate. Published benchmarks stay separate.</p>
           <div>
             <strong>Everyday &amp; restorative</strong>
             <a href="/dental-cleaning-cost/">Dental cleaning</a>
@@ -71,7 +72,7 @@ const sharedFooter = `<footer class="site-footer site-footer--expanded" data-sit
     </div>
     <div class="footer-grid">
       <section>
-        <h2>Cost guides</h2>
+        <h2>Published cost guides</h2>
         <a href="/dental-cleaning-cost/">Dental cleaning</a>
         <a href="/root-canal-cost/">Root canal</a>
         <a href="/dental-crown-cost/">Dental crown</a>
@@ -79,11 +80,11 @@ const sharedFooter = `<footer class="site-footer site-footer--expanded" data-sit
         <a href="/dental-implant-cost-calculator/">Dental implants</a>
       </section>
       <section>
-        <h2>Calculators</h2>
-        <a href="/dental-implant-cost-calculator/">Implant calculator</a>
-        <a href="/dental-cleaning-cost/">Cleaning calculator</a>
-        <a href="/deep-teeth-cleaning-cost/">Deep cleaning calculator</a>
-        <a href="/invisalign-cost-calculator/">Invisalign calculator</a>
+        <h2>Quote check tools</h2>
+        <a href="/dental-implant-cost-calculator/">Implant quote tool</a>
+        <a href="/dental-cleaning-cost/">Cleaning quote tool</a>
+        <a href="/deep-teeth-cleaning-cost/">Deep cleaning quote tool</a>
+        <a href="/invisalign-cost-calculator/">Invisalign quote tool</a>
       </section>
       <section>
         <h2>How we work</h2>
