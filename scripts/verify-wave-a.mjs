@@ -43,6 +43,7 @@ const requiredAssets = [
   "assets/media/home-icons.svg",
   "assets/state-costs.mjs",
   "assets/data/state-dental-costs.json",
+  "assets/data/site-search.json",
   "404.html",
 ];
 
@@ -63,7 +64,7 @@ for (const path of waveARoutes) {
 }
 
 const siteCss = await readFile(resolve(output, "assets/site.css"), "utf8");
-for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", "Institutional editorial system", "Homepage semantic color and responsive polish contract", "Unified one-page-per-procedure architecture", "Homepage hero credibility strip", "Procedure finder vertical-balance refinement", "Global navigation, breadcrumbs, back-to-top, 404 and print UX", "--brand-purple", ".footer-motto", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
+for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", "Institutional editorial system", "Homepage semantic color and responsive polish contract", "Unified one-page-per-procedure architecture", "Homepage hero credibility strip", "Procedure finder vertical-balance refinement", "Global navigation, breadcrumbs, back-to-top, 404 and print UX", "Global static site search", "--brand-purple", ".footer-motto", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
   if (!siteCss.includes(token)) throw new Error(`site css: calculator density contract token missing: ${token}`);
 }
 
@@ -73,7 +74,7 @@ for (const token of ["STANDARD_BANDS", "rankOf", "renderSimilar", "data-state-ra
 }
 
 const chromeScript = await readFile(resolve(output, "assets/site-chrome.mjs"), "utf8");
-for (const token of ["pointerdown", "Escape", "toggle", "site-menu-toggle", "backToTop", "scrollTo"]) {
+for (const token of ["pointerdown", "Escape", "toggle", "site-menu-toggle", "backToTop", "scrollTo", "site-search-toggle", "loadSearchIndex", "runSiteSearch"]) {
   if (!chromeScript.includes(token)) throw new Error(`site chrome: dropdown behavior token missing: ${token}`);
 }
 
@@ -88,6 +89,9 @@ for (const token of [
   "site-nav-bar",
   "site-menu-toggle",
   "back-to-top",
+  "site-search-toggle",
+  "site-search-dialog",
+  "Find dental cost information",
   "One procedure page brings the cost evidence and quote-check tools together.",
   "Browse dental procedures",
   "Roboto+Condensed",
@@ -130,6 +134,22 @@ for (const token of [
   "faq-preview",
 ]) {
   if (!homepage.includes(token)) throw new Error(`homepage: required Wave A trust/ownership token missing: ${token}`);
+}
+
+const searchIndexPayload = JSON.parse(await readFile(resolve(output, "assets/data/site-search.json"), "utf8"));
+if (!Array.isArray(searchIndexPayload.items) || searchIndexPayload.items.length !== 38) {
+  throw new Error(`site search: expected 38 approved non-home pages; found ${searchIndexPayload.items?.length ?? "invalid"}`);
+}
+const searchUrls = new Set(searchIndexPayload.items.map((item) => item.url));
+for (const url of ["/dental-cleaning-cost/", "/dental-implant-cost-calculator/", "/dental-insurance-out-of-pocket-costs/", "/cost-data-methodology/"]) {
+  if (!searchUrls.has(url)) throw new Error(`site search: required indexed URL missing: ${url}`);
+}
+const searchGroups = new Set(searchIndexPayload.items.map((item) => item.group));
+for (const group of ["Dental procedures", "Paying for care", "Trust & methodology"]) {
+  if (!searchGroups.has(group)) throw new Error(`site search: result group missing: ${group}`);
+}
+if (searchUrls.size !== searchIndexPayload.items.length) {
+  throw new Error("site search: duplicate URLs found in generated index");
 }
 
 const representativeProcedure = await readFile(resolve(output, "dental-cleaning-cost/index.html"), "utf8");
