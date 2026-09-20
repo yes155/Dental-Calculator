@@ -101,7 +101,7 @@ for (const token of [
   "Each link opens the single page for that procedure",
   "Published price examples",
   "Three example prices from published sources",
-  "Read the cleaning cost guide →",
+  "Open the dental cleaning page →",
   "data-cost-browser",
   "Choose a type of dental care",
   "What can change the price",
