@@ -62,12 +62,12 @@ for (const path of waveARoutes) {
 }
 
 const siteCss = await readFile(resolve(output, "assets/site.css"), "utf8");
-for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", "Institutional editorial system", "--brand-purple", ".footer-motto", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
+for (const token of ["Universal interaction + calculator density contract", "Universal money-input focus contract", "Homepage whitespace correction", "Institutional editorial system", "Homepage semantic color and responsive polish contract", "--brand-purple", ".footer-motto", ".calculator-card--guided", ".orthodontic-calculator", ".cosmetic-calculator", ".prosthetic-calculator"]) {
   if (!siteCss.includes(token)) throw new Error(`site css: calculator density contract token missing: ${token}`);
 }
 
 const stateScript = await readFile(resolve(output, "assets/state-costs.mjs"), "utf8");
-for (const token of ["STANDARD_BANDS", "rankOf", "renderSimilar", "data-state-range-selected"]) {
+for (const token of ["STANDARD_BANDS", "rankOf", "renderSimilar", "data-state-range-selected", "has-selection", "aria-pressed"]) {
   if (!stateScript.includes(token)) throw new Error(`state costs: information-gain/standardized-scale token missing: ${token}`);
 }
 
@@ -112,10 +112,22 @@ for (const token of [
   "Standardized color scale",
   "Closest published state averages",
   "Same procedure",
+  "doorway-expansion",
+  "doorway-icon",
+  "Open the selector ↓",
+  "finder-help",
+  "cost-tab-copy",
+  "price-teaser-icon",
+  "faq-preview",
 ]) {
   if (!homepage.includes(token)) throw new Error(`homepage: required Wave A trust/ownership token missing: ${token}`);
 }
 
+const calculatorDoorwayIndex = homepage.indexOf("doorway-card--calculator");
+const calculatorFinderIndex = homepage.indexOf('id="calculator-finder"');
+if (!(calculatorDoorwayIndex >= 0 && calculatorFinderIndex > calculatorDoorwayIndex)) {
+  throw new Error("homepage: quote calculator doorway must control the integrated selector below it");
+}
 const heroIndex = homepage.indexOf("home-hero--image");
 const doorwayIndex = homepage.indexOf("Find the right dental cost resource");
 const categoryIndex = homepage.indexOf("Choose a type of dental care");
