@@ -6,7 +6,7 @@ const required = ['invisalign-cost-calculator/index.html','braces-cost/index.htm
 for (const path of required) await access(resolve(output,path));
 const checks = [
   ['invisalign-cost-calculator/index.html',['<h1>Invisalign cost calculator</h1>','$5,108 average','$1,800–$8,100 range','clear aligner treatment','not Invisalign-brand-specific','data-orthodontic-calculator']],
-  ['braces-cost/index.html',['<h1>Braces cost</h1>','$6,343','$5,834','$9,221','separate treatment categories, not one combined braces price range','data-orthodontic-calculator']],
+  ['braces-cost/index.html',['<h1>Braces cost</h1>','$6,343','$5,834','$9,221','there is no site-created all-types braces range','data-orthodontic-calculator']],
   ['dental-retainer-cost/index.html',['<h1>Dental retainer cost</h1>','$344','$181','$302','fee for a replacement retainer is determined by the orthodontist']],
 ];
 for (const [path,tokens] of checks) {
