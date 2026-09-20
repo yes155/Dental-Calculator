@@ -20,7 +20,7 @@ test('DEN-017 keeps clear-aligner benchmark distinct from Invisalign-only eviden
   assert.match(html,/\$5,108 average/);
   assert.match(html,/\$1,800–\$8,100 range/);
   assert.match(html,/clear aligner treatment/);
-  assert.match(html,/not Invisalign alone/);
+  assert.match(html,/does not relabel category-level research as brand-only evidence/);
   assert.match(html,/data-orthodontic-calculator/);
   assert.doesNotMatch(html,/Invisalign-only national (average|range) is \$|Invisalign costs \$1,800–\$8,100/);
 });
@@ -28,7 +28,7 @@ test('DEN-017 keeps clear-aligner benchmark distinct from Invisalign-only eviden
 test('DEN-020 keeps brace-type price evidence separate', async () => {
   const html = await read('braces-cost');
   for (const token of ['$6,343','$2,500–$10,000','$5,834','$4,480–$11,312','$9,221','$7,321–$17,411']) assert.ok(html.includes(token));
-  assert.match(html,/separate treatment categories, not one combined braces price range/);
+  assert.match(html,/separate categories; there is no site-created all-types braces range/);
   assert.match(html,/data-orthodontic-calculator/);
   assert.doesNotMatch(html,/\$2,500–\$17,411 range for braces/);
 });
