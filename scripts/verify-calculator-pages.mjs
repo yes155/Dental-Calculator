@@ -20,7 +20,7 @@ for(const token of ["Primary published benchmark","The price guide above shows t
 }
 console.log(`Calculator landing-page gate passed: ${routes.length} calculator routes.`);
 
-const cleaningHeroEnd=cleaning.indexOf("</header>",cleaning.indexOf('<header class="procedure-hero">'))+9;
+const cleaningHeroEnd=cleaning.indexOf("</header>",cleaning.indexOf('<header class="article-header">'))+9;
 const cleaningCalc=cleaning.indexOf('<section id="quote-calculator"');
 const cleaningGuide=cleaning.indexOf('<section class="cost-snapshot"');
 if(!(cleaningCalc>=cleaningHeroEnd&&cleaningCalc<cleaningGuide))throw new Error("cleaning calculator must be directly after hero and before Quick Price Guide");

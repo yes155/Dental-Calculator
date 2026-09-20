@@ -327,7 +327,7 @@ for (const check of pageChecks) {
     const h1Index = html.indexOf("<h1>Dental cleaning cost</h1>");
     const calculatorIndex = html.indexOf('id="calculator-heading"');
     const priceIndex = html.indexOf('<h2>How much does a dental cleaning cost?</h2>');
-    if (!(h1Index !== -1 && calculatorIndex > h1Index && priceIndex > calculatorIndex)) throw new Error("DEN-002: calculator must sit directly after the procedure hero and before repeated price education");
+    if (!(h1Index !== -1 && calculatorIndex > h1Index && priceIndex > calculatorIndex)) throw new Error("DEN-002: calculator must sit directly after the procedure header and before repeated price education");
     if (html.includes("$203 standard cleaning")) throw new Error("DEN-002: CareCredit $203 bundle must not be relabeled as cleaning-only");
   }
 
