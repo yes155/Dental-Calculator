@@ -22,37 +22,55 @@ const sharedHeader = `<header class="site-header site-header--nav" data-site-chr
   <div class="site-nav-bar">
     <div class="site-header-inner site-header-inner--nav">
       <nav class="site-nav" aria-label="Primary">
-      <a class="nav-resource nav-resource--guide" href="/#common-costs"><span>Cost guides</span><small>Published prices</small></a>
-      <details class="nav-dropdown nav-resource nav-resource--tool">
-        <summary><span>Quote tools</span><small>Use your estimate</small></summary>
+      <details class="nav-dropdown nav-resource nav-resource--procedures">
+        <summary><span>Procedures</span><small>Costs + calculators</small></summary>
         <div class="nav-dropdown-panel">
-          <p class="nav-dropdown-note">Quote tools use the amounts from your written estimate. Published benchmarks stay separate.</p>
+          <p class="nav-dropdown-note">Each procedure has one page. Published cost context and an embedded quote calculator, where available, live together there.</p>
           <div>
-            <strong>Everyday &amp; restorative</strong>
+            <strong>Preventive &amp; diagnostic</strong>
             <a href="/dental-cleaning-cost/">Dental cleaning</a>
             <a href="/deep-teeth-cleaning-cost/">Deep cleaning</a>
+            <a href="/periodontal-maintenance-cost/">Periodontal maintenance</a>
+            <a href="/dentist-visit-cost/">Dentist visit</a>
+            <a href="/dental-x-ray-cost/">Dental X-rays</a>
+          </div>
+          <div>
+            <strong>Restorative &amp; endodontic</strong>
             <a href="/dental-filling-cost/">Dental filling</a>
             <a href="/root-canal-cost/">Root canal</a>
             <a href="/dental-crown-cost/">Dental crown</a>
-            <a href="/tooth-extraction-cost/">Tooth extraction</a>
-            <a href="/wisdom-teeth-removal-cost/">Wisdom teeth removal</a>
+            <a href="/dental-inlay-cost/">Dental inlay</a>
+            <a href="/dental-onlay-cost/">Dental onlay</a>
           </div>
           <div>
-            <strong>Implants &amp; replacement</strong>
+            <strong>Oral surgery &amp; implants</strong>
+            <a href="/tooth-extraction-cost/">Tooth extraction</a>
+            <a href="/wisdom-teeth-removal-cost/">Wisdom teeth removal</a>
+            <a href="/dental-bone-graft-cost/">Dental bone graft</a>
             <a href="/dental-implant-cost-calculator/">Dental implant</a>
             <a href="/all-on-4-dental-implants-cost/">All-on-4</a>
             <a href="/full-mouth-dental-implants-cost/">Full-mouth implants</a>
+          </div>
+          <div>
+            <strong>Replacement</strong>
             <a href="/dental-bridge-cost/">Dental bridge</a>
             <a href="/dentures-cost/">Dentures</a>
           </div>
           <div>
-            <strong>Orthodontic &amp; cosmetic</strong>
-            <a href="/invisalign-cost-calculator/">Invisalign</a>
+            <strong>Orthodontics</strong>
             <a href="/braces-cost/">Braces</a>
-            <a href="/dental-veneers-cost/">Veneers</a>
+            <a href="/invisalign-cost-calculator/">Invisalign</a>
+            <a href="/dental-retainer-cost/">Dental retainer</a>
+          </div>
+          <div>
+            <strong>Cosmetic</strong>
+            <a href="/dental-veneers-cost/">Dental veneers</a>
+            <a href="/teeth-whitening-cost-at-dentist/">Teeth whitening</a>
+            <a href="/dental-bonding-cost/">Dental bonding</a>
           </div>
         </div>
       </details>
+      <a href="/#state-cost-data">Prices by state</a>
       <a href="/about/">About</a>
       <a href="/contact/">Contact</a>
       </nav>
@@ -62,37 +80,58 @@ const sharedHeader = `<header class="site-header site-header--nav" data-site-chr
 
 const sharedFooter = `<footer class="site-footer site-footer--expanded" data-site-chrome="shared-v1">
   <div class="footer-motto">
-    <span>Compare a published benchmark with the scope of your written quote.</span>
-    <a href="/#common-costs">Browse dental cost guides</a>
+    <span>One procedure page brings the cost evidence and quote-check tools together.</span>
+    <a href="/#common-costs">Browse dental procedures</a>
   </div>
   <div class="site-footer-inner">
     <div class="footer-brand-block">
       <a class="footer-brand" href="/"><img src="/assets/brand/favicon.svg" alt="" width="38" height="38"><span>Dental Cost Calculator</span></a>
-      <p>U.S. dental cost guides and quote-based calculators.</p>
+      <p>U.S. dental procedure cost pages with published evidence and embedded quote calculators where available.</p>
     </div>
-    <div class="footer-grid">
-      <section>
-        <h2>Published cost guides</h2>
-        <a href="/dental-cleaning-cost/">Dental cleaning</a>
-        <a href="/root-canal-cost/">Root canal</a>
-        <a href="/dental-crown-cost/">Dental crown</a>
-        <a href="/tooth-extraction-cost/">Tooth extraction</a>
-        <a href="/dental-implant-cost-calculator/">Dental implants</a>
+    <div class="footer-grid footer-grid--unified">
+      <section class="footer-procedure-section">
+        <h2>Dental procedures</h2>
+        <div class="footer-procedure-list">
+          <a href="/dental-cleaning-cost/">Dental cleaning</a>
+          <a href="/deep-teeth-cleaning-cost/">Deep cleaning</a>
+          <a href="/periodontal-maintenance-cost/">Periodontal maintenance</a>
+          <a href="/dentist-visit-cost/">Dentist visit</a>
+          <a href="/dental-x-ray-cost/">Dental X-rays</a>
+          <a href="/dental-filling-cost/">Dental filling</a>
+          <a href="/root-canal-cost/">Root canal</a>
+          <a href="/dental-crown-cost/">Dental crown</a>
+          <a href="/dental-inlay-cost/">Dental inlay</a>
+          <a href="/dental-onlay-cost/">Dental onlay</a>
+          <a href="/tooth-extraction-cost/">Tooth extraction</a>
+          <a href="/wisdom-teeth-removal-cost/">Wisdom teeth removal</a>
+          <a href="/dental-bone-graft-cost/">Dental bone graft</a>
+          <a href="/dental-implant-cost-calculator/">Dental implant</a>
+          <a href="/all-on-4-dental-implants-cost/">All-on-4 implants</a>
+          <a href="/full-mouth-dental-implants-cost/">Full-mouth implants</a>
+          <a href="/dental-bridge-cost/">Dental bridge</a>
+          <a href="/dentures-cost/">Dentures</a>
+          <a href="/braces-cost/">Braces</a>
+          <a href="/invisalign-cost-calculator/">Invisalign</a>
+          <a href="/dental-retainer-cost/">Dental retainer</a>
+          <a href="/dental-veneers-cost/">Dental veneers</a>
+          <a href="/teeth-whitening-cost-at-dentist/">Teeth whitening</a>
+          <a href="/dental-bonding-cost/">Dental bonding</a>
+        </div>
       </section>
       <section>
-        <h2>Quote check tools</h2>
-        <a href="/dental-implant-cost-calculator/">Implant quote tool</a>
-        <a href="/dental-cleaning-cost/">Cleaning quote tool</a>
-        <a href="/deep-teeth-cleaning-cost/">Deep cleaning quote tool</a>
-        <a href="/invisalign-cost-calculator/">Invisalign quote tool</a>
+        <h2>Paying for care</h2>
+        <a href="/dental-insurance-out-of-pocket-costs/">Insurance &amp; out-of-pocket costs</a>
+        <a href="/affordable-dental-care/">Affordable dental care</a>
+        <a href="/#state-cost-data">Prices by state</a>
+        <a href="/cost-data-methodology/">Cost Data Methodology</a>
+        <a href="/calculator-methodology/">Calculator Methodology</a>
       </section>
       <section>
         <h2>How we work</h2>
         <a href="/editorial-policy/">Editorial Policy</a>
-        <a href="/cost-data-methodology/">Cost Data Methodology</a>
-        <a href="/calculator-methodology/">Calculator Methodology</a>
         <a href="/corrections-and-updates/">Corrections &amp; Updates</a>
         <a href="/medical-disclaimer/">Medical Disclaimer</a>
+        <a href="/disclosures/">Disclosures</a>
       </section>
       <section>
         <h2>About this site</h2>
@@ -100,7 +139,6 @@ const sharedFooter = `<footer class="site-footer site-footer--expanded" data-sit
         <a href="/contact/">Contact</a>
         <a href="/privacy/">Privacy</a>
         <a href="/terms/">Terms</a>
-        <a href="/disclosures/">Disclosures</a>
       </section>
     </div>
     <div class="footer-bottom">
