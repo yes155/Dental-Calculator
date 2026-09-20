@@ -77,9 +77,31 @@ const sharedHeader = `<header class="site-header site-header--nav" data-site-chr
       <a href="/#state-cost-data">Prices by state</a>
       <a href="/about/">About</a>
       <a href="/contact/">Contact</a>
+      <button class="site-search-toggle" type="button" aria-haspopup="dialog" aria-controls="site-search-dialog">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="17" height="17"><path d="m20.4 19-4.8-4.8a7 7 0 1 0-1.4 1.4l4.8 4.8 1.4-1.4ZM5 10.5a5.5 5.5 0 1 1 11 0 5.5 5.5 0 0 1-11 0Z" fill="currentColor"/></svg>
+        <span>Search</span>
+      </button>
       </nav>
     </div>
   </div>
+  <dialog class="site-search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+    <div class="site-search-shell">
+      <div class="site-search-head">
+        <div>
+          <p class="eyebrow">Site search</p>
+          <h2 id="site-search-title">Find dental cost information</h2>
+        </div>
+        <button class="site-search-close" type="button" aria-label="Close search">×</button>
+      </div>
+      <label class="site-search-label" for="site-search-input">Search procedures, costs, insurance or methodology</label>
+      <div class="site-search-field">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="19" height="19"><path d="m20.4 19-4.8-4.8a7 7 0 1 0-1.4 1.4l4.8 4.8 1.4-1.4ZM5 10.5a5.5 5.5 0 1 1 11 0 5.5 5.5 0 0 1-11 0Z" fill="currentColor"/></svg>
+        <input id="site-search-input" type="search" autocomplete="off" spellcheck="false" placeholder="Try “root canal”, “implant”, or “insurance”">
+      </div>
+      <p class="site-search-status" id="site-search-status" aria-live="polite">Start typing to search the site.</p>
+      <div class="site-search-results" id="site-search-results"></div>
+    </div>
+  </dialog>
 </header>`;
 
 const sharedFooter = `<button class="back-to-top" type="button" aria-label="Back to top" hidden>
@@ -224,6 +246,71 @@ for (const path of htmlPaths) {
   if (!html.includes('data-site-chrome="shared-v1"')) throw new Error(`${path}: shared site chrome missing`);
   if (!html.includes('/assets/brand/favicon.svg')) throw new Error(`${path}: universal favicon missing`);
 }
+
+const decodeHtmlText = (value = "") => value
+  .replace(/<[^>]*>/g, " ")
+  .replace(/&amp;/g, "&")
+  .replace(/&quot;/g, '"')
+  .replace(/&#39;|&apos;/g, "'")
+  .replace(/&ndash;/g, "–")
+  .replace(/&mdash;/g, "—")
+  .replace(/&nbsp;/g, " ")
+  .replace(/\s+/g, " ")
+  .trim();
+
+const registryCsv = await readFile(resolve(root, "data/page-registry.csv"), "utf8");
+const registryRows = registryCsv
+  .trim()
+  .split(/\r?\n/)
+  .slice(1)
+  .map((line) => {
+    const [pageId, url, status, parentId, calculatorId, cluster, wave] = line.split(",");
+    return { pageId, url, status, parentId, calculatorId, cluster, wave };
+  })
+  .filter((row) => row.status?.startsWith("APPROVED") && row.pageId !== "HOM-001");
+
+const searchIndex = [];
+for (const row of registryRows) {
+  const relativePath = row.url === "/"
+    ? "index.html"
+    : `${row.url.replace(/^\//, "").replace(/\/$/, "")}/index.html`;
+  const html = await readFile(resolve(output, relativePath), "utf8");
+  const h1 = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
+  const description = html.match(/<meta\s+name="description"\s+content="([^"]*)"/i);
+  const headings = [...html.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/gi)]
+    .map((match) => decodeHtmlText(match[1]))
+    .filter(Boolean);
+  const title = decodeHtmlText(h1?.[1] || row.url);
+  const summary = decodeHtmlText(description?.[1] || "");
+  const group = row.pageId.startsWith("DEN-")
+    ? "Dental procedures"
+    : row.pageId.startsWith("GUI-")
+      ? "Paying for care"
+      : "Trust & methodology";
+  const terms = [
+    title,
+    summary,
+    row.cluster,
+    row.url.replace(/[\/-]+/g, " "),
+    headings.join(" "),
+  ].filter(Boolean).join(" ").toLowerCase();
+
+  searchIndex.push({
+    id: row.pageId,
+    url: row.url,
+    title,
+    description: summary,
+    group,
+    cluster: row.cluster || "",
+    terms,
+  });
+}
+
+await writeFile(
+  resolve(output, "assets/data/site-search.json"),
+  JSON.stringify({ generatedFrom: "data/page-registry.csv", items: searchIndex }, null, 2)
+);
+
 
 
 const required = [
