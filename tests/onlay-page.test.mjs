@@ -22,7 +22,7 @@ const expectedH2s = [
   "Onlay repair is not the same price category as a new onlay",
   "How insurance can affect what you pay",
   "Onlay cost versus inlay, filling and crown cost",
-  "Related dental cost guides",
+  "Related dental procedure pages",
 ];
 
 test("DEN-013 keeps the frozen page structure", () => {
