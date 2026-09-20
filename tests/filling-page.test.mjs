@@ -21,11 +21,11 @@ test("DEN-010 preserves separate material price ranges", () => {
   assert.ok(!html.includes("$108–$1,774"), "must not merge material extremes into one generic range");
 });
 
-test("DEN-010 calculator immediately follows direct answer section", () => {
-  const answer = html.indexOf("<h2>How much does a dental filling cost?</h2>");
+test("DEN-010 keeps the calculator before educational price detail", () => {
   const calculator = html.indexOf('<h2 id="calculator-heading">Dental filling cost calculator</h2>');
+  const answer = html.indexOf("<h2>How much does a dental filling cost?</h2>");
   const detail = html.indexOf("<h2>Dental filling prices by material</h2>");
-  assert.ok(answer !== -1 && calculator > answer && calculator < detail);
+  assert.ok(calculator !== -1 && answer > calculator && detail > answer);
 });
 
 test("DEN-010 keeps Orlando examples local", () => {
@@ -38,22 +38,22 @@ test("DEN-010 does not leak internal IDs into reader copy", () => {
   for (const token of ["Use CALC-010", "CALC-010 records", "CALC-010 does not", "DEN-010 owns"]) {
     assert.ok(!html.includes(token), `reader-facing internal ID leaked: ${token}`);
   }
-  assert.match(html, /Use this calculator with a written estimate/);
+  assert.match(html, /Enter the amounts from your written estimate/);
   assert.match(html, /This page covers filling\/restoration pricing/);
 });
 
 test("DEN-010 has one H1 and controlled H2 order", () => {
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   const headings = [
-    "How much does a dental filling cost?",
     "Dental filling cost calculator",
+    "How much does a dental filling cost?",
     "Dental filling prices by material",
     "How surface count and tooth location can change a quote",
     "What may be separate in a filling quote?",
     "What changes a dental filling quote?",
     "How insurance can affect the patient amount",
     "Fillings, bonding, inlays and onlays are different quote categories",
-    "Related dental cost guides",
+    "Related dental procedure pages",
   ];
   let cursor = -1;
   for (const heading of headings) {
