@@ -21,7 +21,7 @@ const expectedH2s = [
   "What to verify before booking lower-cost care",
   "Compare the written quote, not just the advertised discount",
   "What this guide does not promise",
-  "Related dental cost guides",
+  "Related dental procedure pages",
 ];
 
 test("GUI-002 keeps the frozen structure and no calculator", () => {
