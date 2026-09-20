@@ -4160,3 +4160,65 @@ th, td { border-color: var(--line); }
     border-radius: .5rem;
   }
 }
+
+
+/* Procedure-page guide/tool split */
+/* Keep the distinction visible after users leave the homepage. */
+.calculator-landing .procedure-calculator-first {
+  margin-bottom: 2.5rem;
+}
+.calculator-landing .procedure-calculator-first > .procedure-calculator-first-head {
+  padding: .35rem .25rem .9rem;
+}
+.calculator-landing .procedure-calculator-first > .procedure-calculator-first-head .eyebrow {
+  color: var(--brand-purple) !important;
+}
+.calculator-landing .procedure-calculator-first .calculator-principles li {
+  color: #4a086f;
+  background: #f4eafa;
+  border-color: #d8bee7;
+}
+.calculator-landing .cost-snapshot {
+  position: relative;
+  margin-top: 2.75rem;
+  padding: 1.6rem;
+  background: #f3faf6;
+  border: 1px solid #bdd9c6;
+  border-top: 6px solid #218653;
+  border-radius: .6rem;
+}
+.calculator-landing .cost-snapshot::before {
+  content: "COST GUIDE";
+  position: absolute;
+  top: -.78rem;
+  left: 1rem;
+  padding: .22rem .55rem;
+  color: #fff;
+  background: #218653;
+  border-radius: 999px;
+  font-size: .64rem;
+  font-weight: 850;
+  letter-spacing: .065em;
+}
+.calculator-landing .cost-snapshot .eyebrow,
+.calculator-landing .cost-snapshot h2,
+.calculator-landing .cost-snapshot h3 {
+  color: #12683e !important;
+}
+.calculator-landing .cost-snapshot-card {
+  background: #fff;
+  border-color: #c8dfd0;
+}
+.calculator-landing .cost-snapshot-card--primary {
+  border-top: 4px solid #218653;
+}
+.calculator-landing .cost-snapshot-card strong,
+.calculator-landing .snapshot-label {
+  color: #12683e;
+}
+.calculator-landing .calculator-education {
+  border-top: 0;
+}
+.calculator-landing .calculator-education h2 {
+  color: #12683e;
+}
