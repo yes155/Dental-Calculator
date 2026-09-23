@@ -265,7 +265,7 @@ if (!production) {
   await rm(sitemapPath, { force: true });
   console.log(`Deploy SEO prepared in preview mode: ${approvedRoutes.length} approved routes remain noindex; robots blocks crawling.`);
 } else {
-  const robots = `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`;
+  const robots = `# Search/answer/citation bots — explicitly allowed\n\n# OpenAI\nUser-agent: OAI-SearchBot\nAllow: /\nUser-agent: ChatGPT-User\nAllow: /\n\n# Anthropic\nUser-agent: Claude-SearchBot\nAllow: /\nUser-agent: Claude-User\nAllow: /\n\n# Perplexity\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: Perplexity-User\nAllow: /\n\n# Meta AI\nUser-agent: meta-externalfetcher\nAllow: /\n\n# Microsoft Copilot (runs on Bing's index)\nUser-agent: bingbot\nAllow: /\n\n# xAI / Grok\nUser-agent: xAI-Grok\nAllow: /\nUser-agent: GrokBot\nAllow: /\nUser-agent: Grok-DeepSearch\nAllow: /\n\n# All other crawlers\nUser-agent: *\nAllow: /\n\nSitemap: ${origin}/sitemap.xml\n`;
   await writeFile(robotsPath, robots, "utf8");
 
   const urls = approvedRoutes
