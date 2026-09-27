@@ -1,7 +1,9 @@
 import { access, cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = resolve(new URL("..", import.meta.url).pathname);
+const __dirname = resolve(fileURLToPath(new URL(".", import.meta.url)));
+const root = resolve(__dirname, "..");
 const source = resolve(root, "src");
 const output = resolve(root, "dist");
 
@@ -201,7 +203,7 @@ for (const path of htmlPaths) {
   );
 
   html = html.replace(/<link rel="icon"[^>]*>\s*/gi, "");
-  html = html.replace("</head>", '  <link rel="preconnect" href="https://fonts.googleapis.com">\n  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">\n  <link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg">\n  <script type="module" src="/assets/site-chrome.mjs"></script>\n</head>');
+  html = html.replace("</head>", '  <link rel="preconnect" href="https://fonts.googleapis.com">\n  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">\n  <link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg">\n  <meta name="p:domain_verify" content="626a6bf07d481169b286757138dde7c2">\n  <script type="module" src="/assets/site-chrome.mjs"></script>\n</head>');
 
   const headerPattern = /<header class="site-header[^"]*"[^>]*>[\s\S]*?<\/header>/i;
   if (headerPattern.test(html)) html = html.replace(headerPattern, sharedHeader);
