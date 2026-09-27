@@ -1,6 +1,9 @@
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-const root=resolve(new URL('..',import.meta.url).pathname);const output=resolve(root,'dist');
+import { fileURLToPath } from 'node:url';
+const __dirname = resolve(fileURLToPath(new URL(".", import.meta.url)));
+const root = resolve(__dirname, "..");
+const output = resolve(root, "dist");
 const required=['dental-veneers-cost/index.html','dental-bonding-cost/index.html','teeth-whitening-cost-at-dentist/index.html','assets/veneer-calculator-core.mjs','assets/veneer-calculator-ui.mjs','assets/cosmetic-calculator.css'];
 for(const path of required) await access(resolve(output,path));
 const checks=[['dental-veneers-cost/index.html',['<h1>Dental veneers cost</h1>','$751','$1,068','$1,455','$1,781','$13,954','data-veneer-calculator']],['dental-bonding-cost/index.html',['<h1>Dental bonding cost</h1>','$431 average','$288–$915 range','per tooth']],['teeth-whitening-cost-at-dentist/index.html',['<h1>Teeth whitening cost at dentist</h1>','$792','$611–$1,368','$583','$463–$1,011']]];

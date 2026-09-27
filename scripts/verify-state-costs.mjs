@@ -1,7 +1,9 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = resolve(new URL("..", import.meta.url).pathname);
+const __dirname = resolve(fileURLToPath(new URL(".", import.meta.url)));
+const root = resolve(__dirname, "..");
 const path = resolve(root, "dist/assets/data/state-dental-costs.json");
 const data = JSON.parse(await readFile(path, "utf8"));
 const homepage = await readFile(resolve(root, "dist/index.html"), "utf8");

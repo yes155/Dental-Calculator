@@ -1,7 +1,9 @@
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-const root = resolve(new URL('..', import.meta.url).pathname);
-const output = resolve(root, 'dist');
+import { fileURLToPath } from 'node:url';
+const __dirname = resolve(fileURLToPath(new URL(".", import.meta.url)));
+const root = resolve(__dirname, "..");
+const output = resolve(root, "dist");
 const required = ['invisalign-cost-calculator/index.html','braces-cost/index.html','dental-retainer-cost/index.html','assets/orthodontics-calculator-core.mjs','assets/orthodontics-calculator-ui.mjs','assets/orthodontics-calculator.css'];
 for (const path of required) await access(resolve(output,path));
 const checks = [

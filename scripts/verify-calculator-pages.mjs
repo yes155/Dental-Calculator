@@ -1,7 +1,9 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-const root=resolve(new URL("..",import.meta.url).pathname);
-const output=resolve(root,"dist");
+import { fileURLToPath } from "node:url";
+const __dirname = resolve(fileURLToPath(new URL(".", import.meta.url)));
+const root = resolve(__dirname, "..");
+const output = resolve(root, "dist");
 const routes=["/dental-cleaning-cost/","/deep-teeth-cleaning-cost/","/dental-filling-cost/","/root-canal-cost/","/dental-crown-cost/","/dental-implant-cost-calculator/","/all-on-4-dental-implants-cost/","/full-mouth-dental-implants-cost/","/braces-cost/","/invisalign-cost-calculator/","/dental-bridge-cost/","/dentures-cost/","/dental-veneers-cost/","/tooth-extraction-cost/","/wisdom-teeth-removal-cost/"];
 for(const route of routes){
  const html=await readFile(resolve(output,route.slice(1),"index.html"),"utf8");

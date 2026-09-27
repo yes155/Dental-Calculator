@@ -1,7 +1,9 @@
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = resolve(new URL("..", import.meta.url).pathname);
+const __dirname = resolve(fileURLToPath(new URL(".", import.meta.url)));
+const root = resolve(__dirname, "..");
 const output = resolve(root, "dist");
 
 const waveARoutes = [

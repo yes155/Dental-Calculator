@@ -1,7 +1,9 @@
 import { access, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = resolve(new URL("..", import.meta.url).pathname);
+const __dirname = resolve(fileURLToPath(new URL(".", import.meta.url)));
+const root = resolve(__dirname, "..");
 const output = resolve(root, "dist");
 const registryPath = resolve(root, "data", "page-registry.csv");
 const productionBranch = (process.env.PRODUCTION_BRANCH || "main").trim();
